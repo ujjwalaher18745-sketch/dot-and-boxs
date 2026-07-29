@@ -563,14 +563,26 @@
         }
 
         function syncWithFirebase() {
-            if (db && gameData.username) {
-                db.ref('leaderboard/' + gameData.username.replace(/[^a-zA-Z0-9]/g, "_")).set({
-                    username: gameData.username,
-                    stars: gameData.stars,
-                    level: gameData.unlockedLevel
-                });
-            }
-        }
+    if (db && gameData.username) {
+        let userKey = gameData.username.replace(/[^a-zA-Z0-9]/g, "_");
+
+        db.ref('leaderboard/' + userKey).set({
+            username: gameData.username,
+            stars: gameData.stars,
+            level: gameData.unlockedLevel
+        });
+
+        // 👈 हे नवीन जोडा (युजरचा प्रोग्रेस सेव्ह करण्यासाठी)
+        db.ref('users/' + userKey).set({
+            username: gameData.username,
+            password: gameData.password,
+            stars: gameData.stars,
+            coins: gameData.coins,
+            unlockedLevel: gameData.unlockedLevel,
+            avatar: gameData.avatar
+        });
+    }
+}
 
         function listenLiveLeaderboard() {
             if (!db) {
@@ -600,15 +612,54 @@
             document.documentElement.style.setProperty('--box-fill-color', gameData.equippedBoxColor);
         }
 
-        function handleLoginSubmit() {
-            let uName = document.getElementById('loginUser').value.trim();
-            if (uName !== "") {
-                gameData.username = uName; gameData.isLoggedIn = true;
-                saveDataToStorage(); showScreen('screen-home');
-                showToast(`WELCOM, ${uName}!`);
-            }
-        }
+       function handleLoginSubmit() {
+    let uName = document.getElementById('loginUser').value.trim();
+    let pass = document.getElementById('loginPass').value.trim();
 
+    if (uName === "") {
+        showToast("Enter Username!");
+        return;
+    }
+
+    let userKey = uName.replace(/[^a-zA-Z0-9]/g, "_");
+
+    if (db) {
+        // 🔄 Firebase मधून जुना डेटा चेक करून डाऊनलोड करणे
+        db.ref('users/' + userKey).once('value', snapshot => {
+            if (snapshot.exists()) {
+                let savedData = snapshot.val();
+                
+                if (savedData.password && savedData.password !== pass) {
+                    showToast("Wrong Password!");
+                    return;
+                }
+
+                // जुना डेटा दुसऱ्या मोबाईलमध्ये रिस्टोर करणे
+                gameData.username = savedData.username;
+                gameData.password = savedData.password || pass;
+                gameData.stars = savedData.stars || 0;
+                gameData.coins = savedData.coins || 100;
+                gameData.unlockedLevel = savedData.unlockedLevel || 1;
+                gameData.avatar = savedData.avatar || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+                gameData.isLoggedIn = true;
+
+                saveDataToStorage();
+                showScreen('screen-home');
+                showToast(`Welcome Back, ${uName}! Data Restored 🎉`);
+            } else {
+                gameData.username = uName;
+                gameData.password = pass;
+                gameData.isLoggedIn = true;
+                saveDataToStorage();
+                showScreen('screen-home');
+                showToast(`Welcome, ${uName}!`);
+            }
+        });
+    } else {
+        gameData.username = uName; gameData.isLoggedIn = true;
+        saveDataToStorage(); showScreen('screen-home');
+    }
+}
         function handleLogout() {
             gameData.isLoggedIn = false;
             saveDataToStorage();
@@ -650,60 +701,80 @@
 
             roomRef = db.ref('rooms/' + currentRoomCode);
             roomRef.set({
-                p1: gameData.username,
-                p2: "Waiting...",
-                turn: 1,
-                lastMove: null,
-                status: "waiting"
-            });
-
+    p1: gameData.username,
+    p2: "Waiting...",
+    p3: "Waiting...", // 👈 P3 जोडला
+    p4: "Waiting...", // 👈 P4 जोडला
+    playerCount: 1,
+    turn: 1,
+    lastMove: null,
+    status: "waiting"
+});
             showToast(`Room Created! Code: ${currentRoomCode}`);
             startOnlineGameView();
             listenToOnlineRoom();
         }
 
-        function joinOnlineRoom() {
-            let code = document.getElementById('roomCodeInput').value.trim();
-            if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
-            if (!db) { showToast("Firebase not connected!"); return; }
+       function joinOnlineRoom() {
+    let code = document.getElementById('roomCodeInput').value.trim();
+    if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
+    if (!db) { showToast("Firebase not connected!"); return; }
 
-            currentRoomCode = code;
-            roomRef = db.ref('rooms/' + currentRoomCode);
+    currentRoomCode = code;
+    roomRef = db.ref('rooms/' + currentRoomCode);
 
-            roomRef.once('value', snapshot => {
-                if (snapshot.exists()) {
-                    let data = snapshot.val();
-                    if (data.p2 !== "Waiting..." && data.p2 !== gameData.username) {
-                        showToast("Room is full!");
-                        return;
-                    }
-                    myPlayerNumber = 2;
-                    isOnlineGame = true;
-                    activePlayerMode = '2P';
+    roomRef.once('value', snapshot => {
+        if (snapshot.exists()) {
+            let data = snapshot.val();
+            let assignedPlayer = 0;
 
-                    roomRef.update({
-                        p2: gameData.username,
-                        status: "playing"
-                    });
+            // रिकामी जागा शोधणे (P2, P3 किंवा P4)
+            if (data.p2 === "Waiting..." || data.p2 === gameData.username) assignedPlayer = 2;
+            else if (data.p3 === "Waiting..." || data.p3 === gameData.username) assignedPlayer = 3;
+            else if (data.p4 === "Waiting..." || data.p4 === gameData.username) assignedPlayer = 4;
 
-                    showToast("Joined Room Successfully!");
-                    startOnlineGameView();
-                    listenToOnlineRoom();
-                } else {
-                    showToast("Invalid Room Code!");
-                }
-            });
+            if (assignedPlayer === 0) {
+                showToast("Room is full! (Max 4 Players)");
+                return;
+            }
+
+            myPlayerNumber = assignedPlayer;
+            isOnlineGame = true;
+            activePlayerMode = '4P'; // 👈 mode 4 Players केला
+
+            let updateObj = {};
+            updateObj[`p${assignedPlayer}`] = gameData.username;
+            updateObj['status'] = "playing";
+            
+            roomRef.update(updateObj);
+
+            showToast(`Joined as P${assignedPlayer}!`);
+            startOnlineGameView();
+            listenToOnlineRoom();
+        } else {
+            showToast("Invalid Room Code!");
         }
-
-        function startOnlineGameView() {
-            activeLevel = 1; boardRows = 5; boardCols = 5; activeShape = 'SQUARE';
-            isTargetLevelMode = false; targetBoxesToWin = 0;
-            showScreen('screen-game');
-            document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (You are P${myPlayerNumber})`;
-            document.getElementById('p3Box').style.display = 'none';
-            document.getElementById('p4Box').style.display = 'none';
-            initializeBoard();
-        }
+    });
+}
+        
+       function startOnlineGameView() {
+    activeLevel = 1; 
+    boardRows = 20; 
+    boardCols = 20; 
+    activeShape = 'SQUARE';
+    activePlayerMode = '4P'; // 👈 4 Players Mode Active
+    isTargetLevelMode = false; 
+    targetBoxesToWin = 0;
+    
+    showScreen('screen-game');
+    document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (You are P${myPlayerNumber})`;
+    
+    // 👈 चारही प्लेअरचे स्कोर बॉक्स ऑन करणे
+    document.getElementById('p3Box').style.display = 'block';
+    document.getElementById('p4Box').style.display = 'block';
+    
+    initializeBoard();
+}
 
         function listenToOnlineRoom() {
             if (!roomRef) return;
@@ -1019,18 +1090,29 @@
             return false;
         }
 
-        function finishGame(winnerIndex) {
-            playSound('win');
-            if (winnerIndex === 1) {
-                if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel < 60) { gameData.unlockedLevel++; }
-                gameData.stars += 3; gameData.coins += 20;
-                saveDataToStorage();
-                showCandyCrushVictoryModal();
-            } else {
-                showToast(`❌ Player ${winnerIndex} win! try again.`);
-                setTimeout(() => showScreen('screen-map'), 1500);
-            }
+       function finishGame(winnerIndex) {
+    // 🛑 १-१ सेकंदाला स्टार्स वाढणे थांबवण्यासाठी लिसनर बंद
+    if (isOnlineGame && roomRef) {
+        roomRef.off();
+    }
+
+    playSound('win');
+
+    if (winnerIndex === 1) {
+        // ⭐️ स्टार्स फक्त नवीन लेव्हल अनलॉक झाल्यावरच मिळतील (वारंवार मिळणे बंद)
+        if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 60) { 
+            gameData.unlockedLevel++; 
+            gameData.stars += 3;
         }
+        
+        gameData.coins += 20; // कॉईन्स दरवेळी मिळतील
+        saveDataToStorage();
+        showCandyCrushVictoryModal();
+    } else {
+        showToast(`❌ Player ${winnerIndex} win! try again.`);
+        setTimeout(() => showScreen('screen-map'), 1500);
+    }
+}
 
         function showCandyCrushVictoryModal() {
             let modal = document.getElementById('victory-modal');
