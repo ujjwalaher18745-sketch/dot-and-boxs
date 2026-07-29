@@ -25,7 +25,7 @@
             --p2-line: #1e90ff;
             --p3-line: #2ed573;
             --p4-line: #ffa502;
-            --box-fill-color: #ff4757; /* Custom Box Color */
+            --box-fill-color: #ff4757;
             --gold: #ffb142;
         }
 
@@ -166,9 +166,15 @@
         .brand-sub { font-size: 0.75rem; font-weight: 900; letter-spacing: 2px; color: #fff; margin: 2px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
         .brand-boxes { font-size: 2.2rem; font-weight: 900; color: #54a0ff; text-shadow: 2px 2px 0 #fff, 3px 3px 0 #2e86de; line-height: 0.9; }
 
+        /* Online Room Section Added Above Selector */
+        .online-room-card {
+            background: #fff8e7; border: 3px solid #fdcb6e; border-radius: 18px;
+            padding: 8px; margin-bottom: 6px; box-shadow: 0 4px 0 #e1b12c; text-align: center;
+        }
+
         .mini-preview-container {
             background: #fff8e7; border: 3px solid #ffeaa7;
-            border-radius: 18px; padding: 6px; width: 55%; margin: 4px auto;
+            border-radius: 18px; padding: 6px; width: 50%; margin: 2px auto;
             aspect-ratio: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
             box-shadow: 0 6px 0 #fdcb6e, 0 8px 12px rgba(0,0,0,0.15);
         }
@@ -243,8 +249,11 @@
         }
 
         .dot-node { width: 8px; height: 8px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 1px solid #fff; }
+        .dot-node.disabled-cell { visibility: hidden; }
+        
         .line-horizontal { height: 8px; background: #ffeaa7; cursor: pointer; border-radius: 4px; border: 1px solid #fdcb6e; }
         .line-vertical { width: 8px; background: #ffeaa7; cursor: pointer; border-radius: 4px; border: 1px solid #fdcb6e; }
+        .line-disabled { visibility: hidden; pointer-events: none; }
 
         .line-drawn-p1 { background: var(--p1-line) !important; border-color: #fff !important; }
         .line-drawn-p2 { background: var(--p2-line) !important; border-color: #fff !important; }
@@ -252,6 +261,7 @@
         .line-drawn-p4 { background: var(--p4-line) !important; border-color: #fff !important; }
 
         .box-cell { display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 900; color: #fff; border-radius: 4px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .box-disabled { visibility: hidden; }
 
         .modal-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(47, 53, 66, 0.8); backdrop-filter: blur(5px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
         .modal-card { background: #fff8e7; border: 4px solid #fdcb6e; border-radius: 28px; padding: 20px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 10px 0 #e1b12c, 0 15px 25px rgba(0,0,0,0.2); max-height: 85vh; overflow-y: auto; }
@@ -310,6 +320,16 @@
                     <div class="brand-boxes">BOXES</div>
                 </div>
 
+                <!-- 🌐 ONLINE MULTIPLAYER BOX POSITIONED RIGHT HERE ABOVE SELECTOR -->
+                <div class="online-room-card">
+                    <div class="section-heading" style="color:#d63031; margin-bottom: 2px;">🌐 ONLINE ROOM 🌐</div>
+                    <div style="display:flex; gap:4px; margin-bottom:4px;">
+                        <input type="text" id="roomCodeInput" class="login-input" style="padding: 4px 8px; font-size:0.8rem; text-align:center;" placeholder="4-Digit Code" maxlength="4">
+                        <button class="btn-small" style="background:#00cec9; box-shadow:0 2px 0 #00b894; font-size:0.7rem;" onclick="joinOnlineRoom()">JOIN</button>
+                    </div>
+                    <button class="btn-small" style="width:100%; background:#6c5ce7; box-shadow:0 3px 0 #5758bb; font-size:0.75rem;" onclick="createOnlineRoom()">CREATE ROOM ➕</button>
+                </div>
+
                 <div class="mini-preview-container">
                     <div class="preview-quadrant pq-1">P1</div>
                     <div class="preview-quadrant pq-2">P2</div>
@@ -352,9 +372,9 @@
         <!-- SCREEN 3: GAMEPLAY -->
         <div class="screen" id="screen-game">
             <div class="game-header-bar">
-                <button class="back-btn" onclick="showScreen('screen-map')">✖ Exit</button>
-                <div class="score-box" style="color:var(--p1-line)">P1: <span id="s1">0</span></div>
-                <div class="score-box" style="color:var(--p2-line)">P2: <span id="s2">0</span></div>
+                <button class="back-btn" onclick="exitCurrentGame()">✖ Exit</button>
+                <div class="score-box" style="color:var(--p1-line)" id="p1ScoreBox">P1: <span id="s1">0</span></div>
+                <div class="score-box" style="color:var(--p2-line)" id="p2ScoreBox">P2: <span id="s2">0</span></div>
                 <div class="score-box" id="p3Box" style="color:var(--p3-line); display:none;">P3: <span id="s3">0</span></div>
                 <div class="score-box" id="p4Box" style="color:var(--p4-line); display:none;">P4: <span id="s4">0</span></div>
             </div>
@@ -435,7 +455,8 @@
                 <p style="font-size:0.85rem; font-weight:bold; text-align:left; line-height:1.6; margin:10px 0; color:#2f3542;">
                     १. नॉर्मल लेव्हल्सला पूर्ण बोर्ड भरेपर्यंत ज्याचे जास्त बॉक्स होतील तो जिंकेल.<br>
                     २. ५ आणि ६ च्या पटीतील स्पेशल लेव्हल्सला टार्गेट बॉक्सेस पूर्ण करावे लागतील.<br>
-                    ३. ५५ लेव्हल्स जिंका आणि १ नंबर रँक मिळवा!
+                    ३. ५६ ते ६० लेव्हल्स डायमंड व युनिक शेप्सच्या असतील!<br>
+                    ४. ६० लेव्हल्स जिंका आणि १ नंबर रँक मिळवा!
                 </p>
                 <button class="btn-close" onclick="closeModal('helpModal')">Close</button>
             </div>
@@ -516,7 +537,14 @@
         let turnPlayer = 1;
         let playerScores = [0, 0, 0, 0];
 
+        // Online Room Variables
+        let isOnlineGame = false;
+        let currentRoomCode = null;
+        let myPlayerNumber = 1;
+        let roomRef = null;
+
         let horizontalGrid = [], verticalGrid = [], boxesGrid = [];
+        let activeShape = 'SQUARE'; // SQUARE, DIAMOND, HEX, TRIANGLE
 
         window.onload = function() {
             let saved = localStorage.getItem('dots_boxes_candy_save');
@@ -549,7 +577,7 @@
                 document.getElementById('leaderboardList').innerHTML = `🥇 1. ${gameData.username} - ⭐ ${gameData.stars}`;
                 return;
             }
-            db.ref('leaderboard').orderByChild('stars').limitToLast(10).on('value', snapshot => {
+            db.ref('leaderboard').orderByChild('stars').limitToLast(50).on('value', snapshot => {
                 let list = [];
                 snapshot.forEach(child => { list.push(child.val()); });
                 list.reverse();
@@ -606,11 +634,103 @@
 
         function selectMode(mode, element) {
             activePlayerMode = mode;
+            isOnlineGame = false;
             document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
             element.classList.add('active');
         }
 
-        /* 🔥 ५५ लेव्हल्ससाठी २x२ पासून २५x२५ पर्यंत ग्रिड कॅल्क्युलेशन 🔥 */
+        /* 🌐 ONLINE MULTIPLAYER LOGIC 🌐 */
+        function createOnlineRoom() {
+            if (!db) { showToast("Firebase not connected!"); return; }
+            let code = Math.floor(1000 + Math.random() * 9000).toString();
+            currentRoomCode = code;
+            myPlayerNumber = 1;
+            isOnlineGame = true;
+            activePlayerMode = '2P';
+
+            roomRef = db.ref('rooms/' + currentRoomCode);
+            roomRef.set({
+                p1: gameData.username,
+                p2: "Waiting...",
+                turn: 1,
+                lastMove: null,
+                status: "waiting"
+            });
+
+            showToast(`Room Created! Code: ${currentRoomCode}`);
+            startOnlineGameView();
+            listenToOnlineRoom();
+        }
+
+        function joinOnlineRoom() {
+            let code = document.getElementById('roomCodeInput').value.trim();
+            if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
+            if (!db) { showToast("Firebase not connected!"); return; }
+
+            currentRoomCode = code;
+            roomRef = db.ref('rooms/' + currentRoomCode);
+
+            roomRef.once('value', snapshot => {
+                if (snapshot.exists()) {
+                    let data = snapshot.val();
+                    if (data.p2 !== "Waiting..." && data.p2 !== gameData.username) {
+                        showToast("Room is full!");
+                        return;
+                    }
+                    myPlayerNumber = 2;
+                    isOnlineGame = true;
+                    activePlayerMode = '2P';
+
+                    roomRef.update({
+                        p2: gameData.username,
+                        status: "playing"
+                    });
+
+                    showToast("Joined Room Successfully!");
+                    startOnlineGameView();
+                    listenToOnlineRoom();
+                } else {
+                    showToast("Invalid Room Code!");
+                }
+            });
+        }
+
+        function startOnlineGameView() {
+            activeLevel = 1; boardRows = 5; boardCols = 5; activeShape = 'SQUARE';
+            isTargetLevelMode = false; targetBoxesToWin = 0;
+            showScreen('screen-game');
+            document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (You are P${myPlayerNumber})`;
+            document.getElementById('p3Box').style.display = 'none';
+            document.getElementById('p4Box').style.display = 'none';
+            initializeBoard();
+        }
+
+        function listenToOnlineRoom() {
+            if (!roomRef) return;
+            roomRef.on('value', snapshot => {
+                let data = snapshot.val();
+                if (!data) return;
+
+                if (data.lastMove && data.lastMove.player !== myPlayerNumber) {
+                    let m = data.lastMove;
+                    let el = document.getElementById(`${m.type}-${m.r}-${m.c}`);
+                    if (el && !el.classList.contains(`line-drawn-p${m.player}`)) {
+                        executeMove(m.type, m.r, m.c, el, m.player);
+                    }
+                }
+            });
+        }
+
+        function exitCurrentGame() {
+            if (isOnlineGame && roomRef) {
+                roomRef.off();
+                roomRef.remove();
+            }
+            isOnlineGame = false;
+            showScreen('screen-map');
+        }
+
+        /* 🔥 ६० लेव्हल्ससाठी २x२ पासून २५x२५ व व्हरायटी शेप्स 🔥 */
         function getGridSizeForLevel(lvl) {
             if (lvl <= 4) return 4;       // 2x2
             if (lvl <= 5) return 3;       // 3x3
@@ -623,14 +743,15 @@
             if (lvl <= 40) return 18;     // 18x18
             if (lvl <= 45) return 20;     // 20x20
             if (lvl <= 50) return 22;     // 22x22
-            return 25;                    // 25x25 (लेव्हल 51 ते 55)
+            if (lvl <= 55) return 25;     // 25x25
+            return 8;                     // 56-60 Custom Shape Grids
         }
 
         function buildMapRoadmap() {
             let container = document.getElementById('levelNodesContainer');
             container.innerHTML = '';
 
-            for (let lvl = 1; lvl <= 55; lvl++) {
+            for (let lvl = 1; lvl <= 60; lvl++) {
                 let node = document.createElement('div');
                 let isUnlocked = lvl <= gameData.unlockedLevel;
                 let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0);
@@ -640,9 +761,16 @@
                 node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
                 node.innerText = lvl;
 
+                let shapeText = "Full Grid";
+                if (lvl === 56) shapeText = "Diamond";
+                else if (lvl === 57) shapeText = "Hexagon";
+                else if (lvl === 58) shapeText = "Triangle";
+                else if (lvl === 59) shapeText = "Cross";
+                else if (lvl === 60) shapeText = "Master Shape";
+
                 let badge = document.createElement('div');
                 badge.className = 'grid-info-badge';
-                badge.innerText = isSpecial ? `${dotsCount}x${dotsCount} | Target` : `${dotsCount}x${dotsCount} | Full Grid`;
+                badge.innerText = isSpecial ? `${dotsCount}x${dotsCount} | ${shapeText}` : `${dotsCount}x${dotsCount} | ${shapeText}`;
                 node.appendChild(badge);
 
                 if (isUnlocked) {
@@ -656,6 +784,13 @@
             activeLevel = lvl; boardRows = dotsCount; boardCols = dotsCount;
             isTargetLevelMode = isSpecial;
 
+            // Set Shapes
+            if (lvl === 56) activeShape = 'DIAMOND';
+            else if (lvl === 57) activeShape = 'HEX';
+            else if (lvl === 58) activeShape = 'TRIANGLE';
+            else if (lvl >= 59) activeShape = 'CROSS';
+            else activeShape = 'SQUARE';
+
             if (isTargetLevelMode) {
                 targetBoxesToWin = Math.min(Math.floor(dotsCount * 1.5), 20);
             } else {
@@ -667,13 +802,28 @@
             if (isTargetLevelMode) {
                 document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
             } else {
-                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Complete Full Grid (${dotsCount}x${dotsCount})`;
+                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Shape: ${activeShape}`;
             }
 
             document.getElementById('p3Box').style.display = (activePlayerMode === '3P' || activePlayerMode === '4P') ? 'block' : 'none';
             document.getElementById('p4Box').style.display = (activePlayerMode === '4P') ? 'block' : 'none';
 
             initializeBoard();
+        }
+
+        function isCellInShape(r, c) {
+            if (activeShape === 'SQUARE') return true;
+            let midR = Math.floor((boardRows * 2 - 1) / 2);
+            let midC = Math.floor((boardCols * 2 - 1) / 2);
+            
+            if (activeShape === 'DIAMOND') {
+                return (Math.abs(r - midR) + Math.abs(c - midC)) <= midR;
+            } else if (activeShape === 'HEX' || activeShape === 'CROSS') {
+                return !( (r < 2 && c < 2) || (r < 2 && c > boardCols*2-4) || (r > boardRows*2-4 && c < 2) || (r > boardRows*2-4 && c > boardCols*2-4) );
+            } else if (activeShape === 'TRIANGLE') {
+                return c >= (midC - r) && c <= (midC + r);
+            }
+            return true;
         }
 
         function initializeBoard() {
@@ -683,7 +833,6 @@
             let board = document.getElementById('game-board');
             board.innerHTML = '';
 
-            // मोठ्या ग्रिडसाठी dynamic gap size
             let gapSize = Math.max(6, Math.min(22, Math.floor(220 / boardCols)));
 
             board.style.gridTemplateColumns = `repeat(${boardCols * 2 - 1}, auto)`;
@@ -696,57 +845,82 @@
             for (let r = 0; r < boardRows * 2 - 1; r++) {
                 for (let c = 0; c < boardCols * 2 - 1; c++) {
                     let isRowEven = (r % 2 === 0), isColEven = (c % 2 === 0);
+                    let validCell = isCellInShape(r, c);
 
                     if (isRowEven && isColEven) {
-                        let dot = document.createElement('div'); dot.className = 'dot-node'; board.appendChild(dot);
+                        let dot = document.createElement('div'); 
+                        dot.className = 'dot-node' + (validCell ? '' : ' disabled-cell'); 
+                        board.appendChild(dot);
                     } else if (isRowEven && !isColEven) {
-                        let line = document.createElement('div'); line.className = 'line-horizontal'; line.style.width = gapSize + 'px';
+                        let line = document.createElement('div'); 
+                        line.className = 'line-horizontal' + (validCell ? '' : ' line-disabled'); 
+                        line.style.width = gapSize + 'px';
                         let rIdx = r / 2, cIdx = (c - 1) / 2;
-                        line.onclick = () => makeMove('h', rIdx, cIdx, line);
+                        line.onclick = () => handleLineClick('h', rIdx, cIdx, line);
                         line.id = `h-${rIdx}-${cIdx}`; board.appendChild(line);
                     } else if (!isRowEven && isColEven) {
-                        let line = document.createElement('div'); line.className = 'line-vertical'; line.style.height = gapSize + 'px';
+                        let line = document.createElement('div'); 
+                        line.className = 'line-vertical' + (validCell ? '' : ' line-disabled'); 
+                        line.style.height = gapSize + 'px';
                         let rIdx = (r - 1) / 2, cIdx = c / 2;
-                        line.onclick = () => makeMove('v', rIdx, cIdx, line);
+                        line.onclick = () => handleLineClick('v', rIdx, cIdx, line);
                         line.id = `v-${rIdx}-${cIdx}`; board.appendChild(line);
                     } else {
-                        let box = document.createElement('div'); box.className = 'box-cell';
+                        let box = document.createElement('div'); 
+                        box.className = 'box-cell' + (validCell ? '' : ' box-disabled');
                         box.style.width = gapSize + 'px'; box.style.height = gapSize + 'px';
                         box.id = `box-${(r - 1) / 2}-${(c - 1) / 2}`; board.appendChild(box);
+                        if (!validCell) boxesGrid[(r - 1) / 2][(c - 1) / 2] = -1; // Ignore disabled boxes
                     }
                 }
             }
         }
 
-        function makeMove(type, r, c, element) {
+        function handleLineClick(type, r, c, element) {
+            if (isOnlineGame && turnPlayer !== myPlayerNumber) {
+                showToast("Not your turn!"); return;
+            }
+            executeMove(type, r, c, element, turnPlayer);
+        }
+
+        function executeMove(type, r, c, element, player) {
             if (type === 'h' && horizontalGrid[r][c] !== 0) return;
             if (type === 'v' && verticalGrid[r][c] !== 0) return;
 
             playSound('line');
 
-            element.classList.add(`line-drawn-p${turnPlayer}`);
-            if (type === 'h') horizontalGrid[r][c] = turnPlayer;
-            if (type === 'v') verticalGrid[r][c] = turnPlayer;
+            element.classList.add(`line-drawn-p${player}`);
+            if (type === 'h') horizontalGrid[r][c] = player;
+            if (type === 'v') verticalGrid[r][c] = player;
 
-            let filledBox = checkCompletedBoxes(type, r, c);
+            if (isOnlineGame && player === myPlayerNumber && roomRef) {
+                roomRef.update({
+                    lastMove: { type, r, c, player }
+                });
+            }
+
+            let filledBox = checkCompletedBoxes(type, r, c, player);
 
             if (!filledBox) {
                 let totalPlayers = activePlayerMode === '2P' ? 2 : (activePlayerMode === '3P' ? 3 : (activePlayerMode === '4P' ? 4 : 2));
                 turnPlayer = (turnPlayer % totalPlayers) + 1;
+                if (isOnlineGame && roomRef) {
+                    roomRef.update({ turn: turnPlayer });
+                }
             }
 
             updateScoreDisplays();
 
             if (checkGameOver()) return;
 
-            if (activePlayerMode === 'AI' && turnPlayer === 2) {
+            if (!isOnlineGame && activePlayerMode === 'AI' && turnPlayer === 2) {
                 setTimeout(triggerSmartAI, 300);
             }
         }
 
-        function checkCompletedBoxes(type, r, c) {
+        function checkCompletedBoxes(type, r, c, player) {
             let isFilled = false;
-            let tag = `P${turnPlayer}`;
+            let tag = `P${player}`;
 
             let test = (br, bc) => {
                 if (br >= 0 && br < boardRows - 1 && bc >= 0 && bc < boardCols - 1) {
@@ -754,14 +928,14 @@
                         horizontalGrid[br][bc] !== 0 && horizontalGrid[br + 1][bc] !== 0 &&
                         verticalGrid[br][bc] !== 0 && verticalGrid[br][bc + 1] !== 0) {
 
-                        boxesGrid[br][bc] = turnPlayer;
+                        boxesGrid[br][bc] = player;
                         let boxEl = document.getElementById(`box-${br}-${bc}`);
                         boxEl.innerText = tag;
                         
                         let pColors = [gameData.equippedBoxColor, '#1e90ff', '#2ed573', '#ffa502'];
-                        boxEl.style.backgroundColor = pColors[turnPlayer - 1];
+                        boxEl.style.backgroundColor = pColors[player - 1];
 
-                        playerScores[turnPlayer - 1]++;
+                        playerScores[player - 1]++;
                         isFilled = true;
                         playSound('box');
                     }
@@ -789,10 +963,10 @@
                     if (boxesGrid[r][c] === 0) {
                         let linesCount = (horizontalGrid[r][c]?1:0) + (horizontalGrid[r+1][c]?1:0) + (verticalGrid[r][c]?1:0) + (verticalGrid[r][c+1]?1:0);
                         if (linesCount === 3) {
-                            if (!horizontalGrid[r][c]) { makeMove('h', r, c, document.getElementById(`h-${r}-${c}`)); return; }
-                            if (!horizontalGrid[r+1][c]) { makeMove('h', r+1, c, document.getElementById(`h-${r+1}-${c}`)); return; }
-                            if (!verticalGrid[r][c]) { makeMove('v', r, c, document.getElementById(`v-${r}-${c}`)); return; }
-                            if (!verticalGrid[r][c+1]) { makeMove('v', r, c+1, document.getElementById(`v-${r}-${c+1}`)); return; }
+                            if (!horizontalGrid[r][c]) { executeMove('h', r, c, document.getElementById(`h-${r}-${c}`), 2); return; }
+                            if (!horizontalGrid[r+1][c]) { executeMove('h', r+1, c, document.getElementById(`h-${r+1}-${c}`), 2); return; }
+                            if (!verticalGrid[r][c]) { executeMove('v', r, c, document.getElementById(`v-${r}-${c}`), 2); return; }
+                            if (!verticalGrid[r][c+1]) { executeMove('v', r, c+1, document.getElementById(`v-${r}-${c+1}`), 2); return; }
                         }
                     }
                 }
@@ -800,16 +974,20 @@
 
             let possibleMoves = [];
             for (let r = 0; r < boardRows; r++)
-                for (let c = 0; c < boardCols - 1; c++)
-                    if (horizontalGrid[r][c] === 0) possibleMoves.push({ type: 'h', r, c, el: document.getElementById(`h-${r}-${c}`) });
+                for (let c = 0; c < boardCols - 1; c++) {
+                    let el = document.getElementById(`h-${r}-${c}`);
+                    if (horizontalGrid[r][c] === 0 && el && !el.classList.contains('line-disabled')) possibleMoves.push({ type: 'h', r, c, el });
+                }
 
             for (let r = 0; r < boardRows - 1; r++)
-                for (let c = 0; c < boardCols; c++)
-                    if (verticalGrid[r][c] === 0) possibleMoves.push({ type: 'v', r, c, el: document.getElementById(`v-${r}-${c}`) });
+                for (let c = 0; c < boardCols; c++) {
+                    let el = document.getElementById(`v-${r}-${c}`);
+                    if (verticalGrid[r][c] === 0 && el && !el.classList.contains('line-disabled')) possibleMoves.push({ type: 'v', r, c, el });
+                }
 
             if (possibleMoves.length > 0) {
                 let randomPick = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-                makeMove(randomPick.type, randomPick.r, randomPick.c, randomPick.el);
+                executeMove(randomPick.type, randomPick.r, randomPick.c, randomPick.el, 2);
             }
         }
 
@@ -823,10 +1001,16 @@
                 }
             }
 
-            let totalPossibleBoxes = (boardRows - 1) * (boardCols - 1);
+            let totalValidBoxes = 0;
+            for (let r = 0; r < boardRows - 1; r++) {
+                for (let c = 0; c < boardCols - 1; c++) {
+                    if (boxesGrid[r][c] !== -1) totalValidBoxes++;
+                }
+            }
+
             let filledBoxesCount = playerScores.reduce((a, b) => a + b, 0);
 
-            if (filledBoxesCount === totalPossibleBoxes) {
+            if (filledBoxesCount >= totalValidBoxes && totalValidBoxes > 0) {
                 let maxPoints = Math.max(...playerScores);
                 let winnerIndex = playerScores.indexOf(maxPoints) + 1;
                 finishGame(winnerIndex);
@@ -838,7 +1022,7 @@
         function finishGame(winnerIndex) {
             playSound('win');
             if (winnerIndex === 1) {
-                if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel < 55) { gameData.unlockedLevel++; }
+                if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel < 60) { gameData.unlockedLevel++; }
                 gameData.stars += 3; gameData.coins += 20;
                 saveDataToStorage();
                 showCandyCrushVictoryModal();
