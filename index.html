@@ -759,8 +759,8 @@
         
        function startOnlineGameView() {
     activeLevel = 1; 
-    boardRows = 20; 
-    boardCols = 20; 
+    boardRows = 15; 
+    boardCols = 15; 
     activeShape = 'SQUARE';
     activePlayerMode = '4P'; // 👈 4 Players Mode Active
     isTargetLevelMode = false; 
@@ -815,53 +815,66 @@
             if (lvl <= 45) return 20;     // 20x20
             if (lvl <= 50) return 22;     // 22x22
             if (lvl <= 55) return 25;     // 25x25
-            return 8;                     // 56-60 Custom Shape Grids
+            return 20;                     // 56-60 Custom Shape Grids
         }
 
-        function buildMapRoadmap() {
-            let container = document.getElementById('levelNodesContainer');
-            container.innerHTML = '';
+      function buildMapRoadmap() {
+    let container = document.getElementById('levelNodesContainer');
+    container.innerHTML = '';
 
-            for (let lvl = 1; lvl <= 60; lvl++) {
-                let node = document.createElement('div');
-                let isUnlocked = lvl <= gameData.unlockedLevel;
-                let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0);
+    // 🎯 तुझ्या कोडमधील जुन्या ५६ ते ६० शेप्सच्या पुढे ६१ ते १०० जोडा:
+    let shapeTexts = {
+        56: 'DIAMOND', 57: 'HEXAGON', 58: 'TRIANGLE', 59: 'CROSS', 60: 'MASTER SHAPE',
+        // 👇 ६१ ते १०० मधील नवीन कठीण शेप्स
+        61: 'DIAMOND', 62: 'HEXAGON', 63: 'CROSS', 64: 'ZIGZAG', 65: 'PYRAMID',
+        66: 'DIAMOND', 67: 'CROSS', 68: 'ZIGZAG', 69: 'HEXAGON', 70: 'MASTER SHAPE',
+        71: 'PYRAMID', 72: 'ZIGZAG', 73: 'CROSS', 74: 'DIAMOND', 75: 'MASTER SHAPE',
+        76: 'HEXAGON', 77: 'PYRAMID', 78: 'CROSS', 79: 'ZIGZAG', 80: 'MASTER SHAPE',
+        81: 'DIAMOND', 82: 'PYRAMID', 83: 'HEXAGON', 84: 'CROSS', 85: 'MASTER SHAPE',
+        86: 'ZIGZAG', 87: 'DIAMOND', 88: 'PYRAMID', 89: 'CROSS', 90: 'MASTER SHAPE',
+        91: 'HEXAGON', 92: 'ZIGZAG', 93: 'PYRAMID', 94: 'CROSS', 95: 'MASTER SHAPE',
+        96: 'DIAMOND', 97: 'HEXAGON', 98: 'ZIGZAG', 99: 'CROSS', 100: 'ULTIMATE MASTER'
+    };
 
-                let dotsCount = getGridSizeForLevel(lvl);
+    for (let lvl = 1; lvl <= 100; lvl++) { // 👈 लूप १०० करा
+        let node = document.createElement('div');
+        let isUnlocked = lvl <= gameData.unlockedLevel;
+        let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0 || lvl >= 56);
 
-                node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
-                node.innerText = lvl;
+        let dotsCount = getGridSizeForLevel(lvl);
 
-                let shapeText = "Full Grid";
-                if (lvl === 56) shapeText = "Diamond";
-                else if (lvl === 57) shapeText = "Hexagon";
-                else if (lvl === 58) shapeText = "Triangle";
-                else if (lvl === 59) shapeText = "Cross";
-                else if (lvl === 60) shapeText = "Master Shape";
+        node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
+        node.innerText = lvl;
 
-                let badge = document.createElement('div');
-                badge.className = 'grid-info-badge';
-                badge.innerText = isSpecial ? `${dotsCount}x${dotsCount} | ${shapeText}` : `${dotsCount}x${dotsCount} | ${shapeText}`;
-                node.appendChild(badge);
-
-                if (isUnlocked) {
-                    node.onclick = function() { startLevelGame(lvl, dotsCount, isSpecial); };
-                }
-                container.appendChild(node);
-            }
+        let badge = document.createElement('div');
+        badge.className = 'grid-info-badge';
+        
+        // जर शेपचे नाव असेल तर ते दाखवा, नाहीतर ग्रिड साइज
+        if (shapeTexts[lvl]) {
+            badge.innerText = shapeTexts[lvl];
+        } else {
+            badge.innerText = `${dotsCount}x${dotsCount}`;
         }
+        node.appendChild(badge);
 
+        if (isUnlocked) {
+            node.onclick = function() { startLevelGame(lvl, dotsCount, isSpecial); };
+        }
+        container.appendChild(node);
+    }
+}
+        
         function startLevelGame(lvl, dotsCount, isSpecial) {
             activeLevel = lvl; boardRows = dotsCount; boardCols = dotsCount;
             isTargetLevelMode = isSpecial;
 
             // Set Shapes
-            if (lvl === 56) activeShape = 'DIAMOND';
-            else if (lvl === 57) activeShape = 'HEX';
-            else if (lvl === 58) activeShape = 'TRIANGLE';
-            else if (lvl >= 59) activeShape = 'CROSS';
-            else activeShape = 'SQUARE';
-
+           if (lvl === 56 || (lvl >= 61 && lvl <= 70)) activeShape = 'DIAMOND';
+else if (lvl === 57 || (lvl >= 71 && lvl <= 80)) activeShape = 'HEXAGON';
+else if (lvl === 58 || (lvl >= 81 && lvl <= 90)) activeShape = 'TRIANGLE';
+else if (lvl === 59 || (lvl >= 91 && lvl <= 99)) activeShape = 'CROSS';
+else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
+            
             if (isTargetLevelMode) {
                 targetBoxesToWin = Math.min(Math.floor(dotsCount * 1.5), 20);
             } else {
@@ -1100,7 +1113,7 @@
 
     if (winnerIndex === 1) {
         // ⭐️ स्टार्स फक्त नवीन लेव्हल अनलॉक झाल्यावरच मिळतील (वारंवार मिळणे बंद)
-        if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 60) { 
+        if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 100) { 
             gameData.unlockedLevel++; 
             gameData.stars += 3;
         }
