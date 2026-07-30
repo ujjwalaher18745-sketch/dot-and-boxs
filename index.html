@@ -637,7 +637,10 @@
                 // जुना डेटा दुसऱ्या मोबाईलमध्ये रिस्टोर करणे
                 gameData.username = savedData.username;
                 gameData.password = savedData.password || pass;
-                gameData.stars = Math.min(savedData.stars || 0, (savedData.unlockedLevel || 1) * 3);
+               let singlePlayerMax = ((savedData.unlockedLevel || 1) - 1) * 3;
+               let mpStars = savedData.multiplayerStars || 0;
+               gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
+               gameData.multiplayerStars = mpStars;
                 gameData.coins = savedData.coins || 100;
                 gameData.unlockedLevel = savedData.unlockedLevel || 1;
                 gameData.avatar = savedData.avatar || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
@@ -1110,13 +1113,17 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
     }
 
     playSound('win');
-
-    if (winnerIndex === (isOnlineGame ? myPlayerNumber : 1)) {
-        // ⭐️ स्टार्स फक्त नवीन लेव्हल अनलॉक झाल्यावरच मिळतील (वारंवार मिळणे बंद)
-        if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 100) { 
-            gameData.unlockedLevel++; 
-            gameData.stars += 3;
-        }
+ if (winnerIndex === (isOnlineGame ? myPlayerNumber : 1)) {
+    // 🌐 १. जर मल्टिप्लेयर मॅच जिंकली असेल, तर मल्टिप्लेयर स्टार्स ट्रॅक करा
+    if (isOnlineGame) {
+        gameData.multiplayerStars = (gameData.multiplayerStars || 0) + 3;
+        gameData.stars = (gameData.stars || 0) + 3;
+    } 
+    // 🎮 २. जर सिंगल प्लेयर (Single Player) नवीन लेव्हल जिंकेल तर:
+    else if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 100) {
+        gameData.unlockedLevel++;
+        gameData.stars = (gameData.stars || 0) + 3;
+    }
         
         gameData.coins += 20; // कॉईन्स दरवेळी मिळतील
         saveDataToStorage();
