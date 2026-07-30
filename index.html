@@ -637,7 +637,7 @@
                 // जुना डेटा दुसऱ्या मोबाईलमध्ये रिस्टोर करणे
                 gameData.username = savedData.username;
                 gameData.password = savedData.password || pass;
-                gameData.stars = savedData.stars || 0;
+                gameData.stars = Math.min(savedData.stars || 0, (savedData.unlockedLevel || 1) * 3);
                 gameData.coins = savedData.coins || 100;
                 gameData.unlockedLevel = savedData.unlockedLevel || 1;
                 gameData.avatar = savedData.avatar || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
@@ -1111,7 +1111,7 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
 
     playSound('win');
 
-    if (winnerIndex === 1) {
+    if (winnerIndex === (isOnlineGame ? myPlayerNumber : 1)) {
         // ⭐️ स्टार्स फक्त नवीन लेव्हल अनलॉक झाल्यावरच मिळतील (वारंवार मिळणे बंद)
         if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 100) { 
             gameData.unlockedLevel++; 
