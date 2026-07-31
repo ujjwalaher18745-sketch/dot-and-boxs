@@ -2,7 +2,7 @@
 <html lang="mr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>Dots and Boxes - ujwal and nishant Edition</title>
     
     <!-- 🔥 Firebase SDKs (Compat Version for Web) -->
@@ -79,7 +79,6 @@
 
         #game-toast.show { top: 20px; }
 
-        /* 🔥 नवीन स्टार ॲनिमेशन आणि कॉईन्स व्हिक्टरी मोडल डिझाईन */
         #victory-modal {
             display: none; position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -149,6 +148,7 @@
             cursor: pointer; box-shadow: 0 6px 0 #e1b12c, 0 8px 15px rgba(0,0,0,0.2);
             text-transform: uppercase; letter-spacing: 1px;
             transition: transform 0.1s;
+            min-height: 48px;
         }
         .btn-3d:active { transform: translateY(4px); box-shadow: 0 2px 0 #e1b12c; }
 
@@ -173,6 +173,7 @@
             border: 3px solid #ffeaa7; background: #ffffff; color: #2f3542;
             font-size: 1rem; outline: none; font-weight: bold;
             box-shadow: inset 0 3px 6px rgba(0,0,0,0.08);
+            min-height: 48px;
         }
 
         #screen-home { flex-direction: row; padding: 12px; gap: 8px; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
@@ -183,7 +184,6 @@
         .brand-sub { font-size: 0.75rem; font-weight: 900; letter-spacing: 2px; color: #fff; margin: 2px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
         .brand-boxes { font-size: 2.2rem; font-weight: 900; color: #54a0ff; text-shadow: 2px 2px 0 #fff, 3px 3px 0 #2e86de; line-height: 0.9; }
 
-        /* ✨ न्यू आणि ॲनिमेटेड ३ स्टार्स बॉक्स डिझाईन */
         .dots-boxes-anim-box {
             background: linear-gradient(145deg, #1e272e, #2f3542);
             border: 3px solid #fffa65;
@@ -193,13 +193,8 @@
             position: relative; overflow: hidden;
         }
         
-        .anim-stars-row {
-            display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 6px;
-        }
-        .anim-star {
-            font-size: 1.5rem; filter: drop-shadow(0 0 6px #fffa65);
-            animation: popStar 2s infinite ease-in-out alternate;
-        }
+        .anim-stars-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .anim-star { font-size: 1.5rem; filter: drop-shadow(0 0 6px #fffa65); animation: popStar 2s infinite ease-in-out alternate; }
         .anim-star:nth-child(1) { animation-delay: 0s; }
         .anim-star:nth-child(2) { animation-delay: 0.4s; font-size: 2rem; }
         .anim-star:nth-child(3) { animation-delay: 0.8s; }
@@ -229,30 +224,27 @@
         .mode-btn {
             background: #ffffff; border: 2px solid #dfe4ea; border-radius: 14px;
             padding: 8px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer;
-            box-shadow: 0 3px 0 #ced6e0; transition: all 0.1s;
+            box-shadow: 0 3px 0 #ced6e0; transition: all 0.1s; min-height: 48px; justify-content: center;
         }
         .mode-btn.active { border-color: #ff4757; background: #ff788e; box-shadow: 0 3px 0 #d63031; }
         .mode-btn.active .mode-text { color: #ffffff; }
         .mode-icon { font-size: 1.1rem; margin-bottom: 1px; }
         .mode-text { font-size: 0.65rem; font-weight: 900; text-transform: uppercase; color: #2f3542; }
 
-        /* साइडबार लेआउट */
         .home-sidebar {
             width: 68px; background: rgba(255, 255, 255, 0.25); border: 2px solid #ffffff;
             border-radius: 20px; padding: 8px 2px; display: flex; flex-direction: column; gap: 6px; justify-content: space-around;
             backdrop-filter: blur(5px);
         }
-        .side-nav-item { background: #fff8e7; border: 2px solid #fdcb6e; border-radius: 14px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; }
+        .side-nav-item { background: #fff8e7; border: 2px solid #fdcb6e; border-radius: 14px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; min-height: 48px; justify-content: center; }
         .side-nav-item:active { transform: translateY(2px); box-shadow: 0 2px 0 #e1b12c; }
         .side-nav-icon { font-size: 1.1rem; }
         .side-nav-label { font-size: 0.55rem; font-weight: 900; color: #2f3542; text-transform: uppercase; margin-top: 1px; }
 
-        /* 🗺️ रोडमॅप मॅप बॅकग्राउंड */
         #screen-map { 
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
                         url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop') center/cover no-repeat;
-            overflow-y: auto; 
-            position: relative;
+            overflow-y: auto; position: relative;
         }
         .map-top-bar {
             position: sticky; top: 0; background: rgba(255, 248, 231, 0.95);
@@ -260,35 +252,13 @@
             display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(8px); z-index: 10;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .back-btn { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #d63031; }
+        .back-btn { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #d63031; min-height: 40px; }
         .coins-pill { background: #ffeaa7; border: 2px solid #fdcb6e; padding: 4px 12px; border-radius: 16px; font-size: 0.9rem; font-weight: 900; color: #d63031; box-shadow: 0 3px 0 #e1b12c; }
 
-        /* 🔥 १ ते १७० अचूक लेव्हल्सला जोडणारे अचूक SVG नेटवर्क डिझाईन */
-        .map-canvas-wrapper {
-            position: relative;
-            width: 100%;
-            padding: 30px 0 60px 0;
-        }
-
-        #mapSvgContainer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .level-nodes-wrapper {
-            display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2;
-        }
-        
-        .map-node-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
+        .map-canvas-wrapper { position: relative; width: 100%; padding: 30px 0 60px 0; }
+        #mapSvgContainer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .level-nodes-wrapper { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
+        .map-node-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; }
 
         .map-node {
             width: 70px; height: 70px; border-radius: 50%;
@@ -307,35 +277,40 @@
         .map-node-container:nth-child(4n+3) .map-node { transform: translateX(65px); }
         .map-node-container:nth-child(4n+0) .map-node { transform: translateX(0px); }
 
-        /* 🎮 गेम स्क्रीन लेआऊट */
-        #screen-game { padding: 4px; justify-content: flex-start; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
-        .game-header-bar { display: flex; justify-content: space-between; align-items: center; background: #fff8e7; padding: 4px 8px; border-radius: 16px; border: 3px solid #fdcb6e; box-shadow: 0 3px 0 #e1b12c; width: 100%; margin-bottom: 2px; }
-        .score-box { background: #ffffff; padding: 3px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 900; border: 2px solid #dfe4ea; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+        /* 🎮 GAMEPLAY MOBILE RESPONSIVE OPTIMIZATION */
+        #screen-game { padding: 6px; justify-content: flex-start; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
+        .game-header-bar { display: flex; justify-content: space-between; align-items: center; background: #fff8e7; padding: 6px 10px; border-radius: 16px; border: 3px solid #fdcb6e; box-shadow: 0 3px 0 #e1b12c; width: 100%; margin-bottom: 6px; }
+        .score-box { background: #ffffff; padding: 4px 10px; border-radius: 10px; font-size: 0.85rem; font-weight: 900; border: 2px solid #dfe4ea; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
 
-        .board-container { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: calc(100% - 40px); overflow: hidden; position: relative; }
-        .level-indicator { background: #fff8e7; border: 2px solid #fdcb6e; color: #d63031; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 900; margin-bottom: 4px; text-align: center; box-shadow: 0 2px 0 #e1b12c; }
+        .board-container { 
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
+            width: 100%; height: calc(100% - 60px); overflow-x: auto; overflow-y: auto; position: relative; padding: 4px 0;
+        }
+        .level-indicator { background: #fff8e7; border: 2px solid #fdcb6e; color: #d63031; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 900; margin-bottom: 6px; text-align: center; box-shadow: 0 2px 0 #e1b12c; }
 
         #top-target-board-container {
             display: none; background: #fff8e7; border: 3px solid #fdcb6e; border-radius: 16px;
-            padding: 4px; margin-bottom: 4px; box-shadow: 0 4px 0 #e1b12c; flex-direction: column; align-items: center;
+            padding: 4px; margin-bottom: 6px; box-shadow: 0 4px 0 #e1b12c; flex-direction: column; align-items: center;
         }
         #top-target-board { display: grid; gap: 1px; background: #2f3542; padding: 2px; border-radius: 8px; }
         .top-target-cell { display: flex; align-items: center; justify-content: center; background: #ff4757; color: #fff; font-weight: 900; border-radius: 2px; font-size: 0.5rem; width: 14px; height: 14px; }
 
+        /* 🔥 Dynamic Responsive Touch Board */
         #game-board {
-            display: grid; gap: 0px; background: #fff8e7; padding: 8px;
+            display: grid; gap: 0px; background: #fff8e7; padding: 12px;
             border-radius: 20px; border: 4px solid #fdcb6e;
-            width: 98%; height: auto; max-width: 100%; max-height: 90vh;
+            width: auto; max-width: 100%; height: auto;
             align-content: center; justify-content: center; justify-items: center; align-items: center;
             box-shadow: 0 8px 0 #e1b12c, 0 12px 20px rgba(0,0,0,0.2);
-            overflow: hidden;
+            margin: auto;
         }
 
-        .dot-node { width: 12px; height: 12px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 1.5px solid #fff; }
+        .dot-node { width: 14px; height: 14px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 2px solid #fff; }
         .dot-node.disabled-cell { visibility: hidden; }
         
-        .line-horizontal { height: 12px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1px solid #fdcb6e; width: 100%; }
-        .line-vertical { width: 12px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1px solid #fdcb6e; height: 100%; }
+        /* TOUCH FRIENDLY TOUCH TARGETS */
+        .line-horizontal { height: 18px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1.5px solid #fdcb6e; width: 100%; position: relative; }
+        .line-vertical { width: 18px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1.5px solid #fdcb6e; height: 100%; position: relative; }
         .line-disabled { visibility: hidden; pointer-events: none; }
 
         .line-drawn-p1 { background: var(--p1-line) !important; border-color: #fff !important; }
@@ -345,9 +320,8 @@
 
         .box-cell { 
             display: flex; align-items: center; justify-content: center; 
-            font-size: min(2.5vw, 12px); font-weight: 900; color: rgba(47, 53, 66, 0.25); 
-            border-radius: 6px; transition: all 0.2s ease; width: 100%; height: 100%;
-            aspect-ratio: 1 / 1; overflow: hidden; white-space: nowrap;
+            font-size: 0.9rem; font-weight: 900; color: rgba(47, 53, 66, 0.25); 
+            border-radius: 6px; transition: all 0.2s ease; width: 100%; height: 100%; min-width: 28px; min-height: 28px;
         }
         .box-cell.char-unlocked { color: #ffffff !important; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
         .box-disabled { visibility: hidden; }
@@ -356,26 +330,17 @@
         .modal-card { background: #fff8e7; border: 4px solid #fdcb6e; border-radius: 28px; padding: 20px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 10px 0 #e1b12c, 0 15px 25px rgba(0,0,0,0.2); max-height: 85vh; overflow-y: auto; }
         .profile-avatar { width: 80px; height: 80px; border-radius: 50%; border: 4px solid #ff4757; margin: 10px auto; object-fit: cover; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
         .shop-item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #ffffff; border-radius: 16px; margin: 6px 0; border: 2px solid #ffeaa7; font-size: 0.8rem; font-weight: 900; }
-        .btn-small { background: #2ed573; border: 2px solid #fff; color: #fff; padding: 6px 12px; border-radius: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #26af5f; }
-        .btn-close { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 10px 24px; border-radius: 16px; font-weight: 900; margin-top: 15px; cursor: pointer; box-shadow: 0 4px 0 #d63031; }
-        .btn-logout { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 8px 16px; border-radius: 12px; font-weight: 900; margin-top: 10px; cursor: pointer; box-shadow: 0 3px 0 #d63031; }
+        .btn-small { background: #2ed573; border: 2px solid #fff; color: #fff; padding: 6px 12px; border-radius: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #26af5f; min-height: 40px; }
+        .btn-close { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 10px 24px; border-radius: 16px; font-weight: 900; margin-top: 15px; cursor: pointer; box-shadow: 0 4px 0 #d63031; min-height: 44px; }
+        .btn-logout { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 8px 16px; border-radius: 12px; font-weight: 900; margin-top: 10px; cursor: pointer; box-shadow: 0 3px 0 #d63031; min-height: 40px; }
         
         .tab-btn-group { display: flex; gap: 6px; margin-bottom: 10px; }
-        .tab-btn { flex: 1; padding: 6px; font-size: 0.75rem; font-weight: 900; border-radius: 10px; border: 2px solid #fdcb6e; background: #fff; cursor: pointer; }
+        .tab-btn { flex: 1; padding: 8px; font-size: 0.75rem; font-weight: 900; border-radius: 10px; border: 2px solid #fdcb6e; background: #fff; cursor: pointer; min-height: 40px; }
         .tab-btn.active { background: #ff4757; color: #fff; }
 
-        /* 🔥 ऑनलाइन प्लेयर मोड सिलेक्ट बटन्स */
-        .online-player-select {
-            display: flex; gap: 6px; justify-content: center; margin-bottom: 12px;
-        }
-        .online-p-btn {
-            flex: 1; padding: 8px 2px; font-size: 0.75rem; font-weight: 900;
-            border-radius: 12px; border: 2px solid #fdcb6e; background: #ffffff;
-            cursor: pointer; box-shadow: 0 3px 0 #e1b12c; text-align: center;
-        }
-        .online-p-btn.active {
-            background: #ff4757; color: #ffffff; border-color: #ffffff; box-shadow: 0 3px 0 #d63031;
-        }
+        .online-player-select { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
+        .online-p-btn { flex: 1; padding: 8px 2px; font-size: 0.75rem; font-weight: 900; border-radius: 12px; border: 2px solid #fdcb6e; background: #ffffff; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; text-align: center; min-height: 44px; }
+        .online-p-btn.active { background: #ff4757; color: #ffffff; border-color: #ffffff; box-shadow: 0 3px 0 #d63031; }
     </style>
 </head>
 <body>
@@ -383,7 +348,6 @@
     <div class="app-container">
         <div id="game-toast">🔔 Welcome!</div>
 
-        <!-- 🔥 विक्ट्री मोडल स्टार्स आणि कॉईन्स ॲनिमेशन सह -->
         <div id="victory-modal">
             <div class="victory-card">
                 <div class="victory-title">LEVEL COMPLETED!</div>
@@ -423,7 +387,6 @@
                     <div class="brand-boxes">BOXES</div>
                 </div>
 
-                <!-- ✨ न्यू डॉट्स अँड बॉक्स ३ स्टार्स ॲनिमेटेड बॉक्स डिझाईन -->
                 <div class="dots-boxes-anim-box">
                     <div class="anim-stars-row">
                         <div class="anim-star">⭐</div>
@@ -437,7 +400,6 @@
                     </div>
                 </div>
 
-                <!-- 🎛️ मल्टीप्लेअर मोड -->
                 <div>
                     <div class="section-heading">— PLAYER MODE —</div>
                     <div class="mode-selector-grid">
@@ -451,7 +413,6 @@
                 <button class="btn-3d" style="margin-top: 2px;" onclick="showScreen('screen-map')">START NOW</button>
             </div>
 
-            <!-- 🎯 डायग्रामनुसार तयार केलेला साइडबार (Online बटणासह) -->
             <div class="home-sidebar">
                 <div class="side-nav-item" onclick="openModal('profileModal')"><div class="side-nav-icon">👤</div><div class="side-nav-label">Profile</div></div>
                 <div class="side-nav-item" onclick="openModal('rankModal')"><div class="side-nav-icon">🏆</div><div class="side-nav-label">Rank</div></div>
@@ -471,7 +432,6 @@
             </div>
             
             <div class="map-canvas-wrapper">
-                <!-- SVG Canvas for Drawing Accurate Chain Connectors -->
                 <svg id="mapSvgContainer"></svg>
                 <div class="level-nodes-wrapper" id="levelNodesContainer"></div>
             </div>
@@ -500,7 +460,6 @@
         </div>
 
         <!-- MODALS -->
-        <!-- 🔥 अपडेटेड ऑनलाईन मोडल - 2P, 3P, 4P सिलेक्ट ऑप्शन्ससह -->
         <div class="modal-overlay" id="onlineModal">
             <div class="modal-card">
                 <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">🌐 ONLINE ROOM</h3>
@@ -597,7 +556,6 @@
     </div>
 
     <script>
-        /* 🔥 FIREBASE INTEGRATION SETUP 🔥 */
         const firebaseConfig = {
             apiKey: "AIzaSyAu2JHAo9SgKojQ95B-UAVwkI3xfdgYgQQ",
             authDomain: "dotsandboxesgame-d0bdc.firebaseapp.com",
@@ -662,9 +620,9 @@
         };
 
         let activePlayerMode = 'AI';
-        let selectedOnlinePlayerCount = 2; // डिफॉल्ट २ प्लेअर्स ऑनलाईन
+        let selectedOnlinePlayerCount = 2;
         let activeLevel = 1;
-        let boardRows = 2, boardCols = 2;
+        let boardRows = 6, boardCols = 6;
         let isTargetLevelMode = false;
         let targetBoxesToWin = 0;
         let turnPlayer = 1;
@@ -828,7 +786,6 @@
             element.classList.add('active');
         }
 
-        /* 🔥 ऑनलाईन प्लेअर्स निवडणे (2P, 3P, 4P) */
         function setOnlinePlayerCount(count) {
             selectedOnlinePlayerCount = count;
             document.getElementById('btnOnline2P').classList.remove('active');
@@ -908,7 +865,8 @@
         }
         
         function startOnlineGameView() {
-            activeLevel = 1; boardRows = 15; boardCols = 15; 
+            activeLevel = 1; 
+            boardRows = 10; boardCols = 7; // Optimal mobile ratio for online multiplayer
             activeShape = 'SQUARE'; 
             isTargetLevelMode = false; targetBoxesToWin = 0;
             
@@ -944,25 +902,17 @@
         }
 
         function getGridSizeForLevel(lvl) {
-            if (lvl <= 4) return 4;
-            if (lvl <= 5) return 3;
-            if (lvl <= 10) return 4;
-            if (lvl <= 15) return 6;
-            if (lvl <= 20) return 8;
-            if (lvl <= 25) return 10;
-            if (lvl <= 30) return 12;
-            if (lvl <= 35) return 15;
-            if (lvl <= 40) return 18;
-            if (lvl <= 45) return 20;
-            if (lvl <= 50) return 22;
-            if (lvl <= 55) return 25;
-            if (lvl <= 100) return 20;
+            if (lvl <= 4) return { rows: 5, cols: 5 };
+            if (lvl <= 10) return { rows: 6, cols: 6 };
+            if (lvl <= 20) return { rows: 7, cols: 6 };
+            if (lvl <= 35) return { rows: 8, cols: 7 };
+            if (lvl <= 50) return { rows: 9, cols: 7 };
+            if (lvl <= 100) return { rows: 10, cols: 8 };
 
             let step = Math.floor((lvl - 101) / 5);
-            return Math.min(4 + step, 15);
+            return { rows: Math.min(6 + step, 12), cols: Math.min(5 + step, 9) };
         }
 
-        /* 🔥 १ ते १७० सर्व लेव्हल्स बिल्ड करण्याचे लॉजिक */
         function buildMapRoadmap() {
             let container = document.getElementById('levelNodesContainer');
             container.innerHTML = '';
@@ -991,7 +941,7 @@
                 let node = document.createElement('div');
                 let isUnlocked = lvl <= gameData.unlockedLevel;
                 let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0 || lvl >= 56);
-                let dotsCount = getGridSizeForLevel(lvl);
+                let gridDim = getGridSizeForLevel(lvl);
 
                 node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
                 node.innerText = lvl;
@@ -1003,12 +953,12 @@
                 if (shapeTexts[lvl]) {
                     badge.innerText = shapeTexts[lvl];
                 } else {
-                    badge.innerText = `${dotsCount}x${dotsCount}`;
+                    badge.innerText = `${gridDim.cols}x${gridDim.rows}`;
                 }
                 node.appendChild(badge);
 
                 if (isUnlocked) {
-                    node.onclick = function() { startLevelGame(lvl, dotsCount, isSpecial); };
+                    node.onclick = function() { startLevelGame(lvl, gridDim, isSpecial); };
                 }
 
                 nodeWrap.appendChild(node);
@@ -1016,7 +966,6 @@
             }
         }
 
-        /* 🔥 SVG तंत्रज्ञान वापरून १ ते १७० सर्व नोड्स एकमेकांशी अगदी तंतोतंत कनेक्ट करण्याची अचूक पद्धत */
         function drawMapConnectionsSVG() {
             let svg = document.getElementById('mapSvgContainer');
             svg.innerHTML = '';
@@ -1054,8 +1003,10 @@
             svg.appendChild(path);
         }
         
-        function startLevelGame(lvl, dotsCount, isSpecial) {
-            activeLevel = lvl; boardRows = dotsCount; boardCols = dotsCount;
+        function startLevelGame(lvl, gridDim, isSpecial) {
+            activeLevel = lvl; 
+            boardRows = gridDim.rows; 
+            boardCols = gridDim.cols;
             isTargetLevelMode = isSpecial;
 
             if (lvl === 56 || (lvl >= 61 && lvl <= 70)) activeShape = 'DIAMOND';
@@ -1066,7 +1017,7 @@
             else if (lvl >= 101) activeShape = 'SQUARE';
 
             if (isTargetLevelMode) {
-                targetBoxesToWin = Math.min(Math.floor(dotsCount * 1.5), 20);
+                targetBoxesToWin = Math.min(Math.floor((boardRows * boardCols) * 0.3), 20);
             } else {
                 targetBoxesToWin = 0;
             }
@@ -1078,7 +1029,7 @@
             } else if (isTargetLevelMode) {
                 document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
             } else {
-                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${dotsCount}x${dotsCount}`;
+                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${boardCols}x${boardRows}`;
             }
 
             document.getElementById('p3Box').style.display = (activePlayerMode === '3P' || activePlayerMode === '4P') ? 'block' : 'none';
@@ -1147,15 +1098,15 @@
 
             let gridColTemplate = '';
             for (let i = 0; i < boardCols - 1; i++) {
-                gridColTemplate += 'min-content 1fr ';
+                gridColTemplate += 'auto 1fr ';
             }
-            gridColTemplate += 'min-content';
+            gridColTemplate += 'auto';
 
             let gridRowTemplate = '';
             for (let i = 0; i < boardRows - 1; i++) {
-                gridRowTemplate += 'min-content 1fr ';
+                gridRowTemplate += 'auto 1fr ';
             }
-            gridRowTemplate += 'min-content';
+            gridRowTemplate += 'auto';
 
             board.style.gridTemplateColumns = gridColTemplate;
             board.style.gridTemplateRows = gridRowTemplate;
@@ -1299,7 +1250,7 @@
                 for (let c = 0; c < boardCols - 1; c++) {
                     if (boxesGrid[r][c] === 0) {
                         let linesCount = (horizontalGrid[r][c]?1:0) + (horizontalGrid[r+1][c]?1:0) + (verticalGrid[r][c]?1:0) + (verticalGrid[r][c+1]?1:0);
-                         if (linesCount === 3) {
+                        if (linesCount === 3) {
                             if (!horizontalGrid[r][c]) { executeMove('h', r, c, document.getElementById(`h-${r}-${c}`), 2); return; }
                             if (!horizontalGrid[r+1][c]) { executeMove('h', r+1, c, document.getElementById(`h-${r+1}-${c}`), 2); return; }
                             if (!verticalGrid[r][c]) { executeMove('v', r, c, document.getElementById(`v-${r}-${c}`), 2); return; }
@@ -1313,7 +1264,7 @@
             for (let r = 0; r < boardRows; r++)
                 for (let c = 0; c < boardCols - 1; c++) {
                     let el = document.getElementById(`h-${r}-${c}`);
-                    if (horizontalGrid[r][c] === 0 && el && !el.classList.contains('line-disabled')) possibleMoves.push({ type: 'h', r, c, el });
+                     if (horizontalGrid[r][c] === 0 && el && !el.classList.contains('line-disabled')) possibleMoves.push({ type: 'h', r, c, el });
                 }
 
             for (let r = 0; r < boardRows - 1; r++)
@@ -1380,7 +1331,6 @@
             }
         }
 
-        /* 🔥 अपडेटेड स्टार्स पॉप-अप आणि साउंड ॲनिमेशन */
         function showCandyCrushVictoryModal() {
             let modal = document.getElementById('victory-modal');
             let s1 = document.getElementById('star1');
