@@ -904,10 +904,19 @@
         function getGridSizeForLevel(lvl) {
             if (lvl <= 4) return { rows: 5, cols: 5 };
             if (lvl <= 10) return { rows: 6, cols: 6 };
-            if (lvl <= 20) return { rows: 7, cols: 6 };
-            if (lvl <= 35) return { rows: 8, cols: 7 };
-            if (lvl <= 50) return { rows: 9, cols: 7 };
-            if (lvl <= 100) return { rows: 10, cols: 8 };
+           if (lvl <= 29) return { rows: 7, cols: 6 };
+
+    // 🎯 ३० ते ५५ चे गट (तुमच्या गरजेनुसार बदलून घ्या)
+    if (lvl <= 32) return { rows: 8, cols: 7 };
+    if (lvl <= 35) return { rows: 8, cols: 7 };
+    if (lvl <= 38) return { rows: 8, cols: 8 };
+    if (lvl <= 41) return { rows: 9, cols: 7 };
+    if (lvl <= 44) return { rows: 9, cols: 8 };
+    if (lvl <= 47) return { rows: 10, cols: 7 };
+    if (lvl <= 50) return { rows: 11, cols: 8 };
+    if (lvl <= 53) return { rows: 11, cols: 8 };
+    if (lvl <= 55) return { rows: 12, cols: 9 };
+            if (lvl <= 100) return { rows: 13, cols: 9 };
 
             let step = Math.floor((lvl - 101) / 5);
             return { rows: Math.min(6 + step, 12), cols: Math.min(5 + step, 9) };
