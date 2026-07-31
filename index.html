@@ -79,6 +79,7 @@
 
         #game-toast.show { top: 20px; }
 
+        /* 🔥 नवीन स्टार ॲनिमेशन आणि कॉईन्स व्हिक्टरी मोडल डिझाईन */
         #victory-modal {
             display: none; position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -113,16 +114,32 @@
         .stars-row { display: flex; justify-content: center; gap: 15px; margin: 15px 0; }
 
         .star-item {
-            font-size: 3.8rem; opacity: 0.2; transform: scale(0.5);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 3.8rem; opacity: 0.1; transform: scale(0.3) rotate(-20deg);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
             filter: drop-shadow(0 4px 0px rgba(0,0,0,0.2));
         }
 
-        .star-item.active { opacity: 1; transform: scale(1.1) rotate(5deg); }
+        .star-item.active { 
+            opacity: 1; 
+            transform: scale(1.25) rotate(0deg); 
+            animation: starBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+        }
+
+        @keyframes starBounce {
+            0% { transform: scale(0.2) rotate(-45deg); opacity: 0; }
+            70% { transform: scale(1.4) rotate(10deg); }
+            100% { transform: scale(1.25) rotate(0deg); opacity: 1; }
+        }
 
         .victory-rewards {
-            font-size: 1.1rem; color: #2f3542; margin-bottom: 20px; font-weight: 900;
-            background: #ffeaa7; padding: 8px; border-radius: 15px; border: 2px dashed #fdcb6e;
+            font-size: 1.2rem; color: #2f3542; margin-bottom: 20px; font-weight: 900;
+            background: #ffeaa7; padding: 10px; border-radius: 18px; border: 2px dashed #fdcb6e;
+            animation: coinPulse 1.5s infinite alternate;
+        }
+
+        @keyframes coinPulse {
+            0% { transform: scale(0.98); box-shadow: 0 0 5px #ffeaa7; }
+            100% { transform: scale(1.05); box-shadow: 0 0 15px #fdcb6e; }
         }
 
         .btn-3d {
@@ -166,29 +183,52 @@
         .brand-sub { font-size: 0.75rem; font-weight: 900; letter-spacing: 2px; color: #fff; margin: 2px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
         .brand-boxes { font-size: 2.2rem; font-weight: 900; color: #54a0ff; text-shadow: 2px 2px 0 #fff, 3px 3px 0 #2e86de; line-height: 0.9; }
 
-        /* Online Room Section Added Above Selector */
-        .online-room-card {
-            background: #fff8e7; border: 3px solid #fdcb6e; border-radius: 18px;
-            padding: 8px; margin-bottom: 6px; box-shadow: 0 4px 0 #e1b12c; text-align: center;
+        /* ✨ न्यू आणि ॲनिमेटेड ३ स्टार्स बॉक्स डिझाईन */
+        .dots-boxes-anim-box {
+            background: linear-gradient(145deg, #1e272e, #2f3542);
+            border: 3px solid #fffa65;
+            border-radius: 20px; padding: 15px; margin: 6px auto;
+            width: 100%; box-shadow: 0 8px 0 #1e272e, 0 10px 20px rgba(0,0,0,0.4);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        
+        .anim-stars-row {
+            display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 6px;
+        }
+        .anim-star {
+            font-size: 1.5rem; filter: drop-shadow(0 0 6px #fffa65);
+            animation: popStar 2s infinite ease-in-out alternate;
+        }
+        .anim-star:nth-child(1) { animation-delay: 0s; }
+        .anim-star:nth-child(2) { animation-delay: 0.4s; font-size: 2rem; }
+        .anim-star:nth-child(3) { animation-delay: 0.8s; }
+
+        @keyframes popStar {
+            0% { transform: scale(0.6) translateZ(-20px); opacity: 0.4; }
+            100% { transform: scale(1.2) translateZ(10px); opacity: 1; filter: drop-shadow(0 0 12px #fffa65); }
         }
 
-        .mini-preview-container {
-            background: #fff8e7; border: 3px solid #ffeaa7;
-            border-radius: 18px; padding: 6px; width: 50%; margin: 2px auto;
-            aspect-ratio: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
-            box-shadow: 0 6px 0 #fdcb6e, 0 8px 12px rgba(0,0,0,0.15);
+        .anim-grid {
+            display: grid; grid-template-columns: auto 35px auto;
+            grid-template-rows: auto 35px auto; gap: 4px; align-items: center; justify-items: center;
         }
-        .preview-quadrant { border-radius: 10px; border: 2px dashed #74b9ff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; }
-        .pq-1 { background: #ff4757; color: #fff; border-color: #ff6b81; }
-        .pq-2 { background: #1e90ff; color: #fff; border-color: #70a1ff; }
-        .pq-3 { background: #2ed573; color: #fff; border-color: #7bed9f; }
-        .pq-4 { background: #ffa502; color: #fff; border-color: #eccc68; }
+        .anim-dot { width: 10px; height: 10px; background: #fffa65; border-radius: 50%; box-shadow: 0 0 8px #fffa65; }
+        .anim-line-h { width: 35px; height: 4px; background: #ff4757; border-radius: 2px; animation: pulseLine 1.5s infinite alternate; }
+        .anim-line-v { width: 4px; height: 35px; background: #1e90ff; border-radius: 2px; animation: pulseLine 1.5s infinite alternate 0.5s; }
+        .anim-cell {
+            width: 35px; height: 35px; background: rgba(255, 255, 255, 0.15); border-radius: 6px;
+            display: flex; align-items: center; justify-content: center; font-weight: 900; color: #2ed573; font-size: 0.8rem;
+            animation: boxGlow 2s infinite alternate;
+        }
+        @keyframes pulseLine { 0% { opacity: 0.3; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.05); } }
+        @keyframes boxGlow { 0% { background: rgba(46, 213, 115, 0.2); } 100% { background: rgba(46, 213, 115, 0.6); } }
 
-        .section-heading { font-size: 0.7rem; font-weight: 900; text-align: center; color: #ffffff; letter-spacing: 1px; margin-bottom: 4px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .section-heading { font-size: 0.75rem; font-weight: 900; text-align: center; color: #ffffff; letter-spacing: 1px; margin-bottom: 4px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
         .mode-selector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
         .mode-btn {
             background: #ffffff; border: 2px solid #dfe4ea; border-radius: 14px;
-            padding: 6px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer;
+            padding: 8px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer;
             box-shadow: 0 3px 0 #ced6e0; transition: all 0.1s;
         }
         .mode-btn.active { border-color: #ff4757; background: #ff788e; box-shadow: 0 3px 0 #d63031; }
@@ -196,63 +236,106 @@
         .mode-icon { font-size: 1.1rem; margin-bottom: 1px; }
         .mode-text { font-size: 0.65rem; font-weight: 900; text-transform: uppercase; color: #2f3542; }
 
+        /* साइडबार लेआउट */
         .home-sidebar {
-            width: 64px; background: rgba(255, 255, 255, 0.25); border: 2px solid #ffffff;
+            width: 68px; background: rgba(255, 255, 255, 0.25); border: 2px solid #ffffff;
             border-radius: 20px; padding: 8px 2px; display: flex; flex-direction: column; gap: 6px; justify-content: space-around;
             backdrop-filter: blur(5px);
         }
         .side-nav-item { background: #fff8e7; border: 2px solid #fdcb6e; border-radius: 14px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; }
         .side-nav-item:active { transform: translateY(2px); box-shadow: 0 2px 0 #e1b12c; }
-        .side-nav-icon { font-size: 1.2rem; }
+        .side-nav-icon { font-size: 1.1rem; }
         .side-nav-label { font-size: 0.55rem; font-weight: 900; color: #2f3542; text-transform: uppercase; margin-top: 1px; }
 
-        #screen-map { background: linear-gradient(180deg, #a8e6cf 0%, #dbede6 50%, #ffd3b6 100%); overflow-y: auto; }
+        /* 🗺️ रोडमॅप मॅप बॅकग्राउंड */
+        #screen-map { 
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop') center/cover no-repeat;
+            overflow-y: auto; 
+            position: relative;
+        }
         .map-top-bar {
-            position: sticky; top: 0; background: #fff8e7;
+            position: sticky; top: 0; background: rgba(255, 248, 231, 0.95);
             border-bottom: 4px solid #fdcb6e; padding: 12px 16px;
             display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(8px); z-index: 10;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .back-btn { background: #ff4757; border: 2px solid #fff; color: #fff; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #d63031; }
         .coins-pill { background: #ffeaa7; border: 2px solid #fdcb6e; padding: 4px 12px; border-radius: 16px; font-size: 0.9rem; font-weight: 900; color: #d63031; box-shadow: 0 3px 0 #e1b12c; }
 
-        .level-nodes-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0 60px 0; gap: 24px; position: relative; }
+        /* 🔥 १ ते १७० अचूक लेव्हल्सला जोडणारे अचूक SVG नेटवर्क डिझाईन */
+        .map-canvas-wrapper {
+            position: relative;
+            width: 100%;
+            padding: 30px 0 60px 0;
+        }
+
+        #mapSvgContainer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .level-nodes-wrapper {
+            display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2;
+        }
+        
+        .map-node-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
         .map-node {
             width: 70px; height: 70px; border-radius: 50%;
             background: linear-gradient(145deg, #ff7675, #d63031);
-            border: 4px solid #ffffff; box-shadow: 0 8px 0 #b22222, 0 10px 15px rgba(0,0,0,0.2);
+            border: 4px solid #ffffff; box-shadow: 0 8px 0 #b22222, 0 10px 15px rgba(0,0,0,0.4);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             font-size: 1.4rem; font-weight: 900; color: #fff; cursor: pointer; position: relative;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4); z-index: 2;
         }
-        .map-node.special { background: linear-gradient(145deg, #ffeaa7, #fdcb6e); border-color: #fff; color: #d63031; box-shadow: 0 8px 0 #e1b12c, 0 10px 15px rgba(0,0,0,0.2); }
-        .map-node.locked { background: #b2bec3; border-color: #dfe4ea; color: #636e72; cursor: not-allowed; box-shadow: 0 6px 0 #636e72; text-shadow: none; }
-        .grid-info-badge { position: absolute; bottom: -10px; background: #fff; border: 2px solid #74b9ff; color: #0984e3; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; font-weight: 900; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .map-node.special { background: linear-gradient(145deg, #ffeaa7, #fdcb6e); border-color: #fff; color: #d63031; box-shadow: 0 8px 0 #e1b12c, 0 10px 15px rgba(0,0,0,0.4); }
+        .map-node.locked { background: #2f3542; border-color: #57606f; color: #a4b0be; cursor: not-allowed; box-shadow: 0 6px 0 #1e272e; text-shadow: none; }
+        .grid-info-badge { position: absolute; bottom: -10px; background: #fff; border: 2px solid #74b9ff; color: #0984e3; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; font-weight: 900; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
-        .map-node:nth-child(4n+1) { transform: translateX(-65px); }
-        .map-node:nth-child(4n+2) { transform: translateX(0px); }
-        .map-node:nth-child(4n+3) { transform: translateX(65px); }
-        .map-node:nth-child(4n+0) { transform: translateX(0px); }
+        .map-node-container:nth-child(4n+1) .map-node { transform: translateX(-65px); }
+        .map-node-container:nth-child(4n+2) .map-node { transform: translateX(0px); }
+        .map-node-container:nth-child(4n+3) .map-node { transform: translateX(65px); }
+        .map-node-container:nth-child(4n+0) .map-node { transform: translateX(0px); }
 
-        #screen-game { padding: 12px; justify-content: space-between; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
-        .game-header-bar { display: flex; justify-content: space-between; align-items: center; background: #fff8e7; padding: 8px 12px; border-radius: 20px; border: 3px solid #fdcb6e; box-shadow: 0 6px 0 #e1b12c; }
-        .score-box { background: #ffffff; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 900; border: 2px solid #dfe4ea; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+        /* 🎮 गेम स्क्रीन लेआऊट */
+        #screen-game { padding: 4px; justify-content: flex-start; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
+        .game-header-bar { display: flex; justify-content: space-between; align-items: center; background: #fff8e7; padding: 4px 8px; border-radius: 16px; border: 3px solid #fdcb6e; box-shadow: 0 3px 0 #e1b12c; width: 100%; margin-bottom: 2px; }
+        .score-box { background: #ffffff; padding: 3px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 900; border: 2px solid #dfe4ea; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
 
-        .board-container { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 10px 0; overflow: auto; }
-        .level-indicator { background: #fff8e7; border: 3px solid #fdcb6e; color: #d63031; padding: 6px 16px; border-radius: 16px; font-size: 0.85rem; font-weight: 900; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 0 #e1b12c; }
+        .board-container { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: calc(100% - 40px); overflow: hidden; position: relative; }
+        .level-indicator { background: #fff8e7; border: 2px solid #fdcb6e; color: #d63031; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 900; margin-bottom: 4px; text-align: center; box-shadow: 0 2px 0 #e1b12c; }
+
+        #top-target-board-container {
+            display: none; background: #fff8e7; border: 3px solid #fdcb6e; border-radius: 16px;
+            padding: 4px; margin-bottom: 4px; box-shadow: 0 4px 0 #e1b12c; flex-direction: column; align-items: center;
+        }
+        #top-target-board { display: grid; gap: 1px; background: #2f3542; padding: 2px; border-radius: 8px; }
+        .top-target-cell { display: flex; align-items: center; justify-content: center; background: #ff4757; color: #fff; font-weight: 900; border-radius: 2px; font-size: 0.5rem; width: 14px; height: 14px; }
 
         #game-board {
-            display: grid; gap: 0px; background: #fff8e7; padding: 10px;
-            border-radius: 28px; border: 5px solid #fdcb6e;
-            max-width: 100%; max-height: 100%; overflow: auto;
-            box-shadow: 0 10px 0 #e1b12c, 0 15px 25px rgba(0,0,0,0.2);
+            display: grid; gap: 0px; background: #fff8e7; padding: 8px;
+            border-radius: 20px; border: 4px solid #fdcb6e;
+            width: 98%; height: 92%; max-width: 100%; max-height: 100%;
+            align-content: center; justify-content: center; justify-items: center; align-items: center;
+            box-shadow: 0 8px 0 #e1b12c, 0 12px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
         }
 
-        .dot-node { width: 8px; height: 8px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 1px solid #fff; }
+        .dot-node { width: 12px; height: 12px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 1.5px solid #fff; }
         .dot-node.disabled-cell { visibility: hidden; }
         
-        .line-horizontal { height: 8px; background: #ffeaa7; cursor: pointer; border-radius: 4px; border: 1px solid #fdcb6e; }
-        .line-vertical { width: 8px; background: #ffeaa7; cursor: pointer; border-radius: 4px; border: 1px solid #fdcb6e; }
+        .line-horizontal { height: 12px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1px solid #fdcb6e; width: 100%; }
+        .line-vertical { width: 12px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1px solid #fdcb6e; height: 100%; }
         .line-disabled { visibility: hidden; pointer-events: none; }
 
         .line-drawn-p1 { background: var(--p1-line) !important; border-color: #fff !important; }
@@ -260,7 +343,12 @@
         .line-drawn-p3 { background: var(--p3-line) !important; border-color: #fff !important; }
         .line-drawn-p4 { background: var(--p4-line) !important; border-color: #fff !important; }
 
-        .box-cell { display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 900; color: #fff; border-radius: 4px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .box-cell { 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 0.9rem; font-weight: 900; color: rgba(47, 53, 66, 0.25); 
+            border-radius: 6px; transition: all 0.2s ease; width: 100%; height: 100%;
+        }
+        .box-cell.char-unlocked { color: #ffffff !important; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
         .box-disabled { visibility: hidden; }
 
         .modal-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(47, 53, 66, 0.8); backdrop-filter: blur(5px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
@@ -274,6 +362,19 @@
         .tab-btn-group { display: flex; gap: 6px; margin-bottom: 10px; }
         .tab-btn { flex: 1; padding: 6px; font-size: 0.75rem; font-weight: 900; border-radius: 10px; border: 2px solid #fdcb6e; background: #fff; cursor: pointer; }
         .tab-btn.active { background: #ff4757; color: #fff; }
+
+        /* 🔥 ऑनलाइन प्लेयर मोड सिलेक्ट बटन्स */
+        .online-player-select {
+            display: flex; gap: 6px; justify-content: center; margin-bottom: 12px;
+        }
+        .online-p-btn {
+            flex: 1; padding: 8px 2px; font-size: 0.75rem; font-weight: 900;
+            border-radius: 12px; border: 2px solid #fdcb6e; background: #ffffff;
+            cursor: pointer; box-shadow: 0 3px 0 #e1b12c; text-align: center;
+        }
+        .online-p-btn.active {
+            background: #ff4757; color: #ffffff; border-color: #ffffff; box-shadow: 0 3px 0 #d63031;
+        }
     </style>
 </head>
 <body>
@@ -281,6 +382,7 @@
     <div class="app-container">
         <div id="game-toast">🔔 Welcome!</div>
 
+        <!-- 🔥 विक्ट्री मोडल स्टार्स आणि कॉईन्स ॲनिमेशन सह -->
         <div id="victory-modal">
             <div class="victory-card">
                 <div class="victory-title">LEVEL COMPLETED!</div>
@@ -301,11 +403,11 @@
                 <div class="login-subtitle">Login Please In Enter The Game</div>
                 <div class="input-group">
                     <label>Username</label>
-                    <input type="text" id="loginUser" class="login-input" placeholder="Name" >
+                    <input type="text" id="loginUser" class="login-input" placeholder="Name">
                 </div>
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" id="loginPass" class="login-input" placeholder="••••••••" >
+                    <input type="password" id="loginPass" class="login-input" placeholder="••••••••">
                 </div>
                 <button class="btn-3d" style="width:100%; margin-top:10px;" onclick="handleLoginSubmit()">ENTER GAME</button>
             </div>
@@ -320,23 +422,21 @@
                     <div class="brand-boxes">BOXES</div>
                 </div>
 
-                <!-- 🌐 ONLINE MULTIPLAYER BOX POSITIONED RIGHT HERE ABOVE SELECTOR -->
-                <div class="online-room-card">
-                    <div class="section-heading" style="color:#d63031; margin-bottom: 2px;">🌐 ONLINE ROOM 🌐</div>
-                    <div style="display:flex; gap:4px; margin-bottom:4px;">
-                        <input type="text" id="roomCodeInput" class="login-input" style="padding: 4px 8px; font-size:0.8rem; text-align:center;" placeholder="4-Digit Code" maxlength="4">
-                        <button class="btn-small" style="background:#00cec9; box-shadow:0 2px 0 #00b894; font-size:0.7rem;" onclick="joinOnlineRoom()">JOIN</button>
+                <!-- ✨ न्यू डॉट्स अँड बॉक्स ३ स्टार्स ॲनिमेटेड बॉक्स डिझाईन -->
+                <div class="dots-boxes-anim-box">
+                    <div class="anim-stars-row">
+                        <div class="anim-star">⭐</div>
+                        <div class="anim-star">⭐</div>
+                        <div class="anim-star">⭐</div>
                     </div>
-                    <button class="btn-small" style="width:100%; background:#6c5ce7; box-shadow:0 3px 0 #5758bb; font-size:0.75rem;" onclick="createOnlineRoom()">CREATE ROOM ➕</button>
+                    <div class="anim-grid">
+                        <div class="anim-dot"></div><div class="anim-line-h"></div><div class="anim-dot"></div>
+                        <div class="anim-line-v"></div><div class="anim-cell">★</div><div class="anim-line-v"></div>
+                        <div class="anim-dot"></div><div class="anim-line-h"></div><div class="anim-dot"></div>
+                    </div>
                 </div>
 
-                <div class="mini-preview-container">
-                    <div class="preview-quadrant pq-1">P1</div>
-                    <div class="preview-quadrant pq-2">P2</div>
-                    <div class="preview-quadrant pq-3">P3</div>
-                    <div class="preview-quadrant pq-4">P4</div>
-                </div>
-
+                <!-- 🎛️ मल्टीप्लेअर मोड -->
                 <div>
                     <div class="section-heading">— PLAYER MODE —</div>
                     <div class="mode-selector-grid">
@@ -347,15 +447,17 @@
                     </div>
                 </div>
 
-                <button class="btn-3d" style="margin-top: 5px;" onclick="showScreen('screen-map')">START NOW</button>
+                <button class="btn-3d" style="margin-top: 2px;" onclick="showScreen('screen-map')">START NOW</button>
             </div>
 
+            <!-- 🎯 डायग्रामनुसार तयार केलेला साइडबार (Online बटणासह) -->
             <div class="home-sidebar">
                 <div class="side-nav-item" onclick="openModal('profileModal')"><div class="side-nav-icon">👤</div><div class="side-nav-label">Profile</div></div>
                 <div class="side-nav-item" onclick="openModal('rankModal')"><div class="side-nav-icon">🏆</div><div class="side-nav-label">Rank</div></div>
+                <div class="side-nav-item" style="border-color:#ff4757; background:#ffeaa7;" onclick="openModal('onlineModal')"><div class="side-nav-icon">🌐</div><div class="side-nav-label" style="color:#d63031;">Online</div></div>
                 <div class="side-nav-item" onclick="openModal('shopModal')"><div class="side-nav-icon">🛒</div><div class="side-nav-label">Shop</div></div>
                 <div class="side-nav-item" onclick="openModal('spinModal')"><div class="side-nav-icon">🎡</div><div class="side-nav-label">Spin</div></div>
-                <div class="side-nav-item" onclick="openModal('helpModal')"><div class="side-nav-icon">🧩</div><div class="side-nav-label">Rules And info</div></div>
+                <div class="side-nav-item" onclick="openModal('helpModal')"><div class="side-nav-icon">🧩</div><div class="side-nav-label">Rules</div></div>
             </div>
         </div>
 
@@ -366,7 +468,12 @@
                 <div style="font-weight:900; color:#ff4757; font-size:1.1rem;">LEVEL MAP</div>
                 <div class="coins-pill">🪙 <span id="mapCoinsText">100</span></div>
             </div>
-            <div class="level-nodes-wrapper" id="levelNodesContainer"></div>
+            
+            <div class="map-canvas-wrapper">
+                <!-- SVG Canvas for Drawing Accurate Chain Connectors -->
+                <svg id="mapSvgContainer"></svg>
+                <div class="level-nodes-wrapper" id="levelNodesContainer"></div>
+            </div>
         </div>
 
         <!-- SCREEN 3: GAMEPLAY -->
@@ -381,11 +488,39 @@
 
             <div class="board-container">
                 <div class="level-indicator" id="levelBanner">Level 1 - Complete Full Grid!</div>
+                
+                <div id="top-target-board-container">
+                    <div style="font-size:0.6rem; font-weight:900; color:#d63031; margin-bottom:2px;">TARGET PREVIEW</div>
+                    <div id="top-target-board"></div>
+                </div>
+
                 <div id="game-board"></div>
             </div>
         </div>
 
         <!-- MODALS -->
+        <!-- 🔥 अपडेटेड ऑनलाईन मोडल - 2P, 3P, 4P सिलेक्ट ऑप्शन्ससह -->
+        <div class="modal-overlay" id="onlineModal">
+            <div class="modal-card">
+                <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">🌐 ONLINE ROOM</h3>
+                
+                <div style="font-size:0.8rem; font-weight:900; color:#57606f; margin-bottom:4px;">SELECT ONLINE PLAYERS:</div>
+                <div class="online-player-select">
+                    <button class="online-p-btn active" id="btnOnline2P" onclick="setOnlinePlayerCount(2)">2 Players</button>
+                    <button class="online-p-btn" id="btnOnline3P" onclick="setOnlinePlayerCount(3)">3 Players</button>
+                    <button class="online-p-btn" id="btnOnline4P" onclick="setOnlinePlayerCount(4)">4 Players</button>
+                </div>
+
+                <div style="margin-bottom:12px;">
+                    <input type="text" id="roomCodeInput" class="login-input" style="padding: 8px; font-size:0.9rem; text-align:center; margin-bottom:8px;" placeholder="4-Digit Code" maxlength="4">
+                    <button class="btn-small" style="width:100%; background:#00cec9; box-shadow:0 3px 0 #00b894; font-size:0.85rem; padding:8px;" onclick="joinOnlineRoom()">JOIN ROOM</button>
+                </div>
+                <hr style="border:1px dashed #fdcb6e; margin:10px 0;">
+                <button class="btn-small" style="width:100%; background:#6c5ce7; box-shadow:0 3px 0 #5758bb; font-size:0.85rem; padding:8px;" onclick="createOnlineRoom()">CREATE NEW ROOM ➕</button>
+                <button class="btn-close" onclick="closeModal('onlineModal')">Close</button>
+            </div>
+        </div>
+
         <div class="modal-overlay" id="profileModal">
             <div class="modal-card">
                 <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">👤 PLAYER PROFILE</h3>
@@ -405,7 +540,7 @@
             <div class="modal-card">
                 <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">🏆 LIVE LEADERBOARD</h3>
                 <div id="leaderboardList" style="text-align:left; font-size:0.85rem; font-weight:bold; line-height:2; margin:10px 0; color:#2f3542;">
-                    loding...
+                    loading...
                 </div>
                 <button class="btn-close" onclick="closeModal('rankModal')">Close</button>
             </div>
@@ -420,7 +555,6 @@
                     <button class="tab-btn" id="tabBox" onclick="switchShopTab('box')">Box Skins</button>
                 </div>
 
-                <!-- Line Skins -->
                 <div id="lineSkinsSection">
                     <div class="shop-item-row"><div>🔴 Crimson Red</div><button class="btn-small" onclick="equipSkin('line', '#ff4757')">Equip</button></div>
                     <div class="shop-item-row"><div>🔵 Ocean Blue</div><button class="btn-small" onclick="buySkin('line', 100, '#1e90ff')">100 🪙</button></div>
@@ -428,7 +562,6 @@
                     <div class="shop-item-row"><div>🟡 Shiny Gold</div><button class="btn-small" onclick="buySkin('line', 1000, '#ffa502')">1000 🪙</button></div>
                 </div>
 
-                <!-- Box Skins -->
                 <div id="boxSkinsSection" style="display:none;">
                     <div class="shop-item-row"><div>🔴 Classic Red</div><button class="btn-small" onclick="equipSkin('box', '#ff4757')">Equip</button></div>
                     <div class="shop-item-row"><div>🟣 Royal Purple</div><button class="btn-small" onclick="buySkin('box', 500, '#9b59b6')">500 🪙</button></div>
@@ -455,8 +588,7 @@
                 <p style="font-size:0.85rem; font-weight:bold; text-align:left; line-height:1.6; margin:10px 0; color:#2f3542;">
                     १. नॉर्मल लेव्हल्सला पूर्ण बोर्ड भरेपर्यंत ज्याचे जास्त बॉक्स होतील तो जिंकेल.<br>
                     २. ५ आणि ६ च्या पटीतील स्पेशल लेव्हल्सला टार्गेट बॉक्सेस पूर्ण करावे लागतील.<br>
-                    ३. ५६ ते ६० लेव्हल्स डायमंड व युनिक शेप्सच्या असतील!<br>
-                    ४. ६० लेव्हल्स जिंका आणि १ नंबर रँक मिळवा!
+                    ३. १०१ ते १७० लेव्हल्समध्ये कॅरेक्टर बोर्ड उघडून जिंका!
                 </p>
                 <button class="btn-close" onclick="closeModal('helpModal')">Close</button>
             </div>
@@ -476,7 +608,6 @@
             measurementId: "G-243XE4YYRV"
         };
 
-        // Firebase initialize
         let db = null;
         try {
             firebase.initializeApp(firebaseConfig);
@@ -530,6 +661,7 @@
         };
 
         let activePlayerMode = 'AI';
+        let selectedOnlinePlayerCount = 2; // डिफॉल्ट २ प्लेअर्स ऑनलाईन
         let activeLevel = 1;
         let boardRows = 2, boardCols = 2;
         let isTargetLevelMode = false;
@@ -537,14 +669,19 @@
         let turnPlayer = 1;
         let playerScores = [0, 0, 0, 0];
 
-        // Online Room Variables
         let isOnlineGame = false;
         let currentRoomCode = null;
         let myPlayerNumber = 1;
         let roomRef = null;
 
         let horizontalGrid = [], verticalGrid = [], boxesGrid = [];
-        let activeShape = 'SQUARE'; // SQUARE, DIAMOND, HEX, TRIANGLE
+        let activeShape = 'SQUARE';
+
+        const RANDOM_WORDS_LIST = [
+            "MOON", "AIBOT", "HERO", "STAR", "GALAXY", "NINJA", "CYBER", 
+            "TITAN", "DRAGON", "ALPHA", "OMEGA", "SHADOW", "LIGHT", "MATRIX", "VECTOR"
+        ];
+        let levelCharMatrix = [];
 
         window.onload = function() {
             let saved = localStorage.getItem('dots_boxes_candy_save');
@@ -563,26 +700,23 @@
         }
 
         function syncWithFirebase() {
-    if (db && gameData.username) {
-        let userKey = gameData.username.replace(/[^a-zA-Z0-9]/g, "_");
-
-        db.ref('leaderboard/' + userKey).set({
-            username: gameData.username,
-            stars: gameData.stars,
-            level: gameData.unlockedLevel
-        });
-
-        // 👈 हे नवीन जोडा (युजरचा प्रोग्रेस सेव्ह करण्यासाठी)
-        db.ref('users/' + userKey).set({
-            username: gameData.username,
-            password: gameData.password,
-            stars: gameData.stars,
-            coins: gameData.coins,
-            unlockedLevel: gameData.unlockedLevel,
-            avatar: gameData.avatar
-        });
-    }
-}
+            if (db && gameData.username) {
+                let userKey = gameData.username.replace(/[^a-zA-Z0-9]/g, "_");
+                db.ref('leaderboard/' + userKey).set({
+                    username: gameData.username,
+                    stars: gameData.stars,
+                    level: gameData.unlockedLevel
+                });
+                db.ref('users/' + userKey).set({
+                    username: gameData.username,
+                    password: gameData.password,
+                    stars: gameData.stars,
+                    coins: gameData.coins,
+                    unlockedLevel: gameData.unlockedLevel,
+                    avatar: gameData.avatar
+                });
+            }
+        }
 
         function listenLiveLeaderboard() {
             if (!db) {
@@ -598,7 +732,7 @@
                     let medal = index === 0 ? '🥇' : (index === 1 ? '🥈' : (index === 2 ? '🥉' : '👤'));
                     html += `${medal} ${index + 1}. ${item.username} - ⭐ ${item.stars}<br>`;
                 });
-                document.getElementById('leaderboardList').innerHTML = html || "not avalble data";
+                document.getElementById('leaderboardList').innerHTML = html || "not available data";
             });
         }
 
@@ -612,57 +746,54 @@
             document.documentElement.style.setProperty('--box-fill-color', gameData.equippedBoxColor);
         }
 
-       function handleLoginSubmit() {
-    let uName = document.getElementById('loginUser').value.trim();
-    let pass = document.getElementById('loginPass').value.trim();
+        function handleLoginSubmit() {
+            let uName = document.getElementById('loginUser').value.trim();
+            let pass = document.getElementById('loginPass').value.trim();
 
-    if (uName === "") {
-        showToast("Enter Username!");
-        return;
-    }
-
-    let userKey = uName.replace(/[^a-zA-Z0-9]/g, "_");
-
-    if (db) {
-        // 🔄 Firebase मधून जुना डेटा चेक करून डाऊनलोड करणे
-        db.ref('users/' + userKey).once('value', snapshot => {
-            if (snapshot.exists()) {
-                let savedData = snapshot.val();
-                
-                if (savedData.password && savedData.password !== pass) {
-                    showToast("Wrong Password!");
-                    return;
-                }
-
-                // जुना डेटा दुसऱ्या मोबाईलमध्ये रिस्टोर करणे
-                gameData.username = savedData.username;
-                gameData.password = savedData.password || pass;
-               let singlePlayerMax = ((savedData.unlockedLevel || 1) - 1) * 3;
-               let mpStars = savedData.multiplayerStars || 0;
-               gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
-               gameData.multiplayerStars = mpStars;
-                gameData.coins = savedData.coins || 100;
-                gameData.unlockedLevel = savedData.unlockedLevel || 1;
-                gameData.avatar = savedData.avatar || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
-                gameData.isLoggedIn = true;
-
-                saveDataToStorage();
-                showScreen('screen-home');
-                showToast(`Welcome Back, ${uName}! Data Restored 🎉`);
-            } else {
-                gameData.username = uName;
-                gameData.password = pass;
-                gameData.isLoggedIn = true;
-                saveDataToStorage();
-                showScreen('screen-home');
-                showToast(`Welcome, ${uName}!`);
+            if (uName === "") {
+                showToast("Enter Username!");
+                return;
             }
-        });
-    } else {
-        gameData.username = uName; gameData.isLoggedIn = true;
-        saveDataToStorage(); showScreen('screen-home');
-    }
-}
+
+            let userKey = uName.replace(/[^a-zA-Z0-9]/g, "_");
+
+            if (db) {
+                db.ref('users/' + userKey).once('value', snapshot => {
+                    if (snapshot.exists()) {
+                        let savedData = snapshot.val();
+                        if (savedData.password && savedData.password !== pass) {
+                            showToast("Wrong Password!");
+                            return;
+                        }
+                        gameData.username = savedData.username;
+                        gameData.password = savedData.password || pass;
+                        let singlePlayerMax = ((savedData.unlockedLevel || 1) - 1) * 3;
+                        let mpStars = savedData.multiplayerStars || 0;
+                        gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
+                        gameData.multiplayerStars = mpStars;
+                        gameData.coins = savedData.coins || 100;
+                        gameData.unlockedLevel = savedData.unlockedLevel || 1;
+                        gameData.avatar = savedData.avatar || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+                        gameData.isLoggedIn = true;
+
+                        saveDataToStorage();
+                        showScreen('screen-home');
+                        showToast(`Welcome Back, ${uName}! 🎉`);
+                    } else {
+                        gameData.username = uName;
+                        gameData.password = pass;
+                        gameData.isLoggedIn = true;
+                        saveDataToStorage();
+                        showScreen('screen-home');
+                        showToast(`Welcome, ${uName}!`);
+                    }
+                });
+            } else {
+                gameData.username = uName; gameData.isLoggedIn = true;
+                saveDataToStorage(); showScreen('screen-home');
+            }
+        }
+
         function handleLogout() {
             gameData.isLoggedIn = false;
             saveDataToStorage();
@@ -680,7 +811,10 @@
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            if (screenId === 'screen-map') buildMapRoadmap();
+            if (screenId === 'screen-map') {
+                buildMapRoadmap();
+                setTimeout(drawMapConnectionsSVG, 50);
+            }
         }
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
@@ -693,91 +827,98 @@
             element.classList.add('active');
         }
 
-        /* 🌐 ONLINE MULTIPLAYER LOGIC 🌐 */
+        /* 🔥 ऑनलाईन प्लेअर्स निवडणे (2P, 3P, 4P) */
+        function setOnlinePlayerCount(count) {
+            selectedOnlinePlayerCount = count;
+            document.getElementById('btnOnline2P').classList.remove('active');
+            document.getElementById('btnOnline3P').classList.remove('active');
+            document.getElementById('btnOnline4P').classList.remove('active');
+            
+            document.getElementById(`btnOnline${count}P`).classList.add('active');
+        }
+
         function createOnlineRoom() {
             if (!db) { showToast("Firebase not connected!"); return; }
             let code = Math.floor(1000 + Math.random() * 9000).toString();
             currentRoomCode = code;
             myPlayerNumber = 1;
             isOnlineGame = true;
-            activePlayerMode = '2P';
+            activePlayerMode = selectedOnlinePlayerCount + 'P';
 
-            roomRef = db.ref('rooms/' + currentRoomCode);
-            roomRef.set({
-    p1: gameData.username,
-    p2: "Waiting...",
-    p3: "Waiting...", // 👈 P3 जोडला
-    p4: "Waiting...", // 👈 P4 जोडला
-    playerCount: 1,
-    turn: 1,
-    lastMove: null,
-    status: "waiting"
-});
-            showToast(`Room Created! Code: ${currentRoomCode}`);
-            startOnlineGameView();
-            listenToOnlineRoom();
-        }
+            let roomObj = {
+                p1: gameData.username,
+                maxPlayers: selectedOnlinePlayerCount,
+                turn: 1, lastMove: null, status: "waiting"
+            };
 
-       function joinOnlineRoom() {
-    let code = document.getElementById('roomCodeInput').value.trim();
-    if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
-    if (!db) { showToast("Firebase not connected!"); return; }
-
-    currentRoomCode = code;
-    roomRef = db.ref('rooms/' + currentRoomCode);
-
-    roomRef.once('value', snapshot => {
-        if (snapshot.exists()) {
-            let data = snapshot.val();
-            let assignedPlayer = 0;
-
-            // रिकामी जागा शोधणे (P2, P3 किंवा P4)
-            if (data.p2 === "Waiting..." || data.p2 === gameData.username) assignedPlayer = 2;
-            else if (data.p3 === "Waiting..." || data.p3 === gameData.username) assignedPlayer = 3;
-            else if (data.p4 === "Waiting..." || data.p4 === gameData.username) assignedPlayer = 4;
-
-            if (assignedPlayer === 0) {
-                showToast("Room is full! (Max 4 Players)");
-                return;
+            for (let i = 2; i <= selectedOnlinePlayerCount; i++) {
+                roomObj[`p${i}`] = "Waiting...";
             }
 
-            myPlayerNumber = assignedPlayer;
-            isOnlineGame = true;
-            activePlayerMode = '4P'; // 👈 mode 4 Players केला
+            roomRef = db.ref('rooms/' + currentRoomCode);
+            roomRef.set(roomObj);
 
-            let updateObj = {};
-            updateObj[`p${assignedPlayer}`] = gameData.username;
-            updateObj['status'] = "playing";
-            
-            roomRef.update(updateObj);
-
-            showToast(`Joined as P${assignedPlayer}!`);
+            closeModal('onlineModal');
+            showToast(`Room Created (${selectedOnlinePlayerCount}P)! Code: ${currentRoomCode}`);
             startOnlineGameView();
             listenToOnlineRoom();
-        } else {
-            showToast("Invalid Room Code!");
         }
-    });
-}
+
+        function joinOnlineRoom() {
+            let code = document.getElementById('roomCodeInput').value.trim();
+            if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
+            if (!db) { showToast("Firebase not connected!"); return; }
+
+            currentRoomCode = code;
+            roomRef = db.ref('rooms/' + currentRoomCode);
+
+            roomRef.once('value', snapshot => {
+                if (snapshot.exists()) {
+                    let data = snapshot.val();
+                    let maxP = data.maxPlayers || 4;
+                    let assignedPlayer = 0;
+
+                    for (let i = 2; i <= maxP; i++) {
+                        if (data[`p${i}`] === "Waiting..." || data[`p${i}`] === gameData.username) {
+                            assignedPlayer = i;
+                            break;
+                        }
+                    }
+
+                    if (assignedPlayer === 0) { showToast("Room is full!"); return; }
+
+                    myPlayerNumber = assignedPlayer;
+                    isOnlineGame = true;
+                    activePlayerMode = maxP + 'P';
+
+                    let updateObj = {};
+                    updateObj[`p${assignedPlayer}`] = gameData.username;
+                    updateObj['status'] = "playing";
+                    roomRef.update(updateObj);
+
+                    closeModal('onlineModal');
+                    showToast(`Joined as P${assignedPlayer}!`);
+                    startOnlineGameView();
+                    listenToOnlineRoom();
+                } else {
+                    showToast("Invalid Room Code!");
+                }
+            });
+        }
         
-       function startOnlineGameView() {
-    activeLevel = 1; 
-    boardRows = 15; 
-    boardCols = 15; 
-    activeShape = 'SQUARE';
-    activePlayerMode = '4P'; // 👈 4 Players Mode Active
-    isTargetLevelMode = false; 
-    targetBoxesToWin = 0;
-    
-    showScreen('screen-game');
-    document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (You are P${myPlayerNumber})`;
-    
-    // 👈 चारही प्लेअरचे स्कोर बॉक्स ऑन करणे
-    document.getElementById('p3Box').style.display = 'block';
-    document.getElementById('p4Box').style.display = 'block';
-    
-    initializeBoard();
-}
+        function startOnlineGameView() {
+            activeLevel = 1; boardRows = 15; boardCols = 15; 
+            activeShape = 'SQUARE'; 
+            isTargetLevelMode = false; targetBoxesToWin = 0;
+            
+            showScreen('screen-game');
+            document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (You are P${myPlayerNumber})`;
+            
+            document.getElementById('p3Box').style.display = (activePlayerMode === '3P' || activePlayerMode === '4P') ? 'block' : 'none';
+            document.getElementById('p4Box').style.display = (activePlayerMode === '4P') ? 'block' : 'none';
+            
+            initializeBoard();
+        }
 
         function listenToOnlineRoom() {
             if (!roomRef) return;
@@ -796,88 +937,133 @@
         }
 
         function exitCurrentGame() {
-            if (isOnlineGame && roomRef) {
-                roomRef.off();
-                roomRef.remove();
-            }
+            if (isOnlineGame && roomRef) { roomRef.off(); roomRef.remove(); }
             isOnlineGame = false;
             showScreen('screen-map');
         }
 
-        /* 🔥 ६० लेव्हल्ससाठी २x२ पासून २५x२५ व व्हरायटी शेप्स 🔥 */
         function getGridSizeForLevel(lvl) {
-            if (lvl <= 4) return 4;       // 2x2
-            if (lvl <= 5) return 3;       // 3x3
-            if (lvl <= 10) return 4;      // 4x4
-            if (lvl <= 15) return 6;      // 6x6
-            if (lvl <= 20) return 8;      // 8x8
-            if (lvl <= 25) return 10;     // 10x10
-            if (lvl <= 30) return 12;     // 12x12
-            if (lvl <= 35) return 15;     // 15x15
-            if (lvl <= 40) return 18;     // 18x18
-            if (lvl <= 45) return 20;     // 20x20
-            if (lvl <= 50) return 22;     // 22x22
-            if (lvl <= 55) return 25;     // 25x25
-            return 20;                     // 56-60 Custom Shape Grids
+            if (lvl <= 4) return 4;
+            if (lvl <= 5) return 3;
+            if (lvl <= 10) return 4;
+            if (lvl <= 15) return 6;
+            if (lvl <= 20) return 8;
+            if (lvl <= 25) return 10;
+            if (lvl <= 30) return 12;
+            if (lvl <= 35) return 15;
+            if (lvl <= 40) return 18;
+            if (lvl <= 45) return 20;
+            if (lvl <= 50) return 22;
+            if (lvl <= 55) return 25;
+            if (lvl <= 100) return 20;
+
+            let step = Math.floor((lvl - 101) / 5);
+            return Math.min(4 + step, 15);
         }
 
-      function buildMapRoadmap() {
-    let container = document.getElementById('levelNodesContainer');
-    container.innerHTML = '';
+        /* 🔥 १ ते १७० सर्व लेव्हल्स बिल्ड करण्याचे लॉजिक */
+        function buildMapRoadmap() {
+            let container = document.getElementById('levelNodesContainer');
+            container.innerHTML = '';
 
-    // 🎯 तुझ्या कोडमधील जुन्या ५६ ते ६० शेप्सच्या पुढे ६१ ते १०० जोडा:
-    let shapeTexts = {
-        56: 'DIAMOND', 57: 'HEXAGON', 58: 'TRIANGLE', 59: 'CROSS', 60: 'MASTER SHAPE',
-        // 👇 ६१ ते १०० मधील नवीन कठीण शेप्स
-        61: 'DIAMOND', 62: 'HEXAGON', 63: 'CROSS', 64: 'ZIGZAG', 65: 'PYRAMID',
-        66: 'DIAMOND', 67: 'CROSS', 68: 'ZIGZAG', 69: 'HEXAGON', 70: 'MASTER SHAPE',
-        71: 'PYRAMID', 72: 'ZIGZAG', 73: 'CROSS', 74: 'DIAMOND', 75: 'MASTER SHAPE',
-        76: 'HEXAGON', 77: 'PYRAMID', 78: 'CROSS', 79: 'ZIGZAG', 80: 'MASTER SHAPE',
-        81: 'DIAMOND', 82: 'PYRAMID', 83: 'HEXAGON', 84: 'CROSS', 85: 'MASTER SHAPE',
-        86: 'ZIGZAG', 87: 'DIAMOND', 88: 'PYRAMID', 89: 'CROSS', 90: 'MASTER SHAPE',
-        91: 'HEXAGON', 92: 'ZIGZAG', 93: 'PYRAMID', 94: 'CROSS', 95: 'MASTER SHAPE',
-        96: 'DIAMOND', 97: 'HEXAGON', 98: 'ZIGZAG', 99: 'CROSS', 100: 'ULTIMATE MASTER'
-    };
+            let shapeTexts = {
+                56: 'DIAMOND', 57: 'HEXAGON', 58: 'TRIANGLE', 59: 'CROSS', 60: 'MASTER SHAPE',
+                61: 'DIAMOND', 62: 'HEXAGON', 63: 'CROSS', 64: 'ZIGZAG', 65: 'PYRAMID',
+                66: 'DIAMOND', 67: 'CROSS', 68: 'ZIGZAG', 69: 'HEXAGON', 70: 'MASTER SHAPE',
+                71: 'PYRAMID', 72: 'ZIGZAG', 73: 'CROSS', 74: 'DIAMOND', 75: 'MASTER SHAPE',
+                76: 'HEXAGON', 77: 'PYRAMID', 78: 'CROSS', 79: 'ZIGZAG', 80: 'MASTER SHAPE',
+                81: 'DIAMOND', 82: 'PYRAMID', 83: 'HEXAGON', 84: 'CROSS', 85: 'MASTER SHAPE',
+                86: 'ZIGZAG', 87: 'DIAMOND', 88: 'PYRAMID', 89: 'CROSS', 90: 'MASTER SHAPE',
+                91: 'HEXAGON', 92: 'ZIGZAG', 93: 'PYRAMID', 94: 'CROSS', 95: 'MASTER SHAPE',
+                96: 'DIAMOND', 97: 'HEXAGON', 98: 'ZIGZAG', 99: 'CROSS', 100: 'ULTIMATE MASTER'
+            };
 
-    for (let lvl = 1; lvl <= 100; lvl++) { // 👈 लूप १०० करा
-        let node = document.createElement('div');
-        let isUnlocked = lvl <= gameData.unlockedLevel;
-        let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0 || lvl >= 56);
+            for (let lvl = 101; lvl <= 170; lvl++) {
+                let shapes101 = ['DIAMOND', 'HEXAGON', 'CROSS', 'ZIGZAG', 'PYRAMID', 'ULTIMATE HERO'];
+                shapeTexts[lvl] = shapes101[(lvl - 101) % shapes101.length];
+            }
 
-        let dotsCount = getGridSizeForLevel(lvl);
+            for (let lvl = 1; lvl <= 170; lvl++) {
+                let nodeWrap = document.createElement('div');
+                nodeWrap.className = 'map-node-container';
 
-        node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
-        node.innerText = lvl;
+                let node = document.createElement('div');
+                let isUnlocked = lvl <= gameData.unlockedLevel;
+                let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0 || lvl >= 56);
+                let dotsCount = getGridSizeForLevel(lvl);
 
-        let badge = document.createElement('div');
-        badge.className = 'grid-info-badge';
-        
-        // जर शेपचे नाव असेल तर ते दाखवा, नाहीतर ग्रिड साइज
-        if (shapeTexts[lvl]) {
-            badge.innerText = shapeTexts[lvl];
-        } else {
-            badge.innerText = `${dotsCount}x${dotsCount}`;
+                node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
+                node.innerText = lvl;
+                node.setAttribute('data-lvl', lvl);
+
+                let badge = document.createElement('div');
+                badge.className = 'grid-info-badge';
+                
+                if (shapeTexts[lvl]) {
+                    badge.innerText = shapeTexts[lvl];
+                } else {
+                    badge.innerText = `${dotsCount}x${dotsCount}`;
+                }
+                node.appendChild(badge);
+
+                if (isUnlocked) {
+                    node.onclick = function() { startLevelGame(lvl, dotsCount, isSpecial); };
+                }
+
+                nodeWrap.appendChild(node);
+                container.appendChild(nodeWrap);
+            }
         }
-        node.appendChild(badge);
 
-        if (isUnlocked) {
-            node.onclick = function() { startLevelGame(lvl, dotsCount, isSpecial); };
+        /* 🔥 SVG तंत्रज्ञान वापरून १ ते १७० सर्व नोड्स एकमेकांशी अगदी तंतोतंत कनेक्ट करण्याची अचूक पद्धत */
+        function drawMapConnectionsSVG() {
+            let svg = document.getElementById('mapSvgContainer');
+            svg.innerHTML = '';
+            
+            let nodes = document.querySelectorAll('.map-node');
+            if (nodes.length < 2) return;
+
+            let wrapper = document.querySelector('.map-canvas-wrapper');
+            let wrapperRect = wrapper.getBoundingClientRect();
+
+            let points = [];
+            nodes.forEach(node => {
+                let rect = node.getBoundingClientRect();
+                let x = (rect.left + rect.width / 2) - wrapperRect.left;
+                let y = (rect.top + rect.height / 2) - wrapperRect.top;
+                points.push({ x, y });
+            });
+
+            let pathD = `M ${points[0].x} ${points[0].y}`;
+            for (let i = 1; i < points.length; i++) {
+                let prev = points[i - 1];
+                let curr = points[i];
+                let cy = (prev.y + curr.y) / 2;
+                pathD += ` C ${prev.x} ${cy}, ${curr.x} ${cy}, ${curr.x} ${curr.y}`;
+            }
+
+            let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', pathD);
+            path.setAttribute('stroke', '#fffa65');
+            path.setAttribute('stroke-width', '4');
+            path.setAttribute('stroke-dasharray', '8,8');
+            path.setAttribute('fill', 'none');
+            path.setAttribute('opacity', '0.9');
+
+            svg.appendChild(path);
         }
-        container.appendChild(node);
-    }
-}
         
         function startLevelGame(lvl, dotsCount, isSpecial) {
             activeLevel = lvl; boardRows = dotsCount; boardCols = dotsCount;
             isTargetLevelMode = isSpecial;
 
-            // Set Shapes
-           if (lvl === 56 || (lvl >= 61 && lvl <= 70)) activeShape = 'DIAMOND';
-else if (lvl === 57 || (lvl >= 71 && lvl <= 80)) activeShape = 'HEXAGON';
-else if (lvl === 58 || (lvl >= 81 && lvl <= 90)) activeShape = 'TRIANGLE';
-else if (lvl === 59 || (lvl >= 91 && lvl <= 99)) activeShape = 'CROSS';
-else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
-            
+            if (lvl === 56 || (lvl >= 61 && lvl <= 70)) activeShape = 'DIAMOND';
+            else if (lvl === 57 || (lvl >= 71 && lvl <= 80)) activeShape = 'HEXAGON';
+            else if (lvl === 58 || (lvl >= 81 && lvl <= 90)) activeShape = 'TRIANGLE';
+            else if (lvl === 59 || (lvl >= 91 && lvl <= 99)) activeShape = 'CROSS';
+            else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
+            else if (lvl >= 101) activeShape = 'SQUARE';
+
             if (isTargetLevelMode) {
                 targetBoxesToWin = Math.min(Math.floor(dotsCount * 1.5), 20);
             } else {
@@ -886,10 +1072,12 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
 
             showScreen('screen-game');
 
-            if (isTargetLevelMode) {
+            if (activeLevel >= 101) {
+                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Clear Character Grid!`;
+            } else if (isTargetLevelMode) {
                 document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
             } else {
-                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Shape: ${activeShape}`;
+                document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${dotsCount}x${dotsCount}`;
             }
 
             document.getElementById('p3Box').style.display = (activePlayerMode === '3P' || activePlayerMode === '4P') ? 'block' : 'none';
@@ -913,6 +1101,42 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
             return true;
         }
 
+        function generateRandomCharMatrix(rows, cols) {
+            let matrix = [];
+            let word = RANDOM_WORDS_LIST[Math.floor(Math.random() * RANDOM_WORDS_LIST.length)];
+            for (let r = 0; r < rows; r++) {
+                matrix[r] = [];
+                for (let c = 0; c < cols; c++) {
+                    let charIndex = (r * cols + c) % word.length;
+                    matrix[r][c] = word[charIndex];
+                }
+            }
+            return matrix;
+        }
+
+        function renderTopTargetBoard() {
+            let topContainer = document.getElementById('top-target-board-container');
+            let topBoard = document.getElementById('top-target-board');
+            
+            if (activeLevel < 101) {
+                topContainer.style.display = 'none';
+                return;
+            }
+
+            topContainer.style.display = 'flex';
+            topBoard.innerHTML = '';
+            topBoard.style.gridTemplateColumns = `repeat(${boardCols - 1}, auto)`;
+
+            for (let r = 0; r < boardRows - 1; r++) {
+                for (let c = 0; c < boardCols - 1; c++) {
+                    let cell = document.createElement('div');
+                    cell.className = 'top-target-cell';
+                    cell.innerText = levelCharMatrix[r][c];
+                    topBoard.appendChild(cell);
+                }
+            }
+        }
+
         function initializeBoard() {
             turnPlayer = 1; playerScores = [0, 0, 0, 0];
             updateScoreDisplays();
@@ -920,14 +1144,31 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
             let board = document.getElementById('game-board');
             board.innerHTML = '';
 
-            let gapSize = Math.max(6, Math.min(22, Math.floor(220 / boardCols)));
+            let gridColTemplate = '';
+            for (let i = 0; i < boardCols - 1; i++) {
+                gridColTemplate += 'auto 1fr ';
+            }
+            gridColTemplate += 'auto';
 
-            board.style.gridTemplateColumns = `repeat(${boardCols * 2 - 1}, auto)`;
-            board.style.gridTemplateRows = `repeat(${boardRows * 2 - 1}, auto)`;
+            let gridRowTemplate = '';
+            for (let i = 0; i < boardRows - 1; i++) {
+                gridRowTemplate += 'auto 1fr ';
+            }
+            gridRowTemplate += 'auto';
+
+            board.style.gridTemplateColumns = gridColTemplate;
+            board.style.gridTemplateRows = gridRowTemplate;
 
             horizontalGrid = Array(boardRows).fill(null).map(() => Array(boardCols - 1).fill(0));
             verticalGrid = Array(boardRows - 1).fill(null).map(() => Array(boardCols).fill(0));
             boxesGrid = Array(boardRows - 1).fill(null).map(() => Array(boardCols - 1).fill(0));
+
+            if (activeLevel >= 101) {
+                levelCharMatrix = generateRandomCharMatrix(boardRows - 1, boardCols - 1);
+                renderTopTargetBoard();
+            } else {
+                document.getElementById('top-target-board-container').style.display = 'none';
+            }
 
             for (let r = 0; r < boardRows * 2 - 1; r++) {
                 for (let c = 0; c < boardCols * 2 - 1; c++) {
@@ -941,23 +1182,27 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
                     } else if (isRowEven && !isColEven) {
                         let line = document.createElement('div'); 
                         line.className = 'line-horizontal' + (validCell ? '' : ' line-disabled'); 
-                        line.style.width = gapSize + 'px';
                         let rIdx = r / 2, cIdx = (c - 1) / 2;
                         line.onclick = () => handleLineClick('h', rIdx, cIdx, line);
                         line.id = `h-${rIdx}-${cIdx}`; board.appendChild(line);
                     } else if (!isRowEven && isColEven) {
                         let line = document.createElement('div'); 
                         line.className = 'line-vertical' + (validCell ? '' : ' line-disabled'); 
-                        line.style.height = gapSize + 'px';
                         let rIdx = (r - 1) / 2, cIdx = c / 2;
                         line.onclick = () => handleLineClick('v', rIdx, cIdx, line);
                         line.id = `v-${rIdx}-${cIdx}`; board.appendChild(line);
                     } else {
+                        let bR = (r - 1) / 2, bC = (c - 1) / 2;
                         let box = document.createElement('div'); 
                         box.className = 'box-cell' + (validCell ? '' : ' box-disabled');
-                        box.style.width = gapSize + 'px'; box.style.height = gapSize + 'px';
-                        box.id = `box-${(r - 1) / 2}-${(c - 1) / 2}`; board.appendChild(box);
-                        if (!validCell) boxesGrid[(r - 1) / 2][(c - 1) / 2] = -1; // Ignore disabled boxes
+                        box.id = `box-${bR}-${bC}`;
+
+                        if (activeLevel >= 101 && validCell) {
+                            box.innerText = levelCharMatrix[bR][bC];
+                        }
+
+                        board.appendChild(box);
+                        if (!validCell) boxesGrid[bR][bC] = -1;
                     }
                 }
             }
@@ -981,9 +1226,7 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
             if (type === 'v') verticalGrid[r][c] = player;
 
             if (isOnlineGame && player === myPlayerNumber && roomRef) {
-                roomRef.update({
-                    lastMove: { type, r, c, player }
-                });
+                roomRef.update({ lastMove: { type, r, c, player } });
             }
 
             let filledBox = checkCompletedBoxes(type, r, c, player);
@@ -1017,7 +1260,13 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
 
                         boxesGrid[br][bc] = player;
                         let boxEl = document.getElementById(`box-${br}-${bc}`);
-                        boxEl.innerText = tag;
+                        
+                        if (activeLevel >= 101) {
+                            boxEl.innerText = levelCharMatrix[br][bc];
+                            boxEl.classList.add('char-unlocked');
+                        } else {
+                            boxEl.innerText = tag;
+                        }
                         
                         let pColors = [gameData.equippedBoxColor, '#1e90ff', '#2ed573', '#ffa502'];
                         boxEl.style.backgroundColor = pColors[player - 1];
@@ -1106,34 +1355,31 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
             return false;
         }
 
-       function finishGame(winnerIndex) {
-    // 🛑 १-१ सेकंदाला स्टार्स वाढणे थांबवण्यासाठी लिसनर बंद
-    if (isOnlineGame && roomRef) {
-        roomRef.off();
-    }
+        function finishGame(winnerIndex) {
+            if (isOnlineGame && roomRef) {
+                roomRef.off();
+            }
 
-    playSound('win');
- if (winnerIndex === (isOnlineGame ? myPlayerNumber : 1)) {
-    // 🌐 १. जर मल्टिप्लेयर मॅच जिंकली असेल, तर मल्टिप्लेयर स्टार्स ट्रॅक करा
-    if (isOnlineGame) {
-        gameData.multiplayerStars = (gameData.multiplayerStars || 0) + 3;
-        gameData.stars = (gameData.stars || 0) + 3;
-    } 
-    // 🎮 २. जर सिंगल प्लेयर (Single Player) नवीन लेव्हल जिंकेल तर:
-    else if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 100) {
-        gameData.unlockedLevel++;
-        gameData.stars = (gameData.stars || 0) + 3;
-    }
-        
-        gameData.coins += 20; // कॉईन्स दरवेळी मिळतील
-        saveDataToStorage();
-        showCandyCrushVictoryModal();
-    } else {
-        showToast(`❌ Player ${winnerIndex} win! try again.`);
-        setTimeout(() => showScreen('screen-map'), 1500);
-    }
-}
+            playSound('win');
+            if (winnerIndex === (isOnlineGame ? myPlayerNumber : 1)) {
+                if (isOnlineGame) {
+                    gameData.multiplayerStars = (gameData.multiplayerStars || 0) + 3;
+                    gameData.stars = (gameData.stars || 0) + 3;
+                } else if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel <= 170) {
+                    gameData.unlockedLevel++;
+                    gameData.stars = (gameData.stars || 0) + 3;
+                }
+                
+                gameData.coins += 20;
+                saveDataToStorage();
+                showCandyCrushVictoryModal();
+            } else {
+                showToast(`❌ Player ${winnerIndex} win! try again.`);
+                setTimeout(() => showScreen('screen-map'), 1500);
+            }
+        }
 
+        /* 🔥 अपडेटेड स्टार्स पॉप-अप आणि साउंड ॲनिमेशन */
         function showCandyCrushVictoryModal() {
             let modal = document.getElementById('victory-modal');
             let s1 = document.getElementById('star1');
@@ -1144,8 +1390,8 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
             modal.style.display = 'flex';
 
             setTimeout(() => { s1.classList.add('active'); playSound('box'); }, 300);
-            setTimeout(() => { s2.classList.add('active'); playSound('box'); }, 700);
-            setTimeout(() => { s3.classList.add('active'); playSound('win'); }, 1100);
+            setTimeout(() => { s2.classList.add('active'); playSound('box'); }, 800);
+            setTimeout(() => { s3.classList.add('active'); playSound('win'); }, 1300);
         }
 
         function closeVictoryModal() {
@@ -1165,7 +1411,6 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
             closeModal('spinModal');
         }
 
-        /* 🛒 SHOP TABS & SKINS SYSTEM */
         function switchShopTab(type) {
             if (type === 'line') {
                 document.getElementById('lineSkinsSection').style.display = 'block';
@@ -1181,7 +1426,7 @@ else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
         }
 
         function buySkin(type, price, colorCode) {
-            if (gameData.coins < price) { showToast("insufficant coins!"); return; }
+            if (gameData.coins < price) { showToast("insufficient coins!"); return; }
             gameData.coins -= price;
             if (type === 'line') gameData.equippedLineColor = colorCode;
             else gameData.equippedBoxColor = colorCode;
