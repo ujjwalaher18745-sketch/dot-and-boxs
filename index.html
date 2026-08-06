@@ -35,7 +35,7 @@
 }
 
 body {
-    background: #2f3542;
+    background: #0f172a;
     color: #2f3542;
     min-height: 100vh;
     display: flex;
@@ -48,12 +48,20 @@ body {
 .app-container {
     width: 100vw; max-width: 440px;
     height: 100vh; max-height: 900px;
-    background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 35%, #0f766e 70%, #0284c7 100%);
+    background-size: 200% 200%;
+    animation: gradientFlow 12s ease infinite;
     border: 4px solid #ffffff;
     border-radius: 32px; overflow: hidden;
     position: relative;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     display: flex; flex-direction: column;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .screen {
@@ -84,12 +92,6 @@ body {
     backdrop-filter: blur(8px);
     z-index: 500; flex-direction: column;
     align-items: center; justify-content: center;
-    animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
 }
 
 .victory-card {
@@ -119,24 +121,11 @@ body {
 .star-item.active { 
     opacity: 1; 
     transform: scale(1.25) rotate(0deg); 
-    animation: starBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
-}
-
-@keyframes starBounce {
-    0% { transform: scale(0.2) rotate(-45deg); opacity: 0; }
-    70% { transform: scale(1.4) rotate(10deg); }
-    100% { transform: scale(1.25) rotate(0deg); opacity: 1; }
 }
 
 .victory-rewards {
     font-size: 1.2rem; color: #2f3542; margin-bottom: 20px; font-weight: 900;
     background: #ffeaa7; padding: 10px; border-radius: 18px; border: 2px dashed #fdcb6e;
-    animation: coinPulse 1.5s infinite alternate;
-}
-
-@keyframes coinPulse {
-    0% { transform: scale(0.98); box-shadow: 0 0 5px #ffeaa7; }
-    100% { transform: scale(1.05); box-shadow: 0 0 15px #fdcb6e; }
 }
 
 .btn-3d {
@@ -152,7 +141,7 @@ body {
 
 #screen-login {
     justify-content: center; align-items: center; padding: 25px;
-    background: linear-gradient(180deg, #81ecec 0%, #00cec9 100%);
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
 }
 
 .login-card {
@@ -174,64 +163,60 @@ body {
     min-height: 48px;
 }
 
-#screen-home { flex-direction: row; padding: 12px; gap: 8px; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
+#screen-home { flex-direction: row; padding: 12px; gap: 8px; background: transparent; }
 .home-main-content { flex: 1; display: flex; flex-direction: column; justify-content: space-around; }
 
 .game-brand { text-align: center; margin-top: 2px; }
-.brand-dots { font-size: 2.2rem; font-weight: 900; color: #fffa65; text-shadow: 2px 2px 0 #fffa65, 3px 3px 0 #d63031; line-height: 0.9; }
-.brand-sub { font-size: 0.75rem; font-weight: 900; letter-spacing: 2px; color: #fff; margin: 2px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
-.brand-boxes { font-size: 2.2rem; font-weight: 900; color: #54a0ff; text-shadow: 2px 2px 0 #fff, 3px 3px 0 #2e86de; line-height: 0.9; }
+.brand-dots { 
+    font-size: 2.4rem; font-weight: 900; color: #fffa65; 
+    text-shadow: 0 0 10px #fffa65, 3px 3px 0 #d63031; line-height: 0.9; 
+    animation: neonGlowDots 2s infinite alternate;
+}
+.brand-sub { 
+    font-size: 0.8rem; font-weight: 900; letter-spacing: 3px; color: #fff; margin: 2px 0; 
+    text-shadow: 0 0 8px rgba(255,255,255,0.8); 
+}
+.brand-boxes { 
+    font-size: 2.4rem; font-weight: 900; color: #00d2d3; 
+    text-shadow: 0 0 10px #00d2d3, 3px 3px 0 #2e86de; line-height: 0.9; 
+    animation: neonGlowBoxes 2s infinite alternate 1s;
+}
+
+@keyframes neonGlowDots {
+    0% { filter: drop-shadow(0 0 2px #fffa65); transform: scale(1); }
+    100% { filter: drop-shadow(0 0 12px #fffa65); transform: scale(1.03); }
+}
+
+@keyframes neonGlowBoxes {
+    0% { filter: drop-shadow(0 0 2px #00d2d3); transform: scale(1); }
+    100% { filter: drop-shadow(0 0 12px #00d2d3); transform: scale(1.03); }
+}
 
 .animated-brand {
-    animation: brandFloat 2.5s ease-in-out infinite alternate;
-}
-@keyframes brandFloat {
-    0% { transform: translateY(0); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-    100% { transform: translateY(-4px); filter: drop-shadow(0 6px 8px rgba(0,0,0,0.3)); }
+    will-change: transform;
 }
 
 .animated-start-btn {
-    animation: btnPulseGlow 1.5s ease-in-out infinite alternate, btnColorShift 4s linear infinite;
-}
-@keyframes btnPulseGlow {
-    0% { transform: scale(1); box-shadow: 0 6px 0 #c88a17, 0 8px 15px rgba(0,0,0,0.3); }
-    100% { transform: scale(1.04); box-shadow: 0 10px 0 #c88a17, 0 15px 25px rgba(255,250,101,0.7); }
-}
-@keyframes btnColorShift {
-    0% { filter: hue-rotate(0deg); }
-    50% { filter: hue-rotate(15deg); }
-    100% { filter: hue-rotate(0deg); }
+    animation: startBtnPro 2s ease-in-out infinite alternate;
+    will-change: transform, box-shadow;
 }
 
-.animated-mode-btn {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.animated-mode-btn:hover {
-    transform: scale(1.05);
-}
-
-.animated-side-item {
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-.animated-side-item:hover {
-    transform: scale(1.08);
-    background-color: #ffeaa7;
-}
-
-.animated-profile-card {
-    animation: popInCard 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-@keyframes popInCard {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.animated-avatar {
-    animation: avatarPulse 3s ease-in-out infinite alternate;
-}
-@keyframes avatarPulse {
-    0% { box-shadow: 0 0 0px #ff4757; }
-    100% { box-shadow: 0 0 15px #ff4757; }
+@keyframes startBtnPro {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 6px 0 #c88a17, 0 0 10px rgba(255, 250, 101, 0.4);
+        background: linear-gradient(180deg, #fffa65 0%, #ffaf40 100%);
+    }
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 8px 0 #c88a17, 0 0 22px rgba(255, 250, 101, 0.9);
+        background: linear-gradient(180deg, #fff200 0%, #ff9f1a 100%);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 6px 0 #c88a17, 0 0 10px rgba(255, 250, 101, 0.4);
+        background: linear-gradient(180deg, #fffa65 0%, #ffaf40 100%);
+    }
 }
 
 .dots-boxes-anim-box {
@@ -241,51 +226,22 @@ body {
     width: 100%; box-shadow: 0 8px 0 #1e272e, 0 10px 20px rgba(0,0,0,0.4);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
-    animation: boxPulseGlow 3s infinite ease-in-out;
-}
-
-@keyframes boxPulseGlow {
-    0% { transform: scale(1); box-shadow: 0 8px 0 #1e272e, 0 10px 20px rgba(0,0,0,0.4); }
-    50% { transform: scale(1.02); box-shadow: 0 12px 0 #1e272e, 0 15px 25px rgba(255,250,101,0.3); }
-    100% { transform: scale(1); box-shadow: 0 8px 0 #1e272e, 0 10px 20px rgba(0,0,0,0.4); }
-}
-
-.dots-boxes-anim-box::before {
-    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,250,101,0.2) 0%, transparent 70%);
-    animation: rotateGlow 6s linear infinite; pointer-events: none;
-}
-
-@keyframes rotateGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 
 .anim-stars-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 6px; }
-.anim-star { font-size: 1.5rem; filter: drop-shadow(0 0 6px #fffa65); animation: popStar 2s infinite ease-in-out alternate; }
-.anim-star:nth-child(1) { animation-delay: 0s; }
-.anim-star:nth-child(2) { animation-delay: 0.4s; font-size: 2rem; }
-.anim-star:nth-child(3) { animation-delay: 0.8s; }
-
-@keyframes popStar {
-    0% { transform: scale(0.6) translateZ(-20px); opacity: 0.4; }
-    100% { transform: scale(1.2) translateZ(10px); opacity: 1; filter: drop-shadow(0 0 12px #fffa65); }
-}
+.anim-star { font-size: 1.5rem; filter: drop-shadow(0 0 6px #fffa65); }
 
 .anim-grid {
     display: grid; grid-template-columns: auto 35px auto;
     grid-template-rows: auto 35px auto; gap: 4px; align-items: center; justify-items: center;
 }
 .anim-dot { width: 10px; height: 10px; background: #fffa65; border-radius: 50%; box-shadow: 0 0 8px #fffa65; }
-.anim-line-h { width: 35px; height: 4px; background: #ff4757; border-radius: 2px; animation: pulseLine 1.5s infinite alternate; }
-.anim-line-v { width: 4px; height: 35px; background: #1e90ff; border-radius: 2px; animation: pulseLine 1.5s infinite alternate 0.5s; }
+.anim-line-h { width: 35px; height: 4px; background: #ff4757; border-radius: 2px; }
+.anim-line-v { width: 4px; height: 35px; background: #1e90ff; border-radius: 2px; }
 .anim-cell {
     width: 35px; height: 35px; background: rgba(255, 255, 255, 0.15); border-radius: 6px;
     display: flex; align-items: center; justify-content: center; font-weight: 900; color: #2ed573; font-size: 0.8rem;
-    animation: boxGlow 2s infinite alternate;
 }
-@keyframes pulseLine { 0% { opacity: 0.3; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.05); } }
-@keyframes boxGlow { 0% { background: rgba(46, 213, 115, 0.2); } 100% { background: rgba(46, 213, 115, 0.6); } }
 
 .section-heading { font-size: 0.75rem; font-weight: 900; text-align: center; color: #ffffff; letter-spacing: 1px; margin-bottom: 4px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
 .mode-selector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
@@ -299,6 +255,24 @@ body {
 .mode-icon { font-size: 1.1rem; margin-bottom: 1px; }
 .mode-text { font-size: 0.65rem; font-weight: 900; text-transform: uppercase; color: #2f3542; }
 
+.task-home-btn {
+    background: linear-gradient(135deg, #ff9f1a 0%, #ff3f34 100%);
+    border: 2px solid #ffffff; border-radius: 14px;
+    padding: 8px 4px; display: flex; align-items: center; justify-content: center; gap: 6px;
+    cursor: pointer; box-shadow: 0 4px 0 #c88a17, 0 0 12px rgba(255, 159, 26, 0.5); 
+    min-height: 42px; margin-top: 6px; width: 100%;
+    animation: taskGlow 2.5s infinite alternate;
+    will-change: box-shadow;
+}
+
+@keyframes taskGlow {
+    0% { box-shadow: 0 4px 0 #c88a17, 0 0 6px rgba(255, 159, 26, 0.3); }
+    100% { box-shadow: 0 4px 0 #c88a17, 0 0 18px rgba(255, 63, 52, 0.8); }
+}
+
+.task-home-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #c88a17; }
+
+/* SIDEBAR STYLING - UNCHANGED */
 .home-sidebar {
     width: 68px; background: rgba(255, 255, 255, 0.25); border: 2px solid #ffffff;
     border-radius: 20px; padding: 8px 2px; display: flex; flex-direction: column; gap: 6px; justify-content: space-around;
@@ -310,8 +284,7 @@ body {
 .side-nav-label { font-size: 0.55rem; font-weight: 900; color: #2f3542; text-transform: uppercase; margin-top: 1px; }
 
 #screen-map { 
-    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
-                url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop') center/cover no-repeat;
+    background: linear-gradient(135deg, #0984e3 0%, #2c3e50 50%, #6c5ce7 100%);
     overflow-y: auto; position: relative;
 }
 .map-top-bar {
@@ -329,18 +302,46 @@ body {
 .level-nodes-wrapper { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
 .map-node-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; }
 
+/* MAP LEVEL NODES - HIGH-END DYNAMIC COLOR BACKGROUND */
 .map-node {
     width: 70px; height: 70px; border-radius: 50%;
-    background: linear-gradient(145deg, #ff7675, #d63031);
-    border: 4px solid #ffffff; box-shadow: 0 8px 0 #b22222, 0 10px 15px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 50%, #ff7f50 100%);
+    background-size: 200% 200%;
+    border: 4px solid #ffffff; 
+    box-shadow: 0 8px 0 #b22222, 0 0 15px rgba(255, 71, 87, 0.6);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     font-size: 1.4rem; font-weight: 900; color: #fff; cursor: pointer; position: relative;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.4); z-index: 2;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
+    animation: nodeGradientShift 3s ease infinite alternate;
 }
+
+@keyframes nodeGradientShift {
+    0% { background-position: 0% 50%; box-shadow: 0 8px 0 #b22222, 0 0 10px rgba(255, 71, 87, 0.4); }
+    100% { background-position: 100% 50%; box-shadow: 0 8px 0 #b22222, 0 0 20px rgba(255, 107, 129, 0.8); }
+}
+
 .map-node:active { transform: scale(0.95); }
-.map-node.special { background: linear-gradient(145deg, #ffeaa7, #fdcb6e); border-color: #fff; color: #d63031; box-shadow: 0 8px 0 #e1b12c, 0 10px 15px rgba(0,0,0,0.4); }
-.map-node.locked { background: #2f3542; border-color: #57606f; color: #a4b0be; cursor: not-allowed; box-shadow: 0 6px 0 #1e272e; text-shadow: none; }
+
+.map-node.special { 
+    background: linear-gradient(135deg, #f1c40f 0%, #e67e22 50%, #ffda79 100%); 
+    background-size: 200% 200%;
+    border-color: #fff; color: #d63031; 
+    box-shadow: 0 8px 0 #e1b12c, 0 0 18px rgba(241, 196, 15, 0.8); 
+    animation: specialNodeShift 2.5s ease infinite alternate;
+}
+
+@keyframes specialNodeShift {
+    0% { background-position: 0% 50%; box-shadow: 0 8px 0 #e1b12c, 0 0 10px rgba(241, 196, 15, 0.5); }
+    100% { background-position: 100% 50%; box-shadow: 0 8px 0 #e1b12c, 0 0 22px rgba(230, 126, 34, 0.9); }
+}
+
+.map-node.locked { 
+    background: #2f3542; border-color: #57606f; color: #a4b0be; 
+    cursor: not-allowed; box-shadow: 0 6px 0 #1e272e; text-shadow: none; 
+    animation: none;
+}
+
 .grid-info-badge { position: absolute; bottom: -10px; background: #fff; border: 2px solid #74b9ff; color: #0984e3; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; font-weight: 900; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
 .map-node-container:nth-child(4n+1) .map-node { transform: translateX(-65px); }
@@ -433,7 +434,6 @@ body {
     flex-direction: column;
     padding: 12px !important;
     background: linear-gradient(180deg, #1e272e 0%, #2f3542 100%) !important;
-    animation: fadeInModal 0.3s ease-out;
 }
 
 /* EXACT LEADERBOARD/RANK STYLES FROM FIRST CODE */
@@ -448,12 +448,6 @@ body {
     flex-direction: column;
     padding: 12px !important;
     background: linear-gradient(180deg, #fff8e7 0%, #ffeaa7 100%) !important;
-    animation: fadeInModal 0.3s ease-out;
-}
-
-@keyframes fadeInModal {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .rank-header-wrap {
@@ -518,12 +512,6 @@ body {
 .wheel-label-2 { bottom: 35px; right: 45px; transform: rotate(135deg); }
 .wheel-label-3 { bottom: 35px; left: 45px; transform: rotate(225deg); }
 .wheel-label-4 { top: 35px; left: 45px; transform: rotate(315deg); }
-
-.animated-shop-card { animation: shopPulseScale 3s ease-in-out infinite alternate; }
-@keyframes shopPulseScale {
-    0% { transform: translateY(0); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
-    100% { transform: translateY(-3px); filter: drop-shadow(0 8px 12px rgba(253,203,110,0.4)); }
-}
 </style>
 </head>
 <body>
@@ -563,7 +551,7 @@ body {
                     १. दोन डॉटच्या मध्ये क्लिक करून दांडी (Line) मारावी.<br>
                     २. बॉक्स पूर्ण करणाऱ्या खेळाडूला तो बॉक्स मिळतो आणि स्वतःचा इमोजी/चिन्ह तिथे दिसते.<br>
                     ३. ज्याचे बॉक्स सर्वात जास्त असतील तो खेळाडू जिंकेल!<br>
-                    ४. १५ सेकंदाचा टायमर प्रत्येक टर्नला दिला आहे.
+                    ४. लेव्हल ५० नंतर १५ सेकंदाचा टायमर प्रत्येक टर्नला दिला आहे.
                 </p>
                 <button class="btn-close" onclick="closeModal('tutorialModal')">चला खेळूया! ▶</button>
             </div>
@@ -609,10 +597,14 @@ body {
                 <div>
                     <div class="section-heading">— PLAYER MODE —</div>
                     <div class="mode-selector-grid">
-                        <div class="mode-btn active animated-mode-btn" onclick="selectMode('AI', this)" id="modeBtnAI"><div class="mode-icon">🤖</div><div class="mode-text">Vs AI</div></div>
-                        <div class="mode-btn animated-mode-btn" onclick="selectMode('2P', this)" id="modeBtn2P"><div class="mode-icon">👤👤</div><div class="mode-text">2 Players</div></div>
-                        <div class="mode-btn animated-mode-btn" onclick="selectMode('3P', this)" id="modeBtn3P"><div class="mode-icon">👥👤</div><div class="mode-text">3 Players</div></div>
-                        <div class="mode-btn animated-mode-btn" onclick="selectMode('4P', this)" id="modeBtn4P"><div class="mode-icon">👨‍👩‍👧‍👦</div><div class="mode-text">4 Players</div></div>
+                        <div class="mode-btn active" onclick="selectMode('AI', this)" id="modeBtnAI"><div class="mode-icon">🤖</div><div class="mode-text">Vs AI</div></div>
+                        <div class="mode-btn" onclick="selectMode('2P', this)" id="modeBtn2P"><div class="mode-icon">👤👤</div><div class="mode-text">2 Players</div></div>
+                        <div class="mode-btn" onclick="selectMode('3P', this)" id="modeBtn3P"><div class="mode-icon">👥👤</div><div class="mode-text">3 Players</div></div>
+                        <div class="mode-btn" onclick="selectMode('4P', this)" id="modeBtn4P"><div class="mode-icon">👨‍👩‍👧‍👦</div><div class="mode-text">4 Players</div></div>
+                    </div>
+                    <div class="task-home-btn" onclick="openModal('taskModal')">
+                        <span style="font-size:1.1rem;">📋</span>
+                        <span style="font-size:0.85rem; font-weight:900; color:#ffffff; letter-spacing:1px;">DAILY TASK & CHALLENGE</span>
                     </div>
                 </div>
 
@@ -620,13 +612,12 @@ body {
             </div>
 
             <div class="home-sidebar">
-                <div class="side-nav-item animated-side-item" onclick="openModal('profileModal')"><div class="side-nav-icon">👤</div><div class="side-nav-label">Profile</div></div>
-                <div class="side-nav-item animated-side-item" onclick="openModal('rankModal')"><div class="side-nav-icon">🏆</div><div class="side-nav-label">Rank</div></div>
-                <div class="side-nav-item animated-side-item" style="border-color:#ff4757; background:#ffeaa7;" onclick="openModal('onlineModal')"><div class="side-nav-icon">🌐</div><div class="side-nav-label" style="color:#d63031;">Online</div></div>
-                <div class="side-nav-item animated-side-item" onclick="openModal('shopModal')"><div class="side-nav-icon">🛒</div><div class="side-nav-label">Shop</div></div>
-                <div class="side-nav-item animated-side-item" onclick="openModal('spinModal')"><div class="side-nav-icon">🎡</div><div class="side-nav-label">Spin</div></div>
-                <div class="side-nav-item animated-side-item" onclick="openModal('taskModal')"><div class="side-nav-icon">📋</div><div class="side-nav-label">Task</div></div>
-                <div class="side-nav-item animated-side-item" onclick="openModal('helpModal')"><div class="side-nav-icon">🧩</div><div class="side-nav-label">Rules</div></div>
+                <div class="side-nav-item" onclick="openModal('profileModal')"><div class="side-nav-icon">👤</div><div class="side-nav-label">Profile</div></div>
+                <div class="side-nav-item" onclick="openModal('rankModal')"><div class="side-nav-icon">🏆</div><div class="side-nav-label">Rank</div></div>
+                <div class="side-nav-item" style="border-color:#ff4757; background:#ffeaa7;" onclick="openModal('onlineModal')"><div class="side-nav-icon">🌐</div><div class="side-nav-label" style="color:#d63031;">Online</div></div>
+                <div class="side-nav-item" onclick="openModal('shopModal')"><div class="side-nav-icon">🛒</div><div class="side-nav-label">Shop</div></div>
+                <div class="side-nav-item" onclick="openModal('spinModal')"><div class="side-nav-icon">🎡</div><div class="side-nav-label">Spin</div></div>
+                <div class="side-nav-item" onclick="openModal('helpModal')"><div class="side-nav-icon">🧩</div><div class="side-nav-label">Rules</div></div>
             </div>
         </div>
 
@@ -655,9 +646,9 @@ body {
                 <div class="score-box" id="p4Box" style="color:var(--p4-line); display:none;">P4: <span id="s4">0</span></div>
             </div>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; background:#fff8e7; padding:4px 12px; border-radius:12px; font-weight:900; font-size:0.8rem; margin-bottom:4px; border:2px solid #fdcb6e; color:#d63031;">
-                <span id="turnIndicatorText">Turn: Player 1</span>
-                <button id="hintBtn" class="btn-small" style="display:none; padding:2px 8px; font-size:0.7rem; min-height:28px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (30🪙)</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#fff8e7; padding:6px 12px; border-radius:12px; font-weight:900; font-size:0.9rem; margin-bottom:4px; border:2.5px solid #fdcb6e; color:#d63031;">
+                <span id="turnIndicatorText" style="font-size:1rem; font-weight:900; letter-spacing:0.5px; text-shadow:0.5px 0.5px 0 #fff;">Turn: Player 1</span>
+                <button id="hintBtn" class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (30🪙)</button>
             </div>
 
             <div class="board-container">
@@ -702,7 +693,7 @@ body {
         </div>
 
         <div class="modal-overlay" id="profileModal">
-            <div class="modal-card animated-profile-card">
+            <div class="modal-card">
                 <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">👤 PLAYER PROFILE</h3>
                 <div id="avatarEmojiDisplay" style="font-size:3rem; margin:5px auto; line-height:1;">😎</div>
                 
@@ -718,7 +709,6 @@ body {
             </div>
         </div>
 
-        <!-- EXACT RANK MODAL FROM FIRST CODE -->
         <div class="modal-overlay" id="rankModal">
             <div class="modal-card rank-fullscreen-card">
                 <div class="rank-header-wrap" style="justify-content: center;">
@@ -744,7 +734,7 @@ body {
         </div>
 
         <div class="modal-overlay" id="shopModal">
-            <div class="modal-card animated-shop-card" style="max-height: 85vh; display: flex; flex-direction: column;">
+            <div class="modal-card" style="max-height: 85vh; display: flex; flex-direction: column;">
                 <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">🛒 SKINS SHOP</h3>
                 
                 <div class="tab-btn-group">
@@ -843,8 +833,8 @@ body {
                 <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">🧩 GAME RULES</h3>
                 <p style="font-size:0.85rem; font-weight:bold; text-align:left; line-height:1.6; margin:10px 0; color:#2f3542;">
                     १. एकून लेव्हल्स १ ते ३५० पर्यंत सलग आहेत.<br>
-                    २. १५ सेकंदाचा टाईमर दिला आहे, शेवटच्या ५ सेकंदात अलर्ट येईल.<br>
-                    ३. लेव्हल ५० नंतर हिंट (Hint) पर्याय उपलब्ध होतो.<br>
+                    २. लेव्हल ५० नंतर १५ सेकंदाचा टाईमर दिला आहे.<br>
+                    ३. हिंट (Hint) पर्याय १ ल्या लेव्हलपासून उपलब्ध आहे.<br>
                     ४. खेळाडू मोडनुसार २, ३ किंवा ४ खेळाडू निवडून खेळू शकता!
                 </p>
                 <button class="btn-close" onclick="closeModal('helpModal')">Close</button>
@@ -909,14 +899,18 @@ function showToast(msg) {
 
 const AVATAR_OPTIONS = ['😎', '🦁', '🤖', '👑', '🐱', '🦄', '🥷', '🐲', '🚀', '🔥'];
 
-let gameData = {
-    isLoggedIn: false, username: "Player1", password: "",
-    avatar: "😎",
-    coins: 100, stars: 0, unlockedLevel: 1, lastSpinTimestamp: 0,
-    equippedLineColor: '#ff4757',
-    equippedBoxEmoji: '⭐',
-    lastChallengeAttemptTime: 0
-};
+function getDefaultGameData() {
+    return {
+        isLoggedIn: false, username: "Player1", password: "",
+        avatar: "😎",
+        coins: 100, stars: 0, unlockedLevel: 1, lastSpinTimestamp: 0,
+        equippedLineColor: '#ff4757',
+        equippedBoxEmoji: '⭐',
+        lastChallengeAttemptTime: 0
+    };
+}
+
+let gameData = getDefaultGameData();
 
 let activePlayerMode = 'AI';
 let selectedOnlinePlayerCount = 2;
@@ -998,13 +992,13 @@ function syncWithFirebase() {
     }
 }
 
-/* EXACT LISTEN LIVE LEADERBOARD LOGIC FROM FIRST CODE */
+/* LISTEN LIVE LEADERBOARD (Limit 100 as per preference) */
 function listenLiveLeaderboard() {
     if (!db) {
         document.getElementById('leaderboardTableBody').innerHTML = `<tr><td style="padding:8px;">1</td><td style="padding:8px; text-align:left;">${gameData.username}</td><td style="padding:8px;">⭐ ${gameData.stars}</td><td style="padding:8px;">${gameData.unlockedLevel}</td></tr>`;
         return;
     }
-    db.ref('leaderboard').orderByChild('stars').limitToLast(50).on('value', snapshot => {
+    db.ref('leaderboard').orderByChild('stars').limitToLast(100).on('value', snapshot => {
         let list = [];
         snapshot.forEach(child => { list.push(child.val()); });
         list.reverse();
@@ -1084,26 +1078,34 @@ function handleLoginSubmit() {
                 showScreen('screen-home');
                 showToast(`Welcome Back, ${uName}! 🎉`);
             } else {
+                localStorage.clear();
+                gameData = getDefaultGameData();
                 gameData.username = uName;
                 gameData.password = pass;
                 gameData.isLoggedIn = true;
                 saveDataToStorage();
                 showScreen('screen-home');
-                showToast(`Welcome, ${uName}!`);
+                showToast(`Welcome, ${uName}! Fresh Start!`);
             }
         });
     } else {
-        gameData.username = uName; gameData.isLoggedIn = true;
-        saveDataToStorage(); showScreen('screen-home');
+        localStorage.clear();
+        gameData = getDefaultGameData();
+        gameData.username = uName; 
+        gameData.isLoggedIn = true;
+        saveDataToStorage(); 
+        showScreen('screen-home');
     }
 }
 
 function handleLogout() {
-    gameData.isLoggedIn = false;
-    saveDataToStorage();
+    localStorage.clear();
+    gameData = getDefaultGameData();
     closeModal('profileModal');
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
     showScreen('screen-login');
-    showToast("Logout!");
+    showToast("Logged Out!");
 }
 
 function showScreen(screenId) {
@@ -1115,7 +1117,6 @@ function showScreen(screenId) {
     }
 }
 
-/* OPEN MODAL FUNCTION WITH EXACT RANK SCROLL FROM FIRST CODE */
 function openModal(id) { 
     document.getElementById(id).style.display = 'flex'; 
     if (id === 'spinModal') {
@@ -1306,7 +1307,6 @@ function getGridSizeForLevel(lvl) {
         return { rows: Math.min(6 + step, 12), cols: Math.min(5 + step, 9) };
     }
     
-    // Levels 171 to 350 Grid Size Logic
     let newStep = Math.floor((lvl - 171) / 10);
     return { rows: Math.min(6 + (newStep % 6), 11), cols: Math.min(5 + (newStep % 5), 8) };
 }
@@ -1404,11 +1404,8 @@ function startLevelGame(lvl, gridDim, isSpecial) {
     boardCols = gridDim.cols;
     isTargetLevelMode = isSpecial;
 
-    if (lvl >= 50) {
-        document.getElementById('hintBtn').style.display = 'inline-block';
-    } else {
-        document.getElementById('hintBtn').style.display = 'none';
-    }
+    // BADAL: Hint Level 1 pasun chalu keli
+    document.getElementById('hintBtn').style.display = 'inline-block';
 
     if (lvl === 56 || (lvl >= 61 && lvl <= 70)) activeShape = 'DIAMOND';
     else if (lvl === 57 || (lvl >= 71 && lvl <= 80)) activeShape = 'HEXAGON';
@@ -1622,21 +1619,33 @@ function findBestHintMove() {
     return null;
 }
 
+/* BADAL: Turn Indicator अधिक स्पष्ट आणि ठळक केला */
 function updateTurnIndicator() {
     let tText = document.getElementById('turnIndicatorText');
     if (isOnlineGame) {
-        tText.innerText = (turnPlayer === myPlayerNumber) ? "🟢 Your Turn!" : `⏳ P${turnPlayer}'s Turn`;
+        tText.innerHTML = (turnPlayer === myPlayerNumber) 
+            ? "<span style='color:#2ed573;'>🟢 YOUR TURN!</span>" 
+            : `<span style='color:#d63031;'>⏳ P${turnPlayer}'s Turn</span>`;
     } else {
-        tText.innerText = `Turn: Player ${turnPlayer} ${turnPlayer === 1 ? '👤' : (activePlayerMode === 'AI' ? '🤖' : '👤')}`;
+        let pSymbol = turnPlayer === 1 ? '👤 P1' : (activePlayerMode === 'AI' ? '🤖 AI' : `👤 P${turnPlayer}`);
+        let pColor = turnPlayer === 1 ? '#ff4757' : (turnPlayer === 2 ? '#1e90ff' : (turnPlayer === 3 ? '#2ed573' : '#ffa502'));
+        tText.innerHTML = `👉 <span style="color:${pColor}; font-weight:900;">TURN: ${pSymbol}</span>`;
     }
 }
 
+/* BADAL: Timer Level 50 pasun start hoil */
 function startTurnTimer() {
     if (turnTimerInterval) clearInterval(turnTimerInterval);
     let timerBar = document.getElementById('game-timer-bar');
     let timerProg = document.getElementById('game-timer-progress');
+
+    // Level 50 peksha kami asel kiwa Online nasel तर टायमर दाखवू नका
+    if (activeLevel < 50 && !isOnlineGame) {
+        timerBar.style.display = 'none';
+        return;
+    }
+
     timerBar.style.display = 'block';
-    
     let timeLeft = TURN_TIME_SECONDS;
     timerProg.style.width = '100%';
 
