@@ -48,7 +48,7 @@ body {
 .app-container {
     width: 100vw; max-width: 440px;
     height: 100vh; max-height: 900px;
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 35%, #0f766e 70%, #0284c7 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #161243 35%, #05d710 70%, #0899e1 100%);
     background-size: 200% 200%;
     animation: gradientFlow 12s ease infinite;
     border: 4px solid #ffffff;
@@ -226,10 +226,28 @@ body {
     width: 100%; box-shadow: 0 8px 0 #1e272e, 0 10px 20px rgba(0,0,0,0.4);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
+    animation: boxContainerFloat 3s ease-in-out infinite alternate;
+}
+
+@keyframes boxContainerFloat {
+    0% { transform: translateY(0px); box-shadow: 0 8px 0 #1e272e, 0 10px 20px rgba(0,0,0,0.4); }
+    100% { transform: translateY(-6px); box-shadow: 0 14px 0 #1e272e, 0 18px 25px rgba(0,0,0,0.5); }
 }
 
 .anim-stars-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 6px; }
-.anim-star { font-size: 1.5rem; filter: drop-shadow(0 0 6px #fffa65); }
+
+.anim-star { 
+    font-size: 1.5rem; 
+    filter: drop-shadow(0 0 6px #fffa65); 
+    animation: starFloat 2s ease-in-out infinite alternate;
+}
+.anim-star:nth-child(2) { animation-delay: 0.3s; }
+.anim-star:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes starFloat {
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-8px) scale(1.15); }
+}
 
 .anim-grid {
     display: grid; grid-template-columns: auto 35px auto;
@@ -272,7 +290,6 @@ body {
 
 .task-home-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #c88a17; }
 
-/* SIDEBAR STYLING - UNCHANGED */
 .home-sidebar {
     width: 68px; background: rgba(255, 255, 255, 0.25); border: 2px solid #ffffff;
     border-radius: 20px; padding: 8px 2px; display: flex; flex-direction: column; gap: 6px; justify-content: space-around;
@@ -284,7 +301,7 @@ body {
 .side-nav-label { font-size: 0.55rem; font-weight: 900; color: #2f3542; text-transform: uppercase; margin-top: 1px; }
 
 #screen-map { 
-    background: linear-gradient(135deg, #0984e3 0%, #2c3e50 50%, #6c5ce7 100%);
+    background: linear-gradient(135deg, #0984e3 0%, #000000 50%, #6c5ce7 100%);
     overflow-y: auto; position: relative;
 }
 .map-top-bar {
@@ -302,7 +319,6 @@ body {
 .level-nodes-wrapper { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
 .map-node-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; }
 
-/* MAP LEVEL NODES - HIGH-END DYNAMIC COLOR BACKGROUND */
 .map-node {
     width: 70px; height: 70px; border-radius: 50%;
     background: linear-gradient(135deg, #ff4757 0%, #ff6b81 50%, #ff7f50 100%);
@@ -351,7 +367,25 @@ body {
 
 #screen-game { padding: 6px; justify-content: flex-start; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
 .game-header-bar { display: flex; justify-content: space-between; align-items: center; background: #fff8e7; padding: 6px 10px; border-radius: 16px; border: 3px solid #fdcb6e; box-shadow: 0 3px 0 #e1b12c; width: 100%; margin-bottom: 6px; }
-.score-box { background: #ffffff; padding: 4px 10px; border-radius: 10px; font-size: 0.85rem; font-weight: 900; border: 2px solid #dfe4ea; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+
+.score-box { 
+    background: #ffffff; padding: 4px 10px; border-radius: 10px; font-size: 0.85rem; font-weight: 900; 
+    border: 2px solid #dfe4ea; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); 
+    transition: all 0.3s ease;
+}
+
+.score-box.active-turn {
+    border-color: #fffa65 !important;
+    background: #fff3a0 !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 12px #fffa65, 0 0 20px rgba(255, 250, 101, 0.8) !important;
+    animation: turnBoxPulse 1s infinite alternate;
+}
+
+@keyframes turnBoxPulse {
+    0% { transform: scale(1.05); box-shadow: 0 0 8px #fffa65; }
+    100% { transform: scale(1.15); box-shadow: 0 0 18px #ff4757; }
+}
 
 .board-container { 
     flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
@@ -367,20 +401,20 @@ body {
 .top-target-cell { display: flex; align-items: center; justify-content: center; background: #ff4757; color: #fff; font-weight: 900; border-radius: 2px; font-size: 0.5rem; width: 14px; height: 14px; }
 
 #game-board {
-    display: grid; gap: 0px; background: #fff8e7; padding: 12px;
+    display: grid; gap: 0px; background: #fff8e7; padding: 8px;
     border-radius: 20px; border: 4px solid #fdcb6e;
-    width: auto; max-width: 100%; height: auto;
+    width: auto; max-width: 95vw; height: auto; max-height: 65vh;
     align-content: center; justify-content: center; justify-items: center; align-items: center;
     box-shadow: 0 8px 0 #e1b12c, 0 12px 20px rgba(0,0,0,0.2);
-    margin: auto;
+    margin: auto; overflow: auto;
 }
 
-.dot-node { width: 14px; height: 14px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 2px solid #fff; }
+.dot-node { width: 12px; height: 12px; background: #ff4757; border-radius: 50%; box-shadow: inset 0 -1px 0 #b22222; z-index: 3; border: 2px solid #fff; }
 .dot-node.disabled-cell { visibility: hidden; }
         
-.line-horizontal { height: 18px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1.5px solid #fdcb6e; width: 100%; position: relative; transition: background 0.2s; }
+.line-horizontal { height: 14px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1.5px solid #fdcb6e; width: 100%; position: relative; transition: background 0.2s; }
 .line-horizontal:active { background: #fdcb6e; }
-.line-vertical { width: 18px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1.5px solid #fdcb6e; height: 100%; position: relative; transition: background 0.2s; }
+.line-vertical { width: 14px; background: #ffeaa7; cursor: pointer; border-radius: 6px; border: 1.5px solid #fdcb6e; height: 100%; position: relative; transition: background 0.2s; }
 .line-vertical:active { background: #fdcb6e; }
 .line-disabled { visibility: hidden; pointer-events: none; }
 
@@ -389,7 +423,6 @@ body {
 .line-drawn-p3 { background: var(--p3-line) !important; border-color: #fff !important; }
 .line-drawn-p4 { background: var(--p4-line) !important; border-color: #fff !important; }
 
-/* Hint Highlight Effect */
 .hint-highlight {
     background: #ff9f1a !important;
     border-color: #ffffff !important;
@@ -402,8 +435,8 @@ body {
 
 .box-cell { 
     display: flex; align-items: center; justify-content: center; 
-    font-size: 1.1rem; font-weight: 900; color: rgba(47, 53, 66, 0.25); 
-    border-radius: 6px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); width: 100%; height: 100%; min-width: 32px; min-height: 32px;
+    font-size: 0.9rem; font-weight: 900; color: rgba(47, 53, 66, 0.25); 
+    border-radius: 6px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); width: 100%; height: 100%; min-width: 24px; min-height: 24px;
 }
 .box-cell.char-unlocked { color: #ffffff !important; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 .box-disabled { visibility: hidden; }
@@ -422,7 +455,6 @@ body {
 .modal-overlay { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(47, 53, 66, 0.8); backdrop-filter: blur(5px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
 .modal-card { background: #fff8e7; border: 4px solid #fdcb6e; border-radius: 28px; padding: 20px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 10px 0 #e1b12c, 0 15px 25px rgba(0,0,0,0.2); max-height: 85vh; overflow-y: auto; }
 
-/* Fullscreen Challenge Modal Styles */
 .challenge-fullscreen-card {
     max-width: 100vw !important;
     width: 100vw !important;
@@ -436,7 +468,6 @@ body {
     background: linear-gradient(180deg, #1e272e 0%, #2f3542 100%) !important;
 }
 
-/* EXACT LEADERBOARD/RANK STYLES FROM FIRST CODE */
 .rank-fullscreen-card {
     max-width: 100vw !important;
     width: 100vw !important;
@@ -497,7 +528,6 @@ body {
 .online-p-btn { flex: 1; padding: 8px 2px; font-size: 0.75rem; font-weight: 900; border-radius: 12px; border: 2px solid #fdcb6e; background: #ffffff; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; text-align: center; min-height: 44px; }
 .online-p-btn.active { background: #ff4757; color: #ffffff; border-color: #ffffff; box-shadow: 0 3px 0 #d63031; }
 
-/* Fixed Wheel Label Positions - Center of Each Section */
 .wheel-section-label {
     position: absolute;
     color: #fff;
@@ -531,7 +561,7 @@ body {
                     <div class="star-item" id="star2">⭐</div>
                     <div class="star-item" id="star3">⭐</div>
                 </div>
-                <div class="victory-rewards" id="victoryRewardsText">+20 🪙 Coins Earned!</div>
+                <div class="victory-rewards" id="victoryRewardsText">+40 🪙 Coins Earned!</div>
                 <button class="btn-3d" onclick="closeVictoryModal()">NEXT LEVEL ▶</button>
             </div>
         </div>
@@ -539,21 +569,21 @@ body {
         <div id="defeat-modal" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(47, 53, 66, 0.85); backdrop-filter:blur(8px); z-index:500; flex-direction:column; align-items:center; justify-content:center;">
             <div class="victory-card">
                 <div class="victory-title" style="color:#ff4757;" id="defeatModalTitle">DEFEAT!</div>
-                <div style="font-size:1.1rem; color:#2f3542; margin:15px 0; font-weight:900;" id="defeatMsgText">Player 2 Won! Try Again!</div>
+                <div style="font-size:1.1rem; color:#2f3542; margin:15px 0; font-weight:900;" id="defeatMsgText">Player 2 Win! Try Again!</div>
                 <button class="btn-3d" style="width:100%;" onclick="restartCurrentGame()">🔄 RESTART GAME</button>
             </div>
         </div>
 
         <div class="modal-overlay" id="tutorialModal">
             <div class="modal-card">
-                <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">📖 कसं खेळावं? (How to Play)</h3>
+                <h3 style="color:#ff4757; margin-bottom:10px; font-size:1.3rem;">📖How to Play</h3>
                 <p style="font-size:0.85rem; font-weight:bold; text-align:left; line-height:1.6; margin:10px 0; color:#2f3542;">
                     १. दोन डॉटच्या मध्ये क्लिक करून दांडी (Line) मारावी.<br>
                     २. बॉक्स पूर्ण करणाऱ्या खेळाडूला तो बॉक्स मिळतो आणि स्वतःचा इमोजी/चिन्ह तिथे दिसते.<br>
                     ३. ज्याचे बॉक्स सर्वात जास्त असतील तो खेळाडू जिंकेल!<br>
                     ४. लेव्हल ५० नंतर १५ सेकंदाचा टायमर प्रत्येक टर्नला दिला आहे.
                 </p>
-                <button class="btn-close" onclick="closeModal('tutorialModal')">चला खेळूया! ▶</button>
+                <button class="btn-close" onclick="closeModal('tutorialModal')">Play Now! ▶</button>
             </div>
         </div>
 
@@ -563,11 +593,11 @@ body {
                 <div class="login-subtitle">Login Please In Enter The Game</div>
                 <div class="input-group">
                     <label>Username</label>
-                    <input type="text" id="loginUser" class="login-input" placeholder="Name">
+                    <input type="text" id="loginUser" class="login-input" placeholder="enter the name">
                 </div>
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" id="loginPass" class="login-input" placeholder="••••••••">
+                    <input type="password" id="loginPass" class="login-input" placeholder="enter the password">
                 </div>
                 <button class="btn-3d" style="width:100%; margin-top:10px;" onclick="handleLoginSubmit()">ENTER GAME</button>
             </div>
@@ -600,7 +630,7 @@ body {
                         <div class="mode-btn active" onclick="selectMode('AI', this)" id="modeBtnAI"><div class="mode-icon">🤖</div><div class="mode-text">Vs AI</div></div>
                         <div class="mode-btn" onclick="selectMode('2P', this)" id="modeBtn2P"><div class="mode-icon">👤👤</div><div class="mode-text">2 Players</div></div>
                         <div class="mode-btn" onclick="selectMode('3P', this)" id="modeBtn3P"><div class="mode-icon">👥👤</div><div class="mode-text">3 Players</div></div>
-                        <div class="mode-btn" onclick="selectMode('4P', this)" id="modeBtn4P"><div class="mode-icon">👨‍👩‍👧‍👦</div><div class="mode-text">4 Players</div></div>
+                        <div class="mode-btn" onclick="selectMode('4P', this)" id="modeBtn4P"><div class="mode-icon">👥👥</div><div class="mode-text">4 Players</div></div>
                     </div>
                     <div class="task-home-btn" onclick="openModal('taskModal')">
                         <span style="font-size:1.1rem;">📋</span>
@@ -702,7 +732,7 @@ body {
 
                 <p style="font-size:0.9rem; line-height:1.8; font-weight:bold; color:#2f3542;">
                     Name: <span id="profNameDisplay" style="color:#ff4757;">Player1</span><br>
-                    Coins: 🪙 <span id="profCoinsDisplay">100</span> | Stars: ⭐ <span id="profStarsDisplay">0</span>
+                    Coins: 🪙 <span id="profCoinsDisplay">200</span> | Stars: ⭐ <span id="profStarsDisplay">0</span>
                 </p>
                 <button class="btn-logout" onclick="handleLogout()">Log Out </button><br>
                 <button class="btn-close" onclick="closeModal('profileModal')">Close</button>
@@ -743,36 +773,8 @@ body {
                 </div>
 
                 <div style="flex: 1; overflow-y: auto; margin-bottom: 10px; text-align: left;">
-                    <div id="lineSkinsSection">
-                        <div class="shop-item-row"><div>🔴 Crimson Red</div><button class="btn-small" onclick="equipSkin('line', '#ff4757')">Equip</button></div>
-                        <div class="shop-item-row"><div>🔵 Ocean Blue</div><button class="btn-small" onclick="buySkin('line', 100, '#1e90ff')">100 🪙</button></div>
-                        <div class="shop-item-row"><div>🟢 Bright Mint</div><button class="btn-small" onclick="buySkin('line', 200, '#2ed573')">200 🪙</button></div>
-                        <div class="shop-item-row"><div>🟡 Shiny Gold</div><button class="btn-small" onclick="buySkin('line', 300, '#ffa502')">300 🪙</button></div>
-                        <div class="shop-item-row"><div>🟣 Royal Purple</div><button class="btn-small" onclick="buySkin('line', 400, '#9b59b6')">400 🪙</button></div>
-                        <div class="shop-item-row"><div>🟠 Neon Orange</div><button class="btn-small" onclick="buySkin('line', 500, '#e67e22')">500 🪙</button></div>
-                        <div class="shop-item-row"><div>🩵 Turquoise</div><button class="btn-small" onclick="buySkin('line', 600, '#00cec9')">600 🪙</button></div>
-                        <div class="shop-item-row"><div>🩷 Hot Pink</div><button class="btn-small" onclick="buySkin('line', 700, '#fd79a8')">700 🪙</button></div>
-                        <div class="shop-item-row"><div>🟤 Chocolate</div><button class="btn-small" onclick="buySkin('line', 800, '#8e44ad')">800 🪙</button></div>
-                        <div class="shop-item-row"><div>🖤 Dark Obsidian</div><button class="btn-small" onclick="buySkin('line', 1000, '#2d3436')">1000 🪙</button></div>
-                    </div>
-
-                    <div id="boxSkinsSection" style="display:none;">
-                        <div class="shop-item-row"><div>⭐ Star Emoji</div><button class="btn-small" onclick="equipBoxEmoji('⭐')">Equip</button></div>
-                        <div class="shop-item-row"><div>🔥 Fire Emoji</div><button class="btn-small" onclick="buyBoxEmoji(50, '🔥')">50 🪙</button></div>
-                        <div class="shop-item-row"><div>🚀 Rocket Emoji</div><button class="btn-small" onclick="buyBoxEmoji(100, '🚀')">100 🪙</button></div>
-                        <div class="shop-item-row"><div>👑 Crown Emoji</div><button class="btn-small" onclick="buyBoxEmoji(150, '👑')">150 🪙</button></div>
-                        <div class="shop-item-row"><div>💎 Diamond Emoji</div><button class="btn-small" onclick="buyBoxEmoji(200, '💎')">200 🪙</button></div>
-                        <div class="shop-item-row"><div>🎉 Party Emoji</div><button class="btn-small" onclick="buyBoxEmoji(250, '🎉')">250 🪙</button></div>
-                        <div class="shop-item-row"><div>🏆 Trophy Emoji</div><button class="btn-small" onclick="buyBoxEmoji(300, '🏆')">300 🪙</button></div>
-                        <div class="shop-item-row"><div>🎯 Target Emoji</div><button class="btn-small" onclick="buyBoxEmoji(350, '🎯')">350 🪙</button></div>
-                        <div class="shop-item-row"><div>⚡ Lightning Emoji</div><button class="btn-small" onclick="buyBoxEmoji(400, '⚡')">400 🪙</button></div>
-                        <div class="shop-item-row"><div>🍀 Clover Emoji</div><button class="btn-small" onclick="buyBoxEmoji(450, '🍀')">450 🪙</button></div>
-                        <div class="shop-item-row"><div>🤖 Robot Emoji</div><button class="btn-small" onclick="buyBoxEmoji(500, '🤖')">500 🪙</button></div>
-                        <div class="shop-item-row"><div>🦄 Unicorn Emoji</div><button class="btn-small" onclick="buyBoxEmoji(600, '🦄')">600 🪙</button></div>
-                        <div class="shop-item-row"><div>🦁 Lion Emoji</div><button class="btn-small" onclick="buyBoxEmoji(700, '🦁')">700 🪙</button></div>
-                        <div class="shop-item-row"><div>🍎 Apple Emoji</div><button class="btn-small" onclick="buyBoxEmoji(800, '🍎')">800 🪙</button></div>
-                        <div class="shop-item-row"><div>⚽ Football Emoji</div><button class="btn-small" onclick="buyBoxEmoji(1000, '⚽')">1000 🪙</button></div>
-                    </div>
+                    <div id="lineSkinsSection"></div>
+                    <div id="boxSkinsSection" style="display:none;"></div>
                 </div>
 
                 <button class="btn-close" style="margin-top: 0;" onclick="closeModal('shopModal')">Close</button>
@@ -806,7 +808,7 @@ body {
             <div class="modal-card">
                 <h3 style="color:#ff4757; margin-bottom:6px; font-size:1.2rem;">📋 DAILY TASK & CHALLENGE</h3>
                 <p id="taskStatusDesc" style="font-size:0.78rem; font-weight:bold; text-align:center; line-height:1.4; margin:4px 0 8px 0; color:#2f3542;">
-                    चॅलेंज बटणावर क्लिक करून रोबोट विरुद्ध ५x५ बॉक्सेसचा चॅलेंज मॅच खेळा आणि कॉईन्स जिंका! (दिवसातून १ प्रयत्न)
+                    Click on the Challenge button to play a 5x5 box challenge match against the robot and win coins
                 </p>
                 
                 <button class="btn-3d" id="startChallengeBtn" style="width:100%; font-size:1rem; padding:10px; margin: 10px 0;" onclick="handleChallengeStartClick()">CHALLENGE ⚔️</button>
@@ -899,13 +901,46 @@ function showToast(msg) {
 
 const AVATAR_OPTIONS = ['😎', '🦁', '🤖', '👑', '🐱', '🦄', '🥷', '🐲', '🚀', '🔥'];
 
+const LINE_SKINS_LIST = [
+    { name: "🔴 Crimson Red", color: "#ff4757", price: 0 },
+    { name: "🔵 Ocean Blue", color: "#1e90ff", price: 100 },
+    { name: "🟢 Bright Mint", color: "#2ed573", price: 400 },
+    { name: "🟡 Shiny Gold", color: "#ffa502", price: 600 },
+    { name: "🟣 Royal Purple", color: "#9b59b6", price: 602 },
+    { name: "🟠 Neon Orange", color: "#e67e22", price: 650 },
+    { name: "🩵 Turquoise", color: "#00cec9", price: 680 },
+    { name: "🩷 Hot Pink", color: "#fd79a8", price: 700 },
+    { name: "🟤 Chocolate", color: "#8e44ad", price: 800 },
+    { name: "🖤 Dark Obsidian", color: "#2d3436", price: 1000 }
+];
+
+const BOX_EMOJIS_LIST = [
+    { name: "⭐ Star Emoji", emoji: "⭐", price: 0 },
+    { name: "🔥 Fire Emoji", emoji: "🔥", price: 50 },
+    { name: "🚀 Rocket Emoji", emoji: "🚀", price: 200 },
+    { name: "👑 Crown Emoji", emoji: "👑", price: 450 },
+    { name: "💎 Diamond Emoji", emoji: "💎", price: 500 },
+    { name: "🎉 Party Emoji", emoji: "🎉", price: 550 },
+    { name: "🏆 Trophy Emoji", emoji: "🏆", price: 670 },
+    { name: "🎯 Target Emoji", emoji: "🎯", price: 820 },
+    { name: "⚡ Lightning Emoji", emoji: "⚡", price: 911 },
+    { name: "🍀 Clover Emoji", emoji: "🍀", price: 1003 },
+    { name: "🤖 Robot Emoji", emoji: "🤖", price: 2000 },
+    { name: "🦄 Unicorn Emoji", emoji: "🦄", price: 2050 },
+    { name: "🦁 Lion Emoji", emoji: "🦁", price: 2500 },
+    { name: "🍎 Apple Emoji", emoji: "🍎", price: 2675 },
+    { name: "⚽ Football Emoji", emoji: "⚽", price: 3000 }
+];
+
 function getDefaultGameData() {
     return {
         isLoggedIn: false, username: "Player1", password: "",
         avatar: "😎",
-        coins: 100, stars: 0, unlockedLevel: 1, lastSpinTimestamp: 0,
+        coins: 200, stars: 0, unlockedLevel: 1, lastSpinTimestamp: 0,
         equippedLineColor: '#ff4757',
         equippedBoxEmoji: '⭐',
+        unlockedLineSkins: ['#ff4757'],
+        unlockedBoxEmojis: ['⭐'],
         lastChallengeAttemptTime: 0
     };
 }
@@ -915,7 +950,7 @@ let gameData = getDefaultGameData();
 let activePlayerMode = 'AI';
 let selectedOnlinePlayerCount = 2;
 let activeLevel = 1;
-let boardRows = 6, boardCols = 6;
+let boardRows = 5, boardCols = 5;
 let isTargetLevelMode = false;
 let targetBoxesToWin = 0;
 let turnPlayer = 1;
@@ -925,6 +960,7 @@ let isOnlineGame = false;
 let currentRoomCode = null;
 let myPlayerNumber = 1;
 let roomRef = null;
+let trackedRoomPlayers = {};
 
 let horizontalGrid = [], verticalGrid = [], boxesGrid = [];
 let activeShape = 'SQUARE';
@@ -941,7 +977,10 @@ const TURN_TIME_SECONDS = 15;
 window.onload = function() {
     let saved = localStorage.getItem('dots_boxes_candy_save');
     if (saved) {
-        gameData = JSON.parse(saved);
+        let parsed = JSON.parse(saved);
+        gameData = Object.assign(getDefaultGameData(), parsed);
+        if (!gameData.unlockedLineSkins) gameData.unlockedLineSkins = ['#ff4757'];
+        if (!gameData.unlockedBoxEmojis) gameData.unlockedBoxEmojis = ['⭐'];
         if (gameData.isLoggedIn) showScreen('screen-home');
     }
     initAvatarPicker();
@@ -992,7 +1031,6 @@ function syncWithFirebase() {
     }
 }
 
-/* LISTEN LIVE LEADERBOARD (Limit 100 as per preference) */
 function listenLiveLeaderboard() {
     if (!db) {
         document.getElementById('leaderboardTableBody').innerHTML = `<tr><td style="padding:8px;">1</td><td style="padding:8px; text-align:left;">${gameData.username}</td><td style="padding:8px;">⭐ ${gameData.stars}</td><td style="padding:8px;">${gameData.unlockedLevel}</td></tr>`;
@@ -1069,7 +1107,7 @@ function handleLoginSubmit() {
                 let singlePlayerMax = ((savedData.unlockedLevel || 1) - 1) * 3;
                 let mpStars = savedData.multiplayerStars || 0;
                 gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
-                gameData.coins = savedData.coins || 100;
+                gameData.coins = savedData.coins || 200;
                 gameData.unlockedLevel = savedData.unlockedLevel || 1;
                 gameData.avatar = savedData.avatar || "😎";
                 gameData.isLoggedIn = true;
@@ -1123,6 +1161,8 @@ function openModal(id) {
         checkSpinAvailability();
     } else if (id === 'taskModal') {
         checkChallengeAvailability();
+    } else if (id === 'shopModal') {
+        renderShopUI();
     } else if (id === 'rankModal') {
         setTimeout(() => {
             let userRow = document.getElementById('currentUserRankRow');
@@ -1159,6 +1199,7 @@ function createOnlineRoom() {
     myPlayerNumber = 1;
     isOnlineGame = true;
     activePlayerMode = selectedOnlinePlayerCount + 'P';
+    trackedRoomPlayers = {};
 
     let roomObj = {
         p1: gameData.username,
@@ -1187,6 +1228,7 @@ function joinOnlineRoom() {
 
     currentRoomCode = code;
     roomRef = db.ref('rooms/' + currentRoomCode);
+    trackedRoomPlayers = {};
 
     roomRef.once('value', snapshot => {
         if (snapshot.exists()) {
@@ -1224,7 +1266,7 @@ function joinOnlineRoom() {
 
 function startOnlineGameView() {
     activeLevel = 1; 
-    boardRows = 8; boardCols = 6;
+    boardRows = 14; boardCols = 9;
     activeShape = 'SQUARE'; 
     isTargetLevelMode = false; targetBoxesToWin = 0;
     
@@ -1255,6 +1297,25 @@ function listenToOnlineRoom() {
     roomRef.on('value', snapshot => {
         let data = snapshot.val();
         if (!data) return;
+
+        let maxP = data.maxPlayers || 2;
+        for (let i = 1; i <= maxP; i++) {
+            let pName = data[`p${i}`];
+            if (pName && pName !== "Waiting...") {
+                if (!trackedRoomPlayers[i]) {
+                    trackedRoomPlayers[i] = pName;
+                    if (i !== myPlayerNumber) {
+                        showToast(`🎉 ${pName} Joined the Room!`);
+                        if (db) {
+                            db.ref(`rooms/${currentRoomCode}/chat`).push({
+                                user: "System",
+                                msg: `${pName} joined as Player ${i}!`
+                            });
+                        }
+                    }
+                }
+            }
+        }
 
         if (data.turn !== undefined && data.turn !== turnPlayer) {
             turnPlayer = data.turn;
@@ -1296,19 +1357,54 @@ function restartCurrentGame() {
 }
 
 function getGridSizeForLevel(lvl) {
-    if (lvl <= 4) return { rows: 4, cols: 4 };
-    if (lvl <= 10) return { rows: 5, cols: 6 };
-    if (lvl <= 29) return { rows: 7, cols: 6 };
-    if (lvl <= 50) return { rows: 8, cols: 7 };
-    if (lvl <= 75) return { rows: 9, cols: 7 };
-    if (lvl <= 100) return { rows: 10, cols: 8 };
-    if (lvl <= 170) {
-        let step = Math.floor((lvl - 101) / 5);
-        return { rows: Math.min(6 + step, 12), cols: Math.min(5 + step, 9) };
+    if (lvl <= 200) {
+        // प्रत्येक ७ लेव्हलच्या गटासाठी (Group 1 ते Group 29) साईजची लिस्ट
+        // नियम: ३x३ बॉक्सेस हवे असल्यास { rows: 4, cols: 4 } लिहायचे.
+        const groupSizes = [
+            { rows: 4, cols: 4 }, // Group 1  (Level 1-7)    -> 3x3 Boxes
+            { rows: 6, cols: 6 }, // Group 2  (Level 8-14)   -> 3x4 Boxes
+            { rows: 7, cols: 6 }, // Group 3  (Level 15-21)  -> 4x3 Boxes
+            { rows: 7, cols: 7 }, // Group 4  (Level 22-28)  -> 4x4 Boxes
+            { rows: 8, cols: 7 }, // Group 5  (Level 29-35)  -> 4x5 Boxes
+            { rows: 9, cols: 7 }, // Group 6  (Level 36-42)  -> 5x4 Boxes
+            { rows: 10, cols: 7 }, // Group 7  (Level 43-49)  -> 5x5 Boxes
+            { rows: 11, cols: 8 }, // Group 8  (Level 50-56)  -> 3x3 Boxes (Speed Round)
+            { rows: 12, cols: 8 }, // Group 9  (Level 57-63)  -> 3x4 Boxes
+            { rows: 13, cols: 8 }, // Group 10 (Level 64-70)  -> 4x4 Boxes
+            { rows: 14, cols: 9 }, // Group 11 (Level 71-77)  -> 4x5 Boxes
+            { rows: 9, cols: 9 }, // Group 12 (Level 78-84)  -> 5x5 Boxes
+            { rows: 10, cols: 9 }, // Group 13 (Level 85-91)  -> 5x6 Boxes
+            { rows: 10, cols: 10 }, // Group 14 (Level 92-98)  -> 6x5 Boxes
+            { rows: 11, cols: 10 }, // Group 15 (Level 99-105) -> 3x4 Boxes
+            { rows: 12, cols: 10 }, // Group 16 (Level 106-112)-> 4x4 Boxes
+            { rows: 13, cols: 10 }, // Group 17 (Level 113-119)-> 4x5 Boxes
+            { rows: 14, cols: 10 }, // Group 18 (Level 120-126)-> 5x5 Boxes
+            { rows: 15, cols: 10 }, // Group 19 (Level 127-133)-> 5x6 Boxes
+            { rows: 16, cols: 10 }, // Group 20 (Level 134-140)-> 6x5 Boxes
+            { rows: 17, cols: 10 }, // Group 21 (Level 141-147)-> 6x6 Boxes
+            { rows: 7, cols: 10 }, // Group 22 (Level 148-154)-> 4x4 Boxes
+            { rows: 9, cols: 10 }, // Group 23 (Level 155-161)-> 4x5 Boxes
+            { rows: 8, cols: 10 }, // Group 24 (Level 162-168)-> 5x5 Boxes
+            { rows: 6, cols: 10 }, // Group 25 (Level 169-175)-> 5x6 Boxes
+            { rows: 7, cols: 10 }, // Group 26 (Level 176-182)-> 6x5 Boxes
+            { rows: 18, cols: 10 }, // Group 27 (Level 183-189)-> 6x6 Boxes
+            { rows: 19, cols: 10 }, // Group 28 (Level 190-196)-> 5x5 Boxes
+            { rows: 20, cols: 10 }  // Group 29 (Level 197-200)-> 6x6 Boxes
+        ];
+
+        // लेव्हल नंबरवरून त्याचा गट (Group Index) आपोआप निवडला जाईल
+        let groupIndex = Math.floor((lvl - 1) / 7);
+
+        // लिस्टच्या बाहेर लेव्हल गेल्यास शेवटची साईज लागू होईल
+        if (groupIndex >= groupSizes.length) {
+            return groupSizes[groupSizes.length - 1];
+        }
+
+        return groupSizes[groupIndex];
     }
     
-    let newStep = Math.floor((lvl - 171) / 10);
-    return { rows: Math.min(6 + (newStep % 6), 11), cols: Math.min(5 + (newStep % 5), 8) };
+    // २०० नंतरच्या लेव्हल्ससाठी पॅटर्न ग्रिड साईज (६x६)
+    return { rows: 6, cols: 6 };
 }
 
 function buildMapRoadmap() {
@@ -1318,21 +1414,13 @@ function buildMapRoadmap() {
     let startLvl = 1, endLvl = 350;
     document.getElementById('mapLevelTitle').innerText = 'LEVEL MAP (1-350)';
 
-    let shapeTexts = {};
-    for (let lvl = 101; lvl <= 170; lvl++) {
-        let shapes101 = ['DIAMOND', 'HEXAGON', 'CROSS', 'ZIGZAG', 'PYRAMID', 'ULTIMATE HERO'];
-        shapeTexts[lvl] = shapes101[(lvl - 101) % shapes101.length];
-    }
-
-    let extraShapes = ['HEXAGON', 'HEPTAGON', 'OCTAGON', 'NONAGON', 'TRIANGLE', 'RECTANGLE', 'STAR', 'HEART', 'DIAMOND', 'CROSS'];
-
     for (let lvl = startLvl; lvl <= endLvl; lvl++) {
         let nodeWrap = document.createElement('div');
         nodeWrap.className = 'map-node-container';
 
         let node = document.createElement('div');
         let isUnlocked = lvl <= gameData.unlockedLevel;
-        let isSpecial = (lvl % 5 === 0 || lvl % 6 === 0 || lvl >= 56);
+        let isSpecial = (lvl % 5 === 0 || lvl >= 201);
         let gridDim = getGridSizeForLevel(lvl);
 
         node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
@@ -1342,13 +1430,10 @@ function buildMapRoadmap() {
         let badge = document.createElement('div');
         badge.className = 'grid-info-badge';
         
-        if (shapeTexts[lvl]) {
-            badge.innerText = shapeTexts[lvl];
-        } else if (lvl >= 171) {
-            let shapeName = extraShapes[(lvl - 171) % extraShapes.length];
-            badge.innerText = shapeName;
+        if (lvl >= 201) {
+            badge.innerText = "ZIG-ZAG GRID";
         } else {
-            badge.innerText = `${gridDim.cols}x${gridDim.rows}`;
+            badge.innerText = `${gridDim.cols - 1}x${gridDim.rows - 1}`;
         }
         node.appendChild(badge);
 
@@ -1404,22 +1489,16 @@ function startLevelGame(lvl, gridDim, isSpecial) {
     boardCols = gridDim.cols;
     isTargetLevelMode = isSpecial;
 
-    // BADAL: Hint Level 1 pasun chalu keli
     document.getElementById('hintBtn').style.display = 'inline-block';
 
-    if (lvl === 56 || (lvl >= 61 && lvl <= 70)) activeShape = 'DIAMOND';
-    else if (lvl === 57 || (lvl >= 71 && lvl <= 80)) activeShape = 'HEXAGON';
-    else if (lvl === 58 || (lvl >= 81 && lvl <= 90)) activeShape = 'TRIANGLE';
-    else if (lvl === 59 || (lvl >= 91 && lvl <= 99)) activeShape = 'CROSS';
-    else if (lvl === 60 || lvl === 100) activeShape = 'MASTER';
-    else if (lvl >= 101 && lvl <= 170) activeShape = 'SQUARE';
-    else if (lvl >= 171) {
-        let shapesList = ['SQUARE', 'DIAMOND', 'HEXAGON', 'TRIANGLE', 'CROSS'];
-        activeShape = shapesList[(lvl % shapesList.length)];
+    if (lvl >= 201) {
+        activeShape = 'PHOTO_ZIGZAG';
+    } else {
+        activeShape = 'SQUARE';
     }
 
     if (isTargetLevelMode) {
-        targetBoxesToWin = Math.min(Math.floor((boardRows * boardCols) * 0.3), 20);
+        targetBoxesToWin = Math.min(Math.floor((boardRows * boardCols) * 0.3), 15);
     } else {
         targetBoxesToWin = 0;
     }
@@ -1430,12 +1509,12 @@ function startLevelGame(lvl, gridDim, isSpecial) {
         openModal('tutorialModal');
     }
 
-    if (activeLevel >= 101) {
-        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Clear Character Grid!`;
+    if (lvl >= 201) {
+        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Zig-Zag Pattern Grid!`;
     } else if (isTargetLevelMode) {
         document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
     } else {
-        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${boardCols}x${boardRows}`;
+        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${boardCols - 1}x${boardRows - 1}`;
     }
 
     let totalActivePlayers = 2;
@@ -1451,15 +1530,10 @@ function startLevelGame(lvl, gridDim, isSpecial) {
 
 function isCellInShape(r, c) {
     if (activeShape === 'SQUARE') return true;
-    let midR = Math.floor((boardRows * 2 - 1) / 2);
-    let midC = Math.floor((boardCols * 2 - 1) / 2);
-    
-    if (activeShape === 'DIAMOND') {
-        return (Math.abs(r - midR) + Math.abs(c - midC)) <= midR;
-    } else if (activeShape === 'HEXAGON' || activeShape === 'CROSS') {
-        return !( (r < 2 && c < 2) || (r < 2 && c > boardCols*2-4) || (r > boardRows*2-4 && c < 2) || (r > boardRows*2-4 && c > boardCols*2-4) );
-    } else if (activeShape === 'TRIANGLE') {
-        return c >= (midC - r) && c <= (midC + r);
+    if (activeShape === 'PHOTO_ZIGZAG') {
+        if ((r === 0 || r === boardRows*2-2) && (c < 2 || c > boardCols*2-4)) return false;
+        if ((r === 2 || r === boardRows*2-4) && (c === 0 || c === boardCols*2-2)) return false;
+        return true;
     }
     return true;
 }
@@ -1528,7 +1602,7 @@ function initializeBoard() {
     verticalGrid = Array(boardRows - 1).fill(null).map(() => Array(boardCols).fill(0));
     boxesGrid = Array(boardRows - 1).fill(null).map(() => Array(boardCols - 1).fill(0));
 
-    if (activeLevel >= 101) {
+    if (activeLevel >= 101 && activeLevel <= 200) {
         levelCharMatrix = generateRandomCharMatrix(boardRows - 1, boardCols - 1);
         renderTopTargetBoard();
     } else {
@@ -1562,7 +1636,7 @@ function initializeBoard() {
                 box.className = 'box-cell animated-box-cell' + (validCell ? '' : ' box-disabled');
                 box.id = `box-${bR}-${bC}`;
 
-                if (activeLevel >= 101 && validCell) {
+                if (activeLevel >= 101 && activeLevel <= 200 && validCell) {
                     box.innerText = levelCharMatrix[bR][bC];
                 }
 
@@ -1575,11 +1649,11 @@ function initializeBoard() {
 
 function useHint() {
     if (turnPlayer !== 1) { showToast("Wait for your turn!"); return; }
-    if (gameData.coins < 30) { showToast("30 🪙 Coins needed for Hint!"); return; }
+    if (gameData.coins < 50) { showToast("50 🪙 Coins needed for Hint!"); return; }
 
     let bestMove = findBestHintMove();
     if (bestMove) {
-        gameData.coins -= 30;
+        gameData.coins -= 50;
         saveDataToStorage();
         let el = document.getElementById(`${bestMove.type}-${bestMove.r}-${bestMove.c}`);
         if (el) {
@@ -1619,9 +1693,14 @@ function findBestHintMove() {
     return null;
 }
 
-/* BADAL: Turn Indicator अधिक स्पष्ट आणि ठळक केला */
 function updateTurnIndicator() {
     let tText = document.getElementById('turnIndicatorText');
+    
+    document.querySelectorAll('.score-box').forEach(b => b.classList.remove('active-turn'));
+
+    let activeBox = document.getElementById(`p${turnPlayer}ScoreBox`);
+    if (activeBox) activeBox.classList.add('active-turn');
+
     if (isOnlineGame) {
         tText.innerHTML = (turnPlayer === myPlayerNumber) 
             ? "<span style='color:#2ed573;'>🟢 YOUR TURN!</span>" 
@@ -1633,13 +1712,11 @@ function updateTurnIndicator() {
     }
 }
 
-/* BADAL: Timer Level 50 pasun start hoil */
 function startTurnTimer() {
     if (turnTimerInterval) clearInterval(turnTimerInterval);
     let timerBar = document.getElementById('game-timer-bar');
     let timerProg = document.getElementById('game-timer-progress');
 
-    // Level 50 peksha kami asel kiwa Online nasel तर टायमर दाखवू नका
     if (activeLevel < 50 && !isOnlineGame) {
         timerBar.style.display = 'none';
         return;
@@ -1655,7 +1732,7 @@ function startTurnTimer() {
         timerProg.style.width = pct + '%';
 
         if (timeLeft === 5) {
-            showToast("⚠️ अलर्ट: ५ सेकंदच बाकी आहेत!");
+            showToast("⚠️ only 5second!");
         }
 
         if (timeLeft <= 0) {
@@ -1732,7 +1809,7 @@ function checkCompletedBoxes(type, r, c, player) {
                 boxesGrid[br][bc] = player;
                 let boxEl = document.getElementById(`box-${br}-${bc}`);
                 
-                if (activeLevel >= 101) {
+                if (activeLevel >= 101 && activeLevel <= 200) {
                     boxEl.innerText = levelCharMatrix[br][bc];
                     boxEl.classList.add('char-unlocked');
                 } else {
@@ -1914,11 +1991,11 @@ function checkChallengeAvailability() {
         let hrsLeft = Math.ceil((dayMs - diff) / (1000 * 60 * 60));
         btn.disabled = true;
         btn.style.opacity = '0.5';
-        desc.innerText = `पुढील चॅलेंज ${hrsLeft} तासानंतर उपलब्ध होईल. (दिवसातून १ प्रयत्न)`;
+        desc.innerText = `The next challenge will be availble after ${hrsLeft} hours. (One attempt per day) `;
     } else {
         btn.disabled = false;
         btn.style.opacity = '1';
-        desc.innerText = `चॅलेंज बटणावर क्लिक करून रोबोट विरुद्ध ५x५ बॉक्सेसचा चॅलेंज मॅच खेळा आणि कॉईन्स जिंका!`;
+        desc.innerText = `Click on the Challenge button to play a 5x5 box challenge match against the robot and win coins!`;
     }
 }
 
@@ -2037,18 +2114,63 @@ function checkChallengeBox(type, r, c, player) {
 }
 
 function aiChallengeTurn() {
-    let possible = [];
-    for (let r = 0; r < 6; r++)
-        for (let c = 0; c < 5; c++) {
-            if (challengeHGrid[r][c] === 0) possible.push({type:'h', r, c});
-        }
-    for (let r = 0; r < 5; r++)
-        for (let c = 0; c < 6; c++) {
-            if (challengeVGrid[r][c] === 0) possible.push({type:'v', r, c});
-        }
+    if (challengeTurn !== 2) return;
 
-    if (possible.length > 0) {
-        let pick = possible[Math.floor(Math.random() * possible.length)];
+    for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
+            if (challengeBGrid[r][c] === 0) {
+                let count = (challengeHGrid[r][c]?1:0) + (challengeHGrid[r+1][c]?1:0) + (challengeVGrid[r][c]?1:0) + (challengeVGrid[r][c+1]?1:0);
+                if (count === 3) {
+                    let move = null;
+                    if (!challengeHGrid[r][c]) move = { type: 'h', r: r, c: c };
+                    else if (!challengeHGrid[r+1][c]) move = { type: 'h', r: r+1, c: c };
+                    else if (!challengeVGrid[r][c]) move = { type: 'v', r: r, c: c };
+                    else if (!challengeVGrid[r][c+1]) move = { type: 'v', r: r, c: c+1 };
+
+                    if (move) {
+                        let el = document.getElementById(`c${move.type}-${move.r}-${move.c}`);
+                        if (el) el.classList.add('line-drawn-p2');
+                        if (move.type === 'h') challengeHGrid[move.r][move.c] = 2;
+                        else challengeVGrid[move.r][move.c] = 2;
+
+                        checkChallengeBox(move.type, move.r, move.c, 2);
+                        setTimeout(aiChallengeTurn, 400);
+                        checkChallengeGameOver();
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    let safeMoves = [];
+    let unsafeMoves = [];
+
+    for (let r = 0; r < 6; r++) {
+        for (let c = 0; c < 5; c++) {
+            if (challengeHGrid[r][c] === 0) {
+                if (isMoveSafeForAI('h', r, c)) safeMoves.push({ type: 'h', r, c });
+                else unsafeMoves.push({ type: 'h', r, c });
+            }
+        }
+    }
+    for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 6; c++) {
+            if (challengeVGrid[r][c] === 0) {
+                if (isMoveSafeForAI('v', r, c)) safeMoves.push({ type: 'v', r, c });
+                else unsafeMoves.push({ type: 'v', r, c });
+            }
+        }
+    }
+
+    let pick = null;
+    if (safeMoves.length > 0) {
+        pick = safeMoves[Math.floor(Math.random() * safeMoves.length)];
+    } else if (unsafeMoves.length > 0) {
+        pick = unsafeMoves[Math.floor(Math.random() * unsafeMoves.length)];
+    }
+
+    if (pick) {
         let el = document.getElementById(`c${pick.type}-${pick.r}-${pick.c}`);
         if (el) el.classList.add('line-drawn-p2');
 
@@ -2067,8 +2189,25 @@ function aiChallengeTurn() {
     checkChallengeGameOver();
 }
 
+function isMoveSafeForAI(type, r, c) {
+    let checkLinesCount = (br, bc) => {
+        if (br < 0 || br >= 5 || bc < 0 || bc >= 5) return 0;
+        return (challengeHGrid[br][bc]?1:0) + (challengeHGrid[br+1][bc]?1:0) + (challengeVGrid[br][bc]?1:0) + (challengeVGrid[br][bc+1]?1:0);
+    };
+
+    if (type === 'h') {
+        let countBelow = checkLinesCount(r, c);
+        let countAbove = checkLinesCount(r - 1, c);
+        return (countBelow < 2) && (countAbove < 2);
+    } else {
+        let countRight = checkLinesCount(r, c);
+        let countLeft = checkLinesCount(r, c - 1);
+        return (countRight < 2) && (countLeft < 2);
+    }
+}
+
 function checkChallengeGameOver() {
-    let totalBoxes = 25; // 5 x 5
+    let totalBoxes = 25;
     let filled = challengeScores[0] + challengeScores[1];
     if (filled >= totalBoxes) {
         gameData.lastChallengeAttemptTime = new Date().getTime();
@@ -2115,12 +2254,14 @@ function triggerDailySpin() {
             gameData.coins += 100;
             prizeMsg = "🎉 Won 100 Coins!";
         } else if (randomPrizeIndex === 1) {
+            if (!gameData.unlockedBoxEmojis.includes('⭐')) gameData.unlockedBoxEmojis.push('⭐');
             gameData.equippedBoxEmoji = '⭐';
             prizeMsg = "🎁 Won Star Box Skin & Bonus!";
         } else if (randomPrizeIndex === 2) {
             gameData.coins += 250;
             prizeMsg = "✅ Won 250 Coins!";
         } else {
+            if (!gameData.unlockedBoxEmojis.includes('🔥')) gameData.unlockedBoxEmojis.push('🔥');
             gameData.equippedBoxEmoji = '🔥';
             prizeMsg = "🔥 Won Fire Box Skin & Bonus!";
         }
@@ -2143,30 +2284,86 @@ function switchShopTab(type) {
         document.getElementById('tabBox').classList.add('active');
         document.getElementById('tabLine').classList.remove('active');
     }
+    renderShopUI();
+}
+
+function renderShopUI() {
+    let lineContainer = document.getElementById('lineSkinsSection');
+    let boxContainer = document.getElementById('boxSkinsSection');
+
+    let lineHtml = '';
+    LINE_SKINS_LIST.forEach(item => {
+        let isUnlocked = gameData.unlockedLineSkins && gameData.unlockedLineSkins.includes(item.color);
+        let isEquipped = (gameData.equippedLineColor === item.color);
+        let btnHtml = '';
+
+        if (isEquipped) {
+            btnHtml = `<button class="btn-small" style="background:#ffa502; box-shadow:0 3px 0 #e1b12c;" disabled>Equipped ✅</button>`;
+        } else if (isUnlocked) {
+            btnHtml = `<button class="btn-small" style="background:#00cec9; box-shadow:0 3px 0 #00b894;" onclick="equipSkin('line', '${item.color}')">Equip</button>`;
+        } else {
+            btnHtml = `<button class="btn-small" onclick="buySkin('line', ${item.price}, '${item.color}')">${item.price} 🪙</button>`;
+        }
+
+        lineHtml += `<div class="shop-item-row"><div>${item.name}</div>${btnHtml}</div>`;
+    });
+    lineContainer.innerHTML = lineHtml;
+
+    let boxHtml = '';
+    BOX_EMOJIS_LIST.forEach(item => {
+        let isUnlocked = gameData.unlockedBoxEmojis && gameData.unlockedBoxEmojis.includes(item.emoji);
+        let isEquipped = (gameData.equippedBoxEmoji === item.emoji);
+        let btnHtml = '';
+
+        if (isEquipped) {
+            btnHtml = `<button class="btn-small" style="background:#ffa502; box-shadow:0 3px 0 #e1b12c;" disabled>Equipped ✅</button>`;
+        } else if (isUnlocked) {
+            btnHtml = `<button class="btn-small" style="background:#00cec9; box-shadow:0 3px 0 #00b894;" onclick="equipBoxEmoji('${item.emoji}')">Equip</button>`;
+        } else {
+            btnHtml = `<button class="btn-small" onclick="buyBoxEmoji(${item.price}, '${item.emoji}')">${item.price} 🪙</button>`;
+        }
+
+        boxHtml += `<div class="shop-item-row"><div>${item.name}</div>${btnHtml}</div>`;
+    });
+    boxContainer.innerHTML = boxHtml;
 }
 
 function buySkin(type, price, colorCode) {
-    if (gameData.coins < price) { showToast("insufficient coins!"); return; }
+    if (gameData.coins < price) { showToast("Insufficient coins!"); return; }
     gameData.coins -= price;
+    if (!gameData.unlockedLineSkins.includes(colorCode)) {
+        gameData.unlockedLineSkins.push(colorCode);
+    }
     gameData.equippedLineColor = colorCode;
-    saveDataToStorage(); showToast("New line skin has been set!"); closeModal('shopModal');
+    saveDataToStorage();
+    showToast("Skin unlocked & equipped!");
+    renderShopUI();
 }
 
 function equipSkin(type, colorCode) {
     gameData.equippedLineColor = colorCode;
-    saveDataToStorage(); showToast("Line skin applied!"); closeModal('shopModal');
+    saveDataToStorage();
+    showToast("Line skin equipped!");
+    renderShopUI();
 }
 
 function buyBoxEmoji(price, emoji) {
-    if (gameData.coins < price) { showToast("insufficient coins!"); return; }
+    if (gameData.coins < price) { showToast("Insufficient coins!"); return; }
     gameData.coins -= price;
+    if (!gameData.unlockedBoxEmojis.includes(emoji)) {
+        gameData.unlockedBoxEmojis.push(emoji);
+    }
     gameData.equippedBoxEmoji = emoji;
-    saveDataToStorage(); showToast("New Box Emoji skin equipped!"); closeModal('shopModal');
+    saveDataToStorage();
+    showToast("Box Emoji unlocked & equipped!");
+    renderShopUI();
 }
 
 function equipBoxEmoji(emoji) {
     gameData.equippedBoxEmoji = emoji;
-    saveDataToStorage(); showToast("Box Emoji applied!"); closeModal('shopModal');
+    saveDataToStorage();
+    showToast("Box Emoji equipped!");
+    renderShopUI();
 }
 </script>
 </body>
