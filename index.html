@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
-    <title>Dots and Boxes - Custom Room Edition</title>
+    <title>Dots and Boxes - ujwal and nishant Edition</title>
     
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -48,7 +48,7 @@ body {
 .app-container {
     width: 100vw; max-width: 440px;
     height: 100vh; max-height: 900px;
-    background: linear-gradient(135deg, #598ada 0%, #1e1b4b 35%, #0a52a4 70%, #0284c7 100%);
+    background: linear-gradient(135deg, #4670d1 0%, #343167 35%, #0a52a4 70%, #0284c7 100%);
     background-size: 200% 200%;
     animation: gradientFlow 12s ease infinite;
     border: 4px solid #ffffff;
@@ -292,13 +292,13 @@ body {
 
 .home-sidebar {
     width: 68px; background: rgba(255, 255, 255, 0.25); border: 2px solid #ffffff;
-    border-radius: 20px; padding: 6px 2px; display: flex; flex-direction: column; gap: 4px; justify-content: space-around;
+    border-radius: 20px; padding: 8px 2px; display: flex; flex-direction: column; gap: 6px; justify-content: space-around;
     backdrop-filter: blur(5px);
 }
-.side-nav-item { background: #fff8e7; border: 2px solid #fdcb6e; border-radius: 12px; padding: 4px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; min-height: 44px; justify-content: center; }
+.side-nav-item { background: #fff8e7; border: 2px solid #fdcb6e; border-radius: 14px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; cursor: pointer; box-shadow: 0 3px 0 #e1b12c; min-height: 48px; justify-content: center; }
 .side-nav-item:active { transform: translateY(2px); box-shadow: 0 2px 0 #e1b12c; }
-.side-nav-icon { font-size: 1rem; }
-.side-nav-label { font-size: 0.5rem; font-weight: 900; color: #2f3542; text-transform: uppercase; margin-top: 1px; }
+.side-nav-icon { font-size: 1.1rem; }
+.side-nav-label { font-size: 0.55rem; font-weight: 900; color: #2f3542; text-transform: uppercase; margin-top: 1px; }
 
 #screen-map { 
     background: linear-gradient(135deg, #0984e3 0%, #000000 50%, #6c5ce7 100%);
@@ -366,7 +366,13 @@ body {
 .map-node-container:nth-child(4n+0) .map-node { transform: translateX(0px); }
 
 #screen-game { padding: 6px; justify-content: flex-start; background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%); }
-.game-header-bar { display: flex; justify-content: space-between; align-items: center; background: #fff8e7; padding: 6px 10px; border-radius: 16px; border: 3px solid #fdcb6e; box-shadow: 0 3px 0 #e1b12c; width: 100%; margin-bottom: 6px; }
+
+.game-header-bar { 
+    display: flex; justify-content: space-between; align-items: center; 
+    background: #fff8e7; padding: 4px 8px; border-radius: 16px; 
+    border: 3px solid #fdcb6e; box-shadow: 0 3px 0 #e1b12c; 
+    width: 100%; margin-bottom: 6px; gap: 4px;
+}
 
 .score-box { 
     background: #ffffff; padding: 4px 10px; border-radius: 10px; font-size: 0.85rem; font-weight: 900; 
@@ -543,55 +549,6 @@ body {
 .wheel-label-3 { bottom: 35px; left: 45px; transform: rotate(225deg); }
 .wheel-label-4 { top: 35px; left: 45px; transform: rotate(315deg); }
 
-.online-corner-layout {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: calc(100% - 70px);
-    justify-content: space-between;
-    position: relative;
-}
-
-.corner-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 4px 8px;
-    z-index: 10;
-}
-
-.ludo-corner-card {
-    background: #ffffff;
-    border: 3px solid #fdcb6e;
-    border-radius: 14px;
-    padding: 6px 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 100px;
-    box-shadow: 0 4px 0 #e1b12c;
-    transition: all 0.3s ease;
-}
-
-.ludo-corner-card.corner-p1 { border-color: var(--p1-line); }
-.ludo-corner-card.corner-p2 { border-color: var(--p2-line); }
-.ludo-corner-card.corner-p3 { border-color: var(--p3-line); }
-.ludo-corner-card.corner-p4 { border-color: var(--p4-line); }
-
-.ludo-corner-card.glow-active {
-    background: #fff3a0 !important;
-    border-color: #fffa65 !important;
-    transform: scale(1.08);
-    box-shadow: 0 0 15px #fffa65, 0 0 25px #ff4757 !important;
-    animation: cornerGlowPulse 0.8s infinite alternate;
-}
-
-@keyframes cornerGlowPulse {
-    0% { transform: scale(1.05); box-shadow: 0 0 8px #fffa65; }
-    100% { transform: scale(1.12); box-shadow: 0 0 20px #ff4757; }
-}
-
 .shape-btn-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -617,30 +574,7 @@ body {
     border-color: #ffffff;
     box-shadow: 0 3px 0 #d63031;
 }
-
-/* Custom Room Item Style */
-.custom-room-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffff;
-    border: 2px solid #fdcb6e;
-    border-radius: 14px;
-    padding: 8px 12px;
-    margin-bottom: 8px;
-    box-shadow: 0 3px 0 #e1b12c;
-}
-.custom-room-title {
-    font-size: 0.85rem;
-    font-weight: 900;
-    color: #ff4757;
-}
-.custom-room-info {
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: #57606f;
-}
-</style>
+    </style>
 </head>
 <body>
 
@@ -691,11 +625,11 @@ body {
                 <div class="login-subtitle">Login Please In Enter The Game</div>
                 <div class="input-group">
                     <label>Username</label>
-                    <input type="text" id="loginUser" class="login-input" placeholder="enter the name">
+                    <input type="text" id="loginUser" class="login-input" placeholder="Enter the name">
                 </div>
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" id="loginPass" class="login-input" placeholder="enter the password">
+                    <input type="password" id="loginPass" class="login-input" placeholder="Enter the password">
                 </div>
                 <button class="btn-3d" style="width:100%; margin-top:10px;" onclick="handleLoginSubmit()">ENTER GAME</button>
             </div>
@@ -739,11 +673,9 @@ body {
                 <button class="btn-3d animated-start-btn" style="margin-top: 2px;" onclick="showScreen('screen-map')">START NOW</button>
             </div>
 
-            <!-- साईडबार मध्ये CUSTOM पर्याय ॲड केला -->
             <div class="home-sidebar">
                 <div class="side-nav-item" onclick="openModal('profileModal')"><div class="side-nav-icon">👤</div><div class="side-nav-label">Profile</div></div>
                 <div class="side-nav-item" onclick="openModal('rankModal')"><div class="side-nav-icon">🏆</div><div class="side-nav-label">Rank</div></div>
-                <div class="side-nav-item" style="border-color:#2ed573; background:#e8fae8;" onclick="openModal('customRoomModal')"><div class="side-nav-icon">🏠</div><div class="side-nav-label" style="color:#26af5f;">Custom</div></div>
                 <div class="side-nav-item" style="border-color:#ff4757; background:#ffeaa7;" onclick="openModal('onlineModal')"><div class="side-nav-icon">🌐</div><div class="side-nav-label" style="color:#d63031;">Online</div></div>
                 <div class="side-nav-item" onclick="openModal('shopModal')"><div class="side-nav-icon">🛒</div><div class="side-nav-label">Shop</div></div>
                 <div class="side-nav-item" onclick="openModal('spinModal')"><div class="side-nav-icon">🎡</div><div class="side-nav-label">Spin</div></div>
@@ -778,62 +710,18 @@ body {
 
             <div style="display:flex; justify-content:space-between; align-items:center; background:#fff8e7; padding:6px 12px; border-radius:12px; font-weight:900; font-size:0.9rem; margin-bottom:4px; border:2.5px solid #fdcb6e; color:#d63031;">
                 <span id="turnIndicatorText" style="font-size:1rem; font-weight:900; letter-spacing:0.5px; text-shadow:0.5px 0.5px 0 #fff;">Turn: Player 1</span>
-                <button id="hintBtn" class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (30🪙)</button>
+                <button id="hintBtn" class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (50🪙)</button>
             </div>
 
-            <div class="online-corner-layout" id="onlineCornerLayout" style="display:none;">
-                <div class="corner-row">
-                    <div class="ludo-corner-card corner-p1" id="cornerCardP1">
-                        <span style="font-size:1.2rem;">🔴</span>
-                        <div>
-                            <div style="font-size:0.65rem; font-weight:900; color:#57606f;" id="cornerNameP1">P1: Waiting...</div>
-                            <div style="font-size:0.85rem; font-weight:900; color:#ff4757;">Score: <span id="cs1">0</span></div>
-                        </div>
-                    </div>
-                    <div class="ludo-corner-card corner-p2" id="cornerCardP2">
-                        <span style="font-size:1.2rem;">🔵</span>
-                        <div>
-                            <div style="font-size:0.65rem; font-weight:900; color:#57606f;" id="cornerNameP2">P2: Waiting...</div>
-                            <div style="font-size:0.85rem; font-weight:900; color:#1e90ff;">Score: <span id="cs2">0</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="board-container" style="flex:1;">
-                    <div class="level-indicator" id="levelBanner">Level 1 - Complete Full Grid!</div>
-                    
-                    <div id="top-target-board-container">
-                        <div style="font-size:0.6rem; font-weight:900; color:#d63031; margin-bottom:2px;">TARGET PREVIEW</div>
-                        <div id="top-target-board"></div>
-                    </div>
-
-                    <div id="game-board"></div>
-                </div>
-
-                <div class="corner-row">
-                    <div class="ludo-corner-card corner-p4" id="cornerCardP4">
-                        <span style="font-size:1.2rem;">🟠</span>
-                        <div>
-                            <div style="font-size:0.65rem; font-weight:900; color:#57606f;" id="cornerNameP4">P4: Waiting...</div>
-                            <div style="font-size:0.85rem; font-weight:900; color:#ffa502;">Score: <span id="cs4">0</span></div>
-                        </div>
-                    </div>
-                    <div class="ludo-corner-card corner-p3" id="cornerCardP3">
-                        <span style="font-size:1.2rem;">🟢</span>
-                        <div>
-                            <div style="font-size:0.65rem; font-weight:900; color:#57606f;" id="cornerNameP3">P3: Waiting...</div>
-                            <div style="font-size:0.85rem; font-weight:900; color:#2ed573;">Score: <span id="cs3">0</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="board-container" id="standardBoardContainer">
-                <div class="level-indicator" id="levelBannerStandard">Level 1 - Complete Full Grid!</div>
+            <div class="board-container">
+                <div class="level-indicator" id="levelBanner">Level 1 - Complete Full Grid!</div>
                 
-                <div id="top-target-board-container-standard"></div>
+                <div id="top-target-board-container">
+                    <div style="font-size:0.6rem; font-weight:900; color:#d63031; margin-bottom:2px;">TARGET PREVIEW</div>
+                    <div id="top-target-board"></div>
+                </div>
 
-                <div id="game-board-standard"></div>
+                <div id="game-board"></div>
             </div>
 
             <div id="gameChatBar" style="display:none; padding: 6px; background: rgba(255,255,255,0.9); border-top: 3px solid #fdcb6e; flex-direction: column; gap: 4px;">
@@ -842,36 +730,6 @@ body {
                     <input type="text" id="chatInputMsg" class="login-input" style="padding: 4px 8px; font-size: 0.8rem; min-height: 32px;" placeholder="Type chat...">
                     <button class="btn-small" style="padding: 4px 10px; min-height: 32px;" onclick="sendOnlineChat()">Send</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- CUSTOM ROOM MODAL (नवी जोडलेली कस्टम रूम विंडो) -->
-        <div class="modal-overlay" id="customRoomModal">
-            <div class="modal-card">
-                <h3 style="color:#2ed573; margin-bottom:10px; font-size:1.3rem;">🏠 CUSTOM ROOMS</h3>
-                
-                <div style="margin-bottom:10px; text-align:left;">
-                    <label style="font-size:0.75rem; font-weight:900; color:#57606f;">Create Custom Room Name:</label>
-                    <input type="text" id="customRoomNameInput" class="login-input" style="padding: 8px; font-size:0.9rem; margin-top:4px;" placeholder="e.g. Free Fire, Chango Mango">
-                </div>
-
-                <div style="font-size:0.75rem; font-weight:900; color:#57606f; margin-bottom:4px; text-align:left;">PLAYERS:</div>
-                <div class="online-player-select">
-                    <button class="online-p-btn active" id="btnCustom2P" onclick="setCustomPlayerCount(2)">2 Players</button>
-                    <button class="online-p-btn" id="btnCustom3P" onclick="setCustomPlayerCount(3)">3 Players</button>
-                    <button class="online-p-btn" id="btnCustom4P" onclick="setCustomPlayerCount(4)">4 Players</button>
-                </div>
-
-                <button class="btn-small" style="width:100%; background:#2ed573; box-shadow:0 3px 0 #26af5f; font-size:0.85rem; padding:8px; margin-bottom:10px;" onclick="createCustomRoom()">CREATE CUSTOM ROOM ➕</button>
-                
-                <hr style="border:1px dashed #fdcb6e; margin:10px 0;">
-                
-                <div style="font-size:0.8rem; font-weight:900; color:#ff4757; margin-bottom:6px; text-align:left;">LIVE ROOMS (INVITES):</div>
-                <div id="customRoomList" style="max-height: 180px; overflow-y: auto;">
-                    <div style="font-size:0.75rem; color:#a4b0be;">Loading rooms...</div>
-                </div>
-
-                <button class="btn-close" onclick="closeModal('customRoomModal')">Close</button>
             </div>
         </div>
 
@@ -933,7 +791,7 @@ body {
                             <tr style="background: #ffeaa7; border-bottom: 3px solid #fdcb6e; position: sticky; top: 0; z-index: 5;">
                                 <th style="padding: 10px; width: 60px;">No.</th>
                                 <th style="padding: 10px; text-align: left;">User name</th>
-                                <th style="padding: 10px; width: 90px;">Star</th>
+                                <th style="padding: 10px; width: 80px;">Star</th>
                                 <th style="padding: 10px; width: 80px;">Level</th>
                             </tr>
                         </thead>
@@ -1002,11 +860,11 @@ body {
         <div class="modal-overlay" id="challengeMatchModal" style="z-index: 600;">
             <div class="modal-card challenge-fullscreen-card">
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:10px;">
-                    <h3 style="color:#ff4757; font-size:1.2rem; margin:0;">⚔️ CHALLENGE ARENA (5x5)</h3>
-                    <div style="font-size:0.8rem; font-weight:900; color:#ffeaa7;" id="challengeTurnText">Turn: You</div>
+                    <h3 style="color:#ff4757; font-size:1.2rem; margin:0;">⚔️ CHALLENGE AI (5x5)</h3>
+                    <div style="font-size:0.8rem; font-weight:900; color:#4cda05;" id="challengeTurnText">Turn: You</div>
                 </div>
                 
-                <div id="challengeBoardContainer" style="flex:1; display:flex; justify-content:center; align-items:center; overflow:hidden; background:#2f3542; padding:8px; border-radius:16px; margin-bottom:10px; border:2px solid #fdcb6e;">
+                <div id="challengeBoardContainer" style="flex:1; display:flex; justify-content:center; align-items:center; overflow:hidden; background:#2f3542; padding:8px; border-radius:16px; margin-bottom:10px; border:3px solid #fdcb6e;">
                 </div>
                 
                 <button class="btn-close" style="margin-top:0; width:100%; background:#ff4757;" onclick="closeModal('challengeMatchModal')">Exit Challenge</button>
@@ -1132,7 +990,6 @@ let gameData = getDefaultGameData();
 
 let activePlayerMode = 'AI';
 let selectedOnlinePlayerCount = 2;
-let selectedCustomPlayerCount = 4; // कस्टमसाठी बायडिफॉल्ट ४ प्लेअर्स
 let selectedOnlineShape = 'SQUARE';
 let activeLevel = 1;
 let boardRows = 5, boardCols = 5;
@@ -1348,8 +1205,6 @@ function openModal(id) {
         checkChallengeAvailability();
     } else if (id === 'shopModal') {
         renderShopUI();
-    } else if (id === 'customRoomModal') {
-        listenCustomRoomsList();
     } else if (id === 'rankModal') {
         setTimeout(() => {
             let userRow = document.getElementById('currentUserRankRow');
@@ -1379,102 +1234,10 @@ function setOnlinePlayerCount(count) {
     document.getElementById(`btnOnline${count}P`).classList.add('active');
 }
 
-/* --- नवीन: कस्टम प्लेयर काउंट सेट करणे --- */
-function setCustomPlayerCount(count) {
-    selectedCustomPlayerCount = count;
-    document.getElementById('btnCustom2P').classList.remove('active');
-    document.getElementById('btnCustom3P').classList.remove('active');
-    document.getElementById('btnCustom4P').classList.remove('active');
-    
-    document.getElementById(`btnCustom${count}P`).classList.add('active');
-}
-
 function selectOnlineShape(shape, element) {
     selectedOnlineShape = shape;
     document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
     element.classList.add('active');
-}
-
-/* --- नवीन: कस्टम रूम क्रिएट करणे --- */
-function createCustomRoom() {
-    let rName = document.getElementById('customRoomNameInput').value.trim();
-    if (!rName) { showToast("Enter Room Name!"); return; }
-    if (!db) { showToast("Firebase not connected!"); return; }
-
-    let code = Math.floor(1000 + Math.random() * 9000).toString();
-    currentRoomCode = code;
-    myPlayerNumber = 1;
-    isOnlineGame = true;
-    activePlayerMode = selectedCustomPlayerCount + 'P';
-    trackedRoomPlayers = {};
-
-    let roomObj = {
-        roomName: rName,
-        p1: gameData.username,
-        maxPlayers: selectedCustomPlayerCount,
-        shape: 'SQUARE',
-        turn: 1, lastMove: null, status: "waiting",
-        chat: { 0: { user: "System", msg: `Custom Room '${rName}' created!` } }
-    };
-
-    for (let i = 2; i <= selectedCustomPlayerCount; i++) {
-        roomObj[`p${i}`] = "Waiting...";
-    }
-
-    roomRef = db.ref('rooms/' + currentRoomCode);
-    roomRef.set(roomObj);
-
-    closeModal('customRoomModal');
-    showToast(`Custom Room '${rName}' Created!`);
-    startOnlineGameView();
-    listenToOnlineRoom();
-}
-
-/* --- नवीन: कस्टम रूम्सची लाईव्ह लिस्ट (इनव्हाईट्स) मिळवणे --- */
-function listenCustomRoomsList() {
-    if (!db) return;
-    db.ref('rooms').on('value', snapshot => {
-        let listContainer = document.getElementById('customRoomList');
-        if (!listContainer) return;
-
-        let html = '';
-        let hasRooms = false;
-
-        snapshot.forEach(child => {
-            let roomData = child.val();
-            let roomCodeKey = child.key;
-            if (roomData.roomName) {
-                hasRooms = true;
-                let maxP = roomData.maxPlayers || 4;
-                let joinedCount = 0;
-                for (let i = 1; i <= maxP; i++) {
-                    if (roomData[`p${i}`] && roomData[`p${i}`] !== "Waiting...") joinedCount++;
-                }
-
-                let isFull = (joinedCount >= maxP);
-                let actionBtn = isFull 
-                    ? `<span style="font-size:0.7rem; color:#ff4757; font-weight:900;">FULL</span>`
-                    : `<button class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#2ed573;" onclick="joinCustomRoomDirect('${roomCodeKey}')">Invite / Join</button>`;
-
-                html += `
-                <div class="custom-room-card">
-                    <div>
-                        <div class="custom-room-title">🏠 ${roomData.roomName}</div>
-                        <div class="custom-room-info">Host: ${roomData.p1} | Players: ${joinedCount}/${maxP}</div>
-                    </div>
-                    <div>${actionBtn}</div>
-                </div>`;
-            }
-        });
-
-        listContainer.innerHTML = html || `<div style="font-size:0.75rem; color:#a4b0be; padding:10px;">No Active Custom Rooms. Create One!</div>`;
-    });
-}
-
-function joinCustomRoomDirect(codeKey) {
-    document.getElementById('roomCodeInput').value = codeKey;
-    joinOnlineRoom();
-    closeModal('customRoomModal');
 }
 
 function createOnlineRoom() {
@@ -1553,21 +1316,17 @@ function joinOnlineRoom() {
 
 function startOnlineGameView() {
     activeLevel = 1; 
-    boardRows = 7; boardCols = 7;
+    boardRows = 5; boardCols = 5;
     activeShape = selectedOnlineShape; 
     isTargetLevelMode = false; targetBoxesToWin = 0;
     
     showScreen('screen-game');
-    
-    document.getElementById('standardBoardContainer').style.display = 'none';
-    document.getElementById('onlineCornerLayout').style.display = 'flex';
-
-    document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (${activeShape}) - (You: P${myPlayerNumber})`;
+    document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (${activeShape}) - (You are P${myPlayerNumber})`;
     document.getElementById('gameChatBar').style.display = 'flex';
     
-    document.getElementById('cornerCardP3').style.visibility = (selectedOnlinePlayerCount >= 3) ? 'visible' : 'hidden';
-    document.getElementById('cornerCardP4').style.visibility = (selectedOnlinePlayerCount >= 4) ? 'visible' : 'hidden';
-
+    document.getElementById('p3Box').style.display = (selectedOnlinePlayerCount >= 3) ? 'block' : 'none';
+    document.getElementById('p4Box').style.display = (selectedOnlinePlayerCount >= 4) ? 'block' : 'none';
+    
     initializeBoard();
 }
 
@@ -1593,9 +1352,6 @@ function listenToOnlineRoom() {
         for (let i = 1; i <= maxP; i++) {
             let pName = data[`p${i}`];
             if (pName && pName !== "Waiting...") {
-                let cornerNameEl = document.getElementById(`cornerNameP${i}`);
-                if (cornerNameEl) cornerNameEl.innerText = `P${i}: ${pName}`;
-
                 if (!trackedRoomPlayers[i]) {
                     trackedRoomPlayers[i] = pName;
                     if (i !== myPlayerNumber) {
@@ -1642,10 +1398,6 @@ function exitCurrentGame() {
     document.getElementById('gameChatBar').style.display = 'none';
     if (turnTimerInterval) clearInterval(turnTimerInterval);
     document.getElementById('game-timer-bar').style.display = 'none';
-
-    document.getElementById('onlineCornerLayout').style.display = 'none';
-    document.getElementById('standardBoardContainer').style.display = 'flex';
-
     showScreen('screen-map');
 }
 
@@ -1655,49 +1407,67 @@ function restartCurrentGame() {
 }
 
 function getGridSizeForLevel(lvl) {
-    if (lvl <= 200) {
-        const groupSizes = [
-            { rows: 4, cols: 4 }, 
-            { rows: 6, cols: 6 }, 
-            { rows: 7, cols: 6 }, 
-            { rows: 7, cols: 7 }, 
-            { rows: 8, cols: 7 }, 
-            { rows: 9, cols: 7 }, 
-            { rows: 10, cols: 7 }, 
-            { rows: 11, cols: 8 }, 
-            { rows: 12, cols: 8 }, 
-            { rows: 13, cols: 8 }, 
-            { rows: 14, cols: 9 }, 
-            { rows: 9, cols: 9 }, 
-            { rows: 10, cols: 9 }, 
-            { rows: 10, cols: 10 }, 
-            { rows: 11, cols: 10 }, 
-            { rows: 12, cols: 10 }, 
-            { rows: 13, cols: 10 }, 
-            { rows: 14, cols: 10 }, 
-            { rows: 15, cols: 10 }, 
-            { rows: 16, cols: 10 }, 
-            { rows: 17, cols: 10 }, 
-            { rows: 7, cols: 10 }, 
-            { rows: 9, cols: 10 }, 
-            { rows: 8, cols: 10 }, 
-            { rows: 6, cols: 10 }, 
-            { rows: 7, cols: 10 }, 
-            { rows: 18, cols: 10 }, 
-            { rows: 19, cols: 10 }, 
-            { rows: 20, cols: 10 }
+    // लेव्हल 1 ते 200 साठी: दर 5 लेव्हलच्या गटासाठी तुझी स्वतःची फिक्स साईज (एकूण 40 गट)
+    if (lvl >= 1 && lvl <= 200) {
+        let groupIndex = Math.floor((lvl - 1) / 5); // 0 ते 39 पर्यंतचे ग्रुप्स
+        
+        // इथे तू 1 ते 200 लेव्हलपर्यंतच्या प्रत्येक 5 लेव्हलच्या गटासाठी rows आणि cols बदलू शकतोस:
+        const customSizes = [
+            // 1 ते 50 लेव्हलचे गट (10 गट)
+            { rows: 4, cols: 4 }, // लेव्हल 1-5
+            { rows: 4, cols: 5 }, // लेव्हल 6-10
+            { rows: 4, cols: 6 }, // लेव्हल 11-15
+            { rows: 6, cols: 6 }, // लेव्हल 16-20
+            { rows: 5, cols: 6 }, // लेव्हल 21-25
+            { rows: 5, cols: 5 }, // लेव्हल 26-30
+            { rows: 7, cols: 6 }, // लेव्हल 31-35
+            { rows: 8, cols: 7 }, // लेव्हल 36-40
+            { rows: 8, cols: 5 }, // लेव्हल 41-45
+            { rows: 8, cols: 4 }, // लेव्हल 46-50
+            { rows: 8, cols: 8 }, // लेव्हल 51-55
+            { rows: 8, cols: 6 }, // लेव्हल 56-60
+            { rows: 8, cols: 9 }, // लेव्हल 61-65
+            { rows: 8, cols: 10}, // लेव्हल 66-70
+            { rows: 9, cols: 3 }, // लेव्हल 71-75
+            { rows: 9, cols: 4 }, // लेव्हल 76-80
+            { rows: 9, cols: 5 }, // लेव्हल 81-85
+            { rows: 9, cols: 6 }, // लेव्हल 86-90
+            { rows: 9, cols: 7 }, // लेव्हल 91-95
+            { rows: 9, cols: 8 }, // लेव्हल 96-100
+            // 101 ते 200 लेव्हलचे गट (20 गट)
+            { rows: 10, cols: 10}, // लेव्हल 101-105
+            { rows: 11, cols: 10 }, // लेव्हल 106-110
+            { rows: 12, cols: 10 }, // लेव्हल 111-115
+            { rows: 12, cols: 7 }, // लेव्हल 116-120
+            { rows: 13, cols: 9}, // लेव्हल 121-125
+            { rows: 13, cols: 6 }, // लेव्हल 126-130
+            { rows: 13, cols: 10 }, // लेव्हल 131-135
+            { rows: 14, cols: 9 }, // लेव्हल 136-140
+            { rows: 15, cols: 6 }, // लेव्हल 141-145
+            { rows: 15, cols: 7 }, // लेव्हल 146-150
+            { rows: 15, cols: 10 }, // लेव्हल 151-155
+            { rows: 15, cols: 9 }, // लेव्हल 156-160
+            { rows: 16, cols: 9 }, // लेव्हल 161-165
+            { rows: 16, cols: 10 }, // लेव्हल 166-170
+            { rows: 17, cols: 8 }, // लेव्हल 171-175
+            { rows: 17, cols: 10 }, // लेव्हल 176-180
+            { rows:18, cols: 10 }, // लेव्हल 181-185
+            { rows: 19, cols: 10 }, // लेव्हल 186-190
+            { rows: 20, cols: 10 }, // लेव्हल 191-195
+            { rows: 20, cols: 10 }  // लेव्हल 196-200
         ];
-
-        let groupIndex = Math.floor((lvl - 1) / 7);
-
-        if (groupIndex >= groupSizes.length) {
-            return groupSizes[groupSizes.length - 1];
-        }
-
-        return groupSizes[groupIndex];
+        
+        return customSizes[groupIndex] || { rows: 5, cols: 5 };
     }
     
-    return { rows: 6, cols: 6 };
+    // लेव्हल 201 ते 350 साठी जुना नियम जसाच्या तसा
+    else if (lvl <= 350) {
+        let size = 4 + Math.floor((lvl - 1) / 30);
+        if (size > 8) size = 8;
+        return { rows: size, cols: size };
+    }
+    
+    return { rows: 5, cols: 5 };
 }
 
 function buildMapRoadmap() {
@@ -1705,7 +1475,7 @@ function buildMapRoadmap() {
     container.innerHTML = '';
 
     let startLvl = 1, endLvl = 350;
-    document.getElementById('mapLevelTitle').innerText = 'LEVEL MAP (1-350)';
+    document.getElementById('mapLevelTitle').innerText = 'MAP(1-350)';
 
     for (let lvl = startLvl; lvl <= endLvl; lvl++) {
         let nodeWrap = document.createElement('div');
@@ -1781,9 +1551,7 @@ function startLevelGame(lvl, gridDim, isSpecial) {
     boardRows = gridDim.rows; 
     boardCols = gridDim.cols;
     isTargetLevelMode = isSpecial;
-
-    document.getElementById('onlineCornerLayout').style.display = 'none';
-    document.getElementById('standardBoardContainer').style.display = 'flex';
+    isOnlineGame = false;
 
     document.getElementById('hintBtn').style.display = 'inline-block';
 
@@ -1806,11 +1574,11 @@ function startLevelGame(lvl, gridDim, isSpecial) {
     }
 
     if (lvl >= 201) {
-        document.getElementById('levelBannerStandard').innerText = `Level ${activeLevel} - Zig-Zag Pattern Grid!`;
+        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Zig-Zag Pattern Grid!`;
     } else if (isTargetLevelMode) {
-        document.getElementById('levelBannerStandard').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
+        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
     } else {
-        document.getElementById('levelBannerStandard').innerText = `Level ${activeLevel} - Grid ${boardCols - 1}x${boardRows - 1}`;
+        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${boardCols - 1}x${boardRows - 1}`;
     }
 
     let totalActivePlayers = 2;
@@ -1833,20 +1601,28 @@ function isCellInShape(r, c) {
         return true;
     }
 
+    // HEXAGON: कोपरे थोडे कापलेले अससलेला शेप (Perfect Fit)
     if (activeShape === 'HEXAGON') {
-        if ((r === 0 || r === boardRows*2-2) && (c < 2 || c > boardCols*2-4)) return false;
+        let maxR = (boardRows - 1) * 2;
+        let maxC = (boardCols - 1) * 2;
+        if ((r === 0 || r === maxR) && (c < 2 || c > maxC - 2)) return false;
         return true;
     }
 
+    // HEPTAGON: वरची बाजू लहान असलेला शेप
     if (activeShape === 'HEPTAGON') {
-        if (r === 0 && (c < 3 || c > boardCols*2-5)) return false;
-        if (r === boardRows*2-2 && (c < 2 || c > boardCols*2-4)) return false;
+        let maxR = (boardRows - 1) * 2;
+        let maxC = (boardCols - 1) * 2;
+        if (r === 0 && (c < 2 || c > maxC - 2)) return false;
+        if (r === maxR && (c < 1 || c > maxC - 1)) return false;
         return true;
     }
 
+    // PENTAGON: घरच्या आकारासारखा (पंचकोन) शेप
     if (activeShape === 'PENTAGON') {
-        if (r === 0 && (c < 4 || c > boardCols*2-6)) return false;
-        if (r === 2 && (c < 2 || c > boardCols*2-4)) return false;
+        let maxR = (boardRows - 1) * 2;
+        let maxC = (boardCols - 1) * 2;
+        if (r === 0 && (c < Math.floor(maxC/2) - 1 || c > Math.floor(maxC/2) + 1)) return false;
         return true;
     }
 
@@ -1895,7 +1671,7 @@ function initializeBoard() {
     updateTurnIndicator();
     startTurnTimer();
 
-    let board = isOnlineGame ? document.getElementById('game-board') : document.getElementById('game-board-standard');
+    let board = document.getElementById('game-board');
     board.innerHTML = '';
 
     let gridColTemplate = '';
@@ -2012,23 +1788,20 @@ function updateTurnIndicator() {
     let tText = document.getElementById('turnIndicatorText');
     
     document.querySelectorAll('.score-box').forEach(b => b.classList.remove('active-turn'));
-    document.querySelectorAll('.ludo-corner-card').forEach(b => b.classList.remove('glow-active'));
 
     let activeBox = document.getElementById(`p${turnPlayer}ScoreBox`);
     if (activeBox) activeBox.classList.add('active-turn');
 
-    let activeCornerCard = document.getElementById(`cornerCardP${turnPlayer}`);
-    if (activeCornerCard) activeCornerCard.classList.add('glow-active');
-
     if (isOnlineGame) {
-        tText.innerHTML = (turnPlayer === myPlayerNumber) 
-            ? "<span style='color:#2ed573;'>🟢 YOUR TURN!</span>" 
-            : `<span style='color:#d63031;'>⏳ P${turnPlayer}'s Turn</span>`;
-    } else {
-        let pSymbol = turnPlayer === 1 ? '👤 P1' : (activePlayerMode === 'AI' ? '🤖 AI' : `👤 P${turnPlayer}`);
-        let pColor = turnPlayer === 1 ? '#ff4757' : (turnPlayer === 2 ? '#1e90ff' : (turnPlayer === 3 ? '#2ed573' : '#ffa502'));
-        tText.innerHTML = `👉 <span style="color:${pColor}; font-weight:900;">TURN: ${pSymbol}</span>`;
-    }
+    // रूममधील खेळाडूचे नाव शोधून ते दाखवणे
+    let currentTurnPlayerName = trackedRoomPlayers[turnPlayer] || `Player ${turnPlayer}`;
+    tText.innerHTML = (turnPlayer === myPlayerNumber) 
+        ? `<span style='color:#2ed573;'>🟢 ${gameData.username}'s Turn!</span>` 
+        : `<span style='color:#d63031;'>⏳ ${currentTurnPlayerName}'s Turn</span>`;
+} else {
+    let pName = (turnPlayer === 1) ? gameData.username : (activePlayerMode === 'AI' ? '🤖 AI' : `Player ${turnPlayer}`);
+    tText.innerHTML = `👉 <span style="color:#ff4757; font-weight:900;">TURN: ${pName}</span>`;
+}
 }
 
 function startTurnTimer() {
@@ -2155,13 +1928,6 @@ function updateScoreDisplays() {
     document.getElementById('s2').innerText = playerScores[1];
     document.getElementById('s3').innerText = playerScores[2];
     document.getElementById('s4').innerText = playerScores[3];
-
-    if (isOnlineGame) {
-        document.getElementById('cs1').innerText = playerScores[0];
-        document.getElementById('cs2').innerText = playerScores[1];
-        document.getElementById('cs3').innerText = playerScores[2];
-        document.getElementById('cs4').innerText = playerScores[3];
-    }
 }
 
 function triggerSmartAI() {
@@ -2667,7 +2433,7 @@ function buySkin(type, price, colorCode) {
 }
 
 function equipSkin(type, colorCode) {
-    gameData.equippedLineColor = colorCode;
+    gameData.equippedLineCode = colorCode;
     saveDataToStorage();
     showToast("Line skin equipped!");
     renderShopUI();
