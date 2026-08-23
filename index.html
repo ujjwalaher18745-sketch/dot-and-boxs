@@ -429,6 +429,12 @@ body {
 .line-drawn-p3 { background: var(--p3-line) !important; border-color: #fff !important; }
 .line-drawn-p4 { background: var(--p4-line) !important; border-color: #fff !important; }
 
+.line-blocked { background: #ff4757 !important; border-color: #d63031 !important; pointer-events: none; position: relative; }
+.line-blocked::after { content: "✖"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 10px; font-weight: 900; }
+
+.box-mystery { background: #706fd3 !important; border: 2px dashed #34ace0 !important; cursor: pointer; }
+.box-mystery::after { content: "❓"; font-size: 0.8rem; }
+
 .hint-highlight {
     background: #ff9f1a !important;
     border-color: #ffffff !important;
@@ -574,6 +580,242 @@ body {
     border-color: #ffffff;
     box-shadow: 0 3px 0 #d63031;
 }
+
+.mp-config-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 12px;
+    border: 2px solid #fdcb6e;
+    background: #fff;
+    margin-bottom: 8px;
+}
+
+/* MULTIPLAYER UPDATE START - Power-up UI styles */
+.mp-powerup-bar {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    border: 2px solid #fdcb6e;
+    justify-content: space-around;
+    align-items: center;
+    gap: 4px;
+}
+
+.mp-powerup-btn {
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: 2px solid #dfe4ea;
+    background: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.mp-powerup-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.mp-powerup-btn.active {
+    background: #fffa65;
+    border-color: #ffa502;
+    box-shadow: 0 0 8px rgba(255, 165, 2, 0.4);
+}
+
+.mp-combo-display {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff4757;
+    text-shadow: 3px 3px 0 #fff, 0 0 20px rgba(255, 71, 87, 0.5);
+    z-index: 50;
+    pointer-events: none;
+    animation: comboPop 0.8s ease forwards;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 24px;
+    border-radius: 20px;
+    border: 3px solid #fffa65;
+}
+
+@keyframes comboPop {
+    0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+    30% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+    70% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
+
+.mp-event-banner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    z-index: 60;
+    pointer-events: none;
+    background: rgba(0,0,0,0.85);
+    padding: 20px 40px;
+    border-radius: 30px;
+    border: 4px solid #fffa65;
+    text-align: center;
+    animation: eventBannerIn 0.6s ease forwards;
+}
+
+@keyframes eventBannerIn {
+    0% { transform: translate(-50%, -50%) scale(0.5) rotate(-5deg); opacity: 0; }
+    60% { transform: translate(-50%, -50%) scale(1.1) rotate(2deg); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+/* MULTIPLAYER UPDATE END */
+
+/* MULTIPLAYER UI IMPROVEMENTS START - Modern Grid Size & Game Mode Selector */
+.mp-ui-container {
+    margin: 8px 0 12px 0;
+}
+
+.mp-ui-label {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #57606f;
+    text-align: left;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mp-ui-options {
+    display: grid;
+    gap: 6px;
+}
+
+.mp-ui-options.grid-options {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.mp-ui-options.mode-options {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.mp-ui-option {
+    padding: 8px 4px;
+    border-radius: 12px;
+    border: 2px solid #dfe4ea;
+    background: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #2f3542;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    min-height: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mp-ui-option .opt-main {
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+.mp-ui-option .opt-sub {
+    font-size: 0.5rem;
+    color: #a4b0be;
+    margin-top: 1px;
+}
+
+.mp-ui-option:active {
+    transform: scale(0.95);
+}
+
+.mp-ui-option.active {
+    border-color: #ff4757;
+    background: #ff788e;
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(255, 71, 87, 0.2);
+}
+
+.mp-ui-option.active .opt-sub {
+    color: rgba(255,255,255,0.7);
+}
+
+.mp-ui-option.mode-opt.active {
+    border-color: #6c5ce7;
+    background: #a29bfe;
+    box-shadow: 0 0 16px rgba(108, 92, 231, 0.2);
+}
+
+.mp-ui-section {
+    margin-top: 6px;
+}
+/* MULTIPLAYER UI IMPROVEMENTS END */
+
+/* PLAYER EMOJI STYLES START */
+.player-emoji-tag {
+    font-size: 0.8rem;
+    margin-right: 3px;
+}
+
+.score-box .player-emoji-tag {
+    font-size: 0.9rem;
+}
+
+.turn-player-emoji {
+    font-size: 1.1rem;
+    margin-right: 4px;
+}
+
+.box-player-emoji {
+    font-size: 1.1rem;
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+/* PLAYER EMOJI STYLES END */
+
+/* CHALLENGE AI IMPROVEMENTS START */
+.ai-thinking-indicator {
+    display: none;
+    font-size: 0.8rem;
+    color: #fffa65;
+    font-weight: 900;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.challenge-ai-badge {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.6rem;
+    font-weight: 900;
+    display: inline-block;
+    margin-left: 6px;
+}
+/* CHALLENGE AI IMPROVEMENTS END */
     </style>
 </head>
 <body>
@@ -702,16 +944,24 @@ body {
         <div class="screen" id="screen-game">
             <div class="game-header-bar">
                 <button class="back-btn" style="padding: 4px 10px; font-size: 0.75rem; min-height: 34px;" onclick="exitCurrentGame()">✖ Exit</button>
-                <div class="score-box" style="color:var(--p1-line)" id="p1ScoreBox">P1: <span id="s1">0</span></div>
-                <div class="score-box" style="color:var(--p2-line)" id="p2ScoreBox">P2: <span id="s2">0</span></div>
-                <div class="score-box" id="p3Box" style="color:var(--p3-line); display:none;">P3: <span id="s3">0</span></div>
-                <div class="score-box" id="p4Box" style="color:var(--p4-line); display:none;">P4: <span id="s4">0</span></div>
+                <div class="score-box" style="color:var(--p1-line)" id="p1ScoreBox"><span class="player-emoji-tag" id="p1EmojiTag">😎</span>P1: <span id="s1">0</span></div>
+                <div class="score-box" style="color:var(--p2-line)" id="p2ScoreBox"><span class="player-emoji-tag" id="p2EmojiTag">👤</span>P2: <span id="s2">0</span></div>
+                <div class="score-box" id="p3Box" style="color:var(--p3-line); display:none;"><span class="player-emoji-tag" id="p3EmojiTag">👤</span>P3: <span id="s3">0</span></div>
+                <div class="score-box" id="p4Box" style="color:var(--p4-line); display:none;"><span class="player-emoji-tag" id="p4EmojiTag">👤</span>P4: <span id="s4">0</span></div>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; background:#fff8e7; padding:6px 12px; border-radius:12px; font-weight:900; font-size:0.9rem; margin-bottom:4px; border:2.5px solid #fdcb6e; color:#d63031;">
                 <span id="turnIndicatorText" style="font-size:1rem; font-weight:900; letter-spacing:0.5px; text-shadow:0.5px 0.5px 0 #fff;">Turn: Player 1</span>
                 <button id="hintBtn" class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (50🪙)</button>
             </div>
+
+            <!-- MULTIPLAYER UPDATE START - Power-up Bar -->
+            <div class="mp-powerup-bar" id="mpPowerupBar">
+                <button class="mp-powerup-btn" id="mpPowerupDouble" onclick="useMpPowerup('double')" disabled>🔀 Double Line</button>
+                <button class="mp-powerup-btn" id="mpPowerupBlock" onclick="useMpPowerup('block')" disabled>🚫 Block</button>
+                <button class="mp-powerup-btn" id="mpPowerupBreak" onclick="useMpPowerup('break')" disabled>💔 Break</button>
+            </div>
+            <!-- MULTIPLAYER UPDATE END -->
 
             <div class="board-container">
                 <div class="level-indicator" id="levelBanner">Level 1 - Complete Full Grid!</div>
@@ -743,6 +993,98 @@ body {
                     <button class="online-p-btn" id="btnOnline3P" onclick="setOnlinePlayerCount(3)">3 Players</button>
                     <button class="online-p-btn" id="btnOnline4P" onclick="setOnlinePlayerCount(4)">4 Players</button>
                 </div>
+
+                <!-- MULTIPLAYER UI IMPROVEMENTS START - Modern Grid Size Selector -->
+                <div class="mp-ui-container">
+                    <div class="mp-ui-label">🎯 GRID SIZE</div>
+                    <div class="mp-ui-options grid-options" id="mpGridOptions">
+                        <div class="mp-ui-option" data-value="3x3" onclick="selectMpGridSize('3x3', this)">
+                            <span class="opt-main">3 × 3</span>
+                            <span class="opt-sub">Quick</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="3x4" onclick="selectMpGridSize('3x4', this)">
+                            <span class="opt-main">3 × 4</span>
+                            <span class="opt-sub">Quick</span>
+                        </div>
+                        <div class="mp-ui-option active" data-value="5x5" onclick="selectMpGridSize('5x5', this)">
+                            <span class="opt-main">5 × 5</span>
+                            <span class="opt-sub">Classic</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="6x6" onclick="selectMpGridSize('6x6', this)">
+                            <span class="opt-main">6 × 6</span>
+                            <span class="opt-sub">Classic</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="8x8" onclick="selectMpGridSize('8x8', this)">
+                            <span class="opt-main">8 × 8</span>
+                            <span class="opt-sub">Pro</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="10x10" onclick="selectMpGridSize('10x10', this)">
+                            <span class="opt-main">10 × 10</span>
+                            <span class="opt-sub">Pro</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="3x6" onclick="selectMpGridSize('3x6', this)">
+                            <span class="opt-main">3 × 6</span>
+                            <span class="opt-sub">Asym</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="4x8" onclick="selectMpGridSize('4x8', this)">
+                            <span class="opt-main">4 × 8</span>
+                            <span class="opt-sub">Asym</span>
+                        </div>
+                        <div class="mp-ui-option" data-value="5x7" onclick="selectMpGridSize('5x7', this)">
+                            <span class="opt-main">5 × 7</span>
+                            <span class="opt-sub">Asym</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- MULTIPLAYER UI IMPROVEMENTS END -->
+
+                <!-- MULTIPLAYER UI IMPROVEMENTS START - Modern Game Mode Selector -->
+                <div class="mp-ui-container">
+                    <div class="mp-ui-label">🎮 GAME MODE</div>
+                    <div class="mp-ui-options mode-options" id="mpModeOptions">
+                        <div class="mp-ui-option mode-opt active" data-value="CLASSIC" onclick="selectMpGameMode('CLASSIC', this)">
+                            <span class="opt-main">🎯 Classic</span>
+                            <span class="opt-sub">Standard D&B</span>
+                        </div>
+                        <div class="mp-ui-option mode-opt" data-value="PREFILLED" onclick="selectMpGameMode('PREFILLED', this)">
+                            <span class="opt-main">📝 Pre-filled</span>
+                            <span class="opt-sub">25% Lines</span>
+                        </div>
+                        <div class="mp-ui-option mode-opt" data-value="OBSTACLE" onclick="selectMpGameMode('OBSTACLE', this)">
+                            <span class="opt-main">🚧 Obstacle</span>
+                            <span class="opt-sub">Blocked Lines</span>
+                        </div>
+                        <div class="mp-ui-option mode-opt" data-value="FOG" onclick="selectMpGameMode('FOG', this)">
+                            <span class="opt-main">🌫️ Fog</span>
+                            <span class="opt-sub">Hidden Traps</span>
+                        </div>
+                        <div class="mp-ui-option mode-opt" data-value="RACE10" onclick="selectMpGameMode('RACE10', this)">
+                            <span class="opt-main">🏁 Race 10</span>
+                            <span class="opt-sub">First to 10</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- MULTIPLAYER UI IMPROVEMENTS END -->
+
+                <!-- Hidden selects for backward compatibility -->
+                <select id="mpGridSizeSelect" style="display:none;">
+                    <option value="3x3">3x3</option>
+                    <option value="3x4">3x4</option>
+                    <option value="5x5" selected>5x5</option>
+                    <option value="6x6">6x6</option>
+                    <option value="8x8">8x8</option>
+                    <option value="10x10">10x10</option>
+                    <option value="3x6">3x6</option>
+                    <option value="4x8">4x8</option>
+                    <option value="5x7">5x7</option>
+                </select>
+                <select id="mpGameModeSelect" style="display:none;">
+                    <option value="CLASSIC" selected>CLASSIC</option>
+                    <option value="PREFILLED">PREFILLED</option>
+                    <option value="OBSTACLE">OBSTACLE</option>
+                    <option value="FOG">FOG</option>
+                    <option value="RACE10">RACE10</option>
+                </select>
 
                 <div style="margin-bottom:12px;">
                     <input type="text" id="roomCodeInput" class="login-input" style="padding: 8px; font-size:0.9rem; text-align:center; margin-bottom:8px;" placeholder="4-Digit Code" maxlength="4">
@@ -861,7 +1203,7 @@ body {
             <div class="modal-card challenge-fullscreen-card">
                 <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:10px;">
                     <h3 style="color:#ff4757; font-size:1.2rem; margin:0;">⚔️ CHALLENGE AI (5x5)</h3>
-                    <div style="font-size:0.8rem; font-weight:900; color:#4cda05;" id="challengeTurnText">Turn: You</div>
+                    <div style="font-size:0.8rem; font-weight:900; color:#4cda05;" id="challengeTurnText">Turn: You <span class="challenge-ai-badge">🤖 MASTER AI</span></div>
                 </div>
                 
                 <div id="challengeBoardContainer" style="flex:1; display:flex; justify-content:center; align-items:center; overflow:hidden; background:#2f3542; padding:8px; border-radius:16px; margin-bottom:10px; border:3px solid #fdcb6e;">
@@ -885,1578 +1227,2336 @@ body {
         </div>
     </div>
 
-    <script>const firebaseConfig = {
-    apiKey: "AIzaSyAu2JHAo9SgKojQ95B-UAVwkI3xfdgYgQQ",
-    authDomain: "dotsandboxesgame-d0bdc.firebaseapp.com",
-    databaseURL: "https://dotsandboxesgame-d0bdc-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "dotsandboxesgame-d0bdc",
-    storageBucket: "dotsandboxesgame-d0bdc.firebasestorage.app",
-    messagingSenderId: "1849585085",
-    appId: "1:1849585085:web:0cb13ea07e6a3833bb36d4",
-    measurementId: "G-243XE4YYRV"
-};
-
-let db = null;
-try {
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.database();
-    console.log("Firebase Database Successfully Connected!");
-} catch(e) { 
-    console.log("Firebase init error:", e); 
-}
-
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-function playSound(type) {
-    if (audioCtx.state === 'suspended') { audioCtx.resume(); }
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    let now = audioCtx.currentTime;
-
-    if (type === 'line') {
-        osc.type = 'sine'; osc.frequency.setValueAtTime(400, now);
-        osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-        gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
-        osc.start(now); osc.stop(now + 0.08);
-    } else if (type === 'box') {
-        osc.type = 'triangle'; osc.frequency.setValueAtTime(523.25, now);
-        osc.frequency.setValueAtTime(659.25, now + 0.1);
-        gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
-        osc.start(now); osc.stop(now + 0.25);
-    } else if (type === 'win') {
-        osc.type = 'square'; osc.frequency.setValueAtTime(440, now);
-        osc.frequency.setValueAtTime(554.37, now + 0.12);
-        osc.frequency.setValueAtTime(659.25, now + 0.24);
-        osc.frequency.setValueAtTime(880, now + 0.36);
-        gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
-        osc.start(now); osc.stop(now + 0.6);
-    }
-}
-
-function showToast(msg) {
-    let toast = document.getElementById('game-toast');
-    toast.innerText = msg; toast.classList.add('show');
-    setTimeout(() => { toast.classList.remove('show'); }, 2500);
-}
-
-const AVATAR_OPTIONS = ['😎', '🦁', '🤖', '👑', '🐱', '🦄', '🥷', '🐲', '🚀', '🔥'];
-
-const LINE_SKINS_LIST = [
-    { name: "🔴 Crimson Red", color: "#ff4757", price: 0 },
-    { name: "🔵 Ocean Blue", color: "#1e90ff", price: 100 },
-    { name: "🟢 Bright Mint", color: "#2ed573", price: 400 },
-    { name: "🟡 Shiny Gold", color: "#ffa502", price: 600 },
-    { name: "🟣 Royal Purple", color: "#9b59b6", price: 602 },
-    { name: "🟠 Neon Orange", color: "#e67e22", price: 650 },
-    { name: "🩵 Turquoise", color: "#00cec9", price: 680 },
-    { name: "🩷 Hot Pink", color: "#fd79a8", price: 700 },
-    { name: "🟤 Chocolate", color: "#8e44ad", price: 800 },
-    { name: "🖤 Dark Obsidian", color: "#2d3436", price: 1000 }
-];
-
-const BOX_EMOJIS_LIST = [
-    { name: "⭐ Star Emoji", emoji: "⭐", price: 0 },
-    { name: "🔥 Fire Emoji", emoji: "🔥", price: 50 },
-    { name: "🚀 Rocket Emoji", emoji: "🚀", price: 200 },
-    { name: "👑 Crown Emoji", emoji: "👑", price: 450 },
-    { name: "💎 Diamond Emoji", emoji: "💎", price: 500 },
-    { name: "🎉 Party Emoji", emoji: "🎉", price: 550 },
-    { name: "🏆 Trophy Emoji", emoji: "🏆", price: 670 },
-    { name: "🎯 Target Emoji", emoji: "🎯", price: 820 },
-    { name: "⚡ Lightning Emoji", emoji: "⚡", price: 911 },
-    { name: "🍀 Clover Emoji", emoji: "🍀", price: 1003 },
-    { name: "🤖 Robot Emoji", emoji: "🤖", price: 2000 },
-    { name: "🦄 Unicorn Emoji", emoji: "🦄", price: 2050 },
-    { name: "🦁 Lion Emoji", emoji: "🦁", price: 2500 },
-    { name: "🍎 Apple Emoji", emoji: "🍎", price: 2675 },
-    { name: "⚽ Football Emoji", emoji: "⚽", price: 3000 }
-];
-
-function getDefaultGameData() {
-    return {
-        isLoggedIn: false, username: "Player1", password: "",
-        avatar: "😎",
-        coins: 200, stars: 0, unlockedLevel: 1, lastSpinTimestamp: 0,
-        equippedLineColor: '#ff4757',
-        equippedBoxEmoji: '⭐',
-        unlockedLineSkins: ['#ff4757'],
-        unlockedBoxEmojis: ['⭐'],
-        lastChallengeAttemptTime: 0
+    <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyAu2JHAo9SgKojQ95B-UAVwkI3xfdgYgQQ",
+        authDomain: "dotsandboxesgame-d0bdc.firebaseapp.com",
+        databaseURL: "https://dotsandboxesgame-d0bdc-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "dotsandboxesgame-d0bdc",
+        storageBucket: "dotsandboxesgame-d0bdc.firebasestorage.app",
+        messagingSenderId: "1849585085",
+        appId: "1:1849585085:web:0cb13ea07e6a3833bb36d4",
+        measurementId: "G-243XE4YYRV"
     };
-}
 
-let gameData = getDefaultGameData();
-
-let activePlayerMode = 'AI';
-let selectedOnlinePlayerCount = 2;
-let selectedOnlineShape = 'SQUARE';
-let activeLevel = 1;
-let boardRows = 5, boardCols = 5;
-let isTargetLevelMode = false;
-let targetBoxesToWin = 0;
-let turnPlayer = 1;
-let playerScores = [0, 0, 0, 0];
-
-let isOnlineGame = false;
-let currentRoomCode = null;
-let myPlayerNumber = 1;
-let roomRef = null;
-let trackedRoomPlayers = {};
-
-let horizontalGrid = [], verticalGrid = [], boxesGrid = [];
-let activeShape = 'SQUARE';
-
-const RANDOM_WORDS_LIST = [
-    "MOON", "AIBOT", "HERO", "STAR", "GALAXY", "NINJA", "CYBER", 
-    "TITAN", "DRAGON", "ALPHA", "OMEGA", "SHADOW", "LIGHT", "MATRIX", "VECTOR"
-];
-let levelCharMatrix = [];
-
-let turnTimerInterval = null;
-const TURN_TIME_SECONDS = 15;
-
-window.onload = function() {
-    let saved = localStorage.getItem('dots_boxes_candy_save');
-    if (saved) {
-        let parsed = JSON.parse(saved);
-        gameData = Object.assign(getDefaultGameData(), parsed);
-        if (!gameData.unlockedLineSkins) gameData.unlockedLineSkins = ['#ff4757'];
-        if (!gameData.unlockedBoxEmojis) gameData.unlockedBoxEmojis = ['⭐'];
-        if (gameData.isLoggedIn) showScreen('screen-home');
+    let db = null;
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        console.log("Firebase Database Successfully Connected!");
+    } catch(e) { 
+        console.log("Firebase init error:", e); 
     }
-    initAvatarPicker();
-    refreshDataUI();
-    listenLiveLeaderboard();
-};
 
-function initAvatarPicker() {
-    let container = document.getElementById('avatarPickerContainer');
-    container.innerHTML = '';
-    AVATAR_OPTIONS.forEach(emoji => {
-        let opt = document.createElement('div');
-        opt.className = `avatar-opt ${gameData.avatar === emoji ? 'selected' : ''}`;
-        opt.innerText = emoji;
-        opt.onclick = () => {
-            gameData.avatar = emoji;
-            document.querySelectorAll('.avatar-opt').forEach(el => el.classList.remove('selected'));
-            opt.classList.add('selected');
-            document.getElementById('avatarEmojiDisplay').innerText = emoji;
-            saveDataToStorage();
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+        if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        let now = audioCtx.currentTime;
+
+        if (type === 'line') {
+            osc.type = 'sine'; osc.frequency.setValueAtTime(400, now);
+            osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+            gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+            osc.start(now); osc.stop(now + 0.08);
+        } else if (type === 'box') {
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(523.25, now);
+            osc.frequency.setValueAtTime(659.25, now + 0.1);
+            gain.gain.setValueAtTime(0.4, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+            osc.start(now); osc.stop(now + 0.25);
+        } else if (type === 'win') {
+            osc.type = 'square'; osc.frequency.setValueAtTime(440, now);
+            osc.frequency.setValueAtTime(554.37, now + 0.12);
+            osc.frequency.setValueAtTime(659.25, now + 0.24);
+            osc.frequency.setValueAtTime(880, now + 0.36);
+            gain.gain.setValueAtTime(0.3, now); gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
+            osc.start(now); osc.stop(now + 0.6);
+        }
+    }
+
+    function showToast(msg) {
+        let toast = document.getElementById('game-toast');
+        toast.innerText = msg; toast.classList.add('show');
+        setTimeout(() => { toast.classList.remove('show'); }, 2500);
+    }
+
+    const AVATAR_OPTIONS = ['😎', '🦁', '🤖', '👑', '🐱', '🦄', '🥷', '🐲', '🚀', '🔥'];
+
+    const LINE_SKINS_LIST = [
+        { name: "🔴 Crimson Red", color: "#ff4757", price: 0 },
+        { name: "🔵 Ocean Blue", color: "#1e90ff", price: 100 },
+        { name: "🟢 Bright Mint", color: "#2ed573", price: 400 },
+        { name: "🟡 Shiny Gold", color: "#ffa502", price: 600 },
+        { name: "🟣 Royal Purple", color: "#9b59b6", price: 602 },
+        { name: "🟠 Neon Orange", color: "#e67e22", price: 650 },
+        { name: "🩵 Turquoise", color: "#00cec9", price: 680 },
+        { name: "🩷 Hot Pink", color: "#fd79a8", price: 700 },
+        { name: "🟤 Chocolate", color: "#8e44ad", price: 800 },
+        { name: "🖤 Dark Obsidian", color: "#2d3436", price: 1000 }
+    ];
+
+    const BOX_EMOJIS_LIST = [
+        { name: "⭐ Star Emoji", emoji: "⭐", price: 0 },
+        { name: "🔥 Fire Emoji", emoji: "🔥", price: 50 },
+        { name: "🚀 Rocket Emoji", emoji: "🚀", price: 200 },
+        { name: "👑 Crown Emoji", emoji: "👑", price: 450 },
+        { name: "💎 Diamond Emoji", emoji: "💎", price: 500 },
+        { name: "🎉 Party Emoji", emoji: "🎉", price: 550 },
+        { name: "🏆 Trophy Emoji", emoji: "🏆", price: 670 },
+        { name: "🎯 Target Emoji", emoji: "🎯", price: 820 },
+        { name: "⚡ Lightning Emoji", emoji: "⚡", price: 911 },
+        { name: "🍀 Clover Emoji", emoji: "🍀", price: 1003 },
+        { name: "🤖 Robot Emoji", emoji: "🤖", price: 2000 },
+        { name: "🦄 Unicorn Emoji", emoji: "🦄", price: 2050 },
+        { name: "🦁 Lion Emoji", emoji: "🦁", price: 2500 },
+        { name: "🍎 Apple Emoji", emoji: "🍎", price: 2675 },
+        { name: "⚽ Football Emoji", emoji: "⚽", price: 3000 }
+    ];
+
+    function getDefaultGameData() {
+        return {
+            isLoggedIn: false, username: "Player1", password: "",
+            avatar: "😎",
+            coins: 200, stars: 0, unlockedLevel: 1, lastSpinTimestamp: 0,
+            equippedLineColor: '#ff4757',
+            equippedBoxEmoji: '⭐',
+            unlockedLineSkins: ['#ff4757'],
+            unlockedBoxEmojis: ['⭐'],
+            lastChallengeAttemptTime: 0
         };
-        container.appendChild(opt);
-    });
-}
-
-function saveDataToStorage() {
-    localStorage.setItem('dots_boxes_candy_save', JSON.stringify(gameData));
-    refreshDataUI();
-    syncWithFirebase();
-}
-
-function syncWithFirebase() {
-    if (db && gameData.username) {
-        let userKey = gameData.username.replace(/[^a-zA-Z0-9]/g, "_");
-        db.ref('leaderboard/' + userKey).set({
-            username: gameData.username,
-            stars: gameData.stars,
-            level: gameData.unlockedLevel
-        });
-        db.ref('users/' + userKey).set({
-            username: gameData.username,
-            password: gameData.password,
-            stars: gameData.stars,
-            coins: gameData.coins,
-            unlockedLevel: gameData.unlockedLevel,
-            avatar: gameData.avatar || "😎"
-        });
     }
-}
 
-function listenLiveLeaderboard() {
-    if (!db) {
-        document.getElementById('leaderboardTableBody').innerHTML = `<tr><td style="padding:8px;">1</td><td style="padding:8px; text-align:left;">${gameData.username}</td><td style="padding:8px;">⭐ ${gameData.stars}</td><td style="padding:8px;">${gameData.unlockedLevel}</td></tr>`;
-        return;
-    }
-    db.ref('leaderboard').orderByChild('stars').limitToLast(100).on('value', snapshot => {
-        let list = [];
-        snapshot.forEach(child => { list.push(child.val()); });
-        list.reverse();
-        let html = '';
-        
-        list.forEach((item, index) => {
-            let rankNum = index + 1;
-            let medal = '';
-            if (index === 0) medal = '🥇 ';
-            else if (index === 1) medal = '🥈 ';
-            else if (index === 2) medal = '🥉 ';
+    let gameData = getDefaultGameData();
 
-            let isCurrentUser = (item.username === gameData.username);
-            let rowStyle = isCurrentUser ? 'background: #ffeaa7; font-weight: bold; border-left: 5px solid #ff4757;' : 'border-bottom: 1px solid #ffeaa7;';
-            let rowId = isCurrentUser ? 'id="currentUserRankRow"' : '';
+    let activePlayerMode = 'AI';
+    let selectedOnlinePlayerCount = 2;
+    let selectedOnlineShape = 'SQUARE';
+    let activeLevel = 1;
+    let boardRows = 5, boardCols = 5;
+    let isTargetLevelMode = false;
+    let targetBoxesToWin = 0;
+    let turnPlayer = 1;
+    let playerScores = [0, 0, 0, 0];
 
-            html += `<tr ${rowId} style="${rowStyle}">
-                <td style="padding: 10px; font-weight: 900; color: #d63031;">${rankNum}</td>
-                <td style="padding: 10px; text-align: left; color: #2f3542;">${medal}${item.username} ${isCurrentUser ? '(You)' : ''}</td>
-                <td style="padding: 10px; color: #e1b12c;">⭐ ${item.stars}</td>
-                <td style="padding: 10px; color: #0984e3;">${item.level || 1}</td>
-            </tr>`;
-        });
-        document.getElementById('leaderboardTableBody').innerHTML = html || "<tr><td colspan='4' style='padding:20px;'>not available data</td></tr>";
-        
-        setTimeout(() => {
-            let userRow = document.getElementById('currentUserRankRow');
-            let container = document.getElementById('rankTableContainer');
-            if (userRow && container) {
-                container.scrollTop = userRow.offsetTop - container.offsetTop - 50;
+    let isOnlineGame = false;
+    let currentRoomCode = null;
+    let myPlayerNumber = 1;
+    let roomRef = null;
+    let trackedRoomPlayers = {};
+    let activePlayerEmojis = {};
+
+    let onlineGameMode = 'CLASSIC';
+    let mysteryBoxes = {};
+
+    let horizontalGrid = [], verticalGrid = [], boxesGrid = [];
+    let activeShape = 'SQUARE';
+
+    // MULTIPLAYER UPDATE START - Power-up and event state
+    let mpPowerups = { double: 1, block: 1, break: 1 };
+    let mpPowerupCooldowns = { double: 0, block: 0, break: 0 };
+    let mpComboCount = 0;
+    let mpSpecialBoxes = {};
+    let mpActiveEvent = null;
+    let mpEventTimer = null;
+    let mpLastBoxCount = 0;
+    let mpIsFrozen = false;
+    let mpCurrentEvent = null;
+    // MULTIPLAYER UPDATE END
+
+    const RANDOM_WORDS_LIST = [
+        "MOON", "AIBOT", "HERO", "STAR", "GALAXY", "NINJA", "CYBER", 
+        "TITAN", "DRAGON", "ALPHA", "OMEGA", "SHADOW", "LIGHT", "MATRIX", "VECTOR"
+    ];
+    let levelCharMatrix = [];
+
+    let turnTimerInterval = null;
+    let TURN_TIME_SECONDS = 15;
+
+    // CHALLENGE AI - Strong AI opponent
+    let challengeAI = null;
+    let challengeBoardData = null;
+
+    window.onload = function() {
+        let saved = localStorage.getItem('dots_boxes_candy_save');
+        if (saved) {
+            try {
+                let parsed = JSON.parse(saved);
+                gameData = Object.assign(getDefaultGameData(), parsed);
+                if (!gameData.unlockedLineSkins) gameData.unlockedLineSkins = ['#ff4757'];
+                if (!gameData.unlockedBoxEmojis) gameData.unlockedBoxEmojis = ['⭐'];
+                if (gameData.isLoggedIn) showScreen('screen-home');
+            } catch(e) {
+                console.log("Parse error:", e);
             }
-        }, 100);
-    });
+        }
+        initAvatarPicker();
+        refreshDataUI();
+        listenLiveLeaderboard();
+        
+        // Set up multiplayer UI defaults
+        setupMpUI();
+    };
+
+    // MP UI Setup
+    function setupMpUI() {
+        document.querySelectorAll('.mp-ui-option.grid-options').forEach(el => {
+            el.classList.remove('active');
+            if (el.dataset.value === '5x5') el.classList.add('active');
+        });
+        document.querySelectorAll('.mp-ui-option.mode-opt').forEach(el => {
+            el.classList.remove('active');
+            if (el.dataset.value === 'CLASSIC') el.classList.add('active');
+        });
+    }
+function selectMpGridSize(value, element) {
+    var allGridOptions = document.querySelectorAll('.mp-ui-option.grid-options');
+    for (var i = 0; i < allGridOptions.length; i++) {
+        allGridOptions[i].classList.remove('active');
+    }
+    element.classList.add('active');
+    document.getElementById('mpGridSizeSelect').value = value;
 }
 
-function refreshDataUI() {
-    document.getElementById('profNameDisplay').innerText = gameData.username;
-    document.getElementById('profCoinsDisplay').innerText = gameData.coins;
-    document.getElementById('profStarsDisplay').innerText = gameData.stars;
-    document.getElementById('mapCoinsText').innerText = gameData.coins;
-    let starsEl = document.getElementById('mapStarsText');
-    if (starsEl) starsEl.innerText = gameData.stars;
-    document.getElementById('avatarEmojiDisplay').innerText = gameData.avatar || "😎";
-    document.documentElement.style.setProperty('--p1-line', gameData.equippedLineColor);
+function selectMpGameMode(value, element) {
+    var allModeOptions = document.querySelectorAll('.mp-ui-option.mode-opt');
+    for (var i = 0; i < allModeOptions.length; i++) {
+        allModeOptions[i].classList.remove('active');
+    }
+    element.classList.add('active');
+    document.getElementById('mpGameModeSelect').value = value;
 }
 
-function handleLoginSubmit() {
-    let uName = document.getElementById('loginUser').value.trim();
-    let pass = document.getElementById('loginPass').value.trim();
-
-    if (uName === "") {
-        showToast("Enter Username!");
-        return;
+    function initAvatarPicker() {
+        let container = document.getElementById('avatarPickerContainer');
+        container.innerHTML = '';
+        AVATAR_OPTIONS.forEach(emoji => {
+            let opt = document.createElement('div');
+            opt.className = `avatar-opt ${gameData.avatar === emoji ? 'selected' : ''}`;
+            opt.innerText = emoji;
+            opt.onclick = function() {
+                gameData.avatar = emoji;
+                document.querySelectorAll('.avatar-opt').forEach(el => el.classList.remove('selected'));
+                opt.classList.add('selected');
+                document.getElementById('avatarEmojiDisplay').innerText = emoji;
+                saveDataToStorage();
+            };
+            container.appendChild(opt);
+        });
     }
 
-    let userKey = uName.replace(/[^a-zA-Z0-9]/g, "_");
+    function saveDataToStorage() {
+        localStorage.setItem('dots_boxes_candy_save', JSON.stringify(gameData));
+        refreshDataUI();
+        syncWithFirebase();
+    }
 
-    if (db) {
-        db.ref('users/' + userKey).once('value', snapshot => {
-            if (snapshot.exists()) {
-                let savedData = snapshot.val();
-                if (savedData.password && savedData.password !== pass) {
-                    showToast("Wrong Password!");
-                    return;
+    function syncWithFirebase() {
+        if (db && gameData.username) {
+            let userKey = gameData.username.replace(/[^a-zA-Z0-9]/g, "_");
+            db.ref('leaderboard/' + userKey).set({
+                username: gameData.username,
+                stars: gameData.stars,
+                level: gameData.unlockedLevel
+            });
+            db.ref('users/' + userKey).set({
+                username: gameData.username,
+                password: gameData.password,
+                stars: gameData.stars,
+                coins: gameData.coins,
+                unlockedLevel: gameData.unlockedLevel,
+                avatar: gameData.avatar || "😎"
+            });
+        }
+    }
+
+    function listenLiveLeaderboard() {
+        if (!db) {
+            document.getElementById('leaderboardTableBody').innerHTML = `<tr><td style="padding:8px;">1</td><td style="padding:8px; text-align:left;">${gameData.username}</td><td style="padding:8px;">⭐ ${gameData.stars}</td><td style="padding:8px;">${gameData.unlockedLevel}</td></tr>`;
+            return;
+        }
+        db.ref('leaderboard').orderByChild('stars').limitToLast(100).on('value', function(snapshot) {
+            let list = [];
+            snapshot.forEach(function(child) { list.push(child.val()); });
+            list.reverse();
+            let html = '';
+            
+            list.forEach(function(item, index) {
+                let rankNum = index + 1;
+                let medal = '';
+                if (index === 0) medal = '🥇 ';
+                else if (index === 1) medal = '🥈 ';
+                else if (index === 2) medal = '🥉 ';
+
+                let isCurrentUser = (item.username === gameData.username);
+                let rowStyle = isCurrentUser ? 'background: #ffeaa7; font-weight: bold; border-left: 5px solid #ff4757;' : 'border-bottom: 1px solid #ffeaa7;';
+                let rowId = isCurrentUser ? 'id="currentUserRankRow"' : '';
+
+                html += `<tr ${rowId} style="${rowStyle}">
+                    <td style="padding: 10px; font-weight: 900; color: #d63031;">${rankNum}</td>
+                    <td style="padding: 10px; text-align: left; color: #2f3542;">${medal}${item.username} ${isCurrentUser ? '(You)' : ''}</td>
+                    <td style="padding: 10px; color: #e1b12c;">⭐ ${item.stars}</td>
+                    <td style="padding: 10px; color: #0984e3;">${item.level || 1}</td>
+                </tr>`;
+            });
+            document.getElementById('leaderboardTableBody').innerHTML = html || "<tr><td colspan='4' style='padding:20px;'>not available data</td></tr>";
+            
+            setTimeout(function() {
+                let userRow = document.getElementById('currentUserRankRow');
+                let container = document.getElementById('rankTableContainer');
+                if (userRow && container) {
+                    container.scrollTop = userRow.offsetTop - container.offsetTop - 50;
                 }
-                gameData.username = savedData.username;
-                gameData.password = savedData.password || pass;
-                let singlePlayerMax = ((savedData.unlockedLevel || 1) - 1) * 3;
-                let mpStars = savedData.multiplayerStars || 0;
-                gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
-                gameData.coins = savedData.coins || 200;
-                gameData.unlockedLevel = savedData.unlockedLevel || 1;
-                gameData.avatar = savedData.avatar || "😎";
-                gameData.isLoggedIn = true;
+            }, 100);
+        });
+    }
 
-                saveDataToStorage();
-                showScreen('screen-home');
-                showToast(`Welcome Back, ${uName}! 🎉`);
-            } else {
-                localStorage.clear();
-                gameData = getDefaultGameData();
+    function refreshDataUI() {
+        document.getElementById('profNameDisplay').innerText = gameData.username;
+        document.getElementById('profCoinsDisplay').innerText = gameData.coins;
+        document.getElementById('profStarsDisplay').innerText = gameData.stars;
+        document.getElementById('mapCoinsText').innerText = gameData.coins;
+        let starsEl = document.getElementById('mapStarsText');
+        if (starsEl) starsEl.innerText = gameData.stars;
+        document.getElementById('avatarEmojiDisplay').innerText = gameData.avatar || "😎";
+        document.documentElement.style.setProperty('--p1-line', gameData.equippedLineColor);
+        
+        // Update P1 emoji tag
+        document.getElementById('p1EmojiTag').innerText = gameData.avatar || "😎";
+    }
+
+    function handleLoginSubmit() {
+        let uName = document.getElementById('loginUser').value.trim();
+        let pass = document.getElementById('loginPass').value.trim();
+
+        if (uName === "") {
+            showToast("Enter Username!");
+            return;
+        }
+
+        let userKey = uName.replace(/[^a-zA-Z0-9]/g, "_");
+
+        if (db) {
+            db.ref('users/' + userKey).once('value').then(function(snapshot) {
+                if (snapshot.exists()) {
+                    let savedData = snapshot.val();
+                    if (savedData.password && savedData.password !== pass) {
+                        showToast("Wrong Password!");
+                        return;
+                    }
+                    gameData.username = savedData.username;
+                    gameData.password = savedData.password || pass;
+                    let singlePlayerMax = ((savedData.unlockedLevel || 1) - 1) * 3;
+                    let mpStars = savedData.multiplayerStars || 0;
+                    gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
+                    gameData.coins = savedData.coins || 200;
+                    gameData.unlockedLevel = savedData.unlockedLevel || 1;
+                    gameData.avatar = savedData.avatar || "😎";
+                    gameData.isLoggedIn = true;
+
+                    saveDataToStorage();
+                    showScreen('screen-home');
+                    showToast('Welcome Back, ' + uName + '! 🎉');
+                } else {
+                    localStorage.clear();
+                    gameData = getDefaultGameData();
+                    gameData.username = uName;
+                    gameData.password = pass;
+                    gameData.isLoggedIn = true;
+                    saveDataToStorage();
+                    showScreen('screen-home');
+                    showToast('Welcome, ' + uName + '! Fresh Start!');
+                }
+            }).catch(function(err) {
+                console.log("Firebase error:", err);
+                // Fallback - offline mode
                 gameData.username = uName;
                 gameData.password = pass;
                 gameData.isLoggedIn = true;
                 saveDataToStorage();
                 showScreen('screen-home');
-                showToast(`Welcome, ${uName}! Fresh Start!`);
-            }
-        });
-    } else {
+                showToast('Welcome, ' + uName + '! (Offline Mode)');
+            });
+        } else {
+            localStorage.clear();
+            gameData = getDefaultGameData();
+            gameData.username = uName; 
+            gameData.isLoggedIn = true;
+            saveDataToStorage(); 
+            showScreen('screen-home');
+        }
+    }
+
+    function handleLogout() {
         localStorage.clear();
         gameData = getDefaultGameData();
-        gameData.username = uName; 
-        gameData.isLoggedIn = true;
-        saveDataToStorage(); 
-        showScreen('screen-home');
+        closeModal('profileModal');
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+        showScreen('screen-login');
+        showToast("Logged Out!");
     }
-}
 
-function handleLogout() {
-    localStorage.clear();
-    gameData = getDefaultGameData();
-    closeModal('profileModal');
-    document.getElementById('loginUser').value = '';
-    document.getElementById('loginPass').value = '';
-    showScreen('screen-login');
-    showToast("Logged Out!");
-}
-
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screenId).classList.add('active');
-    if (screenId === 'screen-map') {
-        buildMapRoadmap();
-        setTimeout(drawMapConnectionsSVG, 50);
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+        document.getElementById(screenId).classList.add('active');
+        if (screenId === 'screen-map') {
+            buildMapRoadmap();
+            setTimeout(drawMapConnectionsSVG, 50);
+        }
     }
-}
 
-function openModal(id) { 
-    document.getElementById(id).style.display = 'flex'; 
-    if (id === 'spinModal') {
-        checkSpinAvailability();
-    } else if (id === 'taskModal') {
-        checkChallengeAvailability();
-    } else if (id === 'shopModal') {
-        renderShopUI();
-    } else if (id === 'rankModal') {
-        setTimeout(() => {
-            let userRow = document.getElementById('currentUserRankRow');
-            let container = document.getElementById('rankTableContainer');
-            if (userRow && container) {
-                container.scrollTop = userRow.offsetTop - container.offsetTop - 50;
+    function openModal(id) { 
+        document.getElementById(id).style.display = 'flex'; 
+        if (id === 'spinModal') {
+            checkSpinAvailability();
+        } else if (id === 'taskModal') {
+            checkChallengeAvailability();
+        } else if (id === 'shopModal') {
+            renderShopUI();
+        } else if (id === 'rankModal') {
+            setTimeout(function() {
+                let userRow = document.getElementById('currentUserRankRow');
+                let container = document.getElementById('rankTableContainer');
+                if (userRow && container) {
+                    container.scrollTop = userRow.offsetTop - container.offsetTop - 50;
+                }
+            }, 150);
+        }
+    }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function selectMode(mode, element) {
+        activePlayerMode = mode;
+        isOnlineGame = false;
+        document.getElementById('gameChatBar').style.display = 'none';
+        document.querySelectorAll('#screen-home .mode-selector-grid .mode-btn').forEach(function(b) { b.classList.remove('active'); });
+        element.classList.add('active');
+    }
+
+    function setOnlinePlayerCount(count) {
+        selectedOnlinePlayerCount = count;
+        document.getElementById('btnOnline2P').classList.remove('active');
+        document.getElementById('btnOnline3P').classList.remove('active');
+        document.getElementById('btnOnline4P').classList.remove('active');
+        
+        document.getElementById('btnOnline' + count + 'P').classList.add('active');
+    }
+
+    function selectOnlineShape(shape, element) {
+        selectedOnlineShape = shape;
+        document.querySelectorAll('.shape-btn').forEach(function(b) { b.classList.remove('active'); });
+        element.classList.add('active');
+    }
+
+    // Get player emoji for display
+    function getPlayerEmoji(playerNum) {
+        if (isOnlineGame) {
+            return activePlayerEmojis[playerNum] || '👤';
+        }
+        return playerNum === 1 ? gameData.avatar || '😎' : '👤';
+    }
+
+    function createOnlineRoom() {
+        if (!db) { showToast("Firebase not connected!"); return; }
+        let code = Math.floor(1000 + Math.random() * 9000).toString();
+        currentRoomCode = code;
+        myPlayerNumber = 1;
+        isOnlineGame = true;
+        activePlayerMode = selectedOnlinePlayerCount + 'P';
+        trackedRoomPlayers = {};
+        activePlayerEmojis = {};
+
+        let gSizeStr = document.getElementById('mpGridSizeSelect').value;
+        let parts = gSizeStr.split('x');
+        boardCols = parseInt(parts[0]) + 1;
+        boardRows = parseInt(parts[1]) + 1;
+        onlineGameMode = document.getElementById('mpGameModeSelect').value;
+
+        // MULTIPLAYER UPDATE START - Initialize power-ups and events
+        mpPowerups = { double: 1, block: 1, break: 1 };
+        mpPowerupCooldowns = { double: 0, block: 0, break: 0 };
+        mpComboCount = 0;
+        mpSpecialBoxes = {};
+        mpActiveEvent = null;
+        mpIsFrozen = false;
+        mpCurrentEvent = null;
+        // MULTIPLAYER UPDATE END
+
+        let roomObj = {
+            p1: gameData.username,
+            p1Emoji: gameData.avatar || "😎",
+            maxPlayers: selectedOnlinePlayerCount,
+            shape: selectedOnlineShape,
+            gridRows: boardRows,
+            gridCols: boardCols,
+            gameMode: onlineGameMode,
+            turn: 1, lastMove: null, status: "waiting",
+            chat: { 0: { user: "System", msg: "Room created successfully!" } },
+            powerups: { double: 1, block: 1, break: 1 },
+            powerupCooldowns: { double: 0, block: 0, break: 0 },
+            specialBoxes: {},
+            activeEvent: null,
+            eventTimestamp: 0,
+            isFrozen: false,
+            comboCount: 0,
+            lastBoxCount: 0,
+            boxStates: {},
+            playerEmojis: { 1: gameData.avatar || "😎" }
+        };
+
+        for (let i = 2; i <= selectedOnlinePlayerCount; i++) {
+            roomObj['p' + i] = "Waiting...";
+            roomObj['p' + i + 'Emoji'] = "👤";
+        }
+
+        roomRef = db.ref('rooms/' + currentRoomCode);
+        roomRef.set(roomObj);
+
+        closeModal('onlineModal');
+        showToast('Room Created (' + selectedOnlinePlayerCount + 'P - ' + selectedOnlineShape + ')! Code: ' + currentRoomCode);
+        startOnlineGameView();
+        listenToOnlineRoom();
+    }
+
+    function joinOnlineRoom() {
+        let code = document.getElementById('roomCodeInput').value.trim();
+        if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
+        if (!db) { showToast("Firebase not connected!"); return; }
+
+        currentRoomCode = code;
+        roomRef = db.ref('rooms/' + currentRoomCode);
+        trackedRoomPlayers = {};
+        activePlayerEmojis = {};
+
+        roomRef.once('value').then(function(snapshot) {
+            if (snapshot.exists()) {
+                let data = snapshot.val();
+                let maxP = data.maxPlayers || 4;
+                let assignedPlayer = 0;
+
+                for (let i = 2; i <= maxP; i++) {
+                    if (data['p' + i] === "Waiting..." || data['p' + i] === gameData.username) {
+                        assignedPlayer = i;
+                        break;
+                    }
+                }
+
+                if (assignedPlayer === 0) { showToast("Room is full!"); return; }
+
+                myPlayerNumber = assignedPlayer;
+                isOnlineGame = true;
+                activePlayerMode = maxP + 'P';
+                selectedOnlineShape = data.shape || 'SQUARE';
+                boardRows = data.gridRows || 6;
+                boardCols = data.gridCols || 6;
+                onlineGameMode = data.gameMode || 'CLASSIC';
+
+                // Sync power-up state
+                if (data.powerups) {
+                    mpPowerups = data.powerups;
+                }
+                if (data.powerupCooldowns) {
+                    mpPowerupCooldowns = data.powerupCooldowns;
+                }
+                if (data.specialBoxes) {
+                    mpSpecialBoxes = data.specialBoxes;
+                }
+                if (data.activeEvent !== undefined) {
+                    mpActiveEvent = data.activeEvent;
+                }
+                if (data.isFrozen !== undefined) {
+                    mpIsFrozen = data.isFrozen;
+                }
+                if (data.comboCount !== undefined) {
+                    mpComboCount = data.comboCount;
+                }
+                if (data.playerEmojis) {
+                    activePlayerEmojis = data.playerEmojis;
+                }
+
+                let updateObj = {};
+                updateObj['p' + assignedPlayer] = gameData.username;
+                updateObj['p' + assignedPlayer + 'Emoji'] = gameData.avatar || "😎";
+                updateObj['status'] = "playing";
+                if (!data.playerEmojis) {
+                    updateObj['playerEmojis'] = { 1: data.p1Emoji || "😎" };
+                }
+                updateObj['playerEmojis/' + assignedPlayer] = gameData.avatar || "😎";
+                roomRef.update(updateObj);
+
+                closeModal('onlineModal');
+                showToast('Joined as P' + assignedPlayer + '!');
+                startOnlineGameView();
+                listenToOnlineRoom();
+            } else {
+                showToast("Invalid Room Code!");
             }
-        }, 150);
-    }
-}
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-function selectMode(mode, element) {
-    activePlayerMode = mode;
-    isOnlineGame = false;
-    document.getElementById('gameChatBar').style.display = 'none';
-    document.querySelectorAll('#screen-home .mode-selector-grid .mode-btn').forEach(b => b.classList.remove('active'));
-    element.classList.add('active');
-}
-
-function setOnlinePlayerCount(count) {
-    selectedOnlinePlayerCount = count;
-    document.getElementById('btnOnline2P').classList.remove('active');
-    document.getElementById('btnOnline3P').classList.remove('active');
-    document.getElementById('btnOnline4P').classList.remove('active');
-    
-    document.getElementById(`btnOnline${count}P`).classList.add('active');
-}
-
-function selectOnlineShape(shape, element) {
-    selectedOnlineShape = shape;
-    document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
-    element.classList.add('active');
-}
-
-function createOnlineRoom() {
-    if (!db) { showToast("Firebase not connected!"); return; }
-    let code = Math.floor(1000 + Math.random() * 9000).toString();
-    currentRoomCode = code;
-    myPlayerNumber = 1;
-    isOnlineGame = true;
-    activePlayerMode = selectedOnlinePlayerCount + 'P';
-    trackedRoomPlayers = {};
-
-    let roomObj = {
-        p1: gameData.username,
-        maxPlayers: selectedOnlinePlayerCount,
-        shape: selectedOnlineShape,
-        turn: 1, lastMove: null, status: "waiting",
-        chat: { 0: { user: "System", msg: "Room created successfully!" } }
-    };
-
-    for (let i = 2; i <= selectedOnlinePlayerCount; i++) {
-        roomObj[`p${i}`] = "Waiting...";
+        });
     }
 
-    roomRef = db.ref('rooms/' + currentRoomCode);
-    roomRef.set(roomObj);
+    function startOnlineGameView() {
+        activeLevel = 1; 
+        activeShape = selectedOnlineShape; 
+        isTargetLevelMode = (onlineGameMode === 'RACE10'); 
+        targetBoxesToWin = (onlineGameMode === 'RACE10') ? 10 : 0;
+        
+        if (boardRows <= 4 && boardCols <= 4) {
+            TURN_TIME_SECONDS = 7;
+        } else {
+            TURN_TIME_SECONDS = 15;
+        }
 
-    closeModal('onlineModal');
-    showToast(`Room Created (${selectedOnlinePlayerCount}P - ${selectedOnlineShape})! Code: ${currentRoomCode}`);
-    startOnlineGameView();
-    listenToOnlineRoom();
-}
+        // Show power-up bar
+        document.getElementById('mpPowerupBar').style.display = 'flex';
+        updatePowerupUI();
 
-function joinOnlineRoom() {
-    let code = document.getElementById('roomCodeInput').value.trim();
-    if (code.length !== 4) { showToast("Enter 4-Digit Code!"); return; }
-    if (!db) { showToast("Firebase not connected!"); return; }
+        showScreen('screen-game');
+        document.getElementById('levelBanner').innerText = 'Room: ' + currentRoomCode + ' (' + (boardCols-1) + 'x' + (boardRows-1) + ' ' + onlineGameMode + ') - (You are P' + myPlayerNumber + ')';
+        document.getElementById('gameChatBar').style.display = 'flex';
+        
+        document.getElementById('p3Box').style.display = (selectedOnlinePlayerCount >= 3) ? 'block' : 'none';
+        document.getElementById('p4Box').style.display = (selectedOnlinePlayerCount >= 4) ? 'block' : 'none';
+        
+        // Update player emojis
+        updatePlayerEmojiUI();
+        
+        initializeBoard();
 
-    currentRoomCode = code;
-    roomRef = db.ref('rooms/' + currentRoomCode);
-    trackedRoomPlayers = {};
+        // Apply special boxes if they exist
+        if (Object.keys(mpSpecialBoxes).length === 0) {
+            generateSpecialBoxes();
+            if (roomRef && myPlayerNumber === 1) {
+                roomRef.update({ specialBoxes: mpSpecialBoxes });
+            }
+        } else {
+            applySpecialBoxes();
+        }
 
-    roomRef.once('value', snapshot => {
-        if (snapshot.exists()) {
-            let data = snapshot.val();
-            let maxP = data.maxPlayers || 4;
-            let assignedPlayer = 0;
+        if (onlineGameMode === 'PREFILLED' && myPlayerNumber === 1) {
+            applyPrefilledPuzzle();
+        } else if (onlineGameMode === 'OBSTACLE' && myPlayerNumber === 1) {
+            applyObstaclePuzzle();
+        } else if (onlineGameMode === 'FOG') {
+            applyFogOfWarPuzzle();
+        }
 
-            for (let i = 2; i <= maxP; i++) {
-                if (data[`p${i}`] === "Waiting..." || data[`p${i}`] === gameData.username) {
-                    assignedPlayer = i;
+        // Start event system
+        if (myPlayerNumber === 1) {
+            scheduleRandomEvent();
+        }
+    }
+
+    function updatePlayerEmojiUI() {
+        for (let i = 1; i <= 4; i++) {
+            let tag = document.getElementById('p' + i + 'EmojiTag');
+            if (tag) {
+                let emoji = getPlayerEmoji(i);
+                tag.innerText = emoji;
+            }
+        }
+    }
+
+    function applyPrefilledPuzzle() {
+        let totalH = boardRows * (boardCols - 1);
+        let totalV = (boardRows - 1) * boardCols;
+        let linesToFill = Math.floor((totalH + totalV) * 0.28);
+        let filled = 0;
+
+        while (filled < linesToFill) {
+            let isH = Math.random() < 0.5;
+            if (isH) {
+                let r = Math.floor(Math.random() * boardRows);
+                let c = Math.floor(Math.random() * (boardCols - 1));
+                if (horizontalGrid[r][c] === 0) {
+                    let el = document.getElementById('h-' + r + '-' + c);
+                    if (el && !el.classList.contains('line-disabled')) {
+                        horizontalGrid[r][c] = 1;
+                        el.classList.add('line-drawn-p1');
+                        filled++;
+                    }
+                }
+            } else {
+                let r = Math.floor(Math.random() * (boardRows - 1));
+                let c = Math.floor(Math.random() * boardCols);
+                if (verticalGrid[r][c] === 0) {
+                    let el = document.getElementById('v-' + r + '-' + c);
+                    if (el && !el.classList.contains('line-disabled')) {
+                        verticalGrid[r][c] = 1;
+                        el.classList.add('line-drawn-p1');
+                        filled++;
+                    }
+                }
+            }
+        }
+    }
+
+    function applyObstaclePuzzle() {
+        let obstacleCount = Math.max(2, Math.floor((boardRows * boardCols) * 0.1));
+        let blocked = 0;
+
+        while (blocked < obstacleCount) {
+            let isH = Math.random() < 0.5;
+            if (isH) {
+                let r = Math.floor(Math.random() * boardRows);
+                let c = Math.floor(Math.random() * (boardCols - 1));
+                if (horizontalGrid[r][c] === 0) {
+                    let el = document.getElementById('h-' + r + '-' + c);
+                    if (el && !el.classList.contains('line-disabled')) {
+                        horizontalGrid[r][c] = -1;
+                        el.classList.add('line-blocked');
+                        blocked++;
+                    }
+                }
+            } else {
+                let r = Math.floor(Math.random() * (boardRows - 1));
+                let c = Math.floor(Math.random() * boardCols);
+                if (verticalGrid[r][c] === 0) {
+                    let el = document.getElementById('v-' + r + '-' + c);
+                    if (el && !el.classList.contains('line-disabled')) {
+                        verticalGrid[r][c] = -1;
+                        el.classList.add('line-blocked');
+                        blocked++;
+                    }
+                }
+            }
+        }
+    }
+
+    function applyFogOfWarPuzzle() {
+        mysteryBoxes = {};
+        let totalBoxes = (boardRows - 1) * (boardCols - 1);
+        let mysteryCount = Math.min(3, Math.floor(totalBoxes * 0.2));
+        let setBoxes = 0;
+
+        while (setBoxes < mysteryCount) {
+            let r = Math.floor(Math.random() * (boardRows - 1));
+            let c = Math.floor(Math.random() * (boardCols - 1));
+            let key = r + '_' + c;
+            if (!mysteryBoxes[key]) {
+                let val = Math.random() < 0.5 ? 2 : -1;
+                mysteryBoxes[key] = val;
+                let el = document.getElementById('box-' + r + '-' + c);
+                if (el && !el.classList.contains('box-disabled')) {
+                    el.classList.add('box-mystery');
+                }
+                setBoxes++;
+            }
+        }
+    }
+
+    // MULTIPLAYER UPDATE START - Special Box System
+    function generateSpecialBoxes() {
+        mpSpecialBoxes = {};
+        let totalBoxes = (boardRows - 1) * (boardCols - 1);
+        let numSpecial = Math.max(1, Math.floor(totalBoxes * 0.08));
+        
+        let positions = [];
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                positions.push({ r: r, c: c });
+            }
+        }
+        
+        for (let i = positions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [positions[i], positions[j]] = [positions[j], positions[i]];
+        }
+        
+        let specialCount = Math.min(numSpecial, positions.length);
+        for (let i = 0; i < specialCount; i++) {
+            let pos = positions[i];
+            let key = pos.r + '_' + pos.c;
+            let type = Math.random() < 0.6 ? 'golden' : 'diamond';
+            mpSpecialBoxes[key] = type;
+        }
+    }
+
+    function applySpecialBoxes() {
+        for (let key in mpSpecialBoxes) {
+            let parts = key.split('_');
+            let r = parseInt(parts[0]);
+            let c = parseInt(parts[1]);
+            let el = document.getElementById('box-' + r + '-' + c);
+            if (el && !el.classList.contains('box-disabled')) {
+                let type = mpSpecialBoxes[key];
+                if (type === 'golden') {
+                    el.innerHTML = '⭐';
+                    el.style.background = '#ffd700';
+                    el.style.color = '#fff';
+                    el.style.border = '2px solid #ff8c00';
+                    el.dataset.specialType = 'golden';
+                } else if (type === 'diamond') {
+                    el.innerHTML = '💎';
+                    el.style.background = '#00bfff';
+                    el.style.color = '#fff';
+                    el.style.border = '2px solid #0047ab';
+                    el.dataset.specialType = 'diamond';
+                }
+            }
+        }
+    }
+
+    // MULTIPLAYER UPDATE START - Combo System
+    function checkCombo(player) {
+        mpComboCount++;
+        mpLastBoxCount = playerScores[player - 1];
+        
+        let comboBonus = 0;
+        let comboMessage = '';
+        
+        if (mpComboCount === 1) {
+            comboBonus = 1;
+            comboMessage = '📦 +' + comboBonus + ' box!';
+        } else if (mpComboCount === 2) {
+            comboBonus = 3;
+            comboMessage = '🔥 2-BOX COMBO! +' + comboBonus + ' points!';
+        } else if (mpComboCount === 3) {
+            comboBonus = 6;
+            comboMessage = '🔥🔥 3-BOX COMBO! +' + comboBonus + ' points!';
+        } else if (mpComboCount >= 4) {
+            comboBonus = 10;
+            comboMessage = '🔥🔥🔥 ' + mpComboCount + '-BOX MEGA COMBO! +' + comboBonus + ' points!';
+        }
+        
+        if (comboBonus > 1) {
+            showComboNotification(comboMessage);
+            playerScores[player - 1] += comboBonus;
+            playSound('win');
+            showToast('🔥 COMBO! +' + comboBonus + ' bonus points!');
+        }
+        
+        if (isOnlineGame && roomRef) {
+            roomRef.update({
+                comboCount: mpComboCount,
+                lastBoxCount: mpLastBoxCount
+            });
+        }
+    }
+
+    function showComboNotification(message) {
+        document.querySelectorAll('.mp-combo-display').forEach(function(el) { el.remove(); });
+        
+        let display = document.createElement('div');
+        display.className = 'mp-combo-display';
+        display.textContent = message;
+        document.querySelector('.board-container').appendChild(display);
+        
+        setTimeout(function() {
+            display.remove();
+        }, 1500);
+    }
+
+    // MULTIPLAYER UPDATE START - Event System
+    function scheduleRandomEvent() {
+        if (mpEventTimer) clearTimeout(mpEventTimer);
+        
+        let delay = 15000 + Math.random() * 30000;
+        mpEventTimer = setTimeout(function() {
+            triggerRandomEvent();
+        }, delay);
+    }
+
+    function triggerRandomEvent() {
+        if (!isOnlineGame) return;
+        
+        const events = [
+            { id: 'lightning', name: '⚡ LIGHTNING ROUND', effect: 'Shorter turn time!', duration: 8000 },
+            { id: 'gold_rush', name: '💰 GOLD RUSH', effect: 'Special boxes give double points!', duration: 10000 },
+            { id: 'freeze', name: '❄️ FREEZE', effect: 'Player loses a turn!', duration: 5000 },
+            { id: 'mirror', name: '🔄 MIRROR', effect: 'Board orientation flipped!', duration: 8000 }
+        ];
+        
+        let event = events[Math.floor(Math.random() * events.length)];
+        mpCurrentEvent = event;
+        mpActiveEvent = event.id;
+        
+        showEventBanner(event.name + '\n' + event.effect);
+        
+        if (event.id === 'lightning') {
+            let originalTime = TURN_TIME_SECONDS;
+            TURN_TIME_SECONDS = Math.max(5, Math.floor(originalTime * 0.5));
+            showToast('⚡ Lightning Round! Turn time reduced to ' + TURN_TIME_SECONDS + 's!');
+            
+            setTimeout(function() {
+                TURN_TIME_SECONDS = originalTime;
+                showToast('⏰ Back to normal time!');
+            }, event.duration);
+        } else if (event.id === 'gold_rush') {
+            showToast('💰 Gold Rush! Special boxes give double points!');
+        } else if (event.id === 'freeze') {
+            if (!mpIsFrozen) {
+                mpIsFrozen = true;
+                let frozenPlayer = turnPlayer;
+                let totalPlayers = 2;
+                if (activePlayerMode === '3P') totalPlayers = 3;
+                else if (activePlayerMode === '4P') totalPlayers = 4;
+                
+                turnPlayer = (turnPlayer % totalPlayers) + 1;
+                updateTurnIndicator();
+                showToast('❄️ Player ' + frozenPlayer + ' is frozen! Turn skipped!');
+                
+                if (roomRef) {
+                    roomRef.update({ isFrozen: true });
+                }
+                
+                setTimeout(function() {
+                    mpIsFrozen = false;
+                    if (roomRef) {
+                        roomRef.update({ isFrozen: false });
+                    }
+                    showToast('❄️ Freeze effect ended!');
+                }, event.duration);
+            }
+        } else if (event.id === 'mirror') {
+            let board = document.getElementById('game-board');
+            board.style.transform = 'scaleX(-1)';
+            showToast('🔄 Mirror mode activated!');
+            
+            setTimeout(function() {
+                board.style.transform = 'scaleX(1)';
+                showToast('🔄 Mirror mode ended!');
+            }, event.duration);
+        }
+        
+        if (roomRef && myPlayerNumber === 1) {
+            roomRef.update({
+                activeEvent: event.id,
+                eventTimestamp: Date.now()
+            });
+        }
+        
+        setTimeout(function() {
+            if (isOnlineGame) {
+                mpActiveEvent = null;
+                mpCurrentEvent = null;
+                if (roomRef && myPlayerNumber === 1) {
+                    roomRef.update({ activeEvent: null });
+                }
+                scheduleRandomEvent();
+            }
+        }, event.duration + 2000);
+    }
+
+    function showEventBanner(message) {
+        document.querySelectorAll('.mp-event-banner').forEach(function(el) { el.remove(); });
+        
+        let banner = document.createElement('div');
+        banner.className = 'mp-event-banner';
+        banner.innerHTML = message.replace('\n', '<br>');
+        document.body.appendChild(banner);
+        
+        setTimeout(function() {
+            banner.style.opacity = '0';
+            banner.style.transition = 'opacity 1s';
+            setTimeout(function() { banner.remove(); }, 1000);
+        }, 3000);
+    }
+
+    // MULTIPLAYER UPDATE START - Power-up System
+    function useMpPowerup(type) {
+        if (!isOnlineGame) return;
+        if (turnPlayer !== myPlayerNumber) {
+            showToast("Not your turn!");
+            return;
+        }
+        if (mpPowerups[type] <= 0) {
+            showToast('No ' + type + ' power-ups left!');
+            return;
+        }
+        if (mpPowerupCooldowns[type] > Date.now()) {
+            let remaining = Math.ceil((mpPowerupCooldowns[type] - Date.now()) / 1000);
+            showToast('⏳ Power-up on cooldown (' + remaining + 's)');
+            return;
+        }
+        
+        mpPowerups[type]--;
+        mpPowerupCooldowns[type] = Date.now() + 5000;
+        
+        if (type === 'double') {
+            showToast('🔀 Double Line activated! You can place two lines!');
+            window.mpDoubleLineActive = true;
+            window.mpDoubleLineCount = 0;
+        } else if (type === 'block') {
+            showToast('🚫 Click on an edge to block it!');
+            window.mpBlockMode = true;
+        } else if (type === 'break') {
+            showToast('💔 Click on a drawn line to break it!');
+            window.mpBreakMode = true;
+        }
+        
+        updatePowerupUI();
+        syncPowerupState();
+    }
+
+    function updatePowerupUI() {
+        document.getElementById('mpPowerupDouble').innerHTML = '🔀 Double (' + mpPowerups.double + ')';
+        document.getElementById('mpPowerupBlock').innerHTML = '🚫 Block (' + mpPowerups.block + ')';
+        document.getElementById('mpPowerupBreak').innerHTML = '💔 Break (' + mpPowerups.break + ')';
+        
+        let isMyTurn = isOnlineGame && turnPlayer === myPlayerNumber;
+        document.getElementById('mpPowerupDouble').disabled = !isMyTurn || mpPowerups.double <= 0;
+        document.getElementById('mpPowerupBlock').disabled = !isMyTurn || mpPowerups.block <= 0;
+        document.getElementById('mpPowerupBreak').disabled = !isMyTurn || mpPowerups.break <= 0;
+    }
+
+    function syncPowerupState() {
+        if (roomRef) {
+            roomRef.update({
+                powerups: mpPowerups,
+                powerupCooldowns: mpPowerupCooldowns
+            });
+        }
+    }
+
+    function handlePowerupLineClick(type, r, c, element, player) {
+        if (window.mpDoubleLineActive) {
+            executeMove(type, r, c, element, player);
+            window.mpDoubleLineCount++;
+            
+            if (window.mpDoubleLineCount >= 2) {
+                window.mpDoubleLineActive = false;
+                showToast('🔀 Double line used!');
+            }
+            return true;
+        }
+        
+        if (window.mpBlockMode) {
+            if ((type === 'h' && horizontalGrid[r][c] === 0) || (type === 'v' && verticalGrid[r][c] === 0)) {
+                element.classList.add('line-blocked');
+                if (type === 'h') horizontalGrid[r][c] = -1;
+                if (type === 'v') verticalGrid[r][c] = -1;
+                
+                window.mpBlockMode = false;
+                showToast('🚫 Edge blocked!');
+                
+                if (roomRef) {
+                    roomRef.update({
+                        blockedEdge: { type: type, r: r, c: c }
+                    });
+                }
+                return true;
+            } else {
+                showToast('⚠️ That edge is already occupied!');
+                return false;
+            }
+        }
+        
+        if (window.mpBreakMode) {
+            let isDrawn = false;
+            let playerWhoDrew = 0;
+            if (type === 'h' && horizontalGrid[r][c] > 0) {
+                isDrawn = true;
+                playerWhoDrew = horizontalGrid[r][c];
+                horizontalGrid[r][c] = 0;
+            } else if (type === 'v' && verticalGrid[r][c] > 0) {
+                isDrawn = true;
+                playerWhoDrew = verticalGrid[r][c];
+                verticalGrid[r][c] = 0;
+            }
+            
+            if (isDrawn) {
+                element.classList.remove('line-drawn-p' + playerWhoDrew);
+                element.style.background = '#ffeaa7';
+                window.mpBreakMode = false;
+                showToast('💔 Line broken (was P' + playerWhoDrew + "'s line)!");
+                
+                if (roomRef) {
+                    roomRef.update({
+                        brokenLine: { type: type, r: r, c: c, player: playerWhoDrew }
+                    });
+                }
+                return true;
+            } else {
+                showToast('⚠️ No line found there!');
+                return false;
+            }
+        }
+        
+        return false;
+    }
+
+    // MULTIPLAYER UPDATE START - Enhanced executeMove with power-ups, combos, and special boxes
+    function executeMove(type, r, c, element, player, isRemote) {
+        if (isRemote === undefined) isRemote = false;
+        
+        if (type === 'h' && horizontalGrid[r][c] !== 0) return;
+        if (type === 'v' && verticalGrid[r][c] !== 0) return;
+
+        if (isOnlineGame && mpIsFrozen && !isRemote) {
+            showToast('❄️ You are frozen! Turn skipped.');
+            return;
+        }
+
+        playSound('line');
+
+        element.classList.add('line-drawn-p' + player);
+        if (type === 'h') horizontalGrid[r][c] = player;
+        if (type === 'v') verticalGrid[r][c] = player;
+
+        if (isOnlineGame && !isRemote && player === myPlayerNumber && roomRef) {
+            roomRef.update({ lastMove: { type: type, r: r, c: c, player: player } });
+        }
+
+        let filledBoxes = checkCompletedBoxes(type, r, c, player);
+        let boxCount = 0;
+
+        if (filledBoxes) {
+            boxCount = countFilledBoxes();
+            
+            if (boxCount > 0) {
+                mpComboCount += boxCount;
+                checkCombo(player);
+            }
+            
+            if (boxCount === 0) {
+                mpComboCount = 0;
+            }
+        } else {
+            mpComboCount = 0;
+            let totalPlayers = 2;
+            if (activePlayerMode === '3P') totalPlayers = 3;
+            else if (activePlayerMode === '4P') totalPlayers = 4;
+
+            turnPlayer = (turnPlayer % totalPlayers) + 1;
+            if (isOnlineGame && !isRemote && roomRef) {
+                roomRef.update({ turn: turnPlayer });
+            }
+        }
+
+        updateScoreDisplays();
+        updateTurnIndicator();
+        startTurnTimer();
+        
+        if (isOnlineGame) {
+            updatePowerupUI();
+        }
+
+        if (checkGameOver()) return;
+
+        if (!isOnlineGame && activePlayerMode === 'AI' && turnPlayer === 2) {
+            setTimeout(triggerSmartAI, 300);
+        }
+    }
+
+    function countFilledBoxes() {
+        let count = 0;
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                if (boxesGrid[r][c] > 0) count++;
+            }
+        }
+        return count;
+    }
+
+    function checkCompletedBoxes(type, r, c, player) {
+        let isFilled = false;
+
+        let test = function(br, bc) {
+            if (br >= 0 && br < boardRows - 1 && bc >= 0 && bc < boardCols - 1) {
+                if (boxesGrid[br][bc] === 0 &&
+                    horizontalGrid[br][bc] > 0 && horizontalGrid[br + 1][bc] > 0 &&
+                    verticalGrid[br][bc] > 0 && verticalGrid[br][bc + 1] > 0) {
+
+                    boxesGrid[br][bc] = player;
+                    let boxEl = document.getElementById('box-' + br + '-' + bc);
+                    
+                    let pointsAdded = 1;
+                    let key = br + '_' + bc;
+                    
+                    // Special box handling
+                    if (isOnlineGame && mpSpecialBoxes[key]) {
+                        let type = mpSpecialBoxes[key];
+                        if (type === 'golden') {
+                            pointsAdded = 3;
+                            boxEl.innerHTML = '⭐';
+                            boxEl.style.background = '#ffd700';
+                            boxEl.style.color = '#fff';
+                            showToast('⭐ Golden Box! +3 points!');
+                        } else if (type === 'diamond') {
+                            pointsAdded = 5;
+                            boxEl.innerHTML = '💎';
+                            boxEl.style.background = '#00bfff';
+                            boxEl.style.color = '#fff';
+                            showToast('💎 Diamond Box! +5 points!');
+                        }
+                        delete mpSpecialBoxes[key];
+                        if (roomRef && myPlayerNumber === player) {
+                            roomRef.update({ specialBoxes: mpSpecialBoxes });
+                        }
+                    } else if (isOnlineGame && onlineGameMode === 'FOG' && mysteryBoxes[key]) {
+                        pointsAdded = mysteryBoxes[key];
+                        boxEl.classList.remove('box-mystery');
+                        if (pointsAdded > 0) {
+                            showToast('🎁 Surprise Box! +' + pointsAdded + ' Points!');
+                        } else {
+                            showToast('💥 Penalty Trap! ' + pointsAdded + ' Point!');
+                        }
+                    }
+
+                    // Gold Rush event - double points
+                    if (isOnlineGame && mpActiveEvent === 'gold_rush' && pointsAdded > 1) {
+                        pointsAdded *= 2;
+                        showToast('💰 Gold Rush! Double points!');
+                    }
+
+                    // Player emoji in box for multiplayer
+                    if (isOnlineGame) {
+                        let playerEmoji = getPlayerEmoji(player);
+                        boxEl.innerHTML = playerEmoji;
+                        boxEl.className = 'box-cell captured-box-anim box-player-emoji';
+                    } else if (activeLevel >= 101 && activeLevel <= 200) {
+                        boxEl.innerText = levelCharMatrix[br][bc];
+                        boxEl.classList.add('char-unlocked');
+                    } else {
+                        boxEl.innerText = (player === 2 && activePlayerMode === 'AI') ? '🤖' : gameData.equippedBoxEmoji;
+                    }
+                    
+                    boxEl.classList.add('captured-box-anim');
+
+                    playerScores[player - 1] = Math.max(0, playerScores[player - 1] + pointsAdded);
+                    isFilled = true;
+                    playSound('box');
+                }
+            }
+        };
+
+        if (type === 'h') { test(r - 1, c); test(r, c); }
+        else { test(r, c - 1); test(r, c); }
+
+        return isFilled;
+    }
+    // MULTIPLAYER UPDATE END
+
+    function updateScoreDisplays() {
+        document.getElementById('s1').innerText = playerScores[0];
+        document.getElementById('s2').innerText = playerScores[1];
+        document.getElementById('s3').innerText = playerScores[2];
+        document.getElementById('s4').innerText = playerScores[3];
+        updatePlayerEmojiUI();
+    }
+
+    function checkGameOver() {
+        if (isOnlineGame && onlineGameMode === 'RACE10') {
+            for (let i = 0; i < playerScores.length; i++) {
+                if (playerScores[i] >= 10) {
+                    if (turnTimerInterval) clearInterval(turnTimerInterval);
+                    document.getElementById('game-timer-bar').style.display = 'none';
+                    playSound('win');
+                    showToast('🏆 Player ' + (i + 1) + ' Wins the 10-Box Puzzle Race!');
+                    return true;
+                }
+            }
+        }
+
+        let allFilled = true;
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                if (boxesGrid[r][c] === 0) {
+                    allFilled = false;
                     break;
                 }
             }
-
-            if (assignedPlayer === 0) { showToast("Room is full!"); return; }
-
-            myPlayerNumber = assignedPlayer;
-            isOnlineGame = true;
-            activePlayerMode = maxP + 'P';
-            selectedOnlineShape = data.shape || 'SQUARE';
-
-            let updateObj = {};
-            updateObj[`p${assignedPlayer}`] = gameData.username;
-            updateObj['status'] = "playing";
-            roomRef.update(updateObj);
-
-            closeModal('onlineModal');
-            showToast(`Joined as P${assignedPlayer}!`);
-            startOnlineGameView();
-            listenToOnlineRoom();
-        } else {
-            showToast("Invalid Room Code!");
         }
-    });
-}
 
-function startOnlineGameView() {
-    activeLevel = 1; 
-    boardRows = 5; boardCols = 5;
-    activeShape = selectedOnlineShape; 
-    isTargetLevelMode = false; targetBoxesToWin = 0;
-    
-    showScreen('screen-game');
-    document.getElementById('levelBanner').innerText = `Room: ${currentRoomCode} (${activeShape}) - (You are P${myPlayerNumber})`;
-    document.getElementById('gameChatBar').style.display = 'flex';
-    
-    document.getElementById('p3Box').style.display = (selectedOnlinePlayerCount >= 3) ? 'block' : 'none';
-    document.getElementById('p4Box').style.display = (selectedOnlinePlayerCount >= 4) ? 'block' : 'none';
-    
-    initializeBoard();
-}
+        if (allFilled) {
+            if (turnTimerInterval) clearInterval(turnTimerInterval);
+            document.getElementById('game-timer-bar').style.display = 'none';
+            playSound('win');
 
-function sendOnlineChat() {
-    let msgInput = document.getElementById('chatInputMsg');
-    let msg = msgInput.value.trim();
-    if (!msg || !roomRef) return;
-    
-    db.ref(`rooms/${currentRoomCode}/chat`).push({
-        user: gameData.username,
-        msg: msg
-    });
-    msgInput.value = '';
-}
+            let maxScore = Math.max.apply(null, playerScores);
+            let winningPlayer = playerScores.indexOf(maxScore) + 1;
 
-function listenToOnlineRoom() {
-    if (!roomRef) return;
-    roomRef.on('value', snapshot => {
-        let data = snapshot.val();
-        if (!data) return;
+            if (winningPlayer === 1) {
+                if (activeLevel === gameData.unlockedLevel) {
+                    gameData.unlockedLevel++;
+                }
+                gameData.coins += 40;
+                gameData.stars += 3;
+                saveDataToStorage();
 
-        let maxP = data.maxPlayers || 2;
-        for (let i = 1; i <= maxP; i++) {
-            let pName = data[`p${i}`];
-            if (pName && pName !== "Waiting...") {
-                if (!trackedRoomPlayers[i]) {
-                    trackedRoomPlayers[i] = pName;
-                    if (i !== myPlayerNumber) {
-                        showToast(`🎉 ${pName} Joined the Room!`);
-                        if (db) {
-                            db.ref(`rooms/${currentRoomCode}/chat`).push({
-                                user: "System",
-                                msg: `${pName} joined as Player ${i}!`
-                            });
+                document.getElementById('star1').classList.add('active');
+                document.getElementById('star2').classList.add('active');
+                document.getElementById('star3').classList.add('active');
+                document.getElementById('victoryModalTitle').innerText = "VICTORY!";
+                document.getElementById('victoryRewardsText').innerText = "+40 🪙 Coins | +3 ⭐ Stars Earned!";
+                document.getElementById('victory-modal').style.display = 'flex';
+            } else {
+                let pName = (activePlayerMode === 'AI' && winningPlayer === 2) ? "Robot AI" : 'Player ' + winningPlayer;
+                document.getElementById('defeatModalTitle').innerText = "DEFEAT!";
+                document.getElementById('defeatMsgText').innerText = pName + ' Won the Match!';
+                document.getElementById('defeat-modal').style.display = 'flex';
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function closeVictoryModal() {
+        document.getElementById('victory-modal').style.display = 'none';
+        document.getElementById('star1').classList.remove('active');
+        document.getElementById('star2').classList.remove('active');
+        document.getElementById('star3').classList.remove('active');
+        showScreen('screen-map');
+    }
+
+    // Existing AI for single player
+    function triggerSmartAI() {
+        if (turnPlayer !== 2 || activePlayerMode !== 'AI') return;
+
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                if (boxesGrid[r][c] === 0) {
+                    let count = (horizontalGrid[r][c] > 0 ? 1 : 0) + (horizontalGrid[r + 1][c] > 0 ? 1 : 0) + (verticalGrid[r][c] > 0 ? 1 : 0) + (verticalGrid[r][c + 1] > 0 ? 1 : 0);
+                    if (count === 3) {
+                        if (horizontalGrid[r][c] === 0) { executeMove('h', r, c, document.getElementById('h-' + r + '-' + c), 2); return; }
+                        if (horizontalGrid[r + 1][c] === 0) { executeMove('h', r + 1, c, document.getElementById('h-' + (r + 1) + '-' + c), 2); return; }
+                        if (verticalGrid[r][c] === 0) { executeMove('v', r, c, document.getElementById('v-' + r + '-' + c), 2); return; }
+                        if (verticalGrid[r][c + 1] === 0) { executeMove('v', r, c + 1, document.getElementById('v-' + r + '-' + (c + 1)), 2); return; }
+                    }
+                }
+            }
+        }
+
+        let safeMoves = [];
+        for (let r = 0; r < boardRows; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                if (horizontalGrid[r][c] === 0) {
+                    let el = document.getElementById('h-' + r + '-' + c);
+                    if (el && !el.classList.contains('line-disabled') && !el.classList.contains('line-blocked')) safeMoves.push({ type: 'h', r: r, c: c, el: el });
+                }
+            }
+        }
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols; c++) {
+                if (verticalGrid[r][c] === 0) {
+                    let el = document.getElementById('v-' + r + '-' + c);
+                    if (el && !el.classList.contains('line-disabled') && !el.classList.contains('line-blocked')) safeMoves.push({ type: 'v', r: r, c: c, el: el });
+                }
+            }
+        }
+
+        if (safeMoves.length > 0) {
+            let pick = safeMoves[Math.floor(Math.random() * safeMoves.length)];
+            executeMove(pick.type, pick.r, pick.c, pick.el, 2);
+        }
+    }
+
+    // CHALLENGE AI - Strong AI opponent with Minimax + Alpha-Beta Pruning
+    class ChallengeAI {
+        constructor(rows, cols) {
+            this.rows = rows;
+            this.cols = cols;
+            this.maxDepth = 4;
+        }
+
+        getAvailableMoves(hGrid, vGrid) {
+            let moves = [];
+            for (let r = 0; r < this.rows; r++) {
+                for (let c = 0; c < this.cols - 1; c++) {
+                    if (hGrid[r][c] === 0) moves.push({ type: 'h', r: r, c: c });
+                }
+            }
+            for (let r = 0; r < this.rows - 1; r++) {
+                for (let c = 0; c < this.cols; c++) {
+                    if (vGrid[r][c] === 0) moves.push({ type: 'v', r: r, c: c });
+                }
+            }
+            return moves;
+        }
+
+        evaluateBoard(hGrid, vGrid, boxesGrid, player) {
+            let score = 0;
+            let p1Boxes = 0, p2Boxes = 0;
+            for (let r = 0; r < this.rows - 1; r++) {
+                for (let c = 0; c < this.cols - 1; c++) {
+                    if (boxesGrid[r][c] === 1) p1Boxes++;
+                    else if (boxesGrid[r][c] === 2) p2Boxes++;
+                }
+            }
+            score = (player === 1) ? (p1Boxes - p2Boxes) * 10 : (p2Boxes - p1Boxes) * 10;
+            
+            for (let r = 0; r < this.rows - 1; r++) {
+                for (let c = 0; c < this.cols - 1; c++) {
+                    if (boxesGrid[r][c] === 0) {
+                        let count = (hGrid[r][c] > 0 ? 1 : 0) + (hGrid[r+1][c] > 0 ? 1 : 0) + 
+                                   (vGrid[r][c] > 0 ? 1 : 0) + (vGrid[r][c+1] > 0 ? 1 : 0);
+                        if (count === 3) {
+                            score += 8;
+                        } else if (count === 2) {
+                            score += 2;
                         }
                     }
                 }
             }
+            return score;
         }
 
-        if (data.turn !== undefined && data.turn !== turnPlayer) {
-            turnPlayer = data.turn;
-            updateTurnIndicator();
-        }
-
-        if (data.lastMove && data.lastMove.player !== myPlayerNumber) {
-            let m = data.lastMove;
-            let el = document.getElementById(`${m.type}-${m.r}-${m.c}`);
-            if (el && !el.classList.contains(`line-drawn-p${m.player}`)) {
-                executeMove(m.type, m.r, m.c, el, m.player, true);
-            }
-        }
-
-        if (data.chat) {
-            let chatBox = document.getElementById('chatMessagesBox');
-            let chatHTML = '';
-            Object.values(data.chat).forEach(c => {
-                chatHTML += `<div><b>${c.user}:</b> ${c.msg}</div>`;
-            });
-            chatBox.innerHTML = chatHTML;
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    });
-}
-
-function exitCurrentGame() {
-    if (isOnlineGame && roomRef) { roomRef.off(); roomRef.remove(); }
-    isOnlineGame = false;
-    document.getElementById('gameChatBar').style.display = 'none';
-    if (turnTimerInterval) clearInterval(turnTimerInterval);
-    document.getElementById('game-timer-bar').style.display = 'none';
-    showScreen('screen-map');
-}
-
-function restartCurrentGame() {
-    document.getElementById('defeat-modal').style.display = 'none';
-    startLevelGame(activeLevel, getGridSizeForLevel(activeLevel), isTargetLevelMode);
-}
-
-function getGridSizeForLevel(lvl) {
-    // लेव्हल 1 ते 200 साठी: दर 5 लेव्हलच्या गटासाठी तुझी स्वतःची फिक्स साईज (एकूण 40 गट)
-    if (lvl >= 1 && lvl <= 200) {
-        let groupIndex = Math.floor((lvl - 1) / 5); // 0 ते 39 पर्यंतचे ग्रुप्स
-        
-        // इथे तू 1 ते 200 लेव्हलपर्यंतच्या प्रत्येक 5 लेव्हलच्या गटासाठी rows आणि cols बदलू शकतोस:
-        const customSizes = [
-            // 1 ते 50 लेव्हलचे गट (10 गट)
-            { rows: 4, cols: 4 }, // लेव्हल 1-5
-            { rows: 4, cols: 5 }, // लेव्हल 6-10
-            { rows: 4, cols: 6 }, // लेव्हल 11-15
-            { rows: 6, cols: 6 }, // लेव्हल 16-20
-            { rows: 5, cols: 6 }, // लेव्हल 21-25
-            { rows: 5, cols: 5 }, // लेव्हल 26-30
-            { rows: 7, cols: 6 }, // लेव्हल 31-35
-            { rows: 8, cols: 7 }, // लेव्हल 36-40
-            { rows: 8, cols: 5 }, // लेव्हल 41-45
-            { rows: 8, cols: 4 }, // लेव्हल 46-50
-            { rows: 8, cols: 8 }, // लेव्हल 51-55
-            { rows: 8, cols: 6 }, // लेव्हल 56-60
-            { rows: 8, cols: 9 }, // लेव्हल 61-65
-            { rows: 8, cols: 10}, // लेव्हल 66-70
-            { rows: 9, cols: 3 }, // लेव्हल 71-75
-            { rows: 9, cols: 4 }, // लेव्हल 76-80
-            { rows: 9, cols: 5 }, // लेव्हल 81-85
-            { rows: 9, cols: 6 }, // लेव्हल 86-90
-            { rows: 9, cols: 7 }, // लेव्हल 91-95
-            { rows: 9, cols: 8 }, // लेव्हल 96-100
-            // 101 ते 200 लेव्हलचे गट (20 गट)
-            { rows: 10, cols: 10}, // लेव्हल 101-105
-            { rows: 11, cols: 10 }, // लेव्हल 106-110
-            { rows: 12, cols: 10 }, // लेव्हल 111-115
-            { rows: 12, cols: 7 }, // लेव्हल 116-120
-            { rows: 13, cols: 9}, // लेव्हल 121-125
-            { rows: 13, cols: 6 }, // लेव्हल 126-130
-            { rows: 13, cols: 10 }, // लेव्हल 131-135
-            { rows: 14, cols: 9 }, // लेव्हल 136-140
-            { rows: 15, cols: 6 }, // लेव्हल 141-145
-            { rows: 15, cols: 7 }, // लेव्हल 146-150
-            { rows: 15, cols: 10 }, // लेव्हल 151-155
-            { rows: 15, cols: 9 }, // लेव्हल 156-160
-            { rows: 16, cols: 9 }, // लेव्हल 161-165
-            { rows: 16, cols: 10 }, // लेव्हल 166-170
-            { rows: 17, cols: 8 }, // लेव्हल 171-175
-            { rows: 17, cols: 10 }, // लेव्हल 176-180
-            { rows:18, cols: 10 }, // लेव्हल 181-185
-            { rows: 19, cols: 10 }, // लेव्हल 186-190
-            { rows: 20, cols: 10 }, // लेव्हल 191-195
-            { rows: 20, cols: 10 }  // लेव्हल 196-200
-        ];
-        
-        return customSizes[groupIndex] || { rows: 5, cols: 5 };
-    }
-    
-    // लेव्हल 201 ते 350 साठी जुना नियम जसाच्या तसा
-    else if (lvl <= 350) {
-        let size = 4 + Math.floor((lvl - 1) / 30);
-        if (size > 8) size = 8;
-        return { rows: size, cols: size };
-    }
-    
-    return { rows: 5, cols: 5 };
-}
-
-function buildMapRoadmap() {
-    let container = document.getElementById('levelNodesContainer');
-    container.innerHTML = '';
-
-    let startLvl = 1, endLvl = 350;
-    document.getElementById('mapLevelTitle').innerText = 'MAP(1-350)';
-
-    for (let lvl = startLvl; lvl <= endLvl; lvl++) {
-        let nodeWrap = document.createElement('div');
-        nodeWrap.className = 'map-node-container';
-
-        let node = document.createElement('div');
-        let isUnlocked = lvl <= gameData.unlockedLevel;
-        let isSpecial = (lvl % 5 === 0 || lvl >= 201);
-        let gridDim = getGridSizeForLevel(lvl);
-
-        node.className = `map-node ${isUnlocked ? '' : 'locked'} ${isSpecial ? 'special' : ''}`;
-        node.innerText = lvl;
-        node.setAttribute('data-lvl', lvl);
-
-        let badge = document.createElement('div');
-        badge.className = 'grid-info-badge';
-        
-        if (lvl >= 201) {
-            badge.innerText = "ZIG-ZAG GRID";
-        } else {
-            badge.innerText = `${gridDim.cols - 1}x${gridDim.rows - 1}`;
-        }
-        node.appendChild(badge);
-
-        if (isUnlocked) {
-            node.onclick = function() { startLevelGame(lvl, gridDim, isSpecial); };
-        }
-
-        nodeWrap.appendChild(node);
-        container.appendChild(nodeWrap);
-    }
-}
-
-function drawMapConnectionsSVG() {
-    let svg = document.getElementById('mapSvgContainer');
-    svg.innerHTML = '';
-    
-    let nodes = document.querySelectorAll('.map-node');
-    if (nodes.length < 2) return;
-
-    let wrapper = document.querySelector('.map-canvas-wrapper');
-    let wrapperRect = wrapper.getBoundingClientRect();
-
-    let points = [];
-    nodes.forEach(node => {
-        let rect = node.getBoundingClientRect();
-        let x = (rect.left + rect.width / 2) - wrapperRect.left;
-        let y = (rect.top + rect.height / 2) - wrapperRect.top;
-        points.push({ x, y });
-    });
-
-    let pathD = `M ${points[0].x} ${points[0].y}`;
-    for (let i = 1; i < points.length; i++) {
-        let prev = points[i - 1];
-        let curr = points[i];
-        let cy = (prev.y + curr.y) / 2;
-        pathD += ` C ${prev.x} ${cy}, ${curr.x} ${cy}, ${curr.x} ${curr.y}`;
-    }
-
-    let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', pathD);
-    path.setAttribute('stroke', '#fffa65');
-    path.setAttribute('stroke-width', '4');
-    path.setAttribute('stroke-dasharray', '8,8');
-    path.setAttribute('fill', 'none');
-    path.setAttribute('opacity', '0.9');
-
-    svg.appendChild(path);
-}
-
-function startLevelGame(lvl, gridDim, isSpecial) {
-    activeLevel = lvl; 
-    boardRows = gridDim.rows; 
-    boardCols = gridDim.cols;
-    isTargetLevelMode = isSpecial;
-    isOnlineGame = false;
-
-    document.getElementById('hintBtn').style.display = 'inline-block';
-
-    if (lvl >= 201) {
-        activeShape = 'PHOTO_ZIGZAG';
-    } else {
-        activeShape = 'SQUARE';
-    }
-
-    if (isTargetLevelMode) {
-        targetBoxesToWin = Math.min(Math.floor((boardRows * boardCols) * 0.3), 15);
-    } else {
-        targetBoxesToWin = 0;
-    }
-
-    showScreen('screen-game');
-
-    if (activeLevel === 1) {
-        openModal('tutorialModal');
-    }
-
-    if (lvl >= 201) {
-        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Zig-Zag Pattern Grid!`;
-    } else if (isTargetLevelMode) {
-        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Target: Make ${targetBoxesToWin} Boxes First!`;
-    } else {
-        document.getElementById('levelBanner').innerText = `Level ${activeLevel} - Grid ${boardCols - 1}x${boardRows - 1}`;
-    }
-
-    let totalActivePlayers = 2;
-    if (activePlayerMode === '3P') totalActivePlayers = 3;
-    else if (activePlayerMode === '4P') totalActivePlayers = 4;
-    else if (activePlayerMode === 'AI' || activePlayerMode === '2P') totalActivePlayers = 2;
-
-    document.getElementById('p3Box').style.display = (totalActivePlayers >= 3) ? 'block' : 'none';
-    document.getElementById('p4Box').style.display = (totalActivePlayers >= 4) ? 'block' : 'none';
-
-    initializeBoard();
-}
-
-function isCellInShape(r, c) {
-    if (activeShape === 'SQUARE') return true;
-    
-    if (activeShape === 'PHOTO_ZIGZAG') {
-        if ((r === 0 || r === boardRows*2-2) && (c < 2 || c > boardCols*2-4)) return false;
-        if ((r === 2 || r === boardRows*2-4) && (c === 0 || c === boardCols*2-2)) return false;
-        return true;
-    }
-
-    // HEXAGON: कोपरे थोडे कापलेले अससलेला शेप (Perfect Fit)
-    if (activeShape === 'HEXAGON') {
-        let maxR = (boardRows - 1) * 2;
-        let maxC = (boardCols - 1) * 2;
-        if ((r === 0 || r === maxR) && (c < 2 || c > maxC - 2)) return false;
-        return true;
-    }
-
-    // HEPTAGON: वरची बाजू लहान असलेला शेप
-    if (activeShape === 'HEPTAGON') {
-        let maxR = (boardRows - 1) * 2;
-        let maxC = (boardCols - 1) * 2;
-        if (r === 0 && (c < 2 || c > maxC - 2)) return false;
-        if (r === maxR && (c < 1 || c > maxC - 1)) return false;
-        return true;
-    }
-
-    // PENTAGON: घरच्या आकारासारखा (पंचकोन) शेप
-    if (activeShape === 'PENTAGON') {
-        let maxR = (boardRows - 1) * 2;
-        let maxC = (boardCols - 1) * 2;
-        if (r === 0 && (c < Math.floor(maxC/2) - 1 || c > Math.floor(maxC/2) + 1)) return false;
-        return true;
-    }
-
-    return true;
-}
-
-function generateRandomCharMatrix(rows, cols) {
-    let matrix = [];
-    let word = RANDOM_WORDS_LIST[Math.floor(Math.random() * RANDOM_WORDS_LIST.length)];
-    for (let r = 0; r < rows; r++) {
-        matrix[r] = [];
-        for (let c = 0; c < cols; c++) {
-            let charIndex = (r * cols + c) % word.length;
-            matrix[r][c] = word[charIndex];
-        }
-    }
-    return matrix;
-}
-
-function renderTopTargetBoard() {
-    let topContainer = document.getElementById('top-target-board-container');
-    let topBoard = document.getElementById('top-target-board');
-    
-    if (activeLevel < 101) {
-        topContainer.style.display = 'none';
-        return;
-    }
-
-    topContainer.style.display = 'flex';
-    topBoard.innerHTML = '';
-    topBoard.style.gridTemplateColumns = `repeat(${boardCols - 1}, auto)`;
-
-    for (let r = 0; r < boardRows - 1; r++) {
-        for (let c = 0; c < boardCols - 1; c++) {
-            let cell = document.createElement('div');
-            cell.className = 'top-target-cell';
-            cell.innerText = levelCharMatrix[r][c];
-            topBoard.appendChild(cell);
-        }
-    }
-}
-
-function initializeBoard() {
-    turnPlayer = 1; playerScores = [0, 0, 0, 0];
-    updateScoreDisplays();
-    updateTurnIndicator();
-    startTurnTimer();
-
-    let board = document.getElementById('game-board');
-    board.innerHTML = '';
-
-    let gridColTemplate = '';
-    for (let i = 0; i < boardCols - 1; i++) {
-        gridColTemplate += 'auto 1fr ';
-    }
-    gridColTemplate += 'auto';
-
-    let gridRowTemplate = '';
-    for (let i = 0; i < boardRows - 1; i++) {
-        gridRowTemplate += 'auto 1fr ';
-    }
-    gridRowTemplate += 'auto';
-
-    board.style.gridTemplateColumns = gridColTemplate;
-    board.style.gridTemplateRows = gridRowTemplate;
-
-    horizontalGrid = Array(boardRows).fill(null).map(() => Array(boardCols - 1).fill(0));
-    verticalGrid = Array(boardRows - 1).fill(null).map(() => Array(boardCols).fill(0));
-    boxesGrid = Array(boardRows - 1).fill(null).map(() => Array(boardCols - 1).fill(0));
-
-    if (activeLevel >= 101 && activeLevel <= 200) {
-        levelCharMatrix = generateRandomCharMatrix(boardRows - 1, boardCols - 1);
-        renderTopTargetBoard();
-    } else {
-        document.getElementById('top-target-board-container').style.display = 'none';
-    }
-
-    for (let r = 0; r < boardRows * 2 - 1; r++) {
-        for (let c = 0; c < boardCols * 2 - 1; c++) {
-            let isRowEven = (r % 2 === 0), isColEven = (c % 2 === 0);
-            let validCell = isCellInShape(r, c);
-
-            if (isRowEven && isColEven) {
-                let dot = document.createElement('div'); 
-                dot.className = 'dot-node' + (validCell ? '' : ' disabled-cell'); 
-                board.appendChild(dot);
-            } else if (isRowEven && !isColEven) {
-                let line = document.createElement('div'); 
-                line.className = 'line-horizontal animated-line' + (validCell ? '' : ' line-disabled'); 
-                let rIdx = r / 2, cIdx = (c - 1) / 2;
-                line.onclick = () => handleLineClick('h', rIdx, cIdx, line);
-                line.id = `h-${rIdx}-${cIdx}`; board.appendChild(line);
-            } else if (!isRowEven && isColEven) {
-                let line = document.createElement('div'); 
-                line.className = 'line-vertical animated-line' + (validCell ? '' : ' line-disabled'); 
-                let rIdx = (r - 1) / 2, cIdx = c / 2;
-                line.onclick = () => handleLineClick('v', rIdx, cIdx, line);
-                line.id = `v-${rIdx}-${cIdx}`; board.appendChild(line);
-            } else {
-                let bR = (r - 1) / 2, bC = (c - 1) / 2;
-                let box = document.createElement('div'); 
-                box.className = 'box-cell animated-box-cell' + (validCell ? '' : ' box-disabled');
-                box.id = `box-${bR}-${bC}`;
-
-                if (activeLevel >= 101 && activeLevel <= 200 && validCell) {
-                    box.innerText = levelCharMatrix[bR][bC];
-                }
-
-                board.appendChild(box);
-                if (!validCell) boxesGrid[bR][bC] = -1;
-            }
-        }
-    }
-}
-
-function useHint() {
-    if (turnPlayer !== 1) { showToast("Wait for your turn!"); return; }
-    if (gameData.coins < 50) { showToast("50 🪙 Coins needed for Hint!"); return; }
-
-    let bestMove = findBestHintMove();
-    if (bestMove) {
-        gameData.coins -= 50;
-        saveDataToStorage();
-        let el = document.getElementById(`${bestMove.type}-${bestMove.r}-${bestMove.c}`);
-        if (el) {
-            el.classList.add('hint-highlight');
-            setTimeout(() => { el.classList.remove('hint-highlight'); }, 2500);
-            showToast("💡 Best move highlighted!");
-        }
-    } else {
-        showToast("No easy moves found!");
-    }
-}
-
-function findBestHintMove() {
-    for (let r = 0; r < boardRows - 1; r++) {
-        for (let c = 0; c < boardCols - 1; c++) {
-            if (boxesGrid[r][c] === 0) {
-                let count = (horizontalGrid[r][c]?1:0) + (horizontalGrid[r+1][c]?1:0) + (verticalGrid[r][c]?1:0) + (verticalGrid[r][c+1]?1:0);
-                if (count === 3) {
-                    if (!horizontalGrid[r][c]) return { type: 'h', r, c };
-                    if (!horizontalGrid[r+1][c]) return { type: 'h', r: r+1, c };
-                    if (!verticalGrid[r][c]) return { type: 'v', r, c };
-                    if (!verticalGrid[r][c+1]) return { type: 'v', r, c: c+1 };
-                }
-            }
-        }
-    }
-    for (let r = 0; r < boardRows; r++) {
-        for (let c = 0; c < boardCols - 1; c++) {
-            if (horizontalGrid[r][c] === 0) return { type: 'h', r, c };
-        }
-    }
-    for (let r = 0; r < boardRows - 1; r++) {
-        for (let c = 0; c < boardCols; c++) {
-            if (verticalGrid[r][c] === 0) return { type: 'v', r, c };
-        }
-    }
-    return null;
-}
-
-function updateTurnIndicator() {
-    let tText = document.getElementById('turnIndicatorText');
-    
-    document.querySelectorAll('.score-box').forEach(b => b.classList.remove('active-turn'));
-
-    let activeBox = document.getElementById(`p${turnPlayer}ScoreBox`);
-    if (activeBox) activeBox.classList.add('active-turn');
-
-    if (isOnlineGame) {
-    // रूममधील खेळाडूचे नाव शोधून ते दाखवणे
-    let currentTurnPlayerName = trackedRoomPlayers[turnPlayer] || `Player ${turnPlayer}`;
-    tText.innerHTML = (turnPlayer === myPlayerNumber) 
-        ? `<span style='color:#2ed573;'>🟢 ${gameData.username}'s Turn!</span>` 
-        : `<span style='color:#d63031;'>⏳ ${currentTurnPlayerName}'s Turn</span>`;
-} else {
-    let pName = (turnPlayer === 1) ? gameData.username : (activePlayerMode === 'AI' ? '🤖 AI' : `Player ${turnPlayer}`);
-    tText.innerHTML = `👉 <span style="color:#ff4757; font-weight:900;">TURN: ${pName}</span>`;
-}
-}
-
-function startTurnTimer() {
-    if (turnTimerInterval) clearInterval(turnTimerInterval);
-    let timerBar = document.getElementById('game-timer-bar');
-    let timerProg = document.getElementById('game-timer-progress');
-
-    if (activeLevel < 50 && !isOnlineGame) {
-        timerBar.style.display = 'none';
-        return;
-    }
-
-    timerBar.style.display = 'block';
-    let timeLeft = TURN_TIME_SECONDS;
-    timerProg.style.width = '100%';
-
-    turnTimerInterval = setInterval(() => {
-        timeLeft--;
-        let pct = (timeLeft / TURN_TIME_SECONDS) * 100;
-        timerProg.style.width = pct + '%';
-
-        if (timeLeft === 5) {
-            showToast("⚠️ only 5second!");
-        }
-
-        if (timeLeft <= 0) {
-            clearInterval(turnTimerInterval);
-            showToast(`⏰ Time Out! Turn skipped.`);
-            let totalPlayers = 2;
-            if (activePlayerMode === '3P') totalPlayers = 3;
-            else if (activePlayerMode === '4P') totalPlayers = 4;
+        simulateMove(hGrid, vGrid, boxesGrid, move, player) {
+            let nh = hGrid.map(function(row) { return row.slice(); });
+            let nv = vGrid.map(function(row) { return row.slice(); });
+            let nb = boxesGrid.map(function(row) { return row.slice(); });
             
-            turnPlayer = (turnPlayer % totalPlayers) + 1;
-            updateTurnIndicator();
-            startTurnTimer();
-            if (!isOnlineGame && activePlayerMode === 'AI' && turnPlayer === 2) {
-                setTimeout(triggerSmartAI, 300);
+            if (move.type === 'h') nh[move.r][move.c] = player;
+            else nv[move.r][move.c] = player;
+            
+            let completed = false;
+            let test = function(br, bc) {
+                if (br >= 0 && br < this.rows - 1 && bc >= 0 && bc < this.cols - 1) {
+                    if (nb[br][bc] === 0 &&
+                        nh[br][bc] > 0 && nh[br+1][bc] > 0 &&
+                        nv[br][bc] > 0 && nv[br][bc+1] > 0) {
+                        nb[br][bc] = player;
+                        completed = true;
+                    }
+                }
+            }.bind(this);
+            if (move.type === 'h') { test(move.r - 1, move.c); test(move.r, move.c); }
+            else { test(move.r, move.c - 1); test(move.r, move.c); }
+            
+            return { hGrid: nh, vGrid: nv, boxesGrid: nb, completed: completed };
+        }
+
+        minimax(hGrid, vGrid, boxesGrid, depth, isMaximizing, alpha, beta, player) {
+            let moves = this.getAvailableMoves(hGrid, vGrid);
+            if (depth === 0 || moves.length === 0) {
+                return { score: this.evaluateBoard(hGrid, vGrid, boxesGrid, player), move: null };
             }
-        }
-    }, 1000);
-}
 
-function handleLineClick(type, r, c, element) {
-    if (isOnlineGame && turnPlayer !== myPlayerNumber) {
-        showToast("Not your turn!"); return;
-    }
-    executeMove(type, r, c, element, turnPlayer);
-}
+            moves.sort(function(a, b) {
+                let aScore = 0, bScore = 0;
+                if (this.wouldCompleteBox(hGrid, vGrid, boxesGrid, a)) aScore += 50;
+                if (this.wouldCompleteBox(hGrid, vGrid, boxesGrid, b)) bScore += 50;
+                return bScore - aScore;
+            }.bind(this));
 
-function executeMove(type, r, c, element, player, isRemote = false) {
-    if (type === 'h' && horizontalGrid[r][c] !== 0) return;
-    if (type === 'v' && verticalGrid[r][c] !== 0) return;
+            let bestMove = moves[0];
+            let bestScore = isMaximizing ? -Infinity : Infinity;
 
-    playSound('line');
+            for (let move of moves) {
+                let result = this.simulateMove(hGrid, vGrid, boxesGrid, move, player);
+                let nextPlayer = result.completed ? player : (player === 1 ? 2 : 1);
+                let evalResult = this.minimax(
+                    result.hGrid, result.vGrid, result.boxesGrid,
+                    depth - 1, !isMaximizing, alpha, beta, nextPlayer
+                );
+                let score = evalResult.score;
 
-    element.classList.add(`line-drawn-p${player}`);
-    if (type === 'h') horizontalGrid[r][c] = player;
-    if (type === 'v') verticalGrid[r][c] = player;
-
-    if (isOnlineGame && !isRemote && player === myPlayerNumber && roomRef) {
-        roomRef.update({ lastMove: { type, r, c, player } });
-    }
-
-    let filledBox = checkCompletedBoxes(type, r, c, player);
-
-    if (!filledBox) {
-        let totalPlayers = 2;
-        if (activePlayerMode === '3P') totalPlayers = 3;
-        else if (activePlayerMode === '4P') totalPlayers = 4;
-
-        turnPlayer = (turnPlayer % totalPlayers) + 1;
-        if (isOnlineGame && !isRemote && roomRef) {
-            roomRef.update({ turn: turnPlayer });
-        }
-    }
-
-    updateScoreDisplays();
-    updateTurnIndicator();
-    startTurnTimer();
-
-    if (checkGameOver()) return;
-
-    if (!isOnlineGame && activePlayerMode === 'AI' && turnPlayer === 2) {
-        setTimeout(triggerSmartAI, 300);
-    }
-}
-
-function checkCompletedBoxes(type, r, c, player) {
-    let isFilled = false;
-
-    let test = (br, bc) => {
-        if (br >= 0 && br < boardRows - 1 && bc >= 0 && bc < boardCols - 1) {
-            if (boxesGrid[br][bc] === 0 &&
-                horizontalGrid[br][bc] !== 0 && horizontalGrid[br + 1][bc] !== 0 &&
-                verticalGrid[br][bc] !== 0 && verticalGrid[br][bc + 1] !== 0) {
-
-                boxesGrid[br][bc] = player;
-                let boxEl = document.getElementById(`box-${br}-${bc}`);
-                
-                if (activeLevel >= 101 && activeLevel <= 200) {
-                    boxEl.innerText = levelCharMatrix[br][bc];
-                    boxEl.classList.add('char-unlocked');
+                if (isMaximizing) {
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove = move;
+                    }
+                    alpha = Math.max(alpha, bestScore);
                 } else {
-                    boxEl.innerText = (player === 2 && activePlayerMode === 'AI') ? '🤖' : gameData.equippedBoxEmoji;
+                    if (score < bestScore) {
+                        bestScore = score;
+                        bestMove = move;
+                    }
+                    beta = Math.min(beta, bestScore);
                 }
-                
-                boxEl.classList.add('captured-box-anim');
-
-                playerScores[player - 1]++;
-                isFilled = true;
-                playSound('box');
+                if (beta <= alpha) break;
             }
+            return { score: bestScore, move: bestMove };
         }
-    };
 
-    if (type === 'h') { test(r - 1, c); test(r, c); }
-    else { test(r, c - 1); test(r, c); }
+        wouldCompleteBox(hGrid, vGrid, boxesGrid, move) {
+            let nh = hGrid.map(function(row) { return row.slice(); });
+            let nv = vGrid.map(function(row) { return row.slice(); });
+            if (move.type === 'h') nh[move.r][move.c] = 1;
+            else nv[move.r][move.c] = 1;
+            
+            let test = function(br, bc) {
+                if (br >= 0 && br < this.rows - 1 && bc >= 0 && bc < this.cols - 1) {
+                    if (boxesGrid[br][bc] === 0 &&
+                        nh[br][bc] > 0 && nh[br+1][bc] > 0 &&
+                        nv[br][bc] > 0 && nv[br][bc+1] > 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }.bind(this);
+            if (move.type === 'h') return test(move.r - 1, move.c) || test(move.r, move.c);
+            else return test(move.r, move.c - 1) || test(move.r, move.c);
+        }
 
-    return isFilled;
-}
+        getBestMove(hGrid, vGrid, boxesGrid, player) {
+            let depth = this.maxDepth;
+            let moves = this.getAvailableMoves(hGrid, vGrid);
+            if (moves.length <= 15) depth = 5;
+            else if (moves.length <= 30) depth = 4;
+            else depth = 3;
+            
+            let result = this.minimax(hGrid, vGrid, boxesGrid, depth, true, -Infinity, Infinity, player);
+            return result.move;
+        }
+    }
 
-function updateScoreDisplays() {
-    document.getElementById('s1').innerText = playerScores[0];
-    document.getElementById('s2').innerText = playerScores[1];
-    document.getElementById('s3').innerText = playerScores[2];
-    document.getElementById('s4').innerText = playerScores[3];
-}
+    // Challenge setup with Strong AI
+    function setupChallengeBoard() {
+        let container = document.getElementById('challengeBoardContainer');
+        container.innerHTML = '';
+        
+        let board = document.createElement('div');
+        board.style.display = 'grid';
+        board.style.gap = '0px';
+        board.style.background = '#fff8e7';
+        board.style.padding = '8px';
+        board.style.borderRadius = '16px';
+        board.style.border = '4px solid #fdcb6e';
 
-function triggerSmartAI() {
-    if (turnPlayer !== 2 || activePlayerMode !== 'AI') return;
+        let cRows = 6, cCols = 6;
+        let colT = '', rowT = '';
+        for (let i = 0; i < cCols - 1; i++) colT += 'auto 1fr ';
+        colT += 'auto';
+        for (let i = 0; i < cRows - 1; i++) rowT += 'auto 1fr ';
+        rowT += 'auto';
 
-    for (let r = 0; r < boardRows - 1; r++) {
-        for (let c = 0; c < boardCols - 1; c++) {
-            if (boxesGrid[r][c] === 0) {
-                let linesCount = (horizontalGrid[r][c]?1:0) + (horizontalGrid[r+1][c]?1:0) + (verticalGrid[r][c]?1:0) + (verticalGrid[r][c+1]?1:0);
-                if (linesCount === 3) {
-                    if (!horizontalGrid[r][c]) { executeMove('h', r, c, document.getElementById(`h-${r}-${c}`), 2); return; }
-                    if (!horizontalGrid[r+1][c]) { executeMove('h', r+1, c, document.getElementById(`h-${r+1}-${c}`), 2); return; }
-                    if (!verticalGrid[r][c]) { executeMove('v', r, c, document.getElementById(`v-${r}-${c}`), 2); return; }
-                    if (!verticalGrid[r][c+1]) { executeMove('v', r, c+1, document.getElementById(`v-${r}-${c+1}`), 2); return; }
+        board.style.gridTemplateColumns = colT;
+        board.style.gridTemplateRows = rowT;
+
+        let cHGrid = Array(cRows).fill(null).map(function() { return Array(cCols - 1).fill(0); });
+        let cVGrid = Array(cRows - 1).fill(null).map(function() { return Array(cCols).fill(0); });
+        let cBoxGrid = Array(cRows - 1).fill(null).map(function() { return Array(cCols - 1).fill(0); });
+        
+        challengeBoardData = { hGrid: cHGrid, vGrid: cVGrid, boxesGrid: cBoxGrid, rows: cRows, cols: cCols };
+        challengeAI = new ChallengeAI(cRows, cCols);
+        let aiThinking = false;
+
+        function handleChallengeLineClick(type, r, c, element) {
+            if (aiThinking) return;
+            
+            if (type === 'h' && cHGrid[r][c] !== 0) return;
+            if (type === 'v' && cVGrid[r][c] !== 0) return;
+            
+            // Player move (P1)
+            cHGrid[r][c] = (type === 'h') ? 1 : cHGrid[r][c];
+            cVGrid[r][c] = (type === 'v') ? 1 : cVGrid[r][c];
+            element.classList.add('line-drawn-p1');
+            playSound('line');
+            
+            // Check for completed boxes
+            let filled = false;
+            let test = function(br, bc) {
+                if (br >= 0 && br < cRows - 1 && bc >= 0 && bc < cCols - 1) {
+                    if (cBoxGrid[br][bc] === 0 &&
+                        cHGrid[br][bc] > 0 && cHGrid[br+1][bc] > 0 &&
+                        cVGrid[br][bc] > 0 && cVGrid[br][bc+1] > 0) {
+                        cBoxGrid[br][bc] = 1;
+                        let boxEl = board.querySelector('[data-box="' + br + '_' + bc + '"]');
+                        if (boxEl) {
+                            boxEl.innerText = '⭐';
+                            boxEl.style.background = '#ffd700';
+                            boxEl.style.color = '#fff';
+                            boxEl.style.borderRadius = '4px';
+                        }
+                        filled = true;
+                        playSound('box');
+                    }
+                }
+            };
+            if (type === 'h') { test(r - 1, c); test(r, c); }
+            else { test(r, c - 1); test(r, c); }
+            
+            document.getElementById('challengeTurnText').innerHTML = '🤖 AI is thinking... <span class="challenge-ai-badge">🧠 CALCULATING</span>';
+            document.getElementById('challengeTurnText').style.color = '#fffa65';
+            aiThinking = true;
+            
+            setTimeout(function() {
+                // AI move using Minimax
+                let aiMove = challengeAI.getBestMove(cHGrid, cVGrid, cBoxGrid, 2);
+                if (aiMove) {
+                    let aiEl = board.querySelector('[data-line="' + aiMove.type + '_' + aiMove.r + '_' + aiMove.c + '"]');
+                    if (aiEl) {
+                        if (aiMove.type === 'h') cHGrid[aiMove.r][aiMove.c] = 2;
+                        else cVGrid[aiMove.r][aiMove.c] = 2;
+                        aiEl.classList.add('line-drawn-p2');
+                        playSound('line');
+                        
+                        // Check AI completed boxes
+                        let aiFilled = false;
+                        let aiTest = function(br, bc) {
+                            if (br >= 0 && br < cRows - 1 && bc >= 0 && bc < cCols - 1) {
+                                if (cBoxGrid[br][bc] === 0 &&
+                                    cHGrid[br][bc] > 0 && cHGrid[br+1][bc] > 0 &&
+                                    cVGrid[br][bc] > 0 && cVGrid[br][bc+1] > 0) {
+                                    cBoxGrid[br][bc] = 2;
+                                    let boxEl = board.querySelector('[data-box="' + br + '_' + bc + '"]');
+                                    if (boxEl) {
+                                        boxEl.innerText = '🤖';
+                                        boxEl.style.background = '#1e90ff';
+                                        boxEl.style.color = '#fff';
+                                        boxEl.style.borderRadius = '4px';
+                                    }
+                                    aiFilled = true;
+                                    playSound('box');
+                                }
+                            }
+                        };
+                        if (aiMove.type === 'h') { aiTest(aiMove.r - 1, aiMove.c); aiTest(aiMove.r, aiMove.c); }
+                        else { aiTest(aiMove.r, aiMove.c - 1); aiTest(aiMove.r, aiMove.c); }
+                    }
+                }
+                document.getElementById('challengeTurnText').innerHTML = 'Turn: You <span class="challenge-ai-badge">🤖 MASTER AI</span>';
+                document.getElementById('challengeTurnText').style.color = '#4cda05';
+                aiThinking = false;
+            }, 600);
+        }
+
+        for (let r = 0; r < cRows * 2 - 1; r++) {
+            for (let c = 0; c < cCols * 2 - 1; c++) {
+                let isRowEven = (r % 2 === 0), isColEven = (c % 2 === 0);
+                if (isRowEven && isColEven) {
+                    let dot = document.createElement('div');
+                    dot.className = 'dot-node';
+                    board.appendChild(dot);
+                } else if (isRowEven && !isColEven) {
+                    let line = document.createElement('div');
+                    line.className = 'line-horizontal';
+                    let rIdx = r / 2, cIdx = (c - 1) / 2;
+                    line.dataset.line = 'h_' + rIdx + '_' + cIdx;
+                    line.onclick = function() { handleChallengeLineClick('h', rIdx, cIdx, this); };
+                    board.appendChild(line);
+                } else if (!isRowEven && isColEven) {
+                    let line = document.createElement('div');
+                    line.className = 'line-vertical';
+                    let rIdx = (r - 1) / 2, cIdx = c / 2;
+                    line.dataset.line = 'v_' + rIdx + '_' + cIdx;
+                    line.onclick = function() { handleChallengeLineClick('v', rIdx, cIdx, this); };
+                    board.appendChild(line);
+                } else {
+                    let box = document.createElement('div');
+                    box.className = 'box-cell';
+                    let bR = (r - 1) / 2, bC = (c - 1) / 2;
+                    box.dataset.box = bR + '_' + bC;
+                    board.appendChild(box);
                 }
             }
         }
+        container.appendChild(board);
     }
 
-    triggerRandomAIMove();
-}
+    function checkSpinAvailability() {
+        let now = Date.now();
+        let diff = now - gameData.lastSpinTimestamp;
+        let twelveHours = 12 * 60 * 60 * 1000;
 
-function triggerRandomAIMove() {
-    let possibleMoves = [];
-    for (let r = 0; r < boardRows; r++)
-        for (let c = 0; c < boardCols - 1; c++) {
-            let el = document.getElementById(`h-${r}-${c}`);
-             if (horizontalGrid[r][c] === 0 && el && !el.classList.contains('line-disabled')) possibleMoves.push({ type: 'h', r, c, el });
+        if (diff < twelveHours) {
+            let remaining = twelveHours - diff;
+            let hrs = Math.floor(remaining / (1000 * 60 * 60));
+            let mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('spinTimerText').innerText = '⏳ Next spin in: ' + hrs + 'h ' + mins + 'm';
+            document.getElementById('spinBtn').disabled = true;
+            document.getElementById('spinBtn').style.opacity = '0.5';
+        } else {
+            document.getElementById('spinTimerText').innerText = "🎉 Spin Available Now!";
+            document.getElementById('spinBtn').disabled = false;
+            document.getElementById('spinBtn').style.opacity = '1';
         }
-
-    for (let r = 0; r < boardRows - 1; r++)
-        for (let c = 0; c < boardCols; c++) {
-            let el = document.getElementById(`v-${r}-${c}`);
-            if (verticalGrid[r][c] === 0 && el && !el.classList.contains('line-disabled')) possibleMoves.push({ type: 'v', r, c, el });
-        }
-
-    if (possibleMoves.length > 0) {
-        let randomPick = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        executeMove(randomPick.type, randomPick.r, randomPick.c, randomPick.el, 2);
     }
-}
 
-function checkGameOver() {
-    if (isTargetLevelMode) {
-        let maxPlayersCount = 2;
-        if (activePlayerMode === '3P') maxPlayersCount = 3;
-        else if (activePlayerMode === '4P') maxPlayersCount = 4;
+    function triggerDailySpin() {
+        document.getElementById('spinBtn').disabled = true;
+        let wheel = document.getElementById('wheelContainer');
+        let deg = 1440 + Math.floor(Math.random() * 360);
+        wheel.style.transform = 'rotate(' + deg + 'deg)';
 
-        for (let p = 0; p < maxPlayersCount; p++) {
-            if (playerScores[p] >= targetBoxesToWin) {
-                finishGame(p + 1);
-                return true;
+        setTimeout(function() {
+            gameData.coins += 100;
+            gameData.lastSpinTimestamp = Date.now();
+            saveDataToStorage();
+            showToast("🎉 Won 100 🪙 Coins!");
+            checkSpinAvailability();
+        }, 4000);
+    }
+
+    function checkChallengeAvailability() {
+        let now = Date.now();
+        let diff = now - gameData.lastChallengeAttemptTime;
+        let twelveHours = 12 * 60 * 60 * 1000;
+
+        if (diff < twelveHours) {
+            let remaining = twelveHours - diff;
+            let hrs = Math.floor(remaining / (1000 * 60 * 60));
+            let mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('taskStatusDesc').innerText = '⏳ Next Challenge in: ' + hrs + 'h ' + mins + 'm';
+            document.getElementById('startChallengeBtn').disabled = true;
+            document.getElementById('startChallengeBtn').style.opacity = '0.5';
+        } else {
+            document.getElementById('taskStatusDesc').innerText = "Click on the Challenge button to play a 5x5 box challenge match against the robot and win coins";
+            document.getElementById('startChallengeBtn').disabled = false;
+            document.getElementById('startChallengeBtn').style.opacity = '1';
+        }
+    }
+
+    function handleChallengeStartClick() {
+        gameData.lastChallengeAttemptTime = Date.now();
+        saveDataToStorage();
+        closeModal('taskModal');
+        openModal('challengeMatchModal');
+        setupChallengeBoard();
+    }
+
+    function switchShopTab(tab) {
+        if (tab === 'line') {
+            document.getElementById('tabLine').classList.add('active');
+            document.getElementById('tabBox').classList.remove('active');
+            document.getElementById('lineSkinsSection').style.display = 'block';
+            document.getElementById('boxSkinsSection').style.display = 'none';
+        } else {
+            document.getElementById('tabBox').classList.add('active');
+            document.getElementById('tabLine').classList.remove('active');
+            document.getElementById('lineSkinsSection').style.display = 'none';
+            document.getElementById('boxSkinsSection').style.display = 'block';
+        }
+    }
+
+    function renderShopUI() {
+        let lineDiv = document.getElementById('lineSkinsSection');
+        let boxDiv = document.getElementById('boxSkinsSection');
+        
+        lineDiv.innerHTML = '';
+        boxDiv.innerHTML = '';
+
+        LINE_SKINS_LIST.forEach(function(item) {
+            let isUnlocked = gameData.unlockedLineSkins.includes(item.color);
+            let isEquipped = (gameData.equippedLineColor === item.color);
+            
+            let row = document.createElement('div');
+            row.className = 'shop-item-row';
+            row.innerHTML = '<div><span style="color:' + item.color + '; font-size:1.2rem;">■</span> ' + item.name + '</div><div>' + 
+                (isEquipped ? '<span style="color:#2ed573;">Equipped</span>' : 
+                  (isUnlocked ? '<button class="btn-small" onclick="equipSkin(\'line\', \'' + item.color + '\')">Equip</button>' : 
+                   '<button class="btn-small" style="background:#ffa502;" onclick="buySkin(\'line\', \'' + item.color + '\', ' + item.price + ')">🪙 ' + item.price + '</button>')) + 
+                '</div>';
+            lineDiv.appendChild(row);
+        });
+
+        BOX_EMOJIS_LIST.forEach(function(item) {
+            let isUnlocked = gameData.unlockedBoxEmojis.includes(item.emoji);
+            let isEquipped = (gameData.equippedBoxEmoji === item.emoji);
+            
+            let row = document.createElement('div');
+            row.className = 'shop-item-row';
+            row.innerHTML = '<div><span style="font-size:1.2rem;">' + item.emoji + '</span> ' + item.name + '</div><div>' + 
+                (isEquipped ? '<span style="color:#2ed573;">Equipped</span>' : 
+                  (isUnlocked ? '<button class="btn-small" onclick="equipSkin(\'box\', \'' + item.emoji + '\')">Equip</button>' : 
+                   '<button class="btn-small" style="background:#ffa502;" onclick="buySkin(\'box\', \'' + item.emoji + '\', ' + item.price + ')">🪙 ' + item.price + '</button>')) + 
+                '</div>';
+            boxDiv.appendChild(row);
+        });
+    }
+
+    function buySkin(type, value, price) {
+        if (gameData.coins < price) {
+            showToast("Not enough 🪙 coins!");
+            return;
+        }
+        gameData.coins -= price;
+        if (type === 'line') {
+            gameData.unlockedLineSkins.push(value);
+            gameData.equippedLineColor = value;
+        } else {
+            gameData.unlockedBoxEmojis.push(value);
+            gameData.equippedBoxEmoji = value;
+        }
+        saveDataToStorage();
+        renderShopUI();
+        showToast("Purchased & Equipped!");
+    }
+
+    function equipSkin(type, value) {
+        if (type === 'line') {
+            gameData.equippedLineColor = value;
+        } else {
+            gameData.equippedBoxEmoji = value;
+        }
+        saveDataToStorage();
+        renderShopUI();
+        showToast("Equipped!");
+    }
+
+    // MULTIPLAYER UPDATE START - Enhanced room listening with power-ups and events
+    function listenToOnlineRoom() {
+        if (!roomRef) return;
+        roomRef.on('value', function(snapshot) {
+            let data = snapshot.val();
+            if (!data) return;
+
+            let maxP = data.maxPlayers || 2;
+            for (let i = 1; i <= maxP; i++) {
+                let pName = data['p' + i];
+                let pEmoji = data['p' + i + 'Emoji'] || '👤';
+                if (pName && pName !== "Waiting...") {
+                    if (!trackedRoomPlayers[i]) {
+                        trackedRoomPlayers[i] = pName;
+                        if (pEmoji && pEmoji !== "👤") {
+                            activePlayerEmojis[i] = pEmoji;
+                        }
+                        if (i !== myPlayerNumber) {
+                            showToast('🎉 ' + pName + ' Joined the Room!');
+                            if (db) {
+                                db.ref('rooms/' + currentRoomCode + '/chat').push({
+                                    user: "System",
+                                    msg: pName + ' joined as Player ' + i + '!'
+                                });
+                            }
+                        }
+                    }
+                    // Update emoji if changed
+                    if (pEmoji && pEmoji !== "👤" && pEmoji !== activePlayerEmojis[i]) {
+                        activePlayerEmojis[i] = pEmoji;
+                        updatePlayerEmojiUI();
+                    }
+                }
             }
+
+            if (data.turn !== undefined && data.turn !== turnPlayer) {
+                turnPlayer = data.turn;
+                updateTurnIndicator();
+            }
+
+            // Sync power-up state
+            if (data.powerups) {
+                mpPowerups = data.powerups;
+                updatePowerupUI();
+            }
+            if (data.powerupCooldowns) {
+                mpPowerupCooldowns = data.powerupCooldowns;
+            }
+            if (data.specialBoxes) {
+                if (JSON.stringify(mpSpecialBoxes) !== JSON.stringify(data.specialBoxes)) {
+                    mpSpecialBoxes = data.specialBoxes;
+                    applySpecialBoxes();
+                }
+            }
+            if (data.activeEvent !== undefined && data.activeEvent !== mpActiveEvent) {
+                mpActiveEvent = data.activeEvent;
+                if (mpActiveEvent) {
+                    let eventNames = {
+                        'lightning': '⚡ LIGHTNING ROUND',
+                        'gold_rush': '💰 GOLD RUSH',
+                        'freeze': '❄️ FREEZE',
+                        'mirror': '🔄 MIRROR'
+                    };
+                    showEventBanner(eventNames[mpActiveEvent] || 'Event');
+                }
+            }
+            if (data.isFrozen !== undefined) {
+                mpIsFrozen = data.isFrozen;
+            }
+            if (data.comboCount !== undefined) {
+                mpComboCount = data.comboCount;
+            }
+
+            if (data.lastMove && data.lastMove.player !== myPlayerNumber) {
+                let m = data.lastMove;
+                let el = document.getElementById(m.type + '-' + m.r + '-' + m.c);
+                if (el && !el.classList.contains('line-drawn-p' + m.player)) {
+                    executeMove(m.type, m.r, m.c, el, m.player, true);
+                }
+            }
+
+            // Handle blocked and broken lines
+            if (data.blockedEdge) {
+                let m = data.blockedEdge;
+                let el = document.getElementById(m.type + '-' + m.r + '-' + m.c);
+                if (el) {
+                    el.classList.add('line-blocked');
+                    if (m.type === 'h') horizontalGrid[m.r][m.c] = -1;
+                    if (m.type === 'v') verticalGrid[m.r][m.c] = -1;
+                }
+                roomRef.update({ blockedEdge: null });
+            }
+
+            if (data.brokenLine) {
+                let m = data.brokenLine;
+                let el = document.getElementById(m.type + '-' + m.r + '-' + m.c);
+                if (el) {
+                    el.classList.remove('line-drawn-p' + m.player);
+                    el.style.background = '#ffeaa7';
+                    if (m.type === 'h') horizontalGrid[m.r][m.c] = 0;
+                    if (m.type === 'v') verticalGrid[m.r][m.c] = 0;
+                }
+                roomRef.update({ brokenLine: null });
+            }
+
+            if (data.chat) {
+                let chatBox = document.getElementById('chatMessagesBox');
+                let chatHTML = '';
+                for (let key in data.chat) {
+                    let c = data.chat[key];
+                    chatHTML += '<div><b>' + c.user + ':</b> ' + c.msg + '</div>';
+                }
+                chatBox.innerHTML = chatHTML;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+    }
+    // MULTIPLAYER UPDATE END
+
+    function sendOnlineChat() {
+        let msgInput = document.getElementById('chatInputMsg');
+        let msg = msgInput.value.trim();
+        if (!msg || !roomRef) return;
+        
+        db.ref('rooms/' + currentRoomCode + '/chat').push({
+            user: gameData.username,
+            msg: msg
+        });
+        msgInput.value = '';
+    }
+
+    function exitCurrentGame() {
+        if (isOnlineGame && roomRef) { 
+            roomRef.off(); 
+            roomRef.remove(); 
+        }
+        isOnlineGame = false;
+        document.getElementById('gameChatBar').style.display = 'none';
+        document.getElementById('mpPowerupBar').style.display = 'none';
+        if (turnTimerInterval) clearInterval(turnTimerInterval);
+        if (mpEventTimer) clearTimeout(mpEventTimer);
+        document.getElementById('game-timer-bar').style.display = 'none';
+        showScreen('screen-map');
+    }
+
+    function restartCurrentGame() {
+        document.getElementById('defeat-modal').style.display = 'none';
+        startLevelGame(activeLevel, getGridSizeForLevel(activeLevel), isTargetLevelMode);
+    }
+
+    function getGridSizeForLevel(lvl) {
+        if (lvl >= 1 && lvl <= 200) {
+            let groupIndex = Math.floor((lvl - 1) / 5);
+            const customSizes = [
+                { rows: 4, cols: 4 }, { rows: 4, cols: 5 }, { rows: 4, cols: 6 }, { rows: 6, cols: 6 },
+                { rows: 5, cols: 6 }, { rows: 5, cols: 5 }, { rows: 7, cols: 6 }, { rows: 8, cols: 7 },
+                { rows: 8, cols: 5 }, { rows: 8, cols: 4 }, { rows: 8, cols: 8 }, { rows: 8, cols: 6 },
+                { rows: 8, cols: 9 }, { rows: 8, cols: 10}, { rows: 9, cols: 3 }, { rows: 9, cols: 4 },
+                { rows: 9, cols: 5 }, { rows: 9, cols: 6 }, { rows: 9, cols: 7 }, { rows: 9, cols: 8 },
+                { rows: 10, cols: 10}, { rows: 11, cols: 10 }, { rows: 12, cols: 10 }, { rows: 12, cols: 7 },
+                { rows: 13, cols: 9}, { rows: 13, cols: 6 }, { rows: 13, cols: 10 }, { rows: 14, cols: 9 },
+                { rows: 15, cols: 6 }, { rows: 15, cols: 7 }, { rows: 15, cols: 10 }, { rows: 15, cols: 9 },
+                { rows: 16, cols: 9 }, { rows: 16, cols: 10 }, { rows: 17, cols: 8 }, { rows: 17, cols: 10 },
+                { rows:18, cols: 10 }, { rows: 19, cols: 10 }, { rows: 20, cols: 10 }, { rows: 20, cols: 10 }
+            ];
+            return customSizes[groupIndex] || { rows: 5, cols: 5 };
+        } else if (lvl <= 350) {
+            let size = 4 + Math.floor((lvl - 1) / 30);
+            if (size > 8) size = 8;
+            return { rows: size, cols: size };
+        }
+        return { rows: 5, cols: 5 };
+    }
+
+    function buildMapRoadmap() {
+        let container = document.getElementById('levelNodesContainer');
+        container.innerHTML = '';
+
+        let startLvl = 1, endLvl = 350;
+        document.getElementById('mapLevelTitle').innerText = 'MAP(1-350)';
+
+        for (let lvl = startLvl; lvl <= endLvl; lvl++) {
+            let nodeWrap = document.createElement('div');
+            nodeWrap.className = 'map-node-container';
+
+            let node = document.createElement('div');
+            let isUnlocked = lvl <= gameData.unlockedLevel;
+            let isSpecial = (lvl % 5 === 0 || lvl >= 201);
+            let gridDim = getGridSizeForLevel(lvl);
+
+            node.className = 'map-node ' + (isUnlocked ? '' : 'locked') + ' ' + (isSpecial ? 'special' : '');
+            node.innerText = lvl;
+            node.setAttribute('data-lvl', lvl);
+
+            let badge = document.createElement('div');
+            badge.className = 'grid-info-badge';
+            
+            if (lvl >= 201) {
+                badge.innerText = "ZIG-ZAG GRID";
+            } else {
+                badge.innerText = (gridDim.cols - 1) + 'x' + (gridDim.rows - 1);
+            }
+            node.appendChild(badge);
+
+            if (isUnlocked) {
+                node.onclick = function() { startLevelGame(lvl, gridDim, isSpecial); };
+            }
+
+            nodeWrap.appendChild(node);
+            container.appendChild(nodeWrap);
         }
     }
 
-    let totalValidBoxes = 0;
-    for (let r = 0; r < boardRows - 1; r++) {
-        for (let c = 0; c < boardCols - 1; c++) {
-            if (boxesGrid[r][c] !== -1) totalValidBoxes++;
+    function drawMapConnectionsSVG() {
+        let svg = document.getElementById('mapSvgContainer');
+        svg.innerHTML = '';
+        
+        let nodes = document.querySelectorAll('.map-node');
+        if (nodes.length < 2) return;
+
+        let wrapper = document.querySelector('.map-canvas-wrapper');
+        let wrapperRect = wrapper.getBoundingClientRect();
+
+        let points = [];
+        nodes.forEach(function(node) {
+            let rect = node.getBoundingClientRect();
+            let x = (rect.left + rect.width / 2) - wrapperRect.left;
+            let y = (rect.top + rect.height / 2) - wrapperRect.top;
+            points.push({ x: x, y: y });
+        });
+
+        let pathD = 'M ' + points[0].x + ' ' + points[0].y;
+        for (let i = 1; i < points.length; i++) {
+            let prev = points[i - 1];
+            let curr = points[i];
+            let cy = (prev.y + curr.y) / 2;
+            pathD += ' C ' + prev.x + ' ' + cy + ', ' + curr.x + ' ' + cy + ', ' + curr.x + ' ' + curr.y;
         }
+
+        let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathD);
+        path.setAttribute('stroke', '#fffa65');
+        path.setAttribute('stroke-width', '4');
+        path.setAttribute('stroke-dasharray', '8,8');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('opacity', '0.9');
+
+        svg.appendChild(path);
     }
 
-    let filledBoxesCount = playerScores.reduce((a, b) => a + b, 0);
+    function startLevelGame(lvl, gridDim, isSpecial) {
+        activeLevel = lvl; 
+        boardRows = gridDim.rows; 
+        boardCols = gridDim.cols;
+        isTargetLevelMode = isSpecial;
+        isOnlineGame = false;
+        TURN_TIME_SECONDS = 15;
 
-    if (filledBoxesCount >= totalValidBoxes && totalValidBoxes > 0) {
-        let maxPoints = Math.max(...playerScores);
-        let winnerIndex = playerScores.indexOf(maxPoints) + 1;
-        finishGame(winnerIndex);
+        document.getElementById('hintBtn').style.display = 'inline-block';
+
+        if (lvl >= 201) {
+            activeShape = 'PHOTO_ZIGZAG';
+        } else {
+            activeShape = 'SQUARE';
+        }
+
+        if (isTargetLevelMode) {
+            targetBoxesToWin = Math.min(Math.floor((boardRows * boardCols) * 0.3), 15);
+        } else {
+            targetBoxesToWin = 0;
+        }
+
+        showScreen('screen-game');
+
+        if (activeLevel === 1) {
+            openModal('tutorialModal');
+        }
+
+        if (lvl >= 201) {
+            document.getElementById('levelBanner').innerText = 'Level ' + activeLevel + ' - Zig-Zag Pattern Grid!';
+        } else if (isTargetLevelMode) {
+            document.getElementById('levelBanner').innerText = 'Level ' + activeLevel + ' - Target: Make ' + targetBoxesToWin + ' Boxes First!';
+        } else {
+            document.getElementById('levelBanner').innerText = 'Level ' + activeLevel + ' - Grid ' + (boardCols - 1) + 'x' + (boardRows - 1);
+        }
+
+        let totalActivePlayers = 2;
+        if (activePlayerMode === '3P') totalActivePlayers = 3;
+        else if (activePlayerMode === '4P') totalActivePlayers = 4;
+        else if (activePlayerMode === 'AI' || activePlayerMode === '2P') totalActivePlayers = 2;
+
+        document.getElementById('p3Box').style.display = (totalActivePlayers >= 3) ? 'block' : 'none';
+        document.getElementById('p4Box').style.display = (totalActivePlayers >= 4) ? 'block' : 'none';
+
+        // Hide multiplayer UI for single player
+        document.getElementById('mpPowerupBar').style.display = 'none';
+
+        initializeBoard();
+    }
+
+    function isCellInShape(r, c) {
+        if (activeShape === 'SQUARE') return true;
+        
+        if (activeShape === 'PHOTO_ZIGZAG') {
+            if ((r === 0 || r === boardRows*2-2) && (c < 2 || c > boardCols*2-4)) return false;
+            if ((r === 2 || r === boardRows*2-4) && (c === 0 || c === boardCols*2-2)) return false;
+            return true;
+        }
+
+        if (activeShape === 'HEXAGON') {
+            let maxR = (boardRows - 1) * 2;
+            let maxC = (boardCols - 1) * 2;
+            if ((r === 0 || r === maxR) && (c < 2 || c > maxC - 2)) return false;
+            return true;
+        }
+
+        if (activeShape === 'HEPTAGON') {
+            let maxR = (boardRows - 1) * 2;
+            let maxC = (boardCols - 1) * 2;
+            if (r === 0 && (c < 2 || c > maxC - 2)) return false;
+            if (r === maxR && (c < 1 || c > maxC - 1)) return false;
+            return true;
+        }
+
+        if (activeShape === 'PENTAGON') {
+            let maxR = (boardRows - 1) * 2;
+            let maxC = (boardCols - 1) * 2;
+            if (r === 0 && (c < Math.floor(maxC/2) - 1 || c > Math.floor(maxC/2) + 1)) return false;
+            return true;
+        }
+
         return true;
     }
-    return false;
-}
 
-function finishGame(winnerIndex) {
-    if (turnTimerInterval) clearInterval(turnTimerInterval);
-    document.getElementById('game-timer-bar').style.display = 'none';
-
-    if (isOnlineGame && roomRef) {
-        roomRef.off();
+    function generateRandomCharMatrix(rows, cols) {
+        let matrix = [];
+        let word = RANDOM_WORDS_LIST[Math.floor(Math.random() * RANDOM_WORDS_LIST.length)];
+        for (let r = 0; r < rows; r++) {
+            matrix[r] = [];
+            for (let c = 0; c < cols; c++) {
+                let charIndex = (r * cols + c) % word.length;
+                matrix[r][c] = word[charIndex];
+            }
+        }
+        return matrix;
     }
 
-    playSound('win');
-    let myIndex = isOnlineGame ? myPlayerNumber : 1;
-    if (winnerIndex === myIndex) {
-        if (isOnlineGame) {
-            gameData.multiplayerStars = (gameData.multiplayerStars || 0) + 3;
-            gameData.stars = (gameData.stars || 0) + 3;
-        } else if (activeLevel === gameData.unlockedLevel && gameData.unlockedLevel < 350) {
-            gameData.unlockedLevel++;
-            gameData.stars = (gameData.stars || 0) + 3;
-        }
+    function renderTopTargetBoard() {
+        let topContainer = document.getElementById('top-target-board-container');
+        let topBoard = document.getElementById('top-target-board');
         
-        gameData.coins += 20;
-        saveDataToStorage();
-        showCandyCrushVictoryModal();
-    } else {
-        showDefeatModal(winnerIndex);
-    }
-}
+        if (activeLevel < 101) {
+            topContainer.style.display = 'none';
+            return;
+        }
 
-function showDefeatModal(winnerIndex) {
-    let defModal = document.getElementById('defeat-modal');
-    document.getElementById('defeatMsgText').innerText = `Player ${winnerIndex} Won! Try Again!`;
-    defModal.style.display = 'flex';
-}
+        topContainer.style.display = 'flex';
+        topBoard.innerHTML = '';
+        topBoard.style.gridTemplateColumns = 'repeat(' + (boardCols - 1) + ', auto)';
 
-function showCandyCrushVictoryModal() {
-    let modal = document.getElementById('victory-modal');
-    let s1 = document.getElementById('star1');
-    let s2 = document.getElementById('star2');
-    let s3 = document.getElementById('star3');
-
-    s1.classList.remove('active'); s2.classList.remove('active'); s3.classList.remove('active');
-    modal.style.display = 'flex';
-
-    setTimeout(() => { s1.classList.add('active'); playSound('box'); }, 300);
-    setTimeout(() => { s2.classList.add('active'); playSound('box'); }, 800);
-    setTimeout(() => { s3.classList.add('active'); playSound('win'); }, 1300);
-}
-
-function closeVictoryModal() {
-    document.getElementById('victory-modal').style.display = 'none';
-    showScreen('screen-map');
-}
-
-function checkSpinAvailability() {
-    let currentTime = new Date().getTime();
-    let twelveHoursMs = 12 * 60 * 60 * 1000;
-    let timeDiff = currentTime - gameData.lastSpinTimestamp;
-
-    if (timeDiff < twelveHoursMs) {
-        let hoursLeft = Math.ceil((twelveHoursMs - timeDiff) / (1000 * 60 * 60));
-        document.getElementById('spinTimerText').innerText = `Next spin available in ${hoursLeft} hours!`;
-    } else {
-        document.getElementById('spinTimerText').innerText = `Spin is ready!`;
-    }
-}
-
-let challengeHGrid = [], challengeVGrid = [], challengeBGrid = [];
-let challengeTurn = 1;
-let challengeScores = [0, 0];
-
-function checkChallengeAvailability() {
-    let currentTime = new Date().getTime();
-    let dayMs = 24 * 60 * 60 * 1000;
-    let diff = currentTime - (gameData.lastChallengeAttemptTime || 0);
-
-    let btn = document.getElementById('startChallengeBtn');
-    let desc = document.getElementById('taskStatusDesc');
-
-    if (diff < dayMs) {
-        let hrsLeft = Math.ceil((dayMs - diff) / (1000 * 60 * 60));
-        btn.disabled = true;
-        btn.style.opacity = '0.5';
-        desc.innerText = `The next challenge will be availble after ${hrsLeft} hours. (One attempt per day) `;
-    } else {
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        desc.innerText = `Click on the Challenge button to play a 5x5 box challenge match against the robot and win coins!`;
-    }
-}
-
-function handleChallengeStartClick() {
-    let currentTime = new Date().getTime();
-    let dayMs = 24 * 60 * 60 * 1000;
-    if (currentTime - (gameData.lastChallengeAttemptTime || 0) < dayMs) {
-        showToast("Challenge is on cooldown!");
-        return;
-    }
-
-    closeModal('taskModal');
-    let cModal = document.getElementById('challengeMatchModal');
-    cModal.style.display = 'flex';
-    initChallengeBoard();
-}
-
-function initChallengeBoard() {
-    challengeTurn = 1;
-    challengeScores = [0, 0];
-    document.getElementById('challengeTurnText').innerText = "Turn: Your Turn (👤)";
-
-    let container = document.getElementById('challengeBoardContainer');
-    container.innerHTML = '';
-
-    let rows = 6, cols = 6; 
-    challengeHGrid = Array(rows).fill(null).map(() => Array(cols - 1).fill(0));
-    challengeVGrid = Array(rows - 1).fill(null).map(() => Array(cols).fill(0));
-    challengeBGrid = Array(rows - 1).fill(null).map(() => Array(cols - 1).fill(0));
-
-    let board = document.createElement('div');
-    board.style.display = 'grid';
-    let gCol = '';
-    for (let i = 0; i < cols - 1; i++) gCol += 'auto 1fr ';
-    gCol += 'auto';
-    let gRow = '';
-    for (let i = 0; i < rows - 1; i++) gRow += 'auto 1fr ';
-    gRow += 'auto';
-
-    board.style.gridTemplateColumns = gCol;
-    board.style.gridTemplateRows = gRow;
-    board.style.gap = '0px';
-
-    for (let r = 0; r < rows * 2 - 1; r++) {
-        for (let c = 0; c < cols * 2 - 1; c++) {
-            let isRowEven = (r % 2 === 0), isColEven = (c % 2 === 0);
-            if (isRowEven && isColEven) {
-                let dot = document.createElement('div');
-                dot.className = 'dot-node';
-                board.appendChild(dot);
-            } else if (isRowEven && !isColEven) {
-                let line = document.createElement('div');
-                line.className = 'line-horizontal';
-                let rIdx = r / 2, cIdx = (c - 1) / 2;
-                line.onclick = () => handleChallengeLine('h', rIdx, cIdx, line);
-                line.id = `ch-${rIdx}-${cIdx}`;
-                board.appendChild(line);
-            } else if (!isRowEven && isColEven) {
-                let line = document.createElement('div');
-                line.className = 'line-vertical';
-                let rIdx = (r - 1) / 2, cIdx = c / 2;
-                line.onclick = () => handleChallengeLine('v', rIdx, cIdx, line);
-                line.id = `cv-${rIdx}-${cIdx}`;
-                board.appendChild(line);
-            } else {
-                let bR = (r - 1) / 2, bC = (c - 1) / 2;
-                let box = document.createElement('div');
-                box.className = 'box-cell';
-                box.id = `c-box-${bR}-${bC}`;
-                board.appendChild(box);
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                let cell = document.createElement('div');
+                cell.className = 'top-target-cell';
+                cell.innerText = levelCharMatrix[r][c];
+                topBoard.appendChild(cell);
             }
         }
     }
-    container.appendChild(board);
-}
 
-function handleChallengeLine(type, r, c, element) {
-    if (challengeTurn !== 1) return;
-    if (type === 'h' && challengeHGrid[r][c] !== 0) return;
-    if (type === 'v' && challengeVGrid[r][c] !== 0) return;
+    function initializeBoard() {
+        turnPlayer = 1; playerScores = [0, 0, 0, 0];
+        updateScoreDisplays();
+        updateTurnIndicator();
+        startTurnTimer();
 
-    element.classList.add('line-drawn-p1');
-    if (type === 'h') challengeHGrid[r][c] = 1;
-    if (type === 'v') challengeVGrid[r][c] = 1;
+        let board = document.getElementById('game-board');
+        board.innerHTML = '';
 
-    let filled = checkChallengeBox(type, r, c, 1);
-    if (!filled) {
-        challengeTurn = 2;
-        document.getElementById('challengeTurnText').innerText = "Turn: AI's Turn (🤖)";
-        setTimeout(aiChallengeTurn, 400);
-    }
-    checkChallengeGameOver();
-}
+        let gridColTemplate = '';
+        for (let i = 0; i < boardCols - 1; i++) {
+            gridColTemplate += 'auto 1fr ';
+        }
+        gridColTemplate += 'auto';
 
-function checkChallengeBox(type, r, c, player) {
-    let isFilled = false;
-    let test = (br, bc) => {
-        if (br >= 0 && br < 5 && bc >= 0 && bc < 5) {
-            if (challengeBGrid[br][bc] === 0 &&
-                challengeHGrid[br][bc] !== 0 && challengeHGrid[br + 1][bc] !== 0 &&
-                challengeVGrid[br][bc] !== 0 && challengeVGrid[br][bc + 1] !== 0) {
-                challengeBGrid[br][bc] = player;
-                let boxEl = document.getElementById(`c-box-${br}-${bc}`);
-                if (boxEl) {
-                    boxEl.innerText = (player === 1) ? gameData.equippedBoxEmoji : '🤖';
-                    boxEl.classList.add('captured-box-anim');
+        let gridRowTemplate = '';
+        for (let i = 0; i < boardRows - 1; i++) {
+            gridRowTemplate += 'auto 1fr ';
+        }
+        gridRowTemplate += 'auto';
+
+        board.style.gridTemplateColumns = gridColTemplate;
+        board.style.gridTemplateRows = gridRowTemplate;
+
+        horizontalGrid = Array(boardRows).fill(null).map(function() { return Array(boardCols - 1).fill(0); });
+        verticalGrid = Array(boardRows - 1).fill(null).map(function() { return Array(boardCols).fill(0); });
+        boxesGrid = Array(boardRows - 1).fill(null).map(function() { return Array(boardCols - 1).fill(0); });
+
+        if (activeLevel >= 101 && activeLevel <= 200) {
+            levelCharMatrix = generateRandomCharMatrix(boardRows - 1, boardCols - 1);
+            renderTopTargetBoard();
+        } else {
+            document.getElementById('top-target-board-container').style.display = 'none';
+        }
+
+        for (let r = 0; r < boardRows * 2 - 1; r++) {
+            for (let c = 0; c < boardCols * 2 - 1; c++) {
+                let isRowEven = (r % 2 === 0), isColEven = (c % 2 === 0);
+                let validCell = isCellInShape(r, c);
+
+                if (isRowEven && isColEven) {
+                    let dot = document.createElement('div'); 
+                    dot.className = 'dot-node' + (validCell ? '' : ' disabled-cell'); 
+                    board.appendChild(dot);
+                } else if (isRowEven && !isColEven) {
+                    let line = document.createElement('div'); 
+                    line.className = 'line-horizontal animated-line' + (validCell ? '' : ' line-disabled'); 
+                    let rIdx = r / 2, cIdx = (c - 1) / 2;
+                    line.onclick = function() {
+                        if (isOnlineGame) {
+                            if (window.mpBlockMode || window.mpBreakMode || window.mpDoubleLineActive) {
+                                if (handlePowerupLineClick('h', rIdx, cIdx, this)) {
+                                    return;
+                                }
+                            }
+                        }
+                        handleLineClick('h', rIdx, cIdx, this);
+                    };
+                    line.id = 'h-' + rIdx + '-' + cIdx; board.appendChild(line);
+                } else if (!isRowEven && isColEven) {
+                    let line = document.createElement('div'); 
+                    line.className = 'line-vertical animated-line' + (validCell ? '' : ' line-disabled'); 
+                    let rIdx = (r - 1) / 2, cIdx = c / 2;
+                    line.onclick = function() {
+                        if (isOnlineGame) {
+                            if (window.mpBlockMode || window.mpBreakMode || window.mpDoubleLineActive) {
+                                if (handlePowerupLineClick('v', rIdx, cIdx, this)) {
+                                    return;
+                                }
+                            }
+                        }
+                        handleLineClick('v', rIdx, cIdx, this);
+                    };
+                    line.id = 'v-' + rIdx + '-' + cIdx; board.appendChild(line);
+                } else {
+                    let bR = (r - 1) / 2, bC = (c - 1) / 2;
+                    let box = document.createElement('div'); 
+                    box.className = 'box-cell animated-box-cell' + (validCell ? '' : ' box-disabled');
+                    box.id = 'box-' + bR + '-' + bC;
+
+                    if (activeLevel >= 101 && activeLevel <= 200 && validCell) {
+                        box.innerText = levelCharMatrix[bR][bC];
+                    }
+
+                    board.appendChild(box);
+                    if (!validCell) boxesGrid[bR][bC] = -1;
                 }
-                challengeScores[player - 1]++;
-                isFilled = true;
             }
         }
-    };
-    if (type === 'h') { test(r - 1, c); test(r, c); }
-    else { test(r, c - 1); test(r, c); }
-    return isFilled;
-}
 
-function aiChallengeTurn() {
-    if (challengeTurn !== 2) return;
+        if (isOnlineGame && Object.keys(mpSpecialBoxes).length > 0) {
+            applySpecialBoxes();
+        }
+    }
 
-    for (let r = 0; r < 5; r++) {
-        for (let c = 0; c < 5; c++) {
-            if (challengeBGrid[r][c] === 0) {
-                let count = (challengeHGrid[r][c]?1:0) + (challengeHGrid[r+1][c]?1:0) + (challengeVGrid[r][c]?1:0) + (challengeVGrid[r][c+1]?1:0);
-                if (count === 3) {
-                    let move = null;
-                    if (!challengeHGrid[r][c]) move = { type: 'h', r: r, c: c };
-                    else if (!challengeHGrid[r+1][c]) move = { type: 'h', r: r+1, c: c };
-                    else if (!challengeVGrid[r][c]) move = { type: 'v', r: r, c: c };
-                    else if (!challengeVGrid[r][c+1]) move = { type: 'v', r: r, c: c+1 };
+    function useHint() {
+        if (turnPlayer !== 1) { showToast("Wait for your turn!"); return; }
+        if (gameData.coins < 50) { showToast("50 🪙 Coins needed for Hint!"); return; }
 
-                    if (move) {
-                        let el = document.getElementById(`c${move.type}-${move.r}-${move.c}`);
-                        if (el) el.classList.add('line-drawn-p2');
-                        if (move.type === 'h') challengeHGrid[move.r][move.c] = 2;
-                        else challengeVGrid[move.r][move.c] = 2;
+        let bestMove = findBestHintMove();
+        if (bestMove) {
+            gameData.coins -= 50;
+            saveDataToStorage();
+            let el = document.getElementById(bestMove.type + '-' + bestMove.r + '-' + bestMove.c);
+            if (el) {
+                el.classList.add('hint-highlight');
+                setTimeout(function() { el.classList.remove('hint-highlight'); }, 2500);
+                showToast("💡 Best move highlighted!");
+            }
+        } else {
+            showToast("No easy moves found!");
+        }
+    }
 
-                        checkChallengeBox(move.type, move.r, move.c, 2);
-                        setTimeout(aiChallengeTurn, 400);
-                        checkChallengeGameOver();
-                        return;
+    function findBestHintMove() {
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                if (boxesGrid[r][c] === 0) {
+                    let count = (horizontalGrid[r][c]?1:0) + (horizontalGrid[r+1][c]?1:0) + (verticalGrid[r][c]?1:0) + (verticalGrid[r][c+1]?1:0);
+                    if (count === 3) {
+                        if (!horizontalGrid[r][c]) return { type: 'h', r: r, c: c };
+                        if (!horizontalGrid[r+1][c]) return { type: 'h', r: r+1, c: c };
+                        if (!verticalGrid[r][c]) return { type: 'v', r: r, c: c };
+                        if (!verticalGrid[r][c+1]) return { type: 'v', r: r, c: c+1 };
                     }
                 }
             }
         }
-    }
-
-    let safeMoves = [];
-    let unsafeMoves = [];
-
-    for (let r = 0; r < 6; r++) {
-        for (let c = 0; c < 5; c++) {
-            if (challengeHGrid[r][c] === 0) {
-                if (isMoveSafeForAI('h', r, c)) safeMoves.push({ type: 'h', r, c });
-                else unsafeMoves.push({ type: 'h', r, c });
+        for (let r = 0; r < boardRows; r++) {
+            for (let c = 0; c < boardCols - 1; c++) {
+                if (horizontalGrid[r][c] === 0) return { type: 'h', r: r, c: c };
             }
         }
-    }
-    for (let r = 0; r < 5; r++) {
-        for (let c = 0; c < 6; c++) {
-            if (challengeVGrid[r][c] === 0) {
-                if (isMoveSafeForAI('v', r, c)) safeMoves.push({ type: 'v', r, c });
-                else unsafeMoves.push({ type: 'v', r, c });
+        for (let r = 0; r < boardRows - 1; r++) {
+            for (let c = 0; c < boardCols; c++) {
+                if (verticalGrid[r][c] === 0) return { type: 'v', r: r, c: c };
             }
         }
+        return null;
     }
 
-    let pick = null;
-    if (safeMoves.length > 0) {
-        pick = safeMoves[Math.floor(Math.random() * safeMoves.length)];
-    } else if (unsafeMoves.length > 0) {
-        pick = unsafeMoves[Math.floor(Math.random() * unsafeMoves.length)];
-    }
-
-    if (pick) {
-        let el = document.getElementById(`c${pick.type}-${pick.r}-${pick.c}`);
-        if (el) el.classList.add('line-drawn-p2');
-
-        if (pick.type === 'h') challengeHGrid[pick.r][pick.c] = 2;
-        else challengeVGrid[pick.r][pick.c] = 2;
-
-        let filled = checkChallengeBox(pick.type, pick.r, pick.c, 2);
-
-        if (filled) {
-            setTimeout(aiChallengeTurn, 400);
-        } else {
-            challengeTurn = 1;
-            document.getElementById('challengeTurnText').innerText = "Turn: Your Turn (👤)";
-        }
-    }
-    checkChallengeGameOver();
-}
-
-function isMoveSafeForAI(type, r, c) {
-    let checkLinesCount = (br, bc) => {
-        if (br < 0 || br >= 5 || bc < 0 || bc >= 5) return 0;
-        return (challengeHGrid[br][bc]?1:0) + (challengeHGrid[br+1][bc]?1:0) + (challengeVGrid[br][bc]?1:0) + (challengeVGrid[br][bc+1]?1:0);
-    };
-
-    if (type === 'h') {
-        let countBelow = checkLinesCount(r, c);
-        let countAbove = checkLinesCount(r - 1, c);
-        return (countBelow < 2) && (countAbove < 2);
-    } else {
-        let countRight = checkLinesCount(r, c);
-        let countLeft = checkLinesCount(r, c - 1);
-        return (countRight < 2) && (countLeft < 2);
-    }
-}
-
-function checkChallengeGameOver() {
-    let totalBoxes = 25;
-    let filled = challengeScores[0] + challengeScores[1];
-    if (filled >= totalBoxes) {
-        gameData.lastChallengeAttemptTime = new Date().getTime();
+    function updateTurnIndicator() {
+        let tText = document.getElementById('turnIndicatorText');
         
-        if (challengeScores[0] > challengeScores[1]) {
-            let rewardCoins = 150;
-            gameData.coins += rewardCoins;
-            saveDataToStorage();
-            showToast(`🎉 Challenge Won! Earned ${rewardCoins} 🪙 Coins!`);
+        document.querySelectorAll('.score-box').forEach(function(b) { b.classList.remove('active-turn'); });
+
+        let activeBox = document.getElementById('p' + turnPlayer + 'ScoreBox');
+        if (activeBox) activeBox.classList.add('active-turn');
+
+        let frozenText = mpIsFrozen && isOnlineGame ? ' ❄️' : '';
+
+        if (isOnlineGame) {
+            let currentTurnPlayerName = trackedRoomPlayers[turnPlayer] || 'Player ' + turnPlayer;
+            let emoji = getPlayerEmoji(turnPlayer);
+            tText.innerHTML = (turnPlayer === myPlayerNumber) 
+                ? '<span style="color:#2ed573;">🟢 ' + emoji + ' ' + gameData.username + "'s Turn!" + frozenText + '</span>' 
+                : '<span style="color:#d63031;">⏳ ' + emoji + ' ' + currentTurnPlayerName + "'s Turn" + frozenText + '</span>';
         } else {
-            saveDataToStorage();
-            showToast("❌ Challenge Lost! Try again tomorrow.");
+            let pName = (turnPlayer === 1) ? gameData.username : (activePlayerMode === 'AI' ? '🤖 AI' : 'Player ' + turnPlayer);
+            tText.innerHTML = '👉 <span style="color:#ff4757; font-weight:900;">TURN: ' + pName + '</span>';
         }
-        closeModal('challengeMatchModal');
-    }
-}
-
-let isSpinning = false;
-function triggerDailySpin() {
-    if (isSpinning) return;
-    let currentTime = new Date().getTime();
-    let twelveHoursMs = 12 * 60 * 60 * 1000;
-
-    if (currentTime - gameData.lastSpinTimestamp < twelveHoursMs) {
-        showToast("Spin available every 12 hours!"); return;
     }
 
-    isSpinning = true;
-    let wheel = document.getElementById('wheelContainer');
-    
-    let randomPrizeIndex = Math.floor(Math.random() * 4);
-    let baseDegrees = 360 * 5; 
-    let targetDegreeOffset = [45, 135, 225, 315][randomPrizeIndex];
-    let totalRotation = baseDegrees + targetDegreeOffset;
+    function startTurnTimer() {
+        if (turnTimerInterval) clearInterval(turnTimerInterval);
+        let timerBar = document.getElementById('game-timer-bar');
+        let timerProg = document.getElementById('game-timer-progress');
 
-    wheel.style.transform = `rotate(${totalRotation}deg)`;
-
-    setTimeout(() => {
-        isSpinning = false;
-        gameData.lastSpinTimestamp = currentTime;
-
-        let prizeMsg = "";
-        if (randomPrizeIndex === 0) {
-            gameData.coins += 100;
-            prizeMsg = "🎉 Won 100 Coins!";
-        } else if (randomPrizeIndex === 1) {
-            if (!gameData.unlockedBoxEmojis.includes('⭐')) gameData.unlockedBoxEmojis.push('⭐');
-            gameData.equippedBoxEmoji = '⭐';
-            prizeMsg = "🎁 Won Star Box Skin & Bonus!";
-        } else if (randomPrizeIndex === 2) {
-            gameData.coins += 250;
-            prizeMsg = "✅ Won 250 Coins!";
-        } else {
-            if (!gameData.unlockedBoxEmojis.includes('🔥')) gameData.unlockedBoxEmojis.push('🔥');
-            gameData.equippedBoxEmoji = '🔥';
-            prizeMsg = "🔥 Won Fire Box Skin & Bonus!";
+        if (activeLevel < 50 && !isOnlineGame) {
+            timerBar.style.display = 'none';
+            return;
         }
 
-        saveDataToStorage();
-        showToast(prizeMsg);
-        checkSpinAvailability();
-    }, 4000);
-}
+        timerBar.style.display = 'block';
+        let timeLeft = TURN_TIME_SECONDS;
+        timerProg.style.width = '100%';
 
-function switchShopTab(type) {
-    if (type === 'line') {
-        document.getElementById('lineSkinsSection').style.display = 'block';
-        document.getElementById('boxSkinsSection').style.display = 'none';
-        document.getElementById('tabLine').classList.add('active');
-        document.getElementById('tabBox').classList.remove('active');
-    } else {
-        document.getElementById('lineSkinsSection').style.display = 'none';
-        document.getElementById('boxSkinsSection').style.display = 'block';
-        document.getElementById('tabBox').classList.add('active');
-        document.getElementById('tabLine').classList.remove('active');
+        turnTimerInterval = setInterval(function() {
+            timeLeft--;
+            let pct = (timeLeft / TURN_TIME_SECONDS) * 100;
+            timerProg.style.width = pct + '%';
+
+            if (timeLeft === 5) {
+                showToast("⚠️ only 5second!");
+            }
+
+            if (timeLeft <= 0) {
+                clearInterval(turnTimerInterval);
+                showToast('⏰ Time Out! Turn skipped.');
+                let totalPlayers = 2;
+                if (activePlayerMode === '3P') totalPlayers = 3;
+                else if (activePlayerMode === '4P') totalPlayers = 4;
+                
+                turnPlayer = (turnPlayer % totalPlayers) + 1;
+                updateTurnIndicator();
+                startTurnTimer();
+                if (!isOnlineGame && activePlayerMode === 'AI' && turnPlayer === 2) {
+                    setTimeout(triggerSmartAI, 300);
+                }
+            }
+        }, 1000);
     }
-    renderShopUI();
-}
 
-function renderShopUI() {
-    let lineContainer = document.getElementById('lineSkinsSection');
-    let boxContainer = document.getElementById('boxSkinsSection');
-
-    let lineHtml = '';
-    LINE_SKINS_LIST.forEach(item => {
-        let isUnlocked = gameData.unlockedLineSkins && gameData.unlockedLineSkins.includes(item.color);
-        let isEquipped = (gameData.equippedLineColor === item.color);
-        let btnHtml = '';
-
-        if (isEquipped) {
-            btnHtml = `<button class="btn-small" style="background:#ffa502; box-shadow:0 3px 0 #e1b12c;" disabled>Equipped ✅</button>`;
-        } else if (isUnlocked) {
-            btnHtml = `<button class="btn-small" style="background:#00cec9; box-shadow:0 3px 0 #00b894;" onclick="equipSkin('line', '${item.color}')">Equip</button>`;
-        } else {
-            btnHtml = `<button class="btn-small" onclick="buySkin('line', ${item.price}, '${item.color}')">${item.price} 🪙</button>`;
+    function handleLineClick(type, r, c, element) {
+        if (isOnlineGame && turnPlayer !== myPlayerNumber) {
+            showToast("Not your turn!"); return;
         }
-
-        lineHtml += `<div class="shop-item-row"><div>${item.name}</div>${btnHtml}</div>`;
-    });
-    lineContainer.innerHTML = lineHtml;
-
-    let boxHtml = '';
-    BOX_EMOJIS_LIST.forEach(item => {
-        let isUnlocked = gameData.unlockedBoxEmojis && gameData.unlockedBoxEmojis.includes(item.emoji);
-        let isEquipped = (gameData.equippedBoxEmoji === item.emoji);
-        let btnHtml = '';
-
-        if (isEquipped) {
-            btnHtml = `<button class="btn-small" style="background:#ffa502; box-shadow:0 3px 0 #e1b12c;" disabled>Equipped ✅</button>`;
-        } else if (isUnlocked) {
-            btnHtml = `<button class="btn-small" style="background:#00cec9; box-shadow:0 3px 0 #00b894;" onclick="equipBoxEmoji('${item.emoji}')">Equip</button>`;
-        } else {
-            btnHtml = `<button class="btn-small" onclick="buyBoxEmoji(${item.price}, '${item.emoji}')">${item.price} 🪙</button>`;
-        }
-
-        boxHtml += `<div class="shop-item-row"><div>${item.name}</div>${btnHtml}</div>`;
-    });
-    boxContainer.innerHTML = boxHtml;
-}
-
-function buySkin(type, price, colorCode) {
-    if (gameData.coins < price) { showToast("Insufficient coins!"); return; }
-    gameData.coins -= price;
-    if (!gameData.unlockedLineSkins.includes(colorCode)) {
-        gameData.unlockedLineSkins.push(colorCode);
+        executeMove(type, r, c, element, turnPlayer);
     }
-    gameData.equippedLineColor = colorCode;
-    saveDataToStorage();
-    showToast("Skin unlocked & equipped!");
-    renderShopUI();
-}
-
-function equipSkin(type, colorCode) {
-    gameData.equippedLineCode = colorCode;
-    saveDataToStorage();
-    showToast("Line skin equipped!");
-    renderShopUI();
-}
-
-function buyBoxEmoji(price, emoji) {
-    if (gameData.coins < price) { showToast("Insufficient coins!"); return; }
-    gameData.coins -= price;
-    if (!gameData.unlockedBoxEmojis.includes(emoji)) {
-        gameData.unlockedBoxEmojis.push(emoji);
-    }
-    gameData.equippedBoxEmoji = emoji;
-    saveDataToStorage();
-    showToast("Box Emoji unlocked & equipped!");
-    renderShopUI();
-}
-
-function equipBoxEmoji(emoji) {
-    gameData.equippedBoxEmoji = emoji;
-    saveDataToStorage();
-    showToast("Box Emoji equipped!");
-    renderShopUI();
-}
-</script>
+    </script>
 </body>
 </html>
