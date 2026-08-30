@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>Dots and Boxes - ujwal and nishant Edition</title>
-    
+
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js">
     </script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js">
@@ -1221,6 +1221,11 @@
             cursor: pointer;
             box-shadow: 0 3px 0 #26af5f;
             min-height: 40px;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+        .btn-small:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
         }
         .btn-close {
             background: #ff4757;
@@ -1640,7 +1645,7 @@
         .result-title {
             font-size: 2rem;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .result-win {
@@ -1657,14 +1662,17 @@
         }
 
         .timer-display {
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-weight: 900;
             color: #fff;
             background: rgba(0, 0, 0, 0.6);
-            padding: 4px 16px;
-            border-radius: 12px;
+            padding: 2px 10px;
+            border-radius: 10px;
             border: 2px solid #fffa65;
-            margin-left: 8px;
+            margin-left: 6px;
+            display: inline-block;
+            min-width: 60px;
+            text-align: center;
         }
 
         .timer-warning {
@@ -1793,6 +1801,220 @@
             gap: 4px;
             flex-wrap: wrap;
         }
+
+        /* IN-GAME SHOP MODAL */
+        #gameShopModal .modal-card {
+            max-width: 380px;
+        }
+
+        .game-shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #fdcb6e;
+        }
+        .game-shop-header h3 {
+            font-size: 1.2rem;
+            color: #ff4757;
+            margin: 0;
+        }
+        .game-shop-close-btn {
+            background: #ff4757;
+            border: 2px solid #fff;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #d63031;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+        .game-shop-close-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .game-shop-coins {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #d63031;
+            background: #ffeaa7;
+            padding: 6px 14px;
+            border-radius: 16px;
+            border: 2px solid #fdcb6e;
+            display: inline-block;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 0 #e1b12c;
+        }
+
+        .game-shop-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #ffffff;
+            border-radius: 14px;
+            margin: 6px 0;
+            border: 2px solid #ffeaa7;
+            font-size: 0.8rem;
+            font-weight: 900;
+            transition: border-color 0.2s;
+        }
+        .game-shop-item:hover {
+            border-color: #fdcb6e;
+        }
+        .game-shop-item .shop-item-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .game-shop-item .shop-item-left .icon {
+            font-size: 1.2rem;
+        }
+        .game-shop-item .shop-item-left .name {
+            font-size: 0.8rem;
+            color: #2f3542;
+        }
+        .game-shop-item .shop-item-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .game-shop-item .shop-item-right .cost {
+            color: #d63031;
+            font-weight: 900;
+            font-size: 0.75rem;
+        }
+        .game-shop-item .shop-item-right .qty {
+            color: #0984e3;
+            font-weight: 900;
+            font-size: 0.75rem;
+            background: #dfe6e9;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+        .game-shop-item .shop-item-right .btn-shop-buy {
+            background: #2ed573;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 12px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #26af5f;
+            min-height: 34px;
+            font-size: 0.7rem;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+        .game-shop-item .shop-item-right .btn-shop-buy:hover {
+            transform: scale(1.04);
+            filter: brightness(1.08);
+        }
+        .game-shop-item .shop-item-right .btn-shop-buy:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+        }
+
+        .shop-divider {
+            border: none;
+            border-top: 2px dashed #fdcb6e;
+            margin: 8px 0;
+        }
+
+        /* Multiplayer Leaderboard - result card */
+        .mp-ranking-list {
+            text-align: left;
+            margin: 10px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .mp-ranking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 4px 0;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 2px solid #fdcb6e;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        .mp-ranking-item.rank-1 {
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            border-color: #ffb142;
+        }
+
+        .mp-ranking-item.rank-2 {
+            background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+            border-color: #a0a0a0;
+        }
+
+        .mp-ranking-item.rank-3 {
+            background: linear-gradient(135deg, #cd7f32, #e8c8a0);
+            border-color: #b8860b;
+        }
+
+        .mp-ranking-item .rank-number {
+            font-weight: 900;
+            color: #2f3542;
+            min-width: 30px;
+        }
+
+        .mp-ranking-item .rank-player {
+            flex: 1;
+            margin-left: 8px;
+        }
+
+        .mp-ranking-item .rank-score {
+            font-weight: 900;
+            color: #ff4757;
+        }
+
+        .mp-ranking-item .rank-medal {
+            font-size: 1.3rem;
+        }
+
+        /* Shop button in game */
+        .game-shop-btn {
+            background: linear-gradient(135deg, #ff9f1a, #fdcb6e);
+            border: 2px solid #ffffff;
+            border-radius: 14px;
+            padding: 4px 14px;
+            font-weight: 900;
+            font-size: 0.75rem;
+            color: #2f3542;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #c88a17;
+            min-height: 36px;
+            display: none;
+            align-items: center;
+            gap: 4px;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+        .game-shop-btn:hover {
+            transform: scale(1.04);
+            filter: brightness(1.08);
+        }
+        .game-shop-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #c88a17;
+        }
+        .game-shop-btn.show {
+            display: inline-flex;
+        }
     </style>
 </head>
 <body>
@@ -1828,8 +2050,10 @@
         <div id="multiplayer-result-overlay" class="multiplayer-result-overlay">
             <div class="multiplayer-result-card">
                 <div class="result-title" id="mpResultTitle">🏆 GAME OVER</div>
-                <div style="font-size:1.2rem; font-weight:900; margin:10px 0; color:#2f3542;" id="mpResultSubtitle">Player 1 Wins!</div>
-                <div style="font-size:1rem; font-weight:bold; color:#57606f; margin-bottom:15px;" id="mpResultScore">Final Score: P1: 0 - P2: 0</div>
+                <div style="font-size:1.0rem; font-weight:900; margin:4px 0 10px 0; color:#2f3542;" id="mpResultSubtitle">Final Rankings</div>
+                <div id="mpRankingListContainer">
+                    <!-- Rankings rendered by JavaScript -->
+                </div>
                 <button class="btn-3d" onclick="closeMultiplayerResult()">Close</button>
             </div>
         </div>
@@ -1938,7 +2162,10 @@
 
             <div style="display:flex; justify-content:space-between; align-items:center; background:#fff8e7; padding:6px 12px; border-radius:12px; font-weight:900; font-size:0.9rem; margin-bottom:4px; border:2.5px solid #fdcb6e; color:#d63031; flex-wrap:wrap; gap:4px;">
                 <span id="turnIndicatorText" style="font-size:1rem; font-weight:900; letter-spacing:0.5px; text-shadow:0.5px 0.5px 0 #fff;">Turn: Player 1</span>
-                <button id="hintBtn" class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (50🪙)</button>
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                    <button id="hintBtn" class="btn-small" style="padding:4px 10px; font-size:0.75rem; min-height:30px; background:#ff9f1a; box-shadow:0 2px 0 #e1b12c;" onclick="useHint()">💡 Hint (50🪙)</button>
+                    <button id="gameShopBtn" class="game-shop-btn" onclick="openGameShop()">🛒 Shop</button>
+                </div>
             </div>
 
             <div class="mp-powerup-bar" id="mpPowerupBar">
@@ -1966,6 +2193,24 @@
                     <input type="text" id="chatInputMsg" class="login-input" style="padding: 4px 8px; font-size: 0.8rem; min-height: 32px;" placeholder="Type chat...">
                     <button class="btn-small" style="padding: 4px 10px; min-height: 32px;" onclick="sendOnlineChat()">Send</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- IN-GAME SHOP MODAL (appears during active multiplayer game) -->
+        <div class="modal-overlay" id="gameShopModal">
+            <div class="modal-card">
+                <div class="game-shop-header">
+                    <h3>🛒 POWER-UP SHOP</h3>
+                    <button class="game-shop-close-btn" onclick="closeGameShop()">✕</button>
+                </div>
+                <div style="text-align:center;">
+                    <span class="game-shop-coins" id="gameShopCoinsDisplay">🪙 200</span>
+                </div>
+                <hr class="shop-divider">
+                <div id="gameShopItemsContainer">
+                    <!-- Rendered by JavaScript -->
+                </div>
+                <button class="btn-close" style="width:100%; margin-top:12px;" onclick="closeGameShop()">Close</button>
             </div>
         </div>
 
@@ -2054,6 +2299,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- POWER-UP SHOP REMOVED FROM SETUP SCREEN -->
+                <!-- (The shop is now inside the active game only) -->
 
                 <select id="mpGridSizeSelect" style="display:none;">
                     <option value="3x3">3x3</option>
@@ -2316,12 +2564,29 @@
             { name: "⚽ Football Emoji", emoji: "⚽", price: 3000 }
         ];
 
+        // Power-up costs (existing prices reused)
+        const POWERUP_COSTS = {
+            double: 50,
+            block: 40,
+            break: 60,
+            freeze: 70,
+            shield: 80
+        };
+
+        const POWERUP_LABELS = {
+            double: '🔀 Double Line',
+            block: '🚫 Block',
+            break: '💔 Break',
+            freeze: '❄️ Freeze',
+            shield: '🛡️ Shield'
+        };
+
         function getDefaultGameData() {
             return {
                 isLoggedIn: false,
                 username: "Player1",
                 password: "",
-                avatar: "😎",
+                avatar: AVATAR_OPTIONS[0],
                 coins: 200,
                 stars: 0,
                 unlockedLevel: 1,
@@ -2336,6 +2601,8 @@
 
         let gameData = getDefaultGameData();
 
+        // Home screen mode tracking (separate from activePlayerMode to prevent leakage)
+        let homeScreenMode = 'AI';
         let activePlayerMode = 'AI';
         let selectedOnlinePlayerCount = 2;
         let selectedOnlineShape = 'SQUARE';
@@ -2364,9 +2631,9 @@
             boxesGrid = [];
         let activeShape = 'SQUARE';
 
-        // Player-specific power-ups
-        let mpPowerups = { double: 1, block: 1, break: 1, freeze: 1, shield: 1 };
-        let mpPowerupCooldowns = { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+        // Player-specific power-ups - each player has their own inventory
+        let mpPowerups = {};
+        let mpPowerupCooldowns = {};
         let mpComboCount = 0;
         let mpSpecialBoxes = {};
         let mpActiveEvent = null;
@@ -2380,11 +2647,19 @@
         let freezeActive = false;
 
         // Random line disappearance
+        let mpLineRemovalQueue = [];
+        let mpLineRemovalTimer = null;
+        let mpLineRemovalProcessing = false;
+        const LINE_REMOVAL_DELAY_MIN = 15000;
+        const LINE_REMOVAL_DELAY_MAX = 20000;
+
         let mpLineTimers = {};
         let mpLineDisappearanceEnabled = false;
-        let mpLineFadeTime = 8000;
-        let mpLastDisappearanceTime = 0;
+        let mpLineFadeTime = 1200;
         let mpDisappearanceInterval = null;
+
+        let temporaryBlockedLines = {};
+        let tempBlockTimers = {};
 
         let mpTimePressureLevel = 0;
         let mpTimePressureStages = [15000, 7000, 5000, 2000];
@@ -2403,10 +2678,12 @@
         let challengeAI = null;
         let challengeBoardData = null;
 
-        // Total game timer (45 minutes)
         let totalGameTimerInterval = null;
         let totalGameTimeSeconds = 45 * 60;
         let gameStartTime = 0;
+
+        let lastGapState = {};
+        let turnLock = false;
 
         window.onload = function() {
             let saved = localStorage.getItem('dots_boxes_candy_save');
@@ -2414,12 +2691,18 @@
                 try {
                     let parsed = JSON.parse(saved);
                     gameData = Object.assign(getDefaultGameData(), parsed);
+                    if (!gameData.avatar) {
+                        gameData.avatar = AVATAR_OPTIONS[0];
+                    }
                     if (!gameData.unlockedLineSkins) gameData.unlockedLineSkins = ['#ff4757'];
                     if (!gameData.unlockedBoxEmojis) gameData.unlockedBoxEmojis = ['⭐'];
                     if (gameData.isLoggedIn) showScreen('screen-home');
                 } catch (e) {
                     console.log("Parse error:", e);
                 }
+            } else {
+                gameData.avatar = AVATAR_OPTIONS[0];
+                saveDataToStorage();
             }
             initAvatarPicker();
             refreshDataUI();
@@ -2518,7 +2801,7 @@
                     stars: gameData.stars,
                     coins: gameData.coins,
                     unlockedLevel: gameData.unlockedLevel,
-                    avatar: gameData.avatar || "😎"
+                    avatar: gameData.avatar || AVATAR_OPTIONS[0]
                 });
             }
         }
@@ -2574,9 +2857,9 @@
             document.getElementById('mapCoinsText').innerText = gameData.coins;
             let starsEl = document.getElementById('mapStarsText');
             if (starsEl) starsEl.innerText = gameData.stars;
-            document.getElementById('avatarEmojiDisplay').innerText = gameData.avatar || "😎";
+            document.getElementById('avatarEmojiDisplay').innerText = gameData.avatar || AVATAR_OPTIONS[0];
             document.documentElement.style.setProperty('--p1-line', gameData.equippedLineColor);
-            document.getElementById('p1EmojiTag').innerText = gameData.avatar || "😎";
+            document.getElementById('p1EmojiTag').innerText = gameData.avatar || AVATAR_OPTIONS[0];
         }
 
         function handleLoginSubmit() {
@@ -2605,7 +2888,7 @@
                         gameData.stars = Math.min(savedData.stars || 0, singlePlayerMax + mpStars);
                         gameData.coins = savedData.coins || 200;
                         gameData.unlockedLevel = savedData.unlockedLevel || 1;
-                        gameData.avatar = savedData.avatar || "😎";
+                        gameData.avatar = savedData.avatar || AVATAR_OPTIONS[0];
                         gameData.isLoggedIn = true;
 
                         saveDataToStorage();
@@ -2616,6 +2899,7 @@
                         gameData = getDefaultGameData();
                         gameData.username = uName;
                         gameData.password = pass;
+                        gameData.avatar = AVATAR_OPTIONS[0];
                         gameData.isLoggedIn = true;
                         saveDataToStorage();
                         showScreen('screen-home');
@@ -2625,6 +2909,7 @@
                     console.log("Firebase error:", err);
                     gameData.username = uName;
                     gameData.password = pass;
+                    gameData.avatar = AVATAR_OPTIONS[0];
                     gameData.isLoggedIn = true;
                     saveDataToStorage();
                     showScreen('screen-home');
@@ -2634,6 +2919,7 @@
                 localStorage.clear();
                 gameData = getDefaultGameData();
                 gameData.username = uName;
+                gameData.avatar = AVATAR_OPTIONS[0];
                 gameData.isLoggedIn = true;
                 saveDataToStorage();
                 showScreen('screen-home');
@@ -2653,9 +2939,50 @@
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
             document.getElementById(screenId).classList.add('active');
+
+            // === FIX: Mode state leakage — restore home screen mode when returning home ===
+            if (screenId === 'screen-home') {
+                // Find the active mode button on the home screen and restore activePlayerMode
+                let activeBtn = document.querySelector('#screen-home .mode-selector-grid .mode-btn.active');
+                if (activeBtn) {
+                    let id = activeBtn.id;
+                    if (id === 'modeBtnAI') { homeScreenMode = 'AI';
+                        activePlayerMode = 'AI'; } else if (id === 'modeBtn2P') { homeScreenMode = '2P';
+                        activePlayerMode = '2P'; } else if (id === 'modeBtn3P') { homeScreenMode = '3P';
+                        activePlayerMode = '3P'; } else if (id === 'modeBtn4P') { homeScreenMode = '4P';
+                        activePlayerMode = '4P'; }
+                } else {
+                    // Fallback: default to AI
+                    homeScreenMode = 'AI';
+                    activePlayerMode = 'AI';
+                    // Ensure the AI button is active
+                    let aiBtn = document.getElementById('modeBtnAI');
+                    if (aiBtn) {
+                        document.querySelectorAll('#screen-home .mode-selector-grid .mode-btn').forEach(function(b) { b
+                                .classList.remove('active'); });
+                        aiBtn.classList.add('active');
+                    }
+                }
+                isOnlineGame = false;
+            }
+
             if (screenId === 'screen-map') {
                 buildMapRoadmap();
                 setTimeout(drawMapConnectionsSVG, 50);
+            }
+
+            // Show/hide in-game shop button based on game state
+            updateShopButtonVisibility();
+        }
+
+        function updateShopButtonVisibility() {
+            let btn = document.getElementById('gameShopBtn');
+            if (!btn) return;
+            // Show shop button only during active online multiplayer games
+            if (isOnlineGame && !mpGameOver && document.getElementById('screen-game').classList.contains('active')) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
             }
         }
 
@@ -2675,6 +3002,8 @@
                         container.scrollTop = userRow.offsetTop - container.offsetTop - 50;
                     }
                 }, 150);
+            } else if (id === 'onlineModal') {
+                // Power-up shop removed from setup screen; nothing to render here
             }
         }
 
@@ -2682,11 +3011,13 @@
 
         function selectMode(mode, element) {
             activePlayerMode = mode;
+            homeScreenMode = mode;
             isOnlineGame = false;
-            document.getElementById('gameChatBar').style.display = 'none';
             document.querySelectorAll('#screen-home .mode-selector-grid .mode-btn').forEach(function(b) { b.classList
                     .remove('active'); });
             element.classList.add('active');
+            // Also update shop button visibility
+            updateShopButtonVisibility();
         }
 
         function setOnlinePlayerCount(count) {
@@ -2707,7 +3038,7 @@
             if (isOnlineGame) {
                 return activePlayerEmojis[playerNum] || '👤';
             }
-            return playerNum === 1 ? gameData.avatar || '😎' : '👤';
+            return playerNum === 1 ? gameData.avatar || AVATAR_OPTIONS[0] : '👤';
         }
 
         function getTotalPlayers() {
@@ -2733,7 +3064,6 @@
             if (complete && player > 0) {
                 let emoji = '';
                 if (isOnlineGame) {
-                    // Player-specific emoji for online multiplayer
                     emoji = getPlayerEmoji(player);
                     boxEl.innerHTML = emoji;
                     boxEl.className = 'box-cell captured-box-anim box-player-emoji';
@@ -2778,11 +3108,15 @@
         function refreshAllBoxStates() {
             for (let r = 0; r < boardRows - 1; r++) {
                 for (let c = 0; c < boardCols - 1; c++) {
-                    let complete = isBoxComplete(r, c);
-                    if (!complete && boxesGrid[r][c] > 0) {
-                        boxesGrid[r][c] = 0;
-                        recalculateScores();
-                    }
+                    updateBoxVisual(r, c);
+                }
+            }
+            updateScoreDisplays();
+        }
+
+        function refreshAllBoxStatesWithoutScoreRecalc() {
+            for (let r = 0; r < boardRows - 1; r++) {
+                for (let c = 0; c < boardCols - 1; c++) {
                     updateBoxVisual(r, c);
                 }
             }
@@ -2807,6 +3141,7 @@
             currentRoomCode = code;
             myPlayerNumber = 1;
             isOnlineGame = true;
+            // Use the selected online player count from the UI
             activePlayerMode = selectedOnlinePlayerCount + 'P';
             trackedRoomPlayers = {};
             activePlayerEmojis = {};
@@ -2816,8 +3151,11 @@
             mpMoveCountSincePressure = 0;
             mpLineDisappearanceEnabled = false;
             mpLineTimers = {};
+            mpLineRemovalQueue = [];
+            mpLineRemovalProcessing = false;
             shieldActive = false;
             freezeActive = false;
+            turnLock = false;
 
             let gSizeStr = document.getElementById('mpGridSizeSelect').value;
             let parts = gSizeStr.split('x');
@@ -2825,21 +3163,24 @@
             boardRows = parseInt(parts[1]) + 1;
             onlineGameMode = document.getElementById('mpGameModeSelect').value;
 
-            // Player-specific power-ups (each player has their own)
-            mpPowerups = { double: 1, block: 1, break: 1, freeze: 1, shield: 1 };
-            mpPowerupCooldowns = { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+            mpPowerups = {};
+            mpPowerupCooldowns = {};
+            for (let i = 1; i <= selectedOnlinePlayerCount; i++) {
+                mpPowerups[i] = { double: 1, block: 1, break: 1, freeze: 1, shield: 1 };
+                mpPowerupCooldowns[i] = { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+            }
             mpComboCount = 0;
             mpSpecialBoxes = {};
             mpActiveEvent = null;
             mpIsFrozen = false;
             mpCurrentEvent = null;
+            lastGapState = {};
 
-            // Total game timer: 30 or 45 minutes (random)
             totalGameTimeSeconds = Math.random() < 0.5 ? 30 * 60 : 45 * 60;
 
             let roomObj = {
                 p1: gameData.username,
-                p1Emoji: gameData.avatar || "😎",
+                p1Emoji: gameData.avatar || AVATAR_OPTIONS[0],
                 maxPlayers: selectedOnlinePlayerCount,
                 shape: selectedOnlineShape,
                 gridRows: boardRows,
@@ -2849,9 +3190,8 @@
                 lastMove: null,
                 status: "waiting",
                 chat: { 0: { user: "System", msg: "Room created successfully!" } },
-                // Player-specific power-ups stored per player
-                powerups: { 1: { double: 1, block: 1, break: 1, freeze: 1, shield: 1 } },
-                powerupCooldowns: { 1: { double: 0, block: 0, break: 0, freeze: 0, shield: 0 } },
+                powerups: {},
+                powerupCooldowns: {},
                 specialBoxes: {},
                 activeEvent: null,
                 eventTimestamp: 0,
@@ -2859,7 +3199,7 @@
                 comboCount: 0,
                 lastBoxCount: 0,
                 boxStates: {},
-                playerEmojis: { 1: gameData.avatar || "😎" },
+                playerEmojis: { 1: gameData.avatar || AVATAR_OPTIONS[0] },
                 timePressureLevel: 0,
                 moveCount: 0,
                 gameOver: false,
@@ -2868,16 +3208,19 @@
                 gameStartTime: Date.now(),
                 shieldActive: false,
                 freezeActive: false,
-                // Track which players are online
-                onlineStatus: { 1: true }
+                onlineStatus: { 1: true },
+                gapState: {},
+                mpScores: [0, 0, 0, 0],
+                permanentBoxes: {}
             };
 
-            for (let i = 2; i <= selectedOnlinePlayerCount; i++) {
-                roomObj['p' + i] = "Waiting...";
-                roomObj['p' + i + 'Emoji'] = "👤";
-                roomObj['onlineStatus'][i] = false;
+            for (let i = 1; i <= selectedOnlinePlayerCount; i++) {
+                roomObj['p' + i] = (i === 1) ? gameData.username : "Waiting...";
+                roomObj['p' + i + 'Emoji'] = (i === 1) ? (gameData.avatar || AVATAR_OPTIONS[0]) : "👤";
+                roomObj['onlineStatus'][i] = (i === 1);
                 roomObj['powerups'][i] = { double: 1, block: 1, break: 1, freeze: 1, shield: 1 };
                 roomObj['powerupCooldowns'][i] = { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+                roomObj['playerEmojis'][i] = (i === 1) ? (gameData.avatar || AVATAR_OPTIONS[0]) : "👤";
             }
 
             roomRef = db.ref('rooms/' + currentRoomCode);
@@ -2905,8 +3248,12 @@
             mpMoveCountSincePressure = 0;
             mpLineDisappearanceEnabled = false;
             mpLineTimers = {};
+            mpLineRemovalQueue = [];
+            mpLineRemovalProcessing = false;
             shieldActive = false;
             freezeActive = false;
+            lastGapState = {};
+            turnLock = false;
 
             roomRef.once('value').then(function(snapshot) {
                 if (snapshot.exists()) {
@@ -2933,12 +3280,25 @@
                     totalGameTimeSeconds = data.totalGameTime || 45 * 60;
                     gameStartTime = data.gameStartTime || Date.now();
 
-                    // Load player-specific power-ups from room
-                    if (data.powerups && data.powerups[myPlayerNumber]) {
-                        mpPowerups = data.powerups[myPlayerNumber];
+                    mpPowerups = {};
+                    mpPowerupCooldowns = {};
+                    for (let i = 1; i <= maxP; i++) {
+                        mpPowerups[i] = { double: 1, block: 1, break: 1, freeze: 1, shield: 1 };
+                        mpPowerupCooldowns[i] = { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
                     }
-                    if (data.powerupCooldowns && data.powerupCooldowns[myPlayerNumber]) {
-                        mpPowerupCooldowns = data.powerupCooldowns[myPlayerNumber];
+                    if (data.powerups) {
+                        for (let i = 1; i <= maxP; i++) {
+                            if (data.powerups[i]) {
+                                mpPowerups[i] = data.powerups[i];
+                            }
+                        }
+                    }
+                    if (data.powerupCooldowns) {
+                        for (let i = 1; i <= maxP; i++) {
+                            if (data.powerupCooldowns[i]) {
+                                mpPowerupCooldowns[i] = data.powerupCooldowns[i];
+                            }
+                        }
                     }
                     if (data.specialBoxes) {
                         mpSpecialBoxes = data.specialBoxes;
@@ -2967,16 +3327,22 @@
                     if (data.freezeActive !== undefined) {
                         freezeActive = data.freezeActive;
                     }
+                    if (data.gapState) {
+                        lastGapState = data.gapState;
+                    }
+                    if (data.mpScores) {
+                        playerScores = data.mpScores;
+                    }
 
                     let updateObj = {};
                     updateObj['p' + assignedPlayer] = gameData.username;
-                    updateObj['p' + assignedPlayer + 'Emoji'] = gameData.avatar || "😎";
+                    updateObj['p' + assignedPlayer + 'Emoji'] = gameData.avatar || AVATAR_OPTIONS[0];
                     updateObj['status'] = "playing";
                     updateObj['onlineStatus/' + assignedPlayer] = true;
                     if (!data.playerEmojis) {
-                        updateObj['playerEmojis'] = { 1: data.p1Emoji || "😎" };
+                        updateObj['playerEmojis'] = { 1: data.p1Emoji || AVATAR_OPTIONS[0] };
                     }
-                    updateObj['playerEmojis/' + assignedPlayer] = gameData.avatar || "😎";
+                    updateObj['playerEmojis/' + assignedPlayer] = gameData.avatar || AVATAR_OPTIONS[0];
                     roomRef.update(updateObj);
 
                     closeModal('onlineModal');
@@ -3031,12 +3397,23 @@
 
             if (myPlayerNumber === 1) {
                 scheduleRandomEvent();
-                // Start random line disappearance
                 startLineDisappearanceSystem();
             }
 
-            // Start total game timer
             startTotalGameTimer();
+
+            // Show shop button
+            updateShopButtonVisibility();
+
+            if (roomRef) {
+                roomRef.once('value', function(snapshot) {
+                    let data = snapshot.val();
+                    if (data && data.gapState) {
+                        lastGapState = data.gapState;
+                        notifyOpponentsOfGap(lastGapState);
+                    }
+                });
+            }
         }
 
         function updatePlayerEmojiUI() {
@@ -3064,7 +3441,6 @@
                         statusDot.className = 'player-status-dot online';
                         nameSpan.appendChild(statusDot);
                     }
-                    // Check if player is online via trackedRoomPlayers
                     let isOnline = trackedRoomPlayers[i] && trackedRoomPlayers[i] !== "Waiting..." && trackedRoomPlayers[i] !== "Left";
                     statusDot.className = 'player-status-dot ' + (isOnline ? 'online' : 'offline');
                 }
@@ -3236,6 +3612,7 @@
             if (comboBonus > 1) {
                 showComboNotification(comboMessage);
                 playerScores[player - 1] += comboBonus;
+                syncAuthoritativeScores();
                 playSound('win');
                 showToast('🔥 COMBO! +' + comboBonus + ' bonus points!');
             }
@@ -3243,8 +3620,15 @@
             if (isOnlineGame && roomRef) {
                 roomRef.update({
                     comboCount: mpComboCount,
-                    lastBoxCount: mpLastBoxCount
+                    lastBoxCount: mpLastBoxCount,
+                    mpScores: playerScores
                 });
+            }
+        }
+
+        function syncAuthoritativeScores() {
+            if (isOnlineGame && roomRef) {
+                roomRef.update({ mpScores: playerScores });
             }
         }
 
@@ -3365,34 +3749,143 @@
             }, 3000);
         }
 
+        // ============================================================
+        // IN-GAME POWER-UP SHOP (active during multiplayer)
+        // ============================================================
+
+        function renderGameShop() {
+            let container = document.getElementById('gameShopItemsContainer');
+            if (!container) return;
+
+            // Show current coins
+            let coinsDisplay = document.getElementById('gameShopCoinsDisplay');
+            if (coinsDisplay) {
+                coinsDisplay.innerText = '🪙 ' + gameData.coins;
+            }
+
+            const powerups = [
+                { id: 'double', label: '🔀 Double Line', cost: POWERUP_COSTS.double },
+                { id: 'block', label: '🚫 Block', cost: POWERUP_COSTS.block },
+                { id: 'break', label: '💔 Break', cost: POWERUP_COSTS.break },
+                { id: 'freeze', label: '❄️ Freeze', cost: POWERUP_COSTS.freeze },
+                { id: 'shield', label: '🛡️ Shield', cost: POWERUP_COSTS.shield }
+            ];
+
+            // Get current inventory for this player
+            let myInventory = mpPowerups[myPlayerNumber] || { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+
+            let html = '';
+            powerups.forEach(function(p) {
+                let hasEnough = gameData.coins >= p.cost;
+                let qty = myInventory[p.id] || 0;
+                html += `
+                    <div class="game-shop-item">
+                        <div class="shop-item-left">
+                            <span class="icon">${p.label.split(' ')[0]}</span>
+                            <span class="name">${p.label}</span>
+                        </div>
+                        <div class="shop-item-right">
+                            <span class="cost">🪙 ${p.cost}</span>
+                            <span class="qty">×${qty}</span>
+                            <button class="btn-shop-buy" onclick="purchasePowerupFromGame('${p.id}', ${p.cost})" ${!hasEnough ? 'disabled' : ''}>
+                                Buy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Add a small note about using power-ups
+            html += `<hr class="shop-divider">`;
+            html +=
+                `<div style="font-size:0.7rem; color:#57606f; text-align:center; padding:4px;">Use power-ups from the bar below the turn indicator during your turn.</div>`;
+
+            container.innerHTML = html;
+        }
+
+        function purchasePowerupFromGame(type, cost) {
+            if (gameData.coins < cost) {
+                showToast('❌ Not enough coins!');
+                return;
+            }
+
+            // Deduct coins
+            gameData.coins -= cost;
+            saveDataToStorage();
+
+            // Add power-up to this player's inventory
+            if (!mpPowerups[myPlayerNumber]) {
+                mpPowerups[myPlayerNumber] = { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+            }
+            mpPowerups[myPlayerNumber][type] = (mpPowerups[myPlayerNumber][type] || 0) + 1;
+
+            // Sync to Firebase room
+            if (isOnlineGame && roomRef && myPlayerNumber) {
+                let updateObj = {};
+                updateObj['powerups/' + myPlayerNumber + '/' + type] = mpPowerups[myPlayerNumber][type];
+                roomRef.update(updateObj);
+            }
+
+            // Update UI
+            renderGameShop();
+            updatePowerupUI();
+            refreshDataUI();
+
+            showToast('✅ Purchased ' + POWERUP_LABELS[type] + '! (×' + mpPowerups[myPlayerNumber][type] + ')');
+        }
+
+        function openGameShop() {
+            if (!isOnlineGame) {
+                showToast('Shop is only available during online multiplayer games.');
+                return;
+            }
+            if (mpGameOver) {
+                showToast('Game is over!');
+                return;
+            }
+            document.getElementById('gameShopModal').style.display = 'flex';
+            renderGameShop();
+        }
+
+        function closeGameShop() {
+            document.getElementById('gameShopModal').style.display = 'none';
+            // Ensure game state is not affected
+        }
+
+        // ============================================================
+        // END IN-GAME SHOP
+        // ============================================================
+
         function useMpPowerup(type) {
             if (!isOnlineGame) return;
             if (turnPlayer !== myPlayerNumber) {
                 showToast("Not your turn!");
                 return;
             }
-            if (mpPowerups[type] <= 0) {
+
+            let myInventory = mpPowerups[myPlayerNumber] || { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+            if (myInventory[type] <= 0) {
                 showToast('No ' + type + ' power-ups left!');
                 return;
             }
-            if (mpPowerupCooldowns[type] > Date.now()) {
-                let remaining = Math.ceil((mpPowerupCooldowns[type] - Date.now()) / 1000);
+
+            let myCooldowns = mpPowerupCooldowns[myPlayerNumber] || { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+            if (myCooldowns[type] > Date.now()) {
+                let remaining = Math.ceil((myCooldowns[type] - Date.now()) / 1000);
                 showToast('⏳ Power-up on cooldown (' + remaining + 's)');
                 return;
             }
 
-            // Shield: activate protection for 5 seconds (player-specific)
             if (type === 'shield') {
                 shieldActive = true;
-                mpPowerups.shield--;
-                mpPowerupCooldowns.shield = Date.now() + 10000;
+                myInventory.shield--;
+                myCooldowns.shield = Date.now() + 10000;
                 showToast('🛡️ Shield activated! You are protected for 5 seconds!');
                 if (roomRef) {
                     roomRef.update({ shieldActive: true });
                 }
                 updatePowerupUI();
                 syncPowerupState();
-                // Automatically deactivate after 5 seconds
                 setTimeout(function() {
                     shieldActive = false;
                     if (roomRef) {
@@ -3403,13 +3896,12 @@
                 return;
             }
 
-            // Freeze: freeze opponent (player-specific)
             if (type === 'freeze') {
                 let totalPlayers = getTotalPlayers();
                 let opponent = (turnPlayer % totalPlayers) + 1;
                 freezeActive = true;
-                mpPowerups.freeze--;
-                mpPowerupCooldowns.freeze = Date.now() + 15000;
+                myInventory.freeze--;
+                myCooldowns.freeze = Date.now() + 15000;
                 showToast('❄️ Player ' + opponent + ' is frozen for 5 seconds!');
                 if (roomRef) {
                     roomRef.update({ freezeActive: true, frozenPlayer: opponent });
@@ -3426,16 +3918,15 @@
                 return;
             }
 
-            // Regular power-ups (double, block, break)
-            mpPowerups[type]--;
-            mpPowerupCooldowns[type] = Date.now() + 5000;
+            myInventory[type]--;
+            myCooldowns[type] = Date.now() + 5000;
 
             if (type === 'double') {
                 showToast('🔀 Double Line activated! You can place two lines!');
                 window.mpDoubleLineActive = true;
                 window.mpDoubleLineCount = 0;
             } else if (type === 'block') {
-                showToast('🚫 Click on an edge to block it!');
+                showToast('🚫 Click on an edge to block it (2-3 seconds)!');
                 window.mpBlockMode = true;
             } else if (type === 'break') {
                 showToast('💔 Click on a drawn line to break it!');
@@ -3447,25 +3938,28 @@
         }
 
         function updatePowerupUI() {
-            document.getElementById('mpPowerupDouble').innerHTML = '🔀 Double (' + mpPowerups.double + ')';
-            document.getElementById('mpPowerupBlock').innerHTML = '🚫 Block (' + mpPowerups.block + ')';
-            document.getElementById('mpPowerupBreak').innerHTML = '💔 Break (' + mpPowerups.break + ')';
-            document.getElementById('mpPowerupFreeze').innerHTML = '❄️ Freeze (' + mpPowerups.freeze + ')';
-            document.getElementById('mpPowerupShield').innerHTML = '🛡️ Shield (' + mpPowerups.shield + ')';
+            let myInventory = mpPowerups[myPlayerNumber] || { double: 0, block: 0, break: 0, freeze: 0, shield: 0 };
+            document.getElementById('mpPowerupDouble').innerHTML = '🔀 Double (' + myInventory.double + ')';
+            document.getElementById('mpPowerupBlock').innerHTML = '🚫 Block (' + myInventory.block + ')';
+            document.getElementById('mpPowerupBreak').innerHTML = '💔 Break (' + myInventory.break + ')';
+            document.getElementById('mpPowerupFreeze').innerHTML = '❄️ Freeze (' + myInventory.freeze + ')';
+            document.getElementById('mpPowerupShield').innerHTML = '🛡️ Shield (' + myInventory.shield + ')';
 
             let isMyTurn = isOnlineGame && turnPlayer === myPlayerNumber && !mpGameOver;
-            document.getElementById('mpPowerupDouble').disabled = !isMyTurn || mpPowerups.double <= 0;
-            document.getElementById('mpPowerupBlock').disabled = !isMyTurn || mpPowerups.block <= 0;
-            document.getElementById('mpPowerupBreak').disabled = !isMyTurn || mpPowerups.break <= 0;
-            document.getElementById('mpPowerupFreeze').disabled = !isMyTurn || mpPowerups.freeze <= 0;
-            document.getElementById('mpPowerupShield').disabled = !isMyTurn || mpPowerups.shield <= 0 || shieldActive;
+            document.getElementById('mpPowerupDouble').disabled = !isMyTurn || myInventory.double <= 0;
+            document.getElementById('mpPowerupBlock').disabled = !isMyTurn || myInventory.block <= 0;
+            document.getElementById('mpPowerupBreak').disabled = !isMyTurn || myInventory.break <= 0;
+            document.getElementById('mpPowerupFreeze').disabled = !isMyTurn || myInventory.freeze <= 0;
+            document.getElementById('mpPowerupShield').disabled = !isMyTurn || myInventory.shield <= 0;
         }
 
         function syncPowerupState() {
             if (roomRef && myPlayerNumber) {
                 let updateObj = {};
-                updateObj['powerups/' + myPlayerNumber] = mpPowerups;
-                updateObj['powerupCooldowns/' + myPlayerNumber] = mpPowerupCooldowns;
+                updateObj['powerups/' + myPlayerNumber] = mpPowerups[myPlayerNumber] || { double: 0, block: 0, break: 0,
+                    freeze: 0, shield: 0 };
+                updateObj['powerupCooldowns/' + myPlayerNumber] = mpPowerupCooldowns[myPlayerNumber] || { double: 0,
+                    block: 0, break: 0, freeze: 0, shield: 0 };
                 roomRef.update(updateObj);
             }
         }
@@ -3484,18 +3978,31 @@
 
             if (window.mpBlockMode) {
                 if ((type === 'h' && horizontalGrid[r][c] === 0) || (type === 'v' && verticalGrid[r][c] === 0)) {
+                    var blockKey = type + '-' + r + '-' + c;
+                    if (temporaryBlockedLines[blockKey]) {
+                        showToast('⚠️ This line is already blocked!');
+                        return false;
+                    }
+
                     element.classList.add('line-blocked');
-                    if (type === 'h') horizontalGrid[r][c] = -1;
-                    if (type === 'v') verticalGrid[r][c] = -1;
+                    if (type === 'h') horizontalGrid[r][c] = -2;
+                    if (type === 'v') verticalGrid[r][c] = -2;
 
+                    temporaryBlockedLines[blockKey] = true;
                     window.mpBlockMode = false;
-                    showToast('🚫 Edge blocked!');
+                    showToast('🚫 Line blocked for 2-3 seconds!');
 
-                    refreshAllBoxStates();
+                    var unblockDelay = 2000 + Math.random() * 1000;
+                    if (tempBlockTimers[blockKey]) {
+                        clearTimeout(tempBlockTimers[blockKey]);
+                    }
+                    tempBlockTimers[blockKey] = setTimeout(function() {
+                        unblockLine(blockKey, type, r, c);
+                    }, unblockDelay);
 
                     if (roomRef) {
                         roomRef.update({
-                            blockedEdge: { type: type, r: r, c: c }
+                            blockedEdge: { type: type, r: r, c: c, key: blockKey, duration: unblockDelay }
                         });
                     }
                     return true;
@@ -3550,159 +4057,177 @@
             return false;
         }
 
-        // Random line disappearance system for online multiplayer
+        function unblockLine(blockKey, type, r, c) {
+            var el = document.getElementById(blockKey);
+            if (!el) return;
+
+            var isStillBlocked = false;
+            if (type === 'h' && horizontalGrid[r] && horizontalGrid[r][c] === -2) {
+                isStillBlocked = true;
+                horizontalGrid[r][c] = 0;
+            } else if (type === 'v' && verticalGrid[r] && verticalGrid[r][c] === -2) {
+                isStillBlocked = true;
+                verticalGrid[r][c] = 0;
+            }
+
+            if (isStillBlocked) {
+                el.classList.remove('line-blocked');
+                el.style.background = '#ffeaa7';
+                showToast('🔓 Line unblocked!');
+            }
+
+            delete temporaryBlockedLines[blockKey];
+            delete tempBlockTimers[blockKey];
+
+            if (roomRef) {
+                roomRef.update({
+                    unblockedLine: { key: blockKey, type: type, r: r, c: c }
+                });
+            }
+        }
+
         function startLineDisappearanceSystem() {
             if (!isOnlineGame || mpGameOver) return;
             mpLineDisappearanceEnabled = true;
 
-            if (mpDisappearanceInterval) {
-                clearInterval(mpDisappearanceInterval);
+            if (mpLineRemovalTimer) {
+                clearTimeout(mpLineRemovalTimer);
+                mpLineRemovalTimer = null;
             }
 
-            // Random interval between 8-15 seconds
-            let getRandomInterval = function() {
-                return 8000 + Math.random() * 7000;
-            };
-
-            function scheduleNextDisappearance() {
-                if (!mpLineDisappearanceEnabled || mpGameOver || !isOnlineGame) {
-                    if (mpDisappearanceInterval) {
-                        clearInterval(mpDisappearanceInterval);
-                        mpDisappearanceInterval = null;
-                    }
-                    return;
-                }
-
-                // Check if less than 30 seconds remaining - stop disappearing
-                if (checkTotalGameTimer()) {
-                    mpLineDisappearanceEnabled = false;
-                    if (mpDisappearanceInterval) {
-                        clearInterval(mpDisappearanceInterval);
-                        mpDisappearanceInterval = null;
-                    }
-                    return;
-                }
-
-                let delay = getRandomInterval();
-                mpDisappearanceInterval = setTimeout(function() {
-                    if (mpLineDisappearanceEnabled && !mpGameOver && isOnlineGame) {
-                        // Check again for 30-second rule
-                        if (!checkTotalGameTimer()) {
-                            disappearRandomLine();
-                        }
-                        // Schedule next
-                        scheduleNextDisappearance();
-                    }
-                }, delay);
-            }
-
-            scheduleNextDisappearance();
+            processLineRemovalQueue();
         }
 
-        function checkTotalGameTimer() {
-            if (!isOnlineGame) return false;
-            let elapsed = (Date.now() - gameStartTime) / 1000;
-            let remaining = totalGameTimeSeconds - elapsed;
-            // Stop line disappearing if less than 30 seconds remaining
-            if (remaining <= 30 && mpLineDisappearanceEnabled) {
-                mpLineDisappearanceEnabled = false;
-                if (mpDisappearanceInterval) {
-                    clearInterval(mpDisappearanceInterval);
-                    mpDisappearanceInterval = null;
-                }
-                showToast('⏰ Line disappearance stopped - 30 seconds remaining!');
-                return true;
+        function queueLineForRemoval(lineData) {
+            if (!mpLineDisappearanceEnabled || mpGameOver) return;
+
+            var exists = mpLineRemovalQueue.some(function(item) {
+                return item.key === lineData.key;
+            });
+            if (exists) return;
+
+            mpLineRemovalQueue.push(lineData);
+            if (!mpLineRemovalProcessing) {
+                processLineRemovalQueue();
             }
-            return false;
+        }
+
+        function processLineRemovalQueue() {
+            if (mpLineRemovalProcessing) return;
+            if (mpLineRemovalQueue.length === 0) {
+                if (mpLineDisappearanceEnabled && !mpGameOver) {
+                    mpLineRemovalTimer = setTimeout(function() {
+                        processLineRemovalQueue();
+                    }, 5000);
+                }
+                return;
+            }
+
+            mpLineRemovalProcessing = true;
+
+            var lineData = mpLineRemovalQueue.shift();
+
+            var delay = LINE_REMOVAL_DELAY_MIN + Math.random() * (LINE_REMOVAL_DELAY_MAX - LINE_REMOVAL_DELAY_MIN);
+
+            mpLineRemovalTimer = setTimeout(function() {
+                if (!mpLineDisappearanceEnabled || mpGameOver) {
+                    mpLineRemovalProcessing = false;
+                    return;
+                }
+
+                removeLineFromBoard(lineData);
+
+                mpLineRemovalProcessing = false;
+                processLineRemovalQueue();
+            }, delay);
+        }
+
+        function removeLineFromBoard(lineData) {
+            var el = document.getElementById(lineData.key);
+            if (!el) return;
+
+            var isStillDrawn = false;
+            if (lineData.type === 'h' && horizontalGrid[lineData.r] && horizontalGrid[lineData.r][lineData.c] === lineData
+                .player) {
+                isStillDrawn = true;
+            } else if (lineData.type === 'v' && verticalGrid[lineData.r] && verticalGrid[lineData.r][lineData.c] ===
+                lineData.player) {
+                isStillDrawn = true;
+            }
+
+            if (isStillDrawn) {
+                el.classList.add('line-fade-out');
+
+                setTimeout(function() {
+                    if (mpGameOver) return;
+
+                    if (lineData.type === 'h' && horizontalGrid[lineData.r] && horizontalGrid[lineData.r][lineData.c] ===
+                        lineData.player) {
+                        horizontalGrid[lineData.r][lineData.c] = 0;
+                    } else if (lineData.type === 'v' && verticalGrid[lineData.r] && verticalGrid[lineData.r][lineData
+                        .c] === lineData.player) {
+                        verticalGrid[lineData.r][lineData.c] = 0;
+                    }
+
+                    el.classList.remove('line-drawn-p' + lineData.player);
+                    el.classList.remove('line-fade-out');
+                    el.style.background = '#ffeaa7';
+
+                    refreshAllBoxStatesWithoutScoreRecalc();
+
+                    if (roomRef) {
+                        roomRef.update({
+                            disappearedLine: { type: lineData.type, r: lineData.r, c: lineData.c,
+                                player: lineData.player, key: lineData.key }
+                        });
+                    }
+
+                    delete mpLineTimers[lineData.key];
+                }, 1200);
+            }
         }
 
         function disappearRandomLine() {
             if (!isOnlineGame || mpGameOver || !mpLineDisappearanceEnabled) return;
 
-            // Collect all drawn lines
             let drawnLines = [];
 
-            // Horizontal lines
             for (let r = 0; r < boardRows; r++) {
                 for (let c = 0; c < boardCols - 1; c++) {
                     if (horizontalGrid[r][c] > 0) {
-                        drawnLines.push({ type: 'h', r: r, c: c, player: horizontalGrid[r][c], key: 'h-' + r + '-' + c });
+                        var key = 'h-' + r + '-' + c;
+                        var inQueue = mpLineRemovalQueue.some(function(item) { return item.key === key; });
+                        if (!inQueue && !mpLineTimers[key]) {
+                            drawnLines.push({ type: 'h', r: r, c: c, player: horizontalGrid[r][c], key: key });
+                        }
                     }
                 }
             }
 
-            // Vertical lines
             for (let r = 0; r < boardRows - 1; r++) {
                 for (let c = 0; c < boardCols; c++) {
                     if (verticalGrid[r][c] > 0) {
-                        drawnLines.push({ type: 'v', r: r, c: c, player: verticalGrid[r][c], key: 'v-' + r + '-' + c });
+                        var key = 'v-' + r + '-' + c;
+                        var inQueue = mpLineRemovalQueue.some(function(item) { return item.key === key; });
+                        if (!inQueue && !mpLineTimers[key]) {
+                            drawnLines.push({ type: 'v', r: r, c: c, player: verticalGrid[r][c], key: key });
+                        }
                     }
                 }
             }
 
-            if (drawnLines.length === 0) return;
-
-            // Pick a random line
-            let line = drawnLines[Math.floor(Math.random() * drawnLines.length)];
-
-            // Don't disappear lines that are in the process of disappearing
-            if (mpLineTimers[line.key]) return;
-
-            // Find the element
-            let el = document.getElementById(line.key);
-            if (!el) return;
-
-            // Store the player who drew this line for potential score adjustment later
-            let playerWhoDrew = line.player;
-
-            // Animate disappearance
-            el.classList.add('line-fade-out');
-
-            // Remove from grid after animation
-            setTimeout(function() {
-                // Don't remove if game is over
-                if (mpGameOver) return;
-
-                // Check if line is still drawn (could have been broken by power-up)
-                if (line.type === 'h' && horizontalGrid[line.r][line.c] === playerWhoDrew) {
-                    horizontalGrid[line.r][line.c] = 0;
-                } else if (line.type === 'v' && verticalGrid[line.r][line.c] === playerWhoDrew) {
-                    verticalGrid[line.r][line.c] = 0;
+            if (drawnLines.length === 0) {
+                if (mpLineDisappearanceEnabled && !mpGameOver) {
+                    mpLineRemovalTimer = setTimeout(function() {
+                        disappearRandomLine();
+                    }, 8000);
                 }
-
-                // Remove line class
-                el.classList.remove('line-drawn-p' + playerWhoDrew);
-                el.classList.remove('line-fade-out');
-                el.style.background = '#ffeaa7';
-
-                // IMPORTANT: We do NOT recalculate scores from board state
-                // Scores are preserved - captured boxes remain captured
-                // Only update box visuals to reflect the current board state
-
-                // Update box visuals but KEEP scores intact
-                refreshAllBoxStatesWithoutScoreRecalc();
-
-                // Broadcast to other players
-                if (roomRef) {
-                    roomRef.update({
-                        disappearedLine: { type: line.type, r: line.r, c: line.c, player: playerWhoDrew }
-                    });
-                }
-
-                delete mpLineTimers[line.key];
-            }, 1200);
-
-            // Store timer reference
-            mpLineTimers[line.key] = setTimeout(function() {}, 1200);
-        }
-
-        function refreshAllBoxStatesWithoutScoreRecalc() {
-            for (let r = 0; r < boardRows - 1; r++) {
-                for (let c = 0; c < boardCols - 1; c++) {
-                    updateBoxVisual(r, c);
-                }
+                return;
             }
-            updateScoreDisplays();
+
+            var line = drawnLines[Math.floor(Math.random() * drawnLines.length)];
+
+            queueLineForRemoval(line);
         }
 
         function updateTimePressure() {
@@ -3734,11 +4259,32 @@
             }
         }
 
+        function notifyOpponentsOfGap(gapData) {
+            if (!isOnlineGame || !roomRef) return;
+
+            roomRef.update({
+                gapState: gapData,
+                gapTimestamp: Date.now()
+            });
+        }
+
         function executeMove(type, r, c, element, player, isRemote) {
             if (isRemote === undefined) isRemote = false;
             if (mpGameOver) return;
 
-            // Check freeze
+            if (turnLock && !isRemote) {
+                showToast('⏳ Processing move...');
+                return;
+            }
+
+            if (type === 'h' && horizontalGrid[r][c] !== 0) return;
+            if (type === 'v' && verticalGrid[r][c] !== 0) return;
+
+            if (isOnlineGame && !isRemote && player !== turnPlayer) {
+                showToast('Not your turn!');
+                return;
+            }
+
             if (isOnlineGame && freezeActive && !isRemote && player !== myPlayerNumber) {
                 showToast('❄️ Opponent is frozen!');
                 return;
@@ -3748,8 +4294,16 @@
                 return;
             }
 
-            if (type === 'h' && horizontalGrid[r][c] !== 0) return;
-            if (type === 'v' && verticalGrid[r][c] !== 0) return;
+            if (isOnlineGame && !isRemote) {
+                turnLock = true;
+                if (roomRef) {
+                    roomRef.update({
+                        turnLock: true,
+                        turnLockTime: Date.now(),
+                        pendingMove: { type: type, r: r, c: c, player: player }
+                    });
+                }
+            }
 
             playSound('line');
 
@@ -3761,6 +4315,19 @@
                 roomRef.update({ lastMove: { type: type, r: r, c: c, player: player } });
                 roomRef.update({ moveCount: (roomRef.moveCount || 0) + 1 });
                 updateTimePressure();
+
+                let filledBoxes = checkCompletedBoxes(type, r, c, player);
+                if (!filledBoxes) {
+                    let gapData = {
+                        type: type,
+                        r: r,
+                        c: c,
+                        player: player,
+                        timestamp: Date.now()
+                    };
+                    lastGapState = gapData;
+                    notifyOpponentsOfGap(gapData);
+                }
             }
 
             let filledBoxes = checkCompletedBoxes(type, r, c, player);
@@ -3777,6 +4344,13 @@
                 turnPlayer = (turnPlayer % totalPlayers) + 1;
                 if (isOnlineGame && !isRemote && roomRef) {
                     roomRef.update({ turn: turnPlayer });
+                }
+            }
+
+            if (isOnlineGame && !isRemote) {
+                turnLock = false;
+                if (roomRef) {
+                    roomRef.update({ turnLock: false, pendingMove: null });
                 }
             }
 
@@ -3813,7 +4387,6 @@
 
             let test = function(br, bc) {
                 if (br >= 0 && br < boardRows - 1 && bc >= 0 && bc < boardCols - 1) {
-                    // Check if box is already captured - prevent double counting
                     if (boxesGrid[br][bc] === 0 &&
                         horizontalGrid[br][bc] > 0 && horizontalGrid[br + 1][bc] > 0 &&
                         verticalGrid[br][bc] > 0 && verticalGrid[br][bc + 1] > 0) {
@@ -3852,7 +4425,6 @@
                         }
 
                         if (isOnlineGame) {
-                            // Player-specific emoji for captured box
                             let playerEmoji = getPlayerEmoji(player);
                             boxEl.innerHTML = playerEmoji;
                             boxEl.className = 'box-cell captured-box-anim box-player-emoji';
@@ -3867,8 +4439,8 @@
                         boxEl.style.background = '#ffeaa7';
                         boxEl.style.border = '2px solid #fdcb6e';
 
-                        // Add points only once per box
                         playerScores[player - 1] = Math.max(0, playerScores[player - 1] + pointsAdded);
+                        syncAuthoritativeScores();
                         isFilled = true;
                         playSound('box');
                     }
@@ -3890,8 +4462,11 @@
             updatePlayerEmojiUI();
         }
 
+        // ============================================================
+        // MULTIPLAYER GAME OVER & LEADERBOARD (FIXED)
+        // ============================================================
+
         function checkGameOver() {
-            // Check total game timer
             if (isOnlineGame) {
                 let elapsed = (Date.now() - gameStartTime) / 1000;
                 if (elapsed >= totalGameTimeSeconds) {
@@ -3911,7 +4486,6 @@
                         document.getElementById('game-timer-bar').style.display = 'none';
                         if (totalGameTimerInterval) clearInterval(totalGameTimerInterval);
                         playSound('win');
-                        showToast('🏆 Player ' + (i + 1) + ' Wins the 10-Box Puzzle Race!');
                         return true;
                     }
                 }
@@ -3942,81 +4516,109 @@
             mpGameOver = true;
             mpGameResultSent = true;
 
-            // Stop all timers
             if (turnTimerInterval) clearInterval(turnTimerInterval);
             if (mpEventTimer) clearTimeout(mpEventTimer);
             if (totalGameTimerInterval) clearInterval(totalGameTimerInterval);
-            if (mpDisappearanceInterval) {
-                clearInterval(mpDisappearanceInterval);
-                mpDisappearanceInterval = null;
-            }
+            if (mpLineRemovalTimer) clearTimeout(mpLineRemovalTimer);
             mpLineDisappearanceEnabled = false;
+            mpLineRemovalQueue = [];
 
-            // Clear disappearance timers
             for (let key in mpLineTimers) {
                 clearTimeout(mpLineTimers[key]);
                 delete mpLineTimers[key];
             }
-
-            // Calculate final scores (already in playerScores)
-            let maxScore = Math.max.apply(null, playerScores);
-            let winningPlayer = playerScores.indexOf(maxScore) + 1;
-
-            let resultText = '';
-            let resultClass = '';
-            let resultSubtitle = '';
-
-            if (winningPlayer === myPlayerNumber) {
-                resultText = '🎉 YOU WIN!';
-                resultClass = 'result-win';
-                resultSubtitle = 'Congratulations! You won the match!';
-                gameData.coins += 50;
-                gameData.stars += 2;
-                saveDataToStorage();
-                showToast('🏆 You won! +50 coins, +2 stars!');
-            } else {
-                let winnerName = trackedRoomPlayers[winningPlayer] || 'Player ' + winningPlayer;
-                resultText = '😔 YOU LOSE';
-                resultClass = 'result-lose';
-                resultSubtitle = winnerName + ' won the match!';
-                gameData.coins += 10;
-                saveDataToStorage();
-                showToast('😔 You lost! ' + winnerName + ' won!');
+            for (let key in tempBlockTimers) {
+                clearTimeout(tempBlockTimers[key]);
+                delete tempBlockTimers[key];
             }
 
-            // Check for draw
-            let allSame = true;
-            for (let i = 1; i < playerScores.length; i++) {
-                if (playerScores[i] !== playerScores[0]) allSame = false;
-            }
-            if (allSame && playerScores[0] > 0) {
-                resultText = '🤝 DRAW!';
-                resultClass = 'result-draw';
-                resultSubtitle = 'Both players tied with ' + playerScores[0] + ' boxes!';
-                gameData.coins += 20;
-                saveDataToStorage();
+            // Use authoritative scores
+            let finalScores = playerScores.slice();
+            let totalPlayers = getTotalPlayers();
+
+            // Build ranking list
+            let ranking = [];
+            for (let i = 0; i < totalPlayers; i++) {
+                let name = trackedRoomPlayers[i + 1] || 'Player ' + (i + 1);
+                ranking.push({
+                    player: i + 1,
+                    name: name,
+                    score: finalScores[i] || 0,
+                    emoji: getPlayerEmoji(i + 1)
+                });
             }
 
-            let scoreStr = '';
-            for (let i = 0; i < getTotalPlayers(); i++) {
-                let name = trackedRoomPlayers[i + 1] || 'P' + (i + 1);
-                scoreStr += name + ': ' + playerScores[i] + '  ';
-            }
+            // Sort by score descending
+            ranking.sort(function(a, b) { return b.score - a.score; });
 
-            document.getElementById('mpResultTitle').textContent = resultText;
-            document.getElementById('mpResultTitle').className = 'result-title ' + resultClass;
-            document.getElementById('mpResultSubtitle').textContent = resultSubtitle;
-            document.getElementById('mpResultScore').textContent = 'Final Score: ' + scoreStr;
+            // Render ranking leaderboard
+            renderMultiplayerRanking(ranking);
+
+            // Show result overlay
             document.getElementById('multiplayer-result-overlay').style.display = 'flex';
 
             if (roomRef && myPlayerNumber === 1) {
                 roomRef.update({
                     gameOver: true,
                     gameResult: {
-                        winner: winningPlayer,
-                        scores: playerScores
+                        scores: finalScores,
+                        ranking: ranking
                     }
                 });
+            }
+
+            // Hide shop button
+            updateShopButtonVisibility();
+        }
+
+        function renderMultiplayerRanking(ranking) {
+            let container = document.getElementById('mpRankingListContainer');
+            let html = '<div class="mp-ranking-list">';
+
+            var medals = ['🥇', '🥈', '🥉', '4️⃣'];
+
+            ranking.forEach(function(item, index) {
+                var rankClass = '';
+                if (index === 0) rankClass = 'rank-1';
+                else if (index === 1) rankClass = 'rank-2';
+                else if (index === 2) rankClass = 'rank-3';
+
+                var isCurrentPlayer = (item.player === myPlayerNumber);
+                var playerName = isCurrentPlayer ? item.name + ' (You)' : item.name;
+
+                // Show crown for winner
+                var crown = (index === 0) ? ' 👑' : '';
+
+                html += `
+                    <div class="mp-ranking-item ${rankClass}" style="${isCurrentPlayer ? 'border-color: #ff4757; border-width: 3px;' : ''}">
+                        <span class="rank-number">#${index + 1}</span>
+                        <span class="rank-medal">${medals[index] || '👤'}</span>
+                        <span class="rank-player">${item.emoji} ${playerName}${crown}</span>
+                        <span class="rank-score">${item.score} pts</span>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+
+            // Update result title — ALWAYS show "GAME OVER" with leaderboard, no "You Lose"
+            var titleEl = document.getElementById('mpResultTitle');
+            var subtitleEl = document.getElementById('mpResultSubtitle');
+
+            // Always show neutral title with winner indicated in ranking
+            titleEl.textContent = '🏆 GAME OVER';
+            titleEl.className = 'result-title';
+
+            // Show winner in subtitle
+            if (ranking.length > 0) {
+                var winner = ranking[0];
+                var isYou = (winner.player === myPlayerNumber);
+                subtitleEl.textContent = isYou ?
+                    '🎉 You are the Champion with ' + winner.score + ' points!' :
+                    winner.name + ' is the Champion with ' + winner.score + ' points!';
+            } else {
+                subtitleEl.textContent = 'Final Rankings';
             }
         }
 
@@ -4024,6 +4626,10 @@
             document.getElementById('multiplayer-result-overlay').style.display = 'none';
             exitCurrentGame();
         }
+
+        // ============================================================
+        // END MULTIPLAYER RESULT FIX
+        // ============================================================
 
         function closeVictoryModal() {
             document.getElementById('victory-modal').style.display = 'none';
@@ -4593,7 +5199,6 @@
                             updatePlayerEmojiUI();
                         }
                     } else {
-                        // Player left
                         if (trackedRoomPlayers[i]) {
                             showToast('👋 ' + trackedRoomPlayers[i] + ' left the room.');
                             delete trackedRoomPlayers[i];
@@ -4602,12 +5207,10 @@
                     }
                 }
 
-                // Update online status for all players
                 if (data.onlineStatus) {
                     for (let i = 1; i <= maxP; i++) {
                         if (data.onlineStatus[i] === true && !trackedRoomPlayers[i]) {
-                            // Player is online but not in tracked list - they might be the current player
-                            // We'll let the above loop handle it
+                            // Player is online but not in tracked list
                         }
                     }
                 }
@@ -4617,13 +5220,17 @@
                     updateTurnIndicator();
                 }
 
-                // Load player-specific power-ups
+                if (data.mpScores) {
+                    playerScores = data.mpScores;
+                    updateScoreDisplays();
+                }
+
                 if (data.powerups && data.powerups[myPlayerNumber]) {
-                    mpPowerups = data.powerups[myPlayerNumber];
+                    mpPowerups[myPlayerNumber] = data.powerups[myPlayerNumber];
                     updatePowerupUI();
                 }
                 if (data.powerupCooldowns && data.powerupCooldowns[myPlayerNumber]) {
-                    mpPowerupCooldowns = data.powerupCooldowns[myPlayerNumber];
+                    mpPowerupCooldowns[myPlayerNumber] = data.powerupCooldowns[myPlayerNumber];
                 }
                 if (data.specialBoxes) {
                     if (JSON.stringify(mpSpecialBoxes) !== JSON.stringify(data.specialBoxes)) {
@@ -4662,16 +5269,50 @@
                     freezeActive = data.freezeActive;
                 }
 
+                if (data.gapState && data.gapTimestamp) {
+                    let isOwnGap = data.gapState.player === myPlayerNumber;
+                    if (!isOwnGap) {
+                        let gapMsg = '🕳️ Gap created by Player ' + data.gapState.player;
+                        showToast(gapMsg);
+                        lastGapState = data.gapState;
+                    }
+                }
+
                 if (data.blockedEdge) {
                     let m = data.blockedEdge;
                     let el = document.getElementById(m.type + '-' + m.r + '-' + m.c);
-                    if (el) {
+                    if (el && !temporaryBlockedLines[m.key]) {
                         el.classList.add('line-blocked');
-                        if (m.type === 'h') horizontalGrid[m.r][m.c] = -1;
-                        if (m.type === 'v') verticalGrid[m.r][m.c] = -1;
-                        refreshAllBoxStates();
+                        if (m.type === 'h') horizontalGrid[m.r][m.c] = -2;
+                        if (m.type === 'v') verticalGrid[m.r][m.c] = -2;
+                        temporaryBlockedLines[m.key] = true;
+
+                        if (tempBlockTimers[m.key]) {
+                            clearTimeout(tempBlockTimers[m.key]);
+                        }
+                        tempBlockTimers[m.key] = setTimeout(function() {
+                            unblockLine(m.key, m.type, m.r, m.c);
+                        }, m.duration || 2500);
                     }
                     roomRef.update({ blockedEdge: null });
+                }
+
+                if (data.unblockedLine) {
+                    let m = data.unblockedLine;
+                    let el = document.getElementById(m.key);
+                    if (el) {
+                        el.classList.remove('line-blocked');
+                        el.style.background = '#ffeaa7';
+                        if (m.type === 'h' && horizontalGrid[m.r] && horizontalGrid[m.r][m.c] === -2) {
+                            horizontalGrid[m.r][m.c] = 0;
+                        }
+                        if (m.type === 'v' && verticalGrid[m.r] && verticalGrid[m.r][m.c] === -2) {
+                            verticalGrid[m.r][m.c] = 0;
+                        }
+                        delete temporaryBlockedLines[m.key];
+                        delete tempBlockTimers[m.key];
+                    }
+                    roomRef.update({ unblockedLine: null });
                 }
 
                 if (data.brokenLine) {
@@ -4692,22 +5333,24 @@
                     roomRef.update({ brokenLine: null });
                 }
 
-                // Handle disappeared line from other player
                 if (data.disappearedLine) {
                     let m = data.disappearedLine;
-                    let el = document.getElementById(m.type + '-' + m.r + '-' + m.c);
+                    let el = document.getElementById(m.key);
                     if (el && !el.classList.contains('line-fade-out')) {
-                        // Only apply if line is still drawn
                         let isStillDrawn = false;
-                        if (m.type === 'h' && horizontalGrid[m.r][m.c] === m.player) isStillDrawn = true;
-                        else if (m.type === 'v' && verticalGrid[m.r][m.c] === m.player) isStillDrawn = true;
+                        if (m.type === 'h' && horizontalGrid[m.r] && horizontalGrid[m.r][m.c] === m.player) isStillDrawn =
+                            true;
+                        else if (m.type === 'v' && verticalGrid[m.r] && verticalGrid[m.r][m.c] === m.player) isStillDrawn =
+                            true;
 
                         if (isStillDrawn) {
                             el.classList.add('line-fade-out');
                             setTimeout(function() {
-                                if (m.type === 'h' && horizontalGrid[m.r][m.c] === m.player) {
+                                if (m.type === 'h' && horizontalGrid[m.r] && horizontalGrid[m.r][m.c] === m
+                                    .player) {
                                     horizontalGrid[m.r][m.c] = 0;
-                                } else if (m.type === 'v' && verticalGrid[m.r][m.c] === m.player) {
+                                } else if (m.type === 'v' && verticalGrid[m.r] && verticalGrid[m.r][m.c] ===
+                                    m.player) {
                                     verticalGrid[m.r][m.c] = 0;
                                 }
                                 el.classList.remove('line-drawn-p' + m.player);
@@ -4743,65 +5386,36 @@
                     mpGameOver = true;
                     if (data.gameResult) {
                         let result = data.gameResult;
-                        let winner = result.winner;
                         let scores = result.scores || playerScores;
+                        let ranking = result.ranking || [];
 
-                        let resultText = '';
-                        let resultClass = '';
-                        let resultSubtitle = '';
-
-                        if (winner === myPlayerNumber) {
-                            resultText = '🎉 YOU WIN!';
-                            resultClass = 'result-win';
-                            resultSubtitle = 'Congratulations! You won the match!';
-                            gameData.coins += 50;
-                            gameData.stars += 2;
-                            saveDataToStorage();
-                            showToast('🏆 You won! +50 coins, +2 stars!');
-                        } else {
-                            let winnerName = trackedRoomPlayers[winner] || 'Player ' + winner;
-                            resultText = '😔 YOU LOSE';
-                            resultClass = 'result-lose';
-                            resultSubtitle = winnerName + ' won the match!';
-                            gameData.coins += 10;
-                            saveDataToStorage();
-                            showToast('😔 You lost! ' + winnerName + ' won!');
+                        if (ranking.length === 0) {
+                            for (let i = 0; i < getTotalPlayers(); i++) {
+                                let name = trackedRoomPlayers[i + 1] || 'Player ' + (i + 1);
+                                ranking.push({
+                                    player: i + 1,
+                                    name: name,
+                                    score: scores[i] || 0,
+                                    emoji: getPlayerEmoji(i + 1)
+                                });
+                            }
+                            ranking.sort(function(a, b) { return b.score - a.score; });
                         }
 
-                        let allSame = true;
-                        for (let i = 1; i < scores.length; i++) {
-                            if (scores[i] !== scores[0]) allSame = false;
-                        }
-                        if (allSame && scores[0] > 0) {
-                            resultText = '🤝 DRAW!';
-                            resultClass = 'result-draw';
-                            resultSubtitle = 'Both players tied with ' + scores[0] + ' boxes!';
-                            gameData.coins += 20;
-                            saveDataToStorage();
-                        }
-
-                        let scoreStr = '';
-                        for (let i = 0; i < getTotalPlayers(); i++) {
-                            let name = trackedRoomPlayers[i + 1] || 'P' + (i + 1);
-                            scoreStr += name + ': ' + (scores[i] || 0) + '  ';
-                        }
-
-                        document.getElementById('mpResultTitle').textContent = resultText;
-                        document.getElementById('mpResultTitle').className = 'result-title ' + resultClass;
-                        document.getElementById('mpResultSubtitle').textContent = resultSubtitle;
-                        document.getElementById('mpResultScore').textContent = 'Final Score: ' + scoreStr;
+                        renderMultiplayerRanking(ranking);
                         document.getElementById('multiplayer-result-overlay').style.display = 'flex';
 
                         if (turnTimerInterval) clearInterval(turnTimerInterval);
                         if (mpEventTimer) clearTimeout(mpEventTimer);
                         if (totalGameTimerInterval) clearInterval(totalGameTimerInterval);
-                        if (mpDisappearanceInterval) {
-                            clearInterval(mpDisappearanceInterval);
-                            mpDisappearanceInterval = null;
-                        }
+                        if (mpLineRemovalTimer) clearTimeout(mpLineRemovalTimer);
                         for (let key in mpLineTimers) {
                             clearTimeout(mpLineTimers[key]);
                             delete mpLineTimers[key];
+                        }
+                        for (let key in tempBlockTimers) {
+                            clearTimeout(tempBlockTimers[key]);
+                            delete tempBlockTimers[key];
                         }
                     }
                 }
@@ -4822,7 +5436,6 @@
 
         function exitCurrentGame() {
             if (isOnlineGame && roomRef) {
-                // Mark player as left
                 if (myPlayerNumber) {
                     let updateObj = {};
                     updateObj['p' + myPlayerNumber] = "Left";
@@ -4840,21 +5453,27 @@
             document.getElementById('gameChatBar').style.display = 'none';
             document.getElementById('mpPowerupBar').style.display = 'none';
             document.getElementById('multiplayer-result-overlay').style.display = 'none';
+            // Close shop if open
+            closeGameShop();
             if (turnTimerInterval) clearInterval(turnTimerInterval);
             if (mpEventTimer) clearTimeout(mpEventTimer);
             if (totalGameTimerInterval) clearInterval(totalGameTimerInterval);
-            if (mpDisappearanceInterval) {
-                clearInterval(mpDisappearanceInterval);
-                mpDisappearanceInterval = null;
-            }
+            if (mpLineRemovalTimer) clearTimeout(mpLineRemovalTimer);
             mpLineDisappearanceEnabled = false;
+            mpLineRemovalQueue = [];
             for (let key in mpLineTimers) {
                 clearTimeout(mpLineTimers[key]);
                 delete mpLineTimers[key];
             }
+            for (let key in tempBlockTimers) {
+                clearTimeout(tempBlockTimers[key]);
+                delete tempBlockTimers[key];
+            }
             document.getElementById('game-timer-bar').style.display = 'none';
             let timerDisplay = document.getElementById('mpTimerDisplay');
             if (timerDisplay) timerDisplay.remove();
+            // Hide shop button
+            updateShopButtonVisibility();
             showScreen('screen-map');
         }
 
@@ -4965,6 +5584,12 @@
         }
 
         function startLevelGame(lvl, gridDim, isSpecial) {
+            // Ensure we're using the correct mode from home screen
+            if (!isOnlineGame) {
+                // Use the home screen mode
+                activePlayerMode = homeScreenMode;
+            }
+
             activeLevel = lvl;
             boardRows = gridDim.rows;
             boardCols = gridDim.cols;
@@ -5014,6 +5639,9 @@
 
             document.getElementById('mpPowerupBar').style.display = 'none';
             document.getElementById('gameChatBar').style.display = 'none';
+
+            // Hide shop button for offline games
+            updateShopButtonVisibility();
 
             initializeBoard();
         }
@@ -5191,12 +5819,12 @@
 
             refreshAllBoxStates();
 
-            // Start total game timer for online games
             if (isOnlineGame) {
                 gameStartTime = Date.now();
                 startTotalGameTimer();
-                // Start line disappearance system
                 startLineDisappearanceSystem();
+                // Show shop button
+                updateShopButtonVisibility();
             }
         }
 
@@ -5211,12 +5839,11 @@
                 let elapsed = (Date.now() - gameStartTime) / 1000;
                 let remaining = totalGameTimeSeconds - elapsed;
 
-                // Check 30-second rule for line disappearance
                 if (remaining <= 30 && mpLineDisappearanceEnabled) {
                     mpLineDisappearanceEnabled = false;
-                    if (mpDisappearanceInterval) {
-                        clearInterval(mpDisappearanceInterval);
-                        mpDisappearanceInterval = null;
+                    if (mpLineRemovalTimer) {
+                        clearTimeout(mpLineRemovalTimer);
+                        mpLineRemovalTimer = null;
                     }
                     showToast('⏰ Line disappearance stopped - 30 seconds remaining!');
                 }
@@ -5231,7 +5858,6 @@
                 let mins = Math.floor(remaining / 60);
                 let secs = Math.floor(remaining % 60);
 
-                // Update timer display
                 let timerDisplay = document.getElementById('mpTimerDisplay');
                 if (!timerDisplay) {
                     timerDisplay = document.createElement('span');
@@ -5299,9 +5925,7 @@
             let tText = document.getElementById('turnIndicatorText');
 
             let existingTimer = document.getElementById('mpTimerDisplay');
-            if (existingTimer) {
-                // Keep it, but we'll update it in the timer function
-            }
+            // Keep it
 
             document.querySelectorAll('.score-box').forEach(function(b) { b.classList.remove('active-turn'); });
 
@@ -5452,7 +6076,6 @@
             return false;
         };
 
-        // Override closeVictoryModal to handle star cleanup
         const originalCloseVictoryModal = closeVictoryModal;
         closeVictoryModal = function() {
             document.getElementById('victory-modal').style.display = 'none';
