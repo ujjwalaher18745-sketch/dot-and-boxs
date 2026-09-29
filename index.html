@@ -2081,7 +2081,10 @@
                 </div>
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" id="loginPass" class="login-input" placeholder="Enter the password">
+                    <input type="password" id="loginPass" class="login-input" placeholder="Min 8 chars, A-Z, a-z, 0-9, @#$%">
+                    <div style="font-size:0.65rem; color:#856404; margin-top:4px; margin-left:8px; font-weight:bold;">
+                        Must include: 8+ chars, Uppercase, Lowercase, Number &amp; Special character
+                    </div>
                 </div>
                 <button class="btn-3d" style="width:100%; margin-top:10px;" onclick="handleLoginSubmit()">ENTER GAME</button>
             </div>
@@ -2862,12 +2865,33 @@
             document.getElementById('p1EmojiTag').innerText = gameData.avatar || AVATAR_OPTIONS[0];
         }
 
+        // === NEW: Strong password validator ===
+        function isStrongPassword(password) {
+            if (!password || password.length < 8) return false;
+            if (!/[A-Z]/.test(password)) return false;   // uppercase
+            if (!/[a-z]/.test(password)) return false;   // lowercase
+            if (!/[0-9]/.test(password)) return false;   // number
+            if (!/[^A-Za-z0-9]/.test(password)) return false; // special char
+            return true;
+        }
+
+        function getPasswordErrorMessage() {
+            return "⚠️ Weak Password!\n\nPassword must contain:\n• At least 8 characters\n• 1 Uppercase letter (A-Z)\n• 1 Lowercase letter (a-z)\n• 1 Number (0-9)\n• 1 Special character (@, #, $, %, etc.)";
+        }
+
         function handleLoginSubmit() {
             let uName = document.getElementById('loginUser').value.trim();
             let pass = document.getElementById('loginPass').value.trim();
 
             if (uName === "") {
                 showToast("Enter Username!");
+                return;
+            }
+
+            // === NEW: Strong password enforcement (applies to BOTH new account & login) ===
+            if (!isStrongPassword(pass)) {
+                showToast("❌ Weak Password! Check requirements.");
+                alert(getPasswordErrorMessage());
                 return;
             }
 
@@ -6048,41 +6072,86 @@
                 if (totalGameTimerInterval) clearInterval(totalGameTimerInterval);
                 playSound('win');
 
+                // === CHANGED: Skip victory/defeat screens — go straight to leaderboard ===
                 let maxScore = Math.max.apply(null, playerScores);
                 let winningPlayer = playerScores.indexOf(maxScore) + 1;
 
-                if (winningPlayer === 1) {
+                // Award coins/stars if single-player win (preserve progression)
+                if (!isOnlineGame && winningPlayer === 1) {
                     if (activeLevel === gameData.unlockedLevel) {
                         gameData.unlockedLevel++;
                     }
                     gameData.coins += 40;
                     gameData.stars += 3;
                     saveDataToStorage();
-
-                    triggerStarAnimation();
-
-                    document.getElementById('victoryModalTitle').innerText = "VICTORY!";
-                    document.getElementById('victoryRewardsText').innerText = "+40 🪙 Coins | +3 ⭐ Stars Earned!";
-                    document.getElementById('victory-modal').style.display = 'flex';
-                } else {
-                    let pName = (activePlayerMode === 'AI' && winningPlayer === 2) ? "Robot AI" : 'Player ' +
-                    winningPlayer;
-                    document.getElementById('defeatModalTitle').innerText = "DEFEAT!";
-                    document.getElementById('defeatMsgText').innerText = pName + ' Won the Match!';
-                    document.getElementById('defeat-modal').style.display = 'flex';
                 }
+
+                // Build ranking (works for online AND offline)
+                let totalPlayers = getTotalPlayers();
+                let ranking = [];
+                for (let i = 0; i < totalPlayers; i++) {
+                    let name;
+                    let emoji;
+                    if (isOnlineGame) {
+                        name = trackedRoomPlayers[i + 1] || ('Player ' + (i + 1));
+                        emoji = getPlayerEmoji(i + 1);
+                    } else {
+                        if (i === 0) { name = gameData.username; emoji = gameData.avatar || AVATAR_OPTIONS[0]; }
+                        else if (activePlayerMode === 'AI') { name = 'Robot AI'; emoji = '🤖'; }
+                        else { name = 'Player ' + (i + 1); emoji = '👤'; }
+                    }
+                    ranking.push({
+                        player: i + 1,
+                        name: name,
+                        score: playerScores[i] || 0,
+                        emoji: emoji
+                    });
+                }
+                ranking.sort(function(a, b) { return b.score - a.score; });
+
+                // Temporarily set myPlayerNumber for offline display
+                let prevMyPlayerNumber = myPlayerNumber;
+                if (!isOnlineGame) {
+                    myPlayerNumber = 1;
+                }
+                renderMultiplayerRanking(ranking);
+                if (!isOnlineGame) {
+                    myPlayerNumber = prevMyPlayerNumber;
+                }
+
+                // Personalize subtitle for offline play
+                let subtitleEl = document.getElementById('mpResultSubtitle');
+                if (ranking.length > 0) {
+                    let winner = ranking[0];
+                    let isYou;
+                    if (isOnlineGame) {
+                        isYou = (winner.player === myPlayerNumber);
+                    } else {
+                        isYou = (winner.player === 1);
+                    }
+                    subtitleEl.textContent = isYou ?
+                        '🎉 You won with ' + winner.score + ' points!' :
+                        winner.name + ' won with ' + winner.score + ' points!';
+                }
+
+                document.getElementById('multiplayer-result-overlay').style.display = 'flex';
+                updateShopButtonVisibility();
+
+                // Mark online game as over
+                if (isOnlineGame) {
+                    mpGameOver = true;
+                    mpGameResultSent = true;
+                    if (roomRef && myPlayerNumber === 1) {
+                        roomRef.update({
+                            gameOver: true,
+                            gameResult: { scores: playerScores, ranking: ranking }
+                        });
+                    }
+                }
+
                 return true;
             }
             return false;
-        };
-
-        const originalCloseVictoryModal = closeVictoryModal;
-        closeVictoryModal = function() {
-            document.getElementById('victory-modal').style.display = 'none';
-            document.getElementById('star1').classList.remove('active', 'animating', 'sparkle');
-            document.getElementById('star2').classList.remove('active', 'animating', 'sparkle');
-            document.getElementById('star3').classList.remove('active', 'animating', 'sparkle');
-            showScreen('screen-map');
         };
     </script>
 </body>
